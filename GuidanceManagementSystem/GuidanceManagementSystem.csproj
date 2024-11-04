@@ -63,6 +63,12 @@
     <Compile Include="View_Frms\dashboardfrm.Designer.cs">
       <DependentUpon>dashboardfrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View_Frms\dashboard_view.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View_Frms\dashboard_view.Designer.cs">
+      <DependentUpon>dashboard_view.cs</DependentUpon>
+    </Compile>
     <Compile Include="View_Frms\LoginFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +90,9 @@
     </Compile>
     <EmbeddedResource Include="View_Frms\dashboardfrm.resx">
       <DependentUpon>dashboardfrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View_Frms\dashboard_view.resx">
+      <DependentUpon>dashboard_view.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View_Frms\LoginFrm.resx">
       <DependentUpon>LoginFrm.cs</DependentUpon>
@@ -152,6 +161,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\home_500px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fire_exit_500px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\settings_500px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\people_500px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\people_500px1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\people_500hfghfpx.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
