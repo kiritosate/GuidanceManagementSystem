@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace GuidanceManagementSystem.View_Frms
 {
-    public partial class dashboard_view : Form
+    public partial class registration_view : Form
     {
-        public dashboard_view()
+        public registration_view()
         {
             InitializeComponent();
-        }
-
-        private void dashboard_view_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

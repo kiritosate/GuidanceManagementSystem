@@ -75,6 +75,12 @@
     <Compile Include="View_Frms\LoginFrm.Designer.cs">
       <DependentUpon>LoginFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View_Frms\registration_view.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View_Frms\registration_view.Designer.cs">
+      <DependentUpon>registration_view.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Loadingfrm.resx">
       <DependentUpon>Loadingfrm.cs</DependentUpon>
     </EmbeddedResource>
@@ -96,6 +102,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View_Frms\LoginFrm.resx">
       <DependentUpon>LoginFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View_Frms\registration_view.resx">
+      <DependentUpon>registration_view.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

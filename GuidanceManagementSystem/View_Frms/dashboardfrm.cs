@@ -32,25 +32,6 @@ namespace GuidanceManagementSystem.View_Frms
             this.WindowState = FormWindowState.Minimized;
         }
 
-        private async void ShowFormWithLoadingSpinnerAsync(Form formToLoad)
-        {
-            // Show the loading spinner GIF
-            loadFrm.Visible = true;
-
-            // Load the form asynchronously
-            await Task.Run(() =>
-            {
-                // Simulate form initialization (replace with actual initialization logic if needed)
-                
-            });
-
-            // Hide the loading spinner after initialization
-            loadFrm.Visible = false;
-
-            // Show the form inside the panel
-            ShowFormInPanel(formToLoad);
-        }
-
         private void ShowFormInPanel(Form form)
         {
             // Clear any existing form in the dockingPnl
@@ -69,7 +50,7 @@ namespace GuidanceManagementSystem.View_Frms
         private void cuiButton3_Click(object sender, EventArgs e)
         {
             //dashboard
-            ShowFormWithLoadingSpinnerAsync(new dashboard_view());
+            ShowFormInPanel(new dashboard_view());
 
 
         }
@@ -77,6 +58,7 @@ namespace GuidanceManagementSystem.View_Frms
         private void cuiButton4_Click(object sender, EventArgs e)
         {
             //registration
+            ShowFormInPanel(new registration_view());
         }
 
         private void cuiButton5_Click(object sender, EventArgs e)
@@ -92,6 +74,28 @@ namespace GuidanceManagementSystem.View_Frms
         private void timer1_Tick(object sender, EventArgs e)
         {
 
+        }
+
+        private void dashboardfrm_Load(object sender, EventArgs e)
+        {
+            ShowFormInPanel(new dashboard_view());
+        }
+
+        private void cuiButton7_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to log out?", "Logout Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            // Check if the user clicked "Yes"
+            if (result == DialogResult.Yes)
+            {
+                // Perform logout actions, such as closing the current form
+                // Example: this.Close();
+
+                // LoginForm loginForm = new LoginForm();
+                // loginForm.Show();
+                LoginFrm.closeApp();
+                
+            }
         }
     }
 }
