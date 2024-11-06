@@ -22,7 +22,8 @@ namespace GuidanceManagementSystem.methods
             try
             {
                 // Path to Apache binary (make sure the path is correct)
-                string apachePath = @"C:\Apache24\bin\httpd.exe";
+                string appDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                string apachePath = "C:/Apache";//Path.Combine(appDirectory, "Apache", "bin", "httpd.exe");
 
                 // Create a ProcessStartInfo to hide the command window
                 ProcessStartInfo startInfo = new ProcessStartInfo
