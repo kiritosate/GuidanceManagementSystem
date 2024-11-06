@@ -1,4 +1,5 @@
 ﻿using CuoreUI.Controls;
+using GuidanceManagementSystem.methods;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -44,17 +45,56 @@ namespace GuidanceManagementSystem.View_Frms
         private async void cuiButton2_Click(object sender, EventArgs e)
         {
             cuiSpinner1.Visible = true;
-            
             dashboardfrm frm = new dashboardfrm();
             await Task.Delay(3000);
-            frm.Show();
-            this.Hide();
+
+            (int UserType, int ID, string Name) loginResult = MyCon._Login(textBox1.Text, textBox2.Text);
+
+            if (loginResult.UserType > 0)
+            {
+                // If UserType > 0, the login was successful, so show the form
+                
+
+                // Optionally, you can use loginResult.ID and loginResult.Name
+
+                MyCon._loggedName = loginResult.Name;
+                MyCon._loggedId = loginResult.ID;
+
+
+                frm.Show();
+                this.Hide();
+
+                // Example: Display the user's name in a label (if you have a label for this purpose)
+                //frm.userNameLabel.Text = $"Welcome, {loggedInUserName}!";
+            }
+            else
+            {
+                // If login fails, display the spinner and show an error message
+                cuiSpinner1.Visible = false;
+                //MessageBox.Show("Invalid username or password.");
+            }
+
+
         }
 
         private void LoginFrm_Load(object sender, EventArgs e)
         {
-            //cuiTextBox22.PasswordChar = '●';
-            cuiTextBox22.PasswordChar = true;
+            
+            
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            if (textBox2.PasswordChar == '●')
+            {
+                textBox2.PasswordChar = '\0'; // Show password by setting PasswordChar to '\0' (no masking character)
+                pictureBox1.Image = Properties.Resources.hide_480px;
+            }
+            else
+            {
+                textBox2.PasswordChar = '●'; // Hide password by setting PasswordChar back to '●'
+                pictureBox1.Image = Properties.Resources.eye_480px;
+            }
         }
     }
 }

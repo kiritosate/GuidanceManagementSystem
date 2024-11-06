@@ -32,10 +32,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginFrm));
             this.cuiFormRounder1 = new CuoreUI.Components.cuiFormRounder();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.cuiButton2 = new CuoreUI.Controls.cuiButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.cuiTextBox22 = new CuoreUI.Controls.cuiTextBox2();
-            this.cuiTextBox21 = new CuoreUI.Controls.cuiTextBox2();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.cuiButton1 = new CuoreUI.Controls.cuiButton();
             this.cuiFormDrag1 = new CuoreUI.cuiFormDrag(this.components);
             this.cuiSpinner1 = new CuoreUI.Controls.cuiSpinner();
@@ -53,16 +53,27 @@
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackgroundImage = global::GuidanceManagementSystem.Properties.Resources.log;
+            this.panel1.BackgroundImage = global::GuidanceManagementSystem.Properties.Resources.asdasdasdasdasd;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.cuiButton2);
             this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Controls.Add(this.cuiTextBox22);
-            this.panel1.Controls.Add(this.cuiTextBox21);
+            this.panel1.Controls.Add(this.textBox2);
             this.panel1.Location = new System.Drawing.Point(259, 31);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(299, 488);
             this.panel1.TabIndex = 4;
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(60, 274);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(184, 26);
+            this.textBox1.TabIndex = 6;
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // cuiButton2
             // 
@@ -100,63 +111,26 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.pictureBox1.Image = global::GuidanceManagementSystem.Properties.Resources.eye_96px;
-            this.pictureBox1.Location = new System.Drawing.Point(219, 345);
+            this.pictureBox1.Image = global::GuidanceManagementSystem.Properties.Resources.eye_480px;
+            this.pictureBox1.Location = new System.Drawing.Point(216, 324);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(28, 27);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Visible = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
-            // cuiTextBox22
+            // textBox2
             // 
-            this.cuiTextBox22.AccessibleRole = System.Windows.Forms.AccessibleRole.Text;
-            this.cuiTextBox22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.cuiTextBox22.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.cuiTextBox22.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(0)))));
-            this.cuiTextBox22.BorderSize = 1;
-            this.cuiTextBox22.Content = "";
-            this.cuiTextBox22.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.cuiTextBox22.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cuiTextBox22.ForeColor = System.Drawing.Color.DimGray;
-            this.cuiTextBox22.Location = new System.Drawing.Point(47, 337);
-            this.cuiTextBox22.Margin = new System.Windows.Forms.Padding(4);
-            this.cuiTextBox22.Multiline = false;
-            this.cuiTextBox22.Name = "cuiTextBox22";
-            this.cuiTextBox22.Padding = new System.Windows.Forms.Padding(22, 9, 22, 0);
-            this.cuiTextBox22.PasswordChar = true;
-            this.cuiTextBox22.PlaceholderColor = System.Drawing.Color.DimGray;
-            this.cuiTextBox22.PlaceholderText = "Password";
-            this.cuiTextBox22.Rounding = 8;
-            this.cuiTextBox22.Size = new System.Drawing.Size(208, 40);
-            this.cuiTextBox22.TabIndex = 6;
-            this.cuiTextBox22.TextOffset = new System.Drawing.Size(0, 0);
-            this.cuiTextBox22.UnderlinedStyle = false;
-            // 
-            // cuiTextBox21
-            // 
-            this.cuiTextBox21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.cuiTextBox21.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.cuiTextBox21.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(0)))));
-            this.cuiTextBox21.BorderSize = 1;
-            this.cuiTextBox21.Content = "";
-            this.cuiTextBox21.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.cuiTextBox21.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cuiTextBox21.ForeColor = System.Drawing.Color.DimGray;
-            this.cuiTextBox21.Location = new System.Drawing.Point(47, 289);
-            this.cuiTextBox21.Margin = new System.Windows.Forms.Padding(4);
-            this.cuiTextBox21.Multiline = false;
-            this.cuiTextBox21.Name = "cuiTextBox21";
-            this.cuiTextBox21.Padding = new System.Windows.Forms.Padding(22, 9, 22, 0);
-            this.cuiTextBox21.PasswordChar = false;
-            this.cuiTextBox21.PlaceholderColor = System.Drawing.Color.DimGray;
-            this.cuiTextBox21.PlaceholderText = "Username";
-            this.cuiTextBox21.Rounding = 8;
-            this.cuiTextBox21.Size = new System.Drawing.Size(208, 40);
-            this.cuiTextBox21.TabIndex = 5;
-            this.cuiTextBox21.TextOffset = new System.Drawing.Size(0, 0);
-            this.cuiTextBox21.UnderlinedStyle = false;
+            this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
+            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox2.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.Location = new System.Drawing.Point(60, 326);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.PasswordChar = '●';
+            this.textBox2.Size = new System.Drawing.Size(184, 26);
+            this.textBox2.TabIndex = 8;
+            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // cuiButton1
             // 
@@ -203,7 +177,7 @@
             this.cuiSpinner1.Name = "cuiSpinner1";
             this.cuiSpinner1.RingColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
             this.cuiSpinner1.RotateSpeed = 1F;
-            this.cuiSpinner1.Rotation = 62.47591F;
+            this.cuiSpinner1.Rotation = 142.7487F;
             this.cuiSpinner1.Size = new System.Drawing.Size(30, 31);
             this.cuiSpinner1.TabIndex = 5;
             this.cuiSpinner1.Thickness = 3F;
@@ -231,6 +205,7 @@
             this.TopMost = true;
             this.Load += new System.EventHandler(this.LoginFrm_Load);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
@@ -241,11 +216,11 @@
         private CuoreUI.Components.cuiFormRounder cuiFormRounder1;
         private CuoreUI.Controls.cuiButton cuiButton1;
         private System.Windows.Forms.Panel panel1;
-        private CuoreUI.Controls.cuiTextBox2 cuiTextBox21;
-        private CuoreUI.Controls.cuiTextBox2 cuiTextBox22;
         private System.Windows.Forms.PictureBox pictureBox1;
         private CuoreUI.Controls.cuiButton cuiButton2;
         private CuoreUI.cuiFormDrag cuiFormDrag1;
         private CuoreUI.Controls.cuiSpinner cuiSpinner1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox2;
     }
 }

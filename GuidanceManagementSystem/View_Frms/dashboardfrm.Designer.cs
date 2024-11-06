@@ -37,8 +37,9 @@
             this.dockingPnl = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.cuiLabel2 = new CuoreUI.Controls.cuiLabel();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.cuiLabel3 = new CuoreUI.Controls.cuiLabel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.cuiButton2 = new CuoreUI.Controls.cuiButton();
             this.cuiButton7 = new CuoreUI.Controls.cuiButton();
             this.cuiButton6 = new CuoreUI.Controls.cuiButton();
             this.cuiButton5 = new CuoreUI.Controls.cuiButton();
@@ -46,8 +47,6 @@
             this.cuiButton3 = new CuoreUI.Controls.cuiButton();
             this.cuiButton8 = new CuoreUI.Controls.cuiButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.cuiButton2 = new CuoreUI.Controls.cuiButton();
-            this.cuiButton1 = new CuoreUI.Controls.cuiButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -114,7 +113,7 @@
             this.cuiLabel1.Font = new System.Drawing.Font("Segoe UI", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cuiLabel1.ForeColor = System.Drawing.Color.Gainsboro;
             this.cuiLabel1.HorizontalAlignment = CuoreUI.Controls.cuiLabel.HorizontalAlignments.Center;
-            this.cuiLabel1.Location = new System.Drawing.Point(34, 164);
+            this.cuiLabel1.Location = new System.Drawing.Point(25, 160);
             this.cuiLabel1.Name = "cuiLabel1";
             this.cuiLabel1.Size = new System.Drawing.Size(162, 33);
             this.cuiLabel1.TabIndex = 1;
@@ -132,7 +131,6 @@
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(89)))));
             this.panel2.Controls.Add(this.cuiLabel2);
             this.panel2.Controls.Add(this.cuiButton2);
-            this.panel2.Controls.Add(this.cuiButton1);
             this.panel2.Controls.Add(this.cuiLabel3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
@@ -151,23 +149,59 @@
             this.cuiLabel2.Size = new System.Drawing.Size(408, 33);
             this.cuiLabel2.TabIndex = 6;
             // 
+            // cuiLabel3
+            // 
+            this.cuiLabel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cuiLabel3.AutoSize = true;
+            this.cuiLabel3.Content = "Date:Time";
+            this.cuiLabel3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cuiLabel3.ForeColor = System.Drawing.Color.Gainsboro;
+            this.cuiLabel3.HorizontalAlignment = CuoreUI.Controls.cuiLabel.HorizontalAlignments.Left;
+            this.cuiLabel3.Location = new System.Drawing.Point(353, 10);
+            this.cuiLabel3.Name = "cuiLabel3";
+            this.cuiLabel3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.cuiLabel3.Size = new System.Drawing.Size(229, 28);
+            this.cuiLabel3.TabIndex = 8;
+            // 
             // timer1
             // 
             this.timer1.Enabled = true;
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // cuiLabel3
+            // cuiButton2
             // 
-            this.cuiLabel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cuiLabel3.Content = "Date:Time";
-            this.cuiLabel3.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cuiLabel3.ForeColor = System.Drawing.Color.Gainsboro;
-            this.cuiLabel3.HorizontalAlignment = CuoreUI.Controls.cuiLabel.HorizontalAlignments.Left;
-            this.cuiLabel3.Location = new System.Drawing.Point(435, 12);
-            this.cuiLabel3.Name = "cuiLabel3";
-            this.cuiLabel3.Size = new System.Drawing.Size(123, 28);
-            this.cuiLabel3.TabIndex = 8;
+            this.cuiButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cuiButton2.BackColor = System.Drawing.Color.Transparent;
+            this.cuiButton2.CheckButton = false;
+            this.cuiButton2.Checked = false;
+            this.cuiButton2.CheckedBackground = System.Drawing.Color.Red;
+            this.cuiButton2.CheckedImageTint = System.Drawing.Color.White;
+            this.cuiButton2.CheckedOutline = System.Drawing.Color.Red;
+            this.cuiButton2.Content = "-";
+            this.cuiButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cuiButton2.ForeColor = System.Drawing.Color.White;
+            this.cuiButton2.HoverBackground = System.Drawing.Color.ForestGreen;
+            this.cuiButton2.HoveredImageTint = System.Drawing.Color.Transparent;
+            this.cuiButton2.HoverOutline = System.Drawing.Color.Empty;
+            this.cuiButton2.Image = null;
+            this.cuiButton2.ImageAutoCenter = true;
+            this.cuiButton2.ImageExpand = new System.Drawing.Point(3, 3);
+            this.cuiButton2.ImageOffset = new System.Drawing.Point(0, 0);
+            this.cuiButton2.ImageTint = System.Drawing.Color.White;
+            this.cuiButton2.Location = new System.Drawing.Point(596, 10);
+            this.cuiButton2.Name = "cuiButton2";
+            this.cuiButton2.NormalBackground = System.Drawing.Color.DarkCyan;
+            this.cuiButton2.NormalOutline = System.Drawing.Color.Empty;
+            this.cuiButton2.OutlineThickness = 1.6F;
+            this.cuiButton2.PressedBackground = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.cuiButton2.PressedImageTint = System.Drawing.Color.Transparent;
+            this.cuiButton2.PressedOutline = System.Drawing.Color.Empty;
+            this.cuiButton2.Rounding = new System.Windows.Forms.Padding(10);
+            this.cuiButton2.Size = new System.Drawing.Size(25, 25);
+            this.cuiButton2.TabIndex = 5;
+            this.cuiButton2.TextOffset = new System.Drawing.Point(0, 0);
+            this.cuiButton2.Click += new System.EventHandler(this.cuiButton2_Click_1);
             // 
             // cuiButton7
             // 
@@ -234,7 +268,6 @@
             this.cuiButton6.PressedBackground = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(0)))));
             this.cuiButton6.PressedImageTint = System.Drawing.Color.White;
             this.cuiButton6.PressedOutline = System.Drawing.Color.Empty;
-            this.cuiButton6.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.cuiButton6.Rounding = new System.Windows.Forms.Padding(25);
             this.cuiButton6.Size = new System.Drawing.Size(184, 46);
             this.cuiButton6.TabIndex = 11;
@@ -270,7 +303,6 @@
             this.cuiButton5.PressedBackground = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(0)))));
             this.cuiButton5.PressedImageTint = System.Drawing.Color.White;
             this.cuiButton5.PressedOutline = System.Drawing.Color.Empty;
-            this.cuiButton5.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.cuiButton5.Rounding = new System.Windows.Forms.Padding(25);
             this.cuiButton5.Size = new System.Drawing.Size(184, 46);
             this.cuiButton5.TabIndex = 10;
@@ -306,7 +338,6 @@
             this.cuiButton4.PressedBackground = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(0)))));
             this.cuiButton4.PressedImageTint = System.Drawing.Color.White;
             this.cuiButton4.PressedOutline = System.Drawing.Color.Empty;
-            this.cuiButton4.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.cuiButton4.Rounding = new System.Windows.Forms.Padding(25);
             this.cuiButton4.Size = new System.Drawing.Size(184, 46);
             this.cuiButton4.TabIndex = 9;
@@ -342,7 +373,6 @@
             this.cuiButton3.PressedBackground = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(0)))));
             this.cuiButton3.PressedImageTint = System.Drawing.Color.White;
             this.cuiButton3.PressedOutline = System.Drawing.Color.Empty;
-            this.cuiButton3.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.cuiButton3.Rounding = new System.Windows.Forms.Padding(25);
             this.cuiButton3.Size = new System.Drawing.Size(184, 46);
             this.cuiButton3.TabIndex = 8;
@@ -392,74 +422,6 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // cuiButton2
-            // 
-            this.cuiButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cuiButton2.BackColor = System.Drawing.Color.Transparent;
-            this.cuiButton2.CheckButton = false;
-            this.cuiButton2.Checked = false;
-            this.cuiButton2.CheckedBackground = System.Drawing.Color.Red;
-            this.cuiButton2.CheckedImageTint = System.Drawing.Color.White;
-            this.cuiButton2.CheckedOutline = System.Drawing.Color.Red;
-            this.cuiButton2.Content = "";
-            this.cuiButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
-            this.cuiButton2.ForeColor = System.Drawing.Color.White;
-            this.cuiButton2.HoverBackground = System.Drawing.Color.ForestGreen;
-            this.cuiButton2.HoveredImageTint = System.Drawing.Color.Transparent;
-            this.cuiButton2.HoverOutline = System.Drawing.Color.Empty;
-            this.cuiButton2.Image = global::GuidanceManagementSystem.Properties.Resources.subtract_50px;
-            this.cuiButton2.ImageAutoCenter = true;
-            this.cuiButton2.ImageExpand = new System.Drawing.Point(3, 3);
-            this.cuiButton2.ImageOffset = new System.Drawing.Point(0, 0);
-            this.cuiButton2.ImageTint = System.Drawing.Color.White;
-            this.cuiButton2.Location = new System.Drawing.Point(564, 10);
-            this.cuiButton2.Name = "cuiButton2";
-            this.cuiButton2.NormalBackground = System.Drawing.Color.DarkCyan;
-            this.cuiButton2.NormalOutline = System.Drawing.Color.Empty;
-            this.cuiButton2.OutlineThickness = 1.6F;
-            this.cuiButton2.PressedBackground = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.cuiButton2.PressedImageTint = System.Drawing.Color.Transparent;
-            this.cuiButton2.PressedOutline = System.Drawing.Color.Empty;
-            this.cuiButton2.Rounding = new System.Windows.Forms.Padding(15);
-            this.cuiButton2.Size = new System.Drawing.Size(30, 30);
-            this.cuiButton2.TabIndex = 5;
-            this.cuiButton2.TextOffset = new System.Drawing.Point(0, 0);
-            this.cuiButton2.Click += new System.EventHandler(this.cuiButton2_Click_1);
-            // 
-            // cuiButton1
-            // 
-            this.cuiButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cuiButton1.BackColor = System.Drawing.Color.Transparent;
-            this.cuiButton1.CheckButton = false;
-            this.cuiButton1.Checked = false;
-            this.cuiButton1.CheckedBackground = System.Drawing.Color.Red;
-            this.cuiButton1.CheckedImageTint = System.Drawing.Color.White;
-            this.cuiButton1.CheckedOutline = System.Drawing.Color.Red;
-            this.cuiButton1.Content = "";
-            this.cuiButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
-            this.cuiButton1.ForeColor = System.Drawing.Color.White;
-            this.cuiButton1.HoverBackground = System.Drawing.Color.Maroon;
-            this.cuiButton1.HoveredImageTint = System.Drawing.Color.Transparent;
-            this.cuiButton1.HoverOutline = System.Drawing.Color.Empty;
-            this.cuiButton1.Image = global::GuidanceManagementSystem.Properties.Resources.multiply_50px;
-            this.cuiButton1.ImageAutoCenter = true;
-            this.cuiButton1.ImageExpand = new System.Drawing.Point(3, 3);
-            this.cuiButton1.ImageOffset = new System.Drawing.Point(0, 0);
-            this.cuiButton1.ImageTint = System.Drawing.Color.White;
-            this.cuiButton1.Location = new System.Drawing.Point(600, 10);
-            this.cuiButton1.Name = "cuiButton1";
-            this.cuiButton1.NormalBackground = System.Drawing.Color.Red;
-            this.cuiButton1.NormalOutline = System.Drawing.Color.Empty;
-            this.cuiButton1.OutlineThickness = 1.6F;
-            this.cuiButton1.PressedBackground = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.cuiButton1.PressedImageTint = System.Drawing.Color.Transparent;
-            this.cuiButton1.PressedOutline = System.Drawing.Color.Empty;
-            this.cuiButton1.Rounding = new System.Windows.Forms.Padding(15);
-            this.cuiButton1.Size = new System.Drawing.Size(30, 30);
-            this.cuiButton1.TabIndex = 4;
-            this.cuiButton1.TextOffset = new System.Drawing.Point(0, 0);
-            this.cuiButton1.Click += new System.EventHandler(this.cuiButton1_Click);
-            // 
             // dashboardfrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -480,14 +442,13 @@
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private CuoreUI.Controls.cuiButton cuiButton1;
         private CuoreUI.Controls.cuiButton cuiButton2;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Panel panel3;

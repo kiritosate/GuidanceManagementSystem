@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GuidanceManagementSystem.methods;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,7 @@ namespace GuidanceManagementSystem.View_Frms
 {
     public partial class dashboardfrm : Form
     {
+        
         public dashboardfrm()
         {
             InitializeComponent();
@@ -71,31 +73,31 @@ namespace GuidanceManagementSystem.View_Frms
             //reports
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private async void timer1_Tick(object sender, EventArgs e)
         {
-
+            DateTime currentDateTime = await GetCurrentDateTimeAsync();
+            cuiLabel3.Content = currentDateTime.ToString("MMMM dd, yyyy - hh:mm tt");  // Will display: "September 11, 2023 02:30 PM"
         }
 
+        private async Task<DateTime> GetCurrentDateTimeAsync()
+        {
+            // Simulate async work
+            await Task.Delay(1);
+            return DateTime.Now; // "September 11, 2023"
+        }
         private void dashboardfrm_Load(object sender, EventArgs e)
         {
             ShowFormInPanel(new dashboard_view());
+            cuiLabel1.Content = MyCon._loggedName.ToUpper();
+
+
         }
 
         private void cuiButton7_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to log out?", "Logout Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            // Check if the user clicked "Yes"
-            if (result == DialogResult.Yes)
-            {
-                // Perform logout actions, such as closing the current form
-                // Example: this.Close();
-
-                // LoginForm loginForm = new LoginForm();
-                // loginForm.Show();
-                LoginFrm.closeApp();
-                
-            }
+            
+            LoginFrm.closeApp();
+             
         }
     }
 }
