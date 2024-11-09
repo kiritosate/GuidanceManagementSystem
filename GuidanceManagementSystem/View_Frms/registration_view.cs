@@ -19,10 +19,12 @@ namespace GuidanceManagementSystem.View_Frms
         {
             InitializeComponent();
             fetchService = new MyFetch();
+            methods = new MyMethods();
         }
 
         private BindingSource bindingSource = new BindingSource();
         private methods.MyFetch fetchService;
+        private methods.MyMethods methods;
         private String StudentId;
 
         private void cuiTextBox21_ContentChanged(object sender, EventArgs e)
@@ -72,14 +74,14 @@ namespace GuidanceManagementSystem.View_Frms
             DataGridViewImageColumn editColumn = new DataGridViewImageColumn();
             editColumn.HeaderText = "Edit";
             editColumn.Name = "imgEdit";
-            //editColumn.Image = Properties.Resources.pencil_96px; // Replace with your resource image
+            editColumn.Image = Properties.Resources.pen_50px; // Replace with your resource image
             editColumn.ImageLayout = DataGridViewImageCellLayout.Zoom; // Optionally set layout
             dataGridView1.Columns.Add(editColumn);
             // Create the Delete column
             DataGridViewImageColumn deleteColumn = new DataGridViewImageColumn();
             deleteColumn.HeaderText = "Delete";
             deleteColumn.Name = "imgDelete";
-            //deleteColumn.Image = Properties.Resources.delete_trash_96px; // Replace with your resource image
+            deleteColumn.Image = Properties.Resources.Delete_Trash_50px; // Replace with your resource image
             deleteColumn.ImageLayout = DataGridViewImageCellLayout.Zoom; // Optionally set layout
             dataGridView1.Columns.Add(deleteColumn);
         }
@@ -87,6 +89,7 @@ namespace GuidanceManagementSystem.View_Frms
         private void registration_view_Load(object sender, EventArgs e)
         {
             timer1.Start();
+            
             LoadDataIntoDataGridView(dataGridView1);
         }
 
@@ -98,15 +101,50 @@ namespace GuidanceManagementSystem.View_Frms
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if(webserver_view._serverUp)
+            if (methods.IsApacheRunning())
             {
+                //Console.WriteLine("Apache is running.");
+                //webserver_view._serverUp = true;
                 cuiButton2.Image = Properties.Resources.cloud_sync_480px;
             }
             else
             {
+                //Console.WriteLine("Apache is not running.");
+                //webserver_view._serverUp = false;
                 cuiButton2.Image = Properties.Resources.cloud_cross_480px;
             }
-            
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                int columnIndex = e.ColumnIndex;
+
+                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+
+                // Find the column index for "StudentId" column by name
+                int studentIdColumnIndex = dataGridView1.Columns["Student_Id"].Index;
+
+                // Retrieve the StudentId value based on its column index
+                StudentId = row.Cells[studentIdColumnIndex].Value?.ToString() ?? "N/A";
+
+                // Check if the clicked column is one of the action columns
+                if (dataGridView1.Columns[columnIndex].Name == "imgView")
+                {
+                    MessageBox.Show("You clicked to view the record.");
+                }
+                else if (dataGridView1.Columns[columnIndex].Name == "imgEdit")
+                {
+                    MessageBox.Show("You clicked to edit the record.");
+                }
+                else if (dataGridView1.Columns[columnIndex].Name == "imgDelete")
+                {
+                    MessageBox.Show("You clicked to delete the record.");
+                }
+
+                //MessageBox.Show($"Student Id: {StudentId}: {row.Cells[1]}");
+            }
         }
     }
 }

@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cuiLabel2 = new CuoreUI.Controls.cuiLabel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.cuiLabel3 = new CuoreUI.Controls.cuiLabel();
             this.cuiLabel1 = new CuoreUI.Controls.cuiLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.cuiLabel2 = new CuoreUI.Controls.cuiLabel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -54,6 +54,19 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(827, 1169);
             this.panel1.TabIndex = 0;
+            // 
+            // cuiLabel2
+            // 
+            this.cuiLabel2.AutoSize = true;
+            this.cuiLabel2.BackColor = System.Drawing.Color.Transparent;
+            this.cuiLabel2.Content = "link";
+            this.cuiLabel2.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cuiLabel2.ForeColor = System.Drawing.Color.Blue;
+            this.cuiLabel2.HorizontalAlignment = CuoreUI.Controls.cuiLabel.HorizontalAlignments.Center;
+            this.cuiLabel2.Location = new System.Drawing.Point(169, 833);
+            this.cuiLabel2.Name = "cuiLabel2";
+            this.cuiLabel2.Size = new System.Drawing.Size(470, 39);
+            this.cuiLabel2.TabIndex = 18;
             // 
             // pictureBox2
             // 
@@ -85,9 +98,9 @@
             this.cuiLabel1.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cuiLabel1.ForeColor = System.Drawing.Color.IndianRed;
             this.cuiLabel1.HorizontalAlignment = CuoreUI.Controls.cuiLabel.HorizontalAlignments.Center;
-            this.cuiLabel1.Location = new System.Drawing.Point(12, 255);
+            this.cuiLabel1.Location = new System.Drawing.Point(12, 252);
             this.cuiLabel1.Name = "cuiLabel1";
-            this.cuiLabel1.Size = new System.Drawing.Size(787, 88);
+            this.cuiLabel1.Size = new System.Drawing.Size(787, 103);
             this.cuiLabel1.TabIndex = 14;
             // 
             // pictureBox1
@@ -98,19 +111,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 13;
             this.pictureBox1.TabStop = false;
-            // 
-            // cuiLabel2
-            // 
-            this.cuiLabel2.AutoSize = true;
-            this.cuiLabel2.BackColor = System.Drawing.Color.Transparent;
-            this.cuiLabel2.Content = "link";
-            this.cuiLabel2.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cuiLabel2.ForeColor = System.Drawing.Color.Blue;
-            this.cuiLabel2.HorizontalAlignment = CuoreUI.Controls.cuiLabel.HorizontalAlignments.Center;
-            this.cuiLabel2.Location = new System.Drawing.Point(224, 833);
-            this.cuiLabel2.Name = "cuiLabel2";
-            this.cuiLabel2.Size = new System.Drawing.Size(349, 39);
-            this.cuiLabel2.TabIndex = 18;
             // 
             // qrPrint
             // 

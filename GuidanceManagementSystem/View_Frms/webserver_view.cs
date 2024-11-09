@@ -14,14 +14,18 @@ namespace GuidanceManagementSystem.View_Frms
 {
     public partial class webserver_view : Form
     {
-        public webserver_view()
-        {
-            InitializeComponent();
-        }
-        
         public static bool _serverUp { get; set; }
         public static string _ipAddress { get; set; }
         public static Bitmap _qrCodeBitmap { get; set; }
+
+        private MyMethods apacheServer;
+
+        public webserver_view()
+        {
+            InitializeComponent();
+            apacheServer = new MyMethods();
+        }
+
         private void cuiButton1_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -29,64 +33,56 @@ namespace GuidanceManagementSystem.View_Frms
 
         private async void cuiButton2_Click(object sender, EventArgs e)
         {
-            //bool apacheStarted = false; // Declare a variable to store the result
+            cuiButton2.Enabled = false; // Disable button to prevent multiple clicks
             if (_serverUp)
             {
-                MyMethods apacheServer = new MyMethods();
-                bool stoppedSuccessfully = await apacheServer.StopApacheAsync();
-
-                if (stoppedSuccessfully)
-                {
-                    _serverUp = false; // Update the server status
-                    MessageBox.Show("Apache server stopped successfully.");
-                }
-                else
-                {
-                    MessageBox.Show("Failed to stop Apache server.");
-                }
-
-                cuiButton2.Content = "Start Server";
-                cuiButton2.NormalBackground = Color.Green;
+                await StopApacheServer();
             }
             else
             {
-                try
+                await StartApacheServer();
+            }
+            cuiButton2.Enabled = true; // Re-enable button after completion
+        }
+
+        private async Task StartApacheServer()
+        {
+            try
+            {
+                _serverUp = await apacheServer.StartApacheFromBinaryAsync();
+                if (_serverUp)
                 {
-                    // Call the async method when the button is clicked
-                    MyMethods apacheServer = new MyMethods();
+                    _ipAddress = $"http://{await apacheServer.GetLocalIPAddressAsync()}:1111";
+                    _qrCodeBitmap = await apacheServer.GenerateQRCodeAsync(_ipAddress);
+                    pictureBox1.Image = _qrCodeBitmap;
+                    linkLabel1.Text = _ipAddress;
 
-                    // Capture the result of the Apache server start
-                    _serverUp = await apacheServer.StartApacheFromBinaryAsync();
-
-                    // Get the generated QR code as Bitmap
-                    string ipAddress = await apacheServer.GetLocalIPAddressAsync();
-                    _ipAddress = $"http://{ipAddress}:1111";
-                    Bitmap qrCodeBitmap = await apacheServer.GenerateQRCodeAsync(_ipAddress);
-                    _qrCodeBitmap = qrCodeBitmap;
-                    MessageBox.Show(_ipAddress);
-                    MessageBox.Show(_qrCodeBitmap.ToString());
-                    if (qrCodeBitmap != null)
-                    {
-                        
-                        // Set the generated QR code as the Image in the PictureBox
-                        pictureBox1.Image = qrCodeBitmap;
-                        linkLabel1.Text = $"http://{ipAddress}:1111";
-                    }
-
-                    // Show a message based on whether the Apache server started successfully
-                    if (_serverUp)
-                    {
-                        MessageBox.Show("Apache server started and barcode generated successfully.");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Failed to start Apache server.");
-                    }
+                    MessageBox.Show("Apache server started and QR code generated successfully.");
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show($"An error occurred: {ex.Message}");
+                    MessageBox.Show("Failed to start Apache server.");
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}");
+            }
+        }
+
+        private async Task StopApacheServer()
+        {
+            bool stoppedSuccessfully = await apacheServer.StopApacheAsync();
+            if (stoppedSuccessfully)
+            {
+                _serverUp = false;
+                pictureBox1.Image = null;
+                linkLabel1.Text = "Server stopped";
+                MessageBox.Show("Apache server stopped successfully.");
+            }
+            else
+            {
+                MessageBox.Show("Failed to stop Apache server.");
             }
         }
 
@@ -94,34 +90,38 @@ namespace GuidanceManagementSystem.View_Frms
         {
             qrPrint p = new qrPrint();
             p.ShowDialog();
-
         }
 
-        private void webserver_view_Load(object sender, EventArgs e)
+        private async void webserver_view_Load(object sender, EventArgs e)
         {
+            _serverUp = apacheServer.IsApacheRunning();
+            //MessageBox.Show(_serverUp.ToString());
+            if (_serverUp)
+            {
+                _ipAddress = $"http://{await apacheServer.GetLocalIPAddressAsync()}:1111";
+                _qrCodeBitmap = await apacheServer.GenerateQRCodeAsync(_ipAddress);
+                pictureBox1.Image = _qrCodeBitmap;
+                linkLabel1.Text = _ipAddress;
+            }
             timer1.Start();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            cuiButton2.Content = _serverUp ? "Stop Server" : "Start Server";
+            cuiButton2.NormalBackground = _serverUp ? Color.Crimson : Color.Green;
+            cuiButton3.Enabled = _serverUp;
             if (_serverUp)
             {
                 pictureBox1.Image = _qrCodeBitmap;
-                linkLabel1.Text = "";
-                linkLabel1.Text = $"http://{_ipAddress}:1111";
-
-                cuiButton2.Content = "Stop Server";
-                cuiButton2.NormalBackground = Color.Crimson;
-
-                cuiButton3.Enabled = true;
+                linkLabel1.Text = _ipAddress;
             }
             else
             {
-                cuiButton2.Content = "Start Server";
-                cuiButton2.NormalBackground = Color.Green;
-
-                cuiButton3.Enabled = false;
+                pictureBox1.Image = null;
+                linkLabel1.Text = "Server not running";
             }
         }
     }
+
 }

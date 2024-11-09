@@ -71,6 +71,7 @@ namespace GuidanceManagementSystem.View_Frms
         private void cuiButton6_Click(object sender, EventArgs e)
         {
             //reports
+            ShowFormInPanel(new reports_view());
         }
 
         private async void timer1_Tick(object sender, EventArgs e)

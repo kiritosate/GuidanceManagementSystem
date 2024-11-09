@@ -163,6 +163,16 @@ namespace GuidanceManagementSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Delete_Trash_50px {
+            get {
+                object obj = ResourceManager.GetObject("Delete Trash_50px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap eye_480px {
             get {
                 object obj = ResourceManager.GetObject("eye_480px", resourceCulture);
@@ -256,6 +266,16 @@ namespace GuidanceManagementSystem.Properties {
         internal static System.Drawing.Bitmap note_500px {
             get {
                 object obj = ResourceManager.GetObject("note_500px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pen_50px {
+            get {
+                object obj = ResourceManager.GetObject("pen_50px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

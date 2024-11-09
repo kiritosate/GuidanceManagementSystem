@@ -23,7 +23,7 @@ namespace GuidanceManagementSystem.methods
             {
                 // Path to Apache binary (make sure the path is correct)
                 string appDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                string apachePath = "C:/Apache";//Path.Combine(appDirectory, "Apache", "bin", "httpd.exe");
+                string apachePath = "C:/Apache/bin/httpd.exe";//Path.Combine(appDirectory, "Apache", "bin", "httpd.exe");
 
                 // Create a ProcessStartInfo to hide the command window
                 ProcessStartInfo startInfo = new ProcessStartInfo
@@ -45,7 +45,6 @@ namespace GuidanceManagementSystem.methods
                 return false; // Return false if an exception occurs
             }
         }
-
 
         public async Task<string> GetLocalIPAddressAsync()
         {
@@ -110,6 +109,23 @@ namespace GuidanceManagementSystem.methods
             catch (Exception ex)
             {
                 Console.WriteLine($"Error stopping Apache: {ex.Message}");
+                return false;
+            }
+        }
+
+        public bool IsApacheRunning()
+        {
+            try
+            {
+                // Check if there are any processes with the name "httpd"
+                var processes = Process.GetProcessesByName("httpd");
+
+                // If any "httpd" process is found, Apache is running
+                return processes.Length > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error checking Apache status: {ex.Message}");
                 return false;
             }
         }

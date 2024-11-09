@@ -54,6 +54,8 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.cartesianChart1 = new LiveCharts.WinForms.CartesianChart();
+            this.solidGauge1 = new LiveCharts.WinForms.SolidGauge();
             this.flowLayoutPanel1.SuspendLayout();
             this.cuiBorder1.SuspendLayout();
             this.cuiBorder2.SuspendLayout();
@@ -61,6 +63,8 @@
             this.cuiBorder4.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -349,9 +353,14 @@
             this.splitContainer1.Location = new System.Drawing.Point(22, 232);
             this.splitContainer1.Name = "splitContainer1";
             // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.solidGauge1);
+            // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.Color.Transparent;
+            this.splitContainer1.Panel2.Controls.Add(this.cartesianChart1);
             this.splitContainer1.Size = new System.Drawing.Size(895, 315);
             this.splitContainer1.SplitterDistance = 298;
             this.splitContainer1.TabIndex = 8;
@@ -400,6 +409,22 @@
             this.pictureBox4.TabIndex = 3;
             this.pictureBox4.TabStop = false;
             // 
+            // cartesianChart1
+            // 
+            this.cartesianChart1.Location = new System.Drawing.Point(34, 32);
+            this.cartesianChart1.Name = "cartesianChart1";
+            this.cartesianChart1.Size = new System.Drawing.Size(523, 253);
+            this.cartesianChart1.TabIndex = 0;
+            this.cartesianChart1.Text = "cartesianChart1";
+            // 
+            // solidGauge1
+            // 
+            this.solidGauge1.Location = new System.Drawing.Point(18, 32);
+            this.solidGauge1.Name = "solidGauge1";
+            this.solidGauge1.Size = new System.Drawing.Size(251, 268);
+            this.solidGauge1.TabIndex = 0;
+            this.solidGauge1.Text = "solidGauge1";
+            // 
             // dashboard_view
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -426,6 +451,8 @@
             this.cuiBorder3.ResumeLayout(false);
             this.cuiBorder4.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -464,5 +491,7 @@
         private CuoreUI.Controls.cuiLabel cuiLabel12;
         private CuoreUI.Controls.cuiLabel cuiLabel13;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private LiveCharts.WinForms.CartesianChart cartesianChart1;
+        private LiveCharts.WinForms.SolidGauge solidGauge1;
     }
 }

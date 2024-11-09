@@ -33,13 +33,13 @@
             this.cuiButton3 = new CuoreUI.Controls.cuiButton();
             this.panel2 = new System.Windows.Forms.Panel();
             this.cuiLabel2 = new CuoreUI.Controls.cuiLabel();
+            this.cuiButton1 = new CuoreUI.Controls.cuiButton();
             this.cuiControlDrag1 = new CuoreUI.cuiControlDrag(this.components);
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.cuiLabel1 = new CuoreUI.Controls.cuiLabel();
-            this.cuiLabel3 = new CuoreUI.Controls.cuiLabel();
-            this.cuiButton1 = new CuoreUI.Controls.cuiButton();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.cuiLabel3 = new CuoreUI.Controls.cuiLabel();
+            this.cuiLabel1 = new CuoreUI.Controls.cuiLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel2.SuspendLayout();
@@ -135,60 +135,6 @@
             this.cuiLabel2.Size = new System.Drawing.Size(266, 49);
             this.cuiLabel2.TabIndex = 6;
             // 
-            // cuiControlDrag1
-            // 
-            this.cuiControlDrag1.DragFrequency = 4;
-            this.cuiControlDrag1.TargetControl = this;
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel1.Location = new System.Drawing.Point(115, 309);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(137, 20);
-            this.linkLabel1.TabIndex = 10;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "http://0.0.0.0:1111\r\n";
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.pictureBox2);
-            this.panel1.Controls.Add(this.cuiLabel3);
-            this.panel1.Controls.Add(this.cuiLabel1);
-            this.panel1.Controls.Add(this.linkLabel1);
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Location = new System.Drawing.Point(12, 73);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(376, 381);
-            this.panel1.TabIndex = 11;
-            // 
-            // cuiLabel1
-            // 
-            this.cuiLabel1.AutoSize = true;
-            this.cuiLabel1.Content = "Counseling\\ and\\ Career\\ Guidance\\ Services\\ Office";
-            this.cuiLabel1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cuiLabel1.ForeColor = System.Drawing.Color.IndianRed;
-            this.cuiLabel1.HorizontalAlignment = CuoreUI.Controls.cuiLabel.HorizontalAlignments.Center;
-            this.cuiLabel1.Location = new System.Drawing.Point(3, 88);
-            this.cuiLabel1.Name = "cuiLabel1";
-            this.cuiLabel1.Size = new System.Drawing.Size(370, 52);
-            this.cuiLabel1.TabIndex = 7;
-            // 
-            // cuiLabel3
-            // 
-            this.cuiLabel3.AutoSize = true;
-            this.cuiLabel3.BackColor = System.Drawing.Color.Transparent;
-            this.cuiLabel3.Content = "Register\\ Now!!!";
-            this.cuiLabel3.Font = new System.Drawing.Font("Segoe UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cuiLabel3.ForeColor = System.Drawing.Color.IndianRed;
-            this.cuiLabel3.HorizontalAlignment = CuoreUI.Controls.cuiLabel.HorizontalAlignments.Center;
-            this.cuiLabel3.Location = new System.Drawing.Point(3, 332);
-            this.cuiLabel3.Name = "cuiLabel3";
-            this.cuiLabel3.Size = new System.Drawing.Size(370, 26);
-            this.cuiLabel3.TabIndex = 11;
-            // 
             // cuiButton1
             // 
             this.cuiButton1.BackColor = System.Drawing.Color.Transparent;
@@ -222,6 +168,35 @@
             this.cuiButton1.TextOffset = new System.Drawing.Point(0, 0);
             this.cuiButton1.Click += new System.EventHandler(this.cuiButton1_Click);
             // 
+            // cuiControlDrag1
+            // 
+            this.cuiControlDrag1.DragFrequency = 4;
+            this.cuiControlDrag1.TargetControl = this;
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabel1.Location = new System.Drawing.Point(95, 309);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(178, 20);
+            this.linkLabel1.TabIndex = 10;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "http://000.000.000:1111\r\n";
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.pictureBox2);
+            this.panel1.Controls.Add(this.cuiLabel3);
+            this.panel1.Controls.Add(this.cuiLabel1);
+            this.panel1.Controls.Add(this.linkLabel1);
+            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Location = new System.Drawing.Point(12, 73);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(376, 381);
+            this.panel1.TabIndex = 11;
+            // 
             // pictureBox2
             // 
             this.pictureBox2.Image = global::GuidanceManagementSystem.Properties.Resources.Untitled_design;
@@ -231,6 +206,31 @@
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 12;
             this.pictureBox2.TabStop = false;
+            // 
+            // cuiLabel3
+            // 
+            this.cuiLabel3.AutoSize = true;
+            this.cuiLabel3.BackColor = System.Drawing.Color.Transparent;
+            this.cuiLabel3.Content = "Register\\ Now!!!";
+            this.cuiLabel3.Font = new System.Drawing.Font("Segoe UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cuiLabel3.ForeColor = System.Drawing.Color.IndianRed;
+            this.cuiLabel3.HorizontalAlignment = CuoreUI.Controls.cuiLabel.HorizontalAlignments.Center;
+            this.cuiLabel3.Location = new System.Drawing.Point(3, 332);
+            this.cuiLabel3.Name = "cuiLabel3";
+            this.cuiLabel3.Size = new System.Drawing.Size(370, 26);
+            this.cuiLabel3.TabIndex = 11;
+            // 
+            // cuiLabel1
+            // 
+            this.cuiLabel1.AutoSize = true;
+            this.cuiLabel1.Content = "Counseling\\ and\\ Career\\ Guidance\\ Services\\ Office";
+            this.cuiLabel1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cuiLabel1.ForeColor = System.Drawing.Color.IndianRed;
+            this.cuiLabel1.HorizontalAlignment = CuoreUI.Controls.cuiLabel.HorizontalAlignments.Center;
+            this.cuiLabel1.Location = new System.Drawing.Point(3, 88);
+            this.cuiLabel1.Name = "cuiLabel1";
+            this.cuiLabel1.Size = new System.Drawing.Size(370, 52);
+            this.cuiLabel1.TabIndex = 7;
             // 
             // pictureBox1
             // 
