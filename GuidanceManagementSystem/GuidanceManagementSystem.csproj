@@ -208,6 +208,7 @@
     <Compile Include="methods\MyFetch.cs" />
     <Compile Include="methods\MyMethods.cs" />
     <Compile Include="methods\PrinterHelper.cs" />
+    <Compile Include="methods\StudentsRecord.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="qrPrint.cs">
@@ -227,6 +228,12 @@
     </Compile>
     <Compile Include="View_Frms\dashboard_view.Designer.cs">
       <DependentUpon>dashboard_view.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View_Frms\enrollment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View_Frms\enrollment.Designer.cs">
+      <DependentUpon>enrollment.cs</DependentUpon>
     </Compile>
     <Compile Include="View_Frms\LoginFrm.cs">
       <SubType>Form</SubType>
@@ -276,6 +283,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View_Frms\dashboard_view.resx">
       <DependentUpon>dashboard_view.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View_Frms\enrollment.resx">
+      <DependentUpon>enrollment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View_Frms\LoginFrm.resx">
       <DependentUpon>LoginFrm.cs</DependentUpon>
