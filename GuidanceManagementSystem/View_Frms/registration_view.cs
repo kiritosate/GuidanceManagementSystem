@@ -146,5 +146,11 @@ namespace GuidanceManagementSystem.View_Frms
                 //MessageBox.Show($"Student Id: {StudentId}: {row.Cells[1]}");
             }
         }
+
+        private void cuiButton1_Click(object sender, EventArgs e)
+        {
+            enrollment frm = new enrollment();
+            frm.ShowDialog();
+        }
     }
 }

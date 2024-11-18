@@ -9,7 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
-using CounselingAndCareerGuidance;
 using System.Collections;
 using System.Transactions;
 using System.Data.Common;
@@ -128,7 +127,7 @@ namespace GuidanceManagementSystem
             FamilyData father,
             FamilyData mother)
         {
-            string connectionString = "server=localhost;database=guidancedb;user=root;password=;";
+            string connectionString = "server=localhost;database=guidancedb;user=root;password=root;";
 
             using (var connection = new MySqlConnection(connectionString))
             {
@@ -883,6 +882,11 @@ namespace GuidanceManagementSystem
             {
                 tabControl1.SelectedIndex--;
             }
+        }
+
+        private void cuiButton1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

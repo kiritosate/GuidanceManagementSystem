@@ -16,5 +16,10 @@ namespace GuidanceManagementSystem.View_Frms
         {
             InitializeComponent();
         }
+
+        private void cuiButton1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

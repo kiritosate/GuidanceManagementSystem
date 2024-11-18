@@ -65,7 +65,7 @@ namespace GuidanceManagementSystem.methods
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                //MessageBox.Show("Error: " + ex.Message);
                 return (0, 0, string.Empty); // Indicate an error with (0, 0, "")
             }
             finally

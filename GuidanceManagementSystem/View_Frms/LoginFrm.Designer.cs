@@ -177,7 +177,7 @@
             this.cuiSpinner1.Name = "cuiSpinner1";
             this.cuiSpinner1.RingColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
             this.cuiSpinner1.RotateSpeed = 1F;
-            this.cuiSpinner1.Rotation = 142.7487F;
+            this.cuiSpinner1.Rotation = 272.9648F;
             this.cuiSpinner1.Size = new System.Drawing.Size(30, 31);
             this.cuiSpinner1.TabIndex = 5;
             this.cuiSpinner1.Thickness = 3F;
@@ -202,7 +202,6 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LoginFrm";
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.LoginFrm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
