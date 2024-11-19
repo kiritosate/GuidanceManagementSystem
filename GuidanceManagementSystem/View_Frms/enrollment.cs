@@ -15,6 +15,7 @@ using System.Data.Common;
 using System.Diagnostics.Metrics;
 using System.Windows.Controls.Primitives;
 using static GuidanceManagementSystem.StudentRecord;
+using CuoreUI;
 
 
 namespace GuidanceManagementSystem
@@ -115,9 +116,7 @@ namespace GuidanceManagementSystem
                 await command.ExecuteNonQueryAsync();
             }
         }
-
-
-        private async Task SaveAllRecordsAsync(
+            private async Task SaveAllRecordsAsync(
             IndividualRecord IndividualInfo,
             StudentRecord studentRecord,
             EducationalData Education,
@@ -126,8 +125,8 @@ namespace GuidanceManagementSystem
             List<Sibling> sibling,
             FamilyData father,
             FamilyData mother)
-        {
-            string connectionString = "server=localhost;database=guidancedb;user=root;password=root;";
+            {
+            string connectionString = "server=localhost;database=guidancedb;user=root;password=;";
 
             using (var connection = new MySqlConnection(connectionString))
             {
@@ -144,19 +143,16 @@ namespace GuidanceManagementSystem
                         // Save other records asynchronously
                         await SaveStudentRecord(studentRecord, studentID, connection, transaction);
                         await SaveEducationalRecord(Education, studentID, connection, transaction);
-                        await SaveHealthData(healthData, studentID, connection, transaction);
                         await SaveFamilyData(father, mother, studentID, connection, transaction);
                         await SaveAdditionalProfile(AdditionalInfo, studentID, connection, transaction);
-
-
                         // Save siblings with StudentID as a foreign key
                         foreach (var siblingData in sibling)
                         {
                             await SaveSiblingsData(siblingData, studentID, connection, transaction);
                         }
-
                         // Commit the transaction if all inserts succeed
                         await transaction.CommitAsync();
+                        MessageBox.Show("Health data saved successfully!");
                     }
                     catch (Exception ex)
                     {
@@ -167,15 +163,13 @@ namespace GuidanceManagementSystem
                 }
             }
         }
-
-
         private async Task SaveStudentRecord(StudentRecord record, string studentID, MySqlConnection connection, MySqlTransaction transaction)
         {
             try
             {
                 // SQL query to insert data into tbl_personal_data
                 string query = @"
-        INSERT INTO tbl_personal_data (Personal_Data_ID,
+        INSERT INTO tbl_personal_data (
             Student_ID, Firstname, Middlename, Lastname, Nickname, Sex, Age, 
             Nationality, Citizenship, Date_of_Birth, Place_of_Birth, 
             Civil_Status, Spouse_Name, Number_of_Children, Religion, 
@@ -183,15 +177,14 @@ namespace GuidanceManagementSystem
             Boarding_House_Address, Landlord_Name, Person_to_contact, 
             Cell_no, Hobbies_Skills_Talents, Describe_Yourself
         ) 
-        VALUES (@PersonalDataID,
+        VALUES (
             @StudentID, @Firstname, @Middlename, @Lastname, @Nickname, @Sex, @Age, 
             @Nationality, @Citizenship, @DateOfBirth, @PlaceOfBirth, 
             @Civil_Status, @Spouse_Name, @Number_of_Children, @Religion, 
             @Contact_No, @E_mail_Address, @CompleteHomeAddress, 
             @BoardingHouseAddress, @LandlordName, @PersonToContact, 
             @CellNumber, @Hobbies, @DescribeYourself
-        );SELECT LAST_INSERT_ID(); ";
-
+        ); ";
                 // Ensure the connection is open
                 if (connection.State != ConnectionState.Open)
                 {
@@ -201,7 +194,7 @@ namespace GuidanceManagementSystem
                 using (var command = new MySqlCommand(query, connection, transaction))
                 {
                     // Parameter assignments
-                    command.Parameters.AddWithValue("@PersonalDataID", record.PersonalInfo.PersonalDataID);
+                    //command.Parameters.AddWithValue("@PersonalDataID", record.PersonalInfo.PersonalDataID);
                     command.Parameters.AddWithValue("@StudentID", record.PersonalInfo.studentID);
                     command.Parameters.AddWithValue("@Firstname", record.PersonalInfo.FirstName);
                     command.Parameters.AddWithValue("@Middlename", record.PersonalInfo.MiddleName);
@@ -251,9 +244,9 @@ namespace GuidanceManagementSystem
             {
                 // SQL query to insert educational record into tbl_educational_data
                 string query = @"
-            INSERT INTO tbl_educational_data_final(Education_ID,Student_ID, Elementary, ElementaryHonorAwards, ElementaryYearGraduated, HighSchool, JuniorHighYearGraduated, JuniorHighHonorAwards, SeniorHighSchool, SeniorHighYearGraduated, SeniorHighHonorAwards, StrandCompleted, VocationalTechnical, SHSAverageGrade, College, FavoriteSubject, WhyFavoriteSubject, 
+            INSERT INTO tbl_educational_data_final(Student_ID, Elementary, ElementaryHonorAwards, ElementaryYearGraduated, HighSchool, JuniorHighYearGraduated, JuniorHighHonorAwards, SeniorHighSchool, SeniorHighYearGraduated, SeniorHighHonorAwards, StrandCompleted, VocationalTechnical, SHSAverageGrade, College, FavoriteSubject, WhyFavoriteSubject, 
         LeastFavoriteSubject, WhyLeastFavoriteSubject, SupportForStudies, Membership, LeftRightHanded)
-            VALUES (@EducationalID,
+            VALUES (
                  @StudentID, 
                  @Elementary, 
                  @ElementaryHonorAwards,  
@@ -275,7 +268,7 @@ namespace GuidanceManagementSystem
                  @SupportForStudies, 
                  @Membership, 
                  @LeftRightHanded
-            );SELECT LAST_INSERT_ID();";
+            );";
 
                 // Ensure the connection is open
                 if (connection.State != ConnectionState.Open)
@@ -286,7 +279,7 @@ namespace GuidanceManagementSystem
                 using (var command = new MySqlCommand(query, connection, transaction))
                 {
                     // Parameter assignments for educational data fields
-                    command.Parameters.AddWithValue("@EducationalID", Education.EducationalID);
+                    //command.Parameters.AddWithValue("@EducationalID", Education.EducationalID);
                     command.Parameters.AddWithValue("@StudentID", Education.studentID);
                     command.Parameters.AddWithValue("@Elementary", Education.Elementary);
                     command.Parameters.AddWithValue("@ElementaryHonorAwards", Education.ElementaryHonorAwards);
@@ -330,60 +323,34 @@ namespace GuidanceManagementSystem
                 throw;
             }
         }
-
-        private async Task SaveHealthData(HealthData Health, string studentID, MySqlConnection connection, MySqlTransaction transaction)
+        private async Task TestSaveHealthData(HealthData Health)
         {
-            try
+            string connectionString = "server=localhost;database=guidancedb;user=root;password=;";
+            using (var connection = new MySqlConnection(connectionString))
             {
-                // Corrected query without Health_Data_ID since it's auto-increment
-                string query = @"INSERT INTO tbl_health_data (Health_Data_ID
-                            Student_ID,
-                            Sick_Frequency, 
-                            Health_Problems, 
-                            Physical_Disabilities
-                        ) 
-                        VALUES 
-                        (   @HealthDataID,
-                            @StudentID,
-                            @SickFrequency, 
-                            @HealthProblems, 
-                            @PhysicalDisabilities
-                        );";
+                await connection.OpenAsync();
+                string query = @"INSERT INTO tbl_health_data (Student_ID, Sick_Frequency, Health_Problems, Physical_Disabilities)
+                         VALUES (@StudentID, @SickFrequency, @HealthProblems, @PhysicalDisabilities);";
 
-                // Ensure the connection is open
-                if (connection.State != ConnectionState.Open)
+                using (var command = new MySqlCommand(query, connection))
                 {
-                    connection.Open();
-                }
-
-                using (var command = new MySqlCommand(query, connection, transaction))
-                {
-                    // Set parameters correctly
-                    command.Parameters.AddWithValue("@HealthDataID", Health.HealthDataID);
                     command.Parameters.AddWithValue("@StudentID", Health.studentID);
                     command.Parameters.AddWithValue("@SickFrequency", Health.SickFrequency);
                     command.Parameters.AddWithValue("@HealthProblems", Health.HealthProblems);
                     command.Parameters.AddWithValue("@PhysicalDisabilities", Health.PhysicalDisabilities);
 
-                    // Execute the command asynchronously
-                    await command.ExecuteNonQueryAsync();
-
-                    // Commit the transaction inside the using block
-                    transaction.Commit();
+                    try
+                    {
+                        int result = await command.ExecuteNonQueryAsync();
+                        MessageBox.Show(result > 0 ? "Health data saved!" : "Health data not saved.");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error: {ex.Message}");
+                    }
                 }
             }
-            catch (Exception ex)
-            {
-                // Rollback the transaction in case of an error
-                Console.WriteLine($"Error saving health data: {ex.Message}");
-                /*transaction.Rollback();*/ // Rollback if there is an error
-                throw; // Rethrow the exception for further handling if needed
-            }
         }
-
-
-
-
 
         private async Task SaveAdditionalProfile(AdditionalProfile AdditionalInfo, string studentID, MySqlConnection connection, MySqlTransaction transaction)
         {
@@ -745,7 +712,6 @@ namespace GuidanceManagementSystem
                 LeftRightHanded = RightHanded.Checked ? "Right Handed" : LeftHanded.Checked ? "LeftHanded": null,
             };
 
-            // Create health data object
             var Health = new HealthData
                 {
                     studentID = txtStudentID.Text,
@@ -765,8 +731,11 @@ namespace GuidanceManagementSystem
                            chkCleftPalate.Checked ? "Cleft Palate" :
                            chkPhysicalDeformities.Checked ? "Physical Deformities" :
                            chkSeizureDisorders.Checked ? "Seizure Disorder" :
-                           null,
+                           null
                 };
+            await TestSaveHealthData(Health);
+
+
                 var AdditionalInfo = new AdditionalProfile
                 {
                     studentID = txtStudentID.Text,
