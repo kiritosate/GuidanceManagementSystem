@@ -16,18 +16,21 @@ using System.Diagnostics.Metrics;
 using System.Windows.Controls.Primitives;
 using static GuidanceManagementSystem.StudentRecord;
 using CuoreUI;
+using System.Windows.Controls;
+using System.Web.UI.WebControls;
 
 
 namespace GuidanceManagementSystem
 {
     public partial class enrollment : Form
     {
-        private List<TextBox> siblingNameTextBoxes = new List<TextBox>();
-        private List<TextBox> siblingAgeTextBoxes = new List<TextBox>();
+        //private List<TextBox> siblingNameTextBoxes = new List<TextBox>();
+        //private List<TextBox> siblingAgeTextBoxes = new List<TextBox>();
         // Add more lists as needed for other fields
         private int SiblingCount = 0; // Initialize counter
 
 
+        private bool isIndividualRecordSaved = false;
 
         private async Task SaveFamilyData(FamilyData father, FamilyData mother, string studentID, MySqlConnection connection, MySqlTransaction transaction)
         {
@@ -116,16 +119,14 @@ namespace GuidanceManagementSystem
                 await command.ExecuteNonQueryAsync();
             }
         }
-            private async Task SaveAllRecordsAsync(
-            IndividualRecord IndividualInfo,
-            StudentRecord studentRecord,
-            EducationalData Education,
-            HealthData healthData,
-            AdditionalProfile AdditionalInfo,
-            List<Sibling> sibling,
-            FamilyData father,
-            FamilyData mother)
-            {
+        private async Task SaveAllRecordsAsync(
+
+        StudentRecord studentRecord,
+        EducationalData Education,
+        HealthData healthData,
+        FamilyData father,
+        FamilyData mother)
+        {
             string connectionString = "server=localhost;database=guidancedb;user=root;password=;";
 
             using (var connection = new MySqlConnection(connectionString))
@@ -138,18 +139,20 @@ namespace GuidanceManagementSystem
                     try
                     {
                         // Save individual record
-                        string studentID = await SaveIndividualRecord(IndividualInfo, connection, transaction);
+                        string studentID = txtStudentID.Text;
+                        //string studentID = await SaveIndividualRecord(IndividualInfo, connection, transaction);
 
                         // Save other records asynchronously
                         await SaveStudentRecord(studentRecord, studentID, connection, transaction);
                         await SaveEducationalRecord(Education, studentID, connection, transaction);
+                        await TestSaveHealthData(healthData);
                         await SaveFamilyData(father, mother, studentID, connection, transaction);
-                        await SaveAdditionalProfile(AdditionalInfo, studentID, connection, transaction);
+                        //await SaveAdditionalProfile(AdditionalInfo, studentID, connection, transaction);
                         // Save siblings with StudentID as a foreign key
-                        foreach (var siblingData in sibling)
-                        {
-                            await SaveSiblingsData(siblingData, studentID, connection, transaction);
-                        }
+                        //foreach (var siblingData in sibling)
+                        //{
+                        //    await SaveSiblingsData(siblingData, studentID, connection, transaction);
+                        //}
                         // Commit the transaction if all inserts succeed
                         await transaction.CommitAsync();
                         MessageBox.Show("Health data saved successfully!");
@@ -352,106 +355,85 @@ namespace GuidanceManagementSystem
             }
         }
 
-        private async Task SaveAdditionalProfile(AdditionalProfile AdditionalInfo, string studentID, MySqlConnection connection, MySqlTransaction transaction)
+        private async Task TestSaveAdditionalProfile(AdditionalProfile AdditionalInfo)
         {
-            try
+            string connectionString = "server=localhost;database=guidancedb;user=root;password=;";
+            using (var connection = new MySqlConnection(connectionString))
             {
-                string query = @"INSERT INTO tbl_additional_profile (Additional_Profile_ID,Student_ID,
-                         Sexual_Preference, 
-                         Expression_Present, 
-                         Gender_Sexually_Attracted, 
-                         Scholarship, 
-                         Name_of_Scholarship
-                     ) 
-                     VALUES 
-                     (   @AdditionalProfileID,
-                         @StudentID,
-                         @SexualPreference, 
-                         @ExpressionPresent, 
-                         @GenderSexuallyAttracted, 
-                         @Scholarship, 
-                         @NameOfScholarship
-                     );SELECT LAST_INSERT_ID();";
+                await connection.OpenAsync();
+                string query = @"INSERT INTO tbl_additional_profile (
+                            Student_ID, 
+                            Sexual_Preference, 
+                            Expression_Present, 
+                            Gender_Sexually_Attracted,Scholarship,Name_of_Scholarship
+                           
+                         ) 
+                         VALUES (
+                            @StudentID, 
+                            @SexualPreference, 
+                            @ExpressionPresent, 
+                            @GenderSexuallyAttracted,
+                            @HasScholarship,
+                            @ScholarshipName
+                         );";
 
-                using (var command = new MySqlCommand(query, connection, transaction))
+                using (var command = new MySqlCommand(query, connection))
                 {
-                    // Add parameters
-                    command.Parameters.AddWithValue("@AdditionalProfileID", AdditionalInfo.AdditionalProfileID);
                     command.Parameters.AddWithValue("@StudentID", AdditionalInfo.studentID);
                     command.Parameters.AddWithValue("@SexualPreference", AdditionalInfo.SexualPreference);
                     command.Parameters.AddWithValue("@ExpressionPresent", AdditionalInfo.ExpressionPresent);
                     command.Parameters.AddWithValue("@GenderSexuallyAttracted", AdditionalInfo.GenderSexuallyAttracted);
-                    command.Parameters.AddWithValue("@Scholarship", AdditionalInfo.HasScholarship); // Ensure this is a tinyint
-                    command.Parameters.AddWithValue("@NameOfScholarship", AdditionalInfo.ScholarshipName);
+                    command.Parameters.AddWithValue("@HasScholarship", AdditionalInfo.HasScholarship);
+                    command.Parameters.AddWithValue("@ScholarshipName", AdditionalInfo.ScholarshipName);
 
-                    // Execute the command
-                    await command.ExecuteNonQueryAsync();
-                    //AdditionalInfo.AdditionalProfileID = Convert.ToInt32(new MySqlCommand("SELECT LAST_INSERT_ID();", connection, transaction).ExecuteScalar());
-                    transaction.Commit( );
+                    try
+                    {
+                        int result = await command.ExecuteNonQueryAsync();
+                        MessageBox.Show(result > 0 ? "Additional profile saved!" : "Additional profile not saved.");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error: {ex.Message}");
+                    }
                 }
-
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                throw;
             }
         }
-            
-
-        private async Task<string> SaveIndividualRecord(IndividualRecord IndividualInfo, MySqlConnection connection, MySqlTransaction transaction)
+        private async Task SaveIndividualRecordAsync(IndividualRecord IndividualInfo)
         {
-            try
-            {
-                // SQL query to insert the individual record into the database
-                string query = @"
-        INSERT INTO tbl_individual_record (Student_ID,Course, Year,Student_Status)
-        VALUES (@StudentID,@Course, @Year,@StudentStatus);";
+            string connectionString = "server=localhost;database=guidancedb;user=root;password=;";
+            string query = @"INSERT INTO tbl_individual_record (Student_ID, Course, Year,Student_Status) 
+                     VALUES (@StudentID, @Course, @Year,@StudentStatus);";
 
-                using (var command = new MySqlCommand(query, connection, transaction))
+            using (var connection = new MySqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
+
+                using (var command = new MySqlCommand(query, connection))
                 {
-                    // Add parameters
                     command.Parameters.AddWithValue("@StudentID", IndividualInfo.studentID);
                     command.Parameters.AddWithValue("@Course", IndividualInfo.Course);
                     command.Parameters.AddWithValue("@Year", IndividualInfo.Year);
                     command.Parameters.AddWithValue("@StudentStatus", IndividualInfo.StudentStatus);
-                    //command.Parameters.AddWithValue("@PersonalDataID", IndividualInfo.PersonalDataID);
-                    //command.Parameters.AddWithValue("@FamilyDataID", IndividualInfo.FamilyDataID);
-                    //command.Parameters.AddWithValue("@SiblingsID", IndividualInfo.SiblingsID);
-                    //command.Parameters.AddWithValue("@EducationalID", IndividualInfo.EducationalID);
-                    //command.Parameters.AddWithValue("@AdditionalProfileID", IndividualInfo.AdditionalProfileID);
-                    //command.Parameters.AddWithValue("@HealthDataID", IndividualInfo.HealthDataID);
-                    //command.Parameters.AddWithValue("@Status", IndividualInfo.Status);
 
-                    // Execute the command asynchronously
                     await command.ExecuteNonQueryAsync();
-
-                    // Get the last inserted ID (for the StudentID)
-                    string studentID = command.LastInsertedId.ToString();
-                    return studentID;
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error saving individual record: {ex.Message}");
-                throw;
             }
         }
 
-        public async Task SaveSiblingsData(Sibling siblingData, string studentID, MySqlConnection connection, MySqlTransaction transaction)
+
+
+        private async Task SaveSiblingsData(Sibling sibling, string studentID, MySqlConnection connection, MySqlTransaction transaction)
         {
-            string query = @"
-        INSERT INTO tbl_siblings (Student_ID, Name, Age, School, EducationalAttainment, EmploymentAgency)
-        VALUES (@StudentID, @Name, @Age, @School, @EducationalAttainment, @EmploymentAgency);";
+            string query = "INSERT INTO tbl_brothers_sisters (Student_ID, Name, Age, School, Educational_Attainment, Employment_Business_Agency) VALUES (@StudentID, @Name, @Age, @School, @EducationalAttainment, @EmploymentBusinessAgency)";
 
             using (var command = new MySqlCommand(query, connection, transaction))
             {
-                command.Parameters.AddWithValue("@StudentID",siblingData.studentID);
-                command.Parameters.AddWithValue("@Name", siblingData.Name);
-                command.Parameters.AddWithValue("@Age", siblingData.Age);
-                command.Parameters.AddWithValue("@School", siblingData.School);
-                command.Parameters.AddWithValue("@EducationalAttainment", siblingData.EducationalAttainment);
-                command.Parameters.AddWithValue("@EmploymentAgency", siblingData.EmploymentBusinessAgency);
+                command.Parameters.AddWithValue("@StudentID", studentID);
+                command.Parameters.AddWithValue("@Name", sibling.Name);
+                command.Parameters.AddWithValue("@Age", sibling.Age);
+                command.Parameters.AddWithValue("@School", sibling.School);
+                command.Parameters.AddWithValue("@EducationalAttainment", sibling.EducationalAttainment);
+                command.Parameters.AddWithValue("@EmploymentBusinessAgency", sibling.EmploymentBusinessAgency);
 
                 await command.ExecuteNonQueryAsync();
             }
@@ -592,6 +574,7 @@ namespace GuidanceManagementSystem
       
         private async void button1_Click(object sender, EventArgs e)
         {
+
             var studentRecord = new StudentRecord
             {
 
@@ -624,25 +607,6 @@ namespace GuidanceManagementSystem
 
                 }
             };
-            var individualInfo = new StudentRecord.IndividualRecord
-            {
-                studentID = txtStudentID.Text,
-                Course = cmbCourse.Text,
-                Year = int.TryParse(cmbYear.Text, out var year) ? year : 0,
-                StudentStatus = rbIsNewStudent.Checked ? "New Student" :
-                       rbIsTransferee.Checked ? "Transferee" :
-                       rbIsReEntry.Checked ? "Re-entry" :
-                       rbisShifter.Checked ? "Shifter" : null,
-
-                // PersonalDataID = 0, // Set this according to your logic
-                //FamilyDataID = 0, // Set this according to your logic
-                //SiblingsID = 0, // Set this according to your logic
-                //EducationalID = 0, // Set this according to your logic
-                //AdditionalProfileID = 0, // Set this according to your logic
-                //HealthDataID = 0, // Set this according to your logic
-                //Status = true // or false, depending on your logic
-            };
-
             var father = new StudentRecord.FamilyData
             {
                
@@ -712,9 +676,10 @@ namespace GuidanceManagementSystem
                 LeftRightHanded = RightHanded.Checked ? "Right Handed" : LeftHanded.Checked ? "LeftHanded": null,
             };
 
+
             var Health = new HealthData
                 {
-                    studentID = txtStudentID.Text,
+                    studentID = SavedStudentID,
                     SickFrequency = rbSickOften.Checked ? "Yes" :
                     rbSickNo.Checked ? "No" :
                     rbSickSeldom.Checked ? "Seldom" :
@@ -733,25 +698,33 @@ namespace GuidanceManagementSystem
                            chkSeizureDisorders.Checked ? "Seizure Disorder" :
                            null
                 };
+            if (string.IsNullOrEmpty(SavedStudentID))
+            {
+                MessageBox.Show("Please save the Individual Record first.");
+                return;
+            }
             await TestSaveHealthData(Health);
 
 
                 var AdditionalInfo = new AdditionalProfile
                 {
-                    studentID = txtStudentID.Text,
+                    studentID =SavedStudentID,
                     SexualPreference = GetGenderIdentity(),
                     ExpressionPresent = GetGenderExpression(),
                     GenderSexuallyAttracted = GetGenderSexuallyAttracted(),
                     HasScholarship = rbScholarshipYes.Checked? "Yes": rbScholarshipNo.Checked? "No": null,
                     ScholarshipName = txtScholarshipName.Text
                 };
-                var siblingsData = GetSiblingsDataFromGrid();
-         
-
+            await TestSaveAdditionalProfile(AdditionalInfo);
+            var siblingsData = new Sibling
+                {
+                   
+                };
+ 
             try
             {
                 // Call the async SaveAllRecords method with await
-                await SaveAllRecordsAsync(individualInfo,studentRecord, Education, Health, AdditionalInfo, siblingsData, father, mother);
+                await SaveAllRecordsAsync(studentRecord, Education, Health, father, mother);
 
                 // If all records are saved successfully, show a success message
                 MessageBox.Show("Record saved successfully!");
@@ -772,26 +745,99 @@ namespace GuidanceManagementSystem
                 // Skip the new row placeholder
                 if (row.IsNewRow) continue;
 
-                // Create a new Sibling object
+                // Try to get the value for each column
+                string name = row.Cells["Name"].Value?.ToString();
+                string school = row.Cells["School"].Value?.ToString();
+                string educationalAttainment = row.Cells["Educational_Attainment"].Value?.ToString();
+                string employmentBusinessAgency = row.Cells["Employment_Business_Agency"].Value?.ToString();
+
+                // Try to get the Age value, handling any invalid data
+                int age = 0;
+                if (row.Cells["Age"].Value != null && int.TryParse(row.Cells["Age"].Value.ToString(), out age))
+                {
+                    // Successfully parsed age
+                }
+                else
+                {
+                    // Handle invalid age data, maybe set a default or show a warning
+                    MessageBox.Show("Invalid age data found.");
+                    continue; // Skip this row if age is invalid
+                }
+
+                // Create a new Sibling object and add to the list
                 var sibling = new Sibling
                 {
-                    Name = row.Cells["Name"].Value?.ToString(),
-                    Age = Convert.ToInt32(row.Cells["Age"].Value),
-                    School = row.Cells["School"].Value?.ToString(),
-                    EducationalAttainment = row.Cells["Educational_Attainment"].Value?.ToString(),
-                    EmploymentBusinessAgency = row.Cells["Employment_Business_Agency"].Value?.ToString()
+                    Name = name,
+                    Age = age,
+                    School = school,
+                    EducationalAttainment = educationalAttainment,
+                    EmploymentBusinessAgency = employmentBusinessAgency
                 };
 
-                // Add the sibling object to the list
                 siblingsList.Add(sibling);
             }
 
             return siblingsList;
-
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void tabControl_Selecting(object sender, TabControlCancelEventArgs e)
         {
+            // Check if the tab should be disabled
+            if (!e.TabPage.Enabled)
+            {
+                e.Cancel = true; // Cancel the tab selection
+            }
+        }
+
+        public string SavedStudentID { get; private set; }
+        private async void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Validate that StudentID is not empty
+                if (string.IsNullOrWhiteSpace(txtStudentID.Text))
+                {
+                    MessageBox.Show("Please enter the Student ID before proceeding.");
+                    return;
+                }
+
+                // Save Individual Record only if it hasn't been saved yet
+                if (!isIndividualRecordSaved)
+                {
+                    // Create the IndividualRecord object
+                    IndividualRecord individualRecord = new IndividualRecord
+                    {
+                        studentID = txtStudentID.Text,
+                        Course = cmbCourse.Text,
+                        Year = int.TryParse(cmbYear.Text, out var year) ? year : 0,
+                        StudentStatus = rbIsNewStudent.Checked ? "New Student" :
+                            rbIsTransferee.Checked ? "Transferee" :
+                            rbIsReEntry.Checked ? "Re-entry" :
+                            rbisShifter.Checked ? "Shifter" : null,
+                    };
+
+                    // Save the Individual Record to the database
+                    await SaveIndividualRecordAsync(individualRecord);
+                    isIndividualRecordSaved = true; // Mark as saved
+                    SavedStudentID = txtStudentID.Text; // Store the StudentID globally if needed
+
+                    // Show success message
+                    MessageBox.Show("Individual record saved successfully! You can now proceed to the next section.");
+                }
+
+                // Enable the next tab and navigate to it
+                int currentTabIndex = tabControl1.SelectedIndex;
+                if (currentTabIndex < tabControl1.TabPages.Count - 1)
+                {
+                    tabControl1.TabPages[currentTabIndex + 1].Enabled = true;
+                    tabControl1.SelectedIndex = currentTabIndex + 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors and show a meaningful message
+                MessageBox.Show($"An error occurred: {ex.Message}");
+            }
             if (tabControl1.SelectedIndex == 0) // PersonalDataTab validation
             {
                 // Add validation for PersonalDataTab
@@ -857,6 +903,78 @@ namespace GuidanceManagementSystem
         {
             this.Close();
         }
+
+        private void enrollment_Load(object sender, EventArgs e)
+        {
+            
+
+            //foreach (TabPage tabPage in tabControl1.TabPages)
+            //{
+            //    tabPage.Enabled = false;
+            //}
+            //tabControl1.TabPages[0].Enabled = true;
+        }
+
+      
+           
+
+        private async void cuiButton2_Click_1(object sender, EventArgs e)
+        {
+                try
+                {
+                    // Step 1: Get the list of sibling data from the DataGridView
+                    List<Sibling> siblingsData = GetSiblingsDataFromGrid();
+
+                    if (siblingsData.Count == 0)
+                    {
+                        MessageBox.Show("No sibling data to save.");
+                        return;
+                    }
+
+                    // Step 2: Assuming you have a student ID (from IndividualRecord or other source)
+                    string studentID = txtStudentID.Text;  // Example of getting the Student ID
+
+                    if (string.IsNullOrWhiteSpace(studentID))
+                    {
+                        MessageBox.Show("Please enter a valid Student ID.");
+                        return;
+                    }
+
+                    // Step 3: Save each sibling record in the database
+                    string connectionString = "server=localhost;database=guidancedb;user=root;password=;";
+                    using (var connection = new MySqlConnection(connectionString))
+                    {
+                        await connection.OpenAsync();
+                        using (var transaction = await connection.BeginTransactionAsync())
+                        {
+                            try
+                            {
+                                // Loop through each sibling in the list and save it
+                                foreach (var sibling in siblingsData)
+                                {
+                                    await SaveSiblingsData(sibling, studentID, connection, transaction);
+                                }
+
+                                // Commit the transaction
+                                await transaction.CommitAsync();
+                                MessageBox.Show("Siblings data saved successfully!");
+                            }
+                            catch (Exception ex)
+                            {
+                                // If an error occurs, roll back the transaction
+                                await transaction.RollbackAsync();
+                                MessageBox.Show($"Error: {ex.Message}");
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Handle any unexpected errors
+                    MessageBox.Show($"Error: {ex.Message}");
+                }
+            }
+        }
     }
-}
+
 

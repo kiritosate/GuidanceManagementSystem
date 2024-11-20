@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(enrollment));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtStudentID = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -153,6 +154,8 @@
             this.label42 = new System.Windows.Forms.Label();
             this.txtFatherName = new System.Windows.Forms.TextBox();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.cuiButton2 = new CuoreUI.Controls.cuiButton();
             this.dgvSiblings = new System.Windows.Forms.DataGridView();
             this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Age = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -271,6 +274,7 @@
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtFatherNoOfChildren)).BeginInit();
             this.tabPage7.SuspendLayout();
+            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSiblings)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -283,7 +287,7 @@
             // 
             this.txtStudentID.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtStudentID.Location = new System.Drawing.Point(221, 81);
-            this.txtStudentID.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtStudentID.Margin = new System.Windows.Forms.Padding(4);
             this.txtStudentID.Name = "txtStudentID";
             this.txtStudentID.Size = new System.Drawing.Size(244, 34);
             this.txtStudentID.TabIndex = 1;
@@ -310,7 +314,7 @@
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(4, 17);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -333,7 +337,7 @@
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage6.Size = new System.Drawing.Size(1277, 713);
             this.tabPage6.TabIndex = 7;
-            this.tabPage6.Text = "F. Identification";
+            this.tabPage6.Text = "A.Identification";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
             // cmbCourse
@@ -346,7 +350,7 @@
             "CHM",
             "COA"});
             this.cmbCourse.Location = new System.Drawing.Point(221, 174);
-            this.cmbCourse.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbCourse.Margin = new System.Windows.Forms.Padding(4);
             this.cmbCourse.Name = "cmbCourse";
             this.cmbCourse.Size = new System.Drawing.Size(160, 36);
             this.cmbCourse.TabIndex = 6;
@@ -361,7 +365,7 @@
             "3",
             "4"});
             this.cmbYear.Location = new System.Drawing.Point(391, 174);
-            this.cmbYear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbYear.Margin = new System.Windows.Forms.Padding(4);
             this.cmbYear.Name = "cmbYear";
             this.cmbYear.Size = new System.Drawing.Size(80, 36);
             this.cmbYear.TabIndex = 7;
@@ -374,7 +378,7 @@
             this.panel1.Controls.Add(this.rbIsTransferee);
             this.panel1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel1.Location = new System.Drawing.Point(175, 252);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(296, 138);
             this.panel1.TabIndex = 9;
@@ -492,13 +496,13 @@
             this.tabPage1.Controls.Add(this.txtFirstName);
             this.tabPage1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage1.Location = new System.Drawing.Point(4, 37);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
             this.tabPage1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tabPage1.Size = new System.Drawing.Size(1277, 713);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "A. Personal Data";
+            this.tabPage1.Text = "B.Personal Data";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // label43
@@ -523,7 +527,7 @@
             // numericUpDownNumberOfChildren
             // 
             this.numericUpDownNumberOfChildren.Location = new System.Drawing.Point(597, 260);
-            this.numericUpDownNumberOfChildren.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDownNumberOfChildren.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDownNumberOfChildren.Name = "numericUpDownNumberOfChildren";
             this.numericUpDownNumberOfChildren.Size = new System.Drawing.Size(180, 34);
             this.numericUpDownNumberOfChildren.TabIndex = 161;
@@ -1045,20 +1049,20 @@
             this.tabPage2.Controls.Add(this.label42);
             this.tabPage2.Controls.Add(this.txtFatherName);
             this.tabPage2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPage2.Location = new System.Drawing.Point(4, 70);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage2.Location = new System.Drawing.Point(4, 37);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 62);
-            this.tabPage2.Size = new System.Drawing.Size(1277, 680);
+            this.tabPage2.Size = new System.Drawing.Size(1277, 713);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "B. Family Data";
+            this.tabPage2.Text = "C. Family Data";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // txtFatherNoOfChildren
             // 
             this.txtFatherNoOfChildren.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFatherNoOfChildren.Location = new System.Drawing.Point(487, 608);
-            this.txtFatherNoOfChildren.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtFatherNoOfChildren.Margin = new System.Windows.Forms.Padding(4);
             this.txtFatherNoOfChildren.Name = "txtFatherNoOfChildren";
             this.txtFatherNoOfChildren.Size = new System.Drawing.Size(129, 34);
             this.txtFatherNoOfChildren.TabIndex = 197;
@@ -1693,15 +1697,56 @@
             // 
             // tabPage7
             // 
+            this.tabPage7.Controls.Add(this.panel2);
             this.tabPage7.Controls.Add(this.dgvSiblings);
-            this.tabPage7.Location = new System.Drawing.Point(4, 70);
+            this.tabPage7.Location = new System.Drawing.Point(4, 37);
             this.tabPage7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage7.Size = new System.Drawing.Size(1277, 680);
+            this.tabPage7.Size = new System.Drawing.Size(1277, 713);
             this.tabPage7.TabIndex = 6;
-            this.tabPage7.Text = "C. Siblings Data";
+            this.tabPage7.Text = "D. Siblings Data";
             this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.cuiButton2);
+            this.panel2.Location = new System.Drawing.Point(6, 585);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1265, 123);
+            this.panel2.TabIndex = 252;
+            // 
+            // cuiButton2
+            // 
+            this.cuiButton2.CheckButton = false;
+            this.cuiButton2.Checked = false;
+            this.cuiButton2.CheckedBackground = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(0)))));
+            this.cuiButton2.CheckedImageTint = System.Drawing.Color.White;
+            this.cuiButton2.CheckedOutline = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(0)))));
+            this.cuiButton2.Content = "Click here if done.";
+            this.cuiButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+            this.cuiButton2.ForeColor = System.Drawing.Color.Black;
+            this.cuiButton2.HoverBackground = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(0)))));
+            this.cuiButton2.HoveredImageTint = System.Drawing.Color.White;
+            this.cuiButton2.HoverOutline = System.Drawing.Color.Empty;
+            this.cuiButton2.Image = ((System.Drawing.Image)(resources.GetObject("cuiButton2.Image")));
+            this.cuiButton2.ImageAutoCenter = true;
+            this.cuiButton2.ImageExpand = new System.Drawing.Point(0, 0);
+            this.cuiButton2.ImageOffset = new System.Drawing.Point(0, 0);
+            this.cuiButton2.ImageTint = System.Drawing.Color.White;
+            this.cuiButton2.Location = new System.Drawing.Point(1100, 3);
+            this.cuiButton2.Name = "cuiButton2";
+            this.cuiButton2.NormalBackground = System.Drawing.Color.White;
+            this.cuiButton2.NormalOutline = System.Drawing.Color.Empty;
+            this.cuiButton2.OutlineThickness = 1.6F;
+            this.cuiButton2.PressedBackground = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(0)))));
+            this.cuiButton2.PressedImageTint = System.Drawing.Color.White;
+            this.cuiButton2.PressedOutline = System.Drawing.Color.Empty;
+            this.cuiButton2.Rounding = new System.Windows.Forms.Padding(8);
+            this.cuiButton2.Size = new System.Drawing.Size(165, 37);
+            this.cuiButton2.TabIndex = 251;
+            this.cuiButton2.TextOffset = new System.Drawing.Point(0, 0);
+            this.cuiButton2.Click += new System.EventHandler(this.cuiButton2_Click_1);
             // 
             // dgvSiblings
             // 
@@ -1764,12 +1809,12 @@
             this.tabPage3.Controls.Add(this.panel4);
             this.tabPage3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage3.Location = new System.Drawing.Point(4, 37);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(4);
             this.tabPage3.Size = new System.Drawing.Size(1277, 713);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "C. Educational Data";
+            this.tabPage3.Text = "E. Educational Data";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // panel4
@@ -1821,7 +1866,7 @@
             this.panel4.Controls.Add(this.label49);
             this.panel4.Controls.Add(this.label50);
             this.panel4.Location = new System.Drawing.Point(4, 4);
-            this.panel4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel4.Margin = new System.Windows.Forms.Padding(4);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(1269, 611);
             this.panel4.TabIndex = 12;
@@ -2268,13 +2313,13 @@
             this.tabPage4.Controls.Add(this.label69);
             this.tabPage4.Controls.Add(this.label68);
             this.tabPage4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPage4.Location = new System.Drawing.Point(4, 70);
-            this.tabPage4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage4.Location = new System.Drawing.Point(4, 37);
+            this.tabPage4.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tabPage4.Size = new System.Drawing.Size(1277, 680);
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage4.Size = new System.Drawing.Size(1277, 713);
             this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "D. Healty Data";
+            this.tabPage4.Text = "F. Healty Data";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // rbSickNever
@@ -2616,12 +2661,12 @@
             this.tabPage5.Controls.Add(this.label73);
             this.tabPage5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage5.Location = new System.Drawing.Point(4, 37);
-            this.tabPage5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage5.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(4);
             this.tabPage5.Size = new System.Drawing.Size(1277, 713);
             this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "E. Additional Profile";
+            this.tabPage5.Text = "G. Additional Profile";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // button1
@@ -2927,7 +2972,7 @@
             this.panel3.Controls.Add(this.tabControl1);
             this.panel3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel3.Location = new System.Drawing.Point(21, 59);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1293, 828);
             this.panel3.TabIndex = 11;
@@ -2976,7 +3021,7 @@
             this.cuiButton1.ImageOffset = new System.Drawing.Point(0, 0);
             this.cuiButton1.ImageTint = System.Drawing.Color.White;
             this.cuiButton1.Location = new System.Drawing.Point(1265, 15);
-            this.cuiButton1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cuiButton1.Margin = new System.Windows.Forms.Padding(4);
             this.cuiButton1.Name = "cuiButton1";
             this.cuiButton1.NormalBackground = System.Drawing.Color.Red;
             this.cuiButton1.NormalOutline = System.Drawing.Color.Empty;
@@ -2999,11 +3044,12 @@
             this.Controls.Add(this.cuiButton1);
             this.Controls.Add(this.panel3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.Margin = new System.Windows.Forms.Padding(5);
            // this.Name = "enrollment";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "enrollment";
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.enrollment_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
@@ -3016,6 +3062,7 @@
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtFatherNoOfChildren)).EndInit();
             this.tabPage7.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSiblings)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
@@ -3267,5 +3314,7 @@
         private System.Windows.Forms.RadioButton RightHanded;
         private System.Windows.Forms.RadioButton LeftHanded;
         private CuoreUI.Controls.cuiButton cuiButton1;
+        private CuoreUI.Controls.cuiButton cuiButton2;
+        private System.Windows.Forms.Panel panel2;
     }
 }
