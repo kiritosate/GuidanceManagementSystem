@@ -71,7 +71,7 @@ namespace GuidanceManagementSystem.View_Frms
             {
                 // If login fails, display the spinner and show an error message
                 cuiSpinner1.Visible = false;
-                //MessageBox.Show("Invalid username or password.");
+                MessageBox.Show("Invalid username or password.");
             }
 
 

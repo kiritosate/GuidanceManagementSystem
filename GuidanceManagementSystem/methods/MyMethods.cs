@@ -34,7 +34,15 @@ namespace GuidanceManagementSystem.methods
                 };
 
                 // Start Apache using the ProcessStartInfo
-                await Task.Run(() => Process.Start(startInfo));
+                try
+                {
+                    await Task.Run(() => Process.Start(startInfo));
+                } catch (Exception ex)
+                
+                {
+                    //saas
+                }
+                
 
                 Console.WriteLine("Apache server started without showing CMD.");
                 return true; // Return true indicating success
@@ -43,6 +51,14 @@ namespace GuidanceManagementSystem.methods
             {
                 Console.WriteLine($"An error occurred: {ex.Message}");
                 return false; // Return false if an exception occurs
+            }
+        }
+
+        public static void UncheckAllCheckBoxes(CheckBox[] checkBoxes)
+        {
+            foreach (var checkBox in checkBoxes)
+            {
+                checkBox.Checked = false;
             }
         }
 

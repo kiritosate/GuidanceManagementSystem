@@ -14,6 +14,7 @@ using System.Transactions;
 using System.Data.Common;
 using System.Diagnostics.Metrics;
 using System.Windows.Controls.Primitives;
+using static GuidanceManagementSystem.methods.MyMethods;
 using static GuidanceManagementSystem.StudentRecord;
 
 
@@ -24,9 +25,7 @@ namespace GuidanceManagementSystem
         private List<TextBox> siblingNameTextBoxes = new List<TextBox>();
         private List<TextBox> siblingAgeTextBoxes = new List<TextBox>();
         // Add more lists as needed for other fields
-        private int SiblingCount = 0; // Initialize counter
-
-
+        private int SiblingCount = 0; // Initialize counte
 
         private async Task SaveFamilyData(FamilyData father, FamilyData mother, string studentID, MySqlConnection connection, MySqlTransaction transaction)
         {
@@ -887,6 +886,23 @@ namespace GuidanceManagementSystem
         private void cuiButton1_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBox1.Checked)
+            {
+                checkBox2.Checked = false;
+            } 
+             
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox2.Checked)
+            {
+                checkBox1.Checked = false;
+            }
         }
     }
 }
