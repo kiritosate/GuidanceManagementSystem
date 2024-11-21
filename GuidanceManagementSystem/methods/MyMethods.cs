@@ -1,6 +1,10 @@
-﻿using Org.BouncyCastle.Asn1.Crmf;
+﻿using GuidanceManagementSystem.docsFrm;
+using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Asn1.Crmf;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Printing;
@@ -45,6 +49,71 @@ namespace GuidanceManagementSystem.methods
                 return false; // Return false if an exception occurs
             }
         }
+
+        public static void txtInput_TextChanged_Letters(object sender, EventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            // Initialize an empty string to hold the valid text
+            string filteredText = string.Empty;
+
+            foreach (char c in textBox.Text)
+            {
+                if (char.IsLetter(c) || char.IsWhiteSpace(c)) // Allow letters and spaces
+                {
+                    filteredText += c;
+                }
+            }
+
+            // Only update the text if it's different from the filtered text
+            if (textBox.Text != filteredText)
+            {
+                int cursorPosition = textBox.SelectionStart; // Save cursor position
+
+                // Set the filtered text and restore the cursor position
+                textBox.Text = filteredText;
+                textBox.SelectionStart = Math.Min(cursorPosition, filteredText.Length); // Prevent cursor jumping to the end
+            }
+        }
+
+        // Filters only digits
+        public static void txtInput_TextChanged_Numbers(object sender, EventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            // Initialize an empty string to hold the valid text
+            string filteredText = string.Empty;
+
+            foreach (char c in textBox.Text)
+            {
+                if (char.IsDigit(c)) // Allow only digits
+                {
+                    filteredText += c;
+                }
+            }
+
+            // Only update the text if it's different from the filtered text
+            if (textBox.Text != filteredText)
+            {
+                int cursorPosition = textBox.SelectionStart; // Save cursor position
+
+                // Set the filtered text and restore the cursor position
+                textBox.Text = filteredText;
+                textBox.SelectionStart = Math.Min(cursorPosition, filteredText.Length); // Prevent cursor jumping to the end
+            }
+        }
+
+        // Method to attach the TextChanged event handler to multiple TextBoxes
+        public static void AttachTextChangedEventHandlers(EventHandler handler, params TextBox[] textBoxes)
+        {
+            foreach (var textBox in textBoxes)
+            {
+                textBox.TextChanged += handler;
+            }
+        }
+        
+
+
 
         public async Task<string> GetLocalIPAddressAsync()
         {
@@ -167,6 +236,80 @@ namespace GuidanceManagementSystem.methods
                 }
             });
         }
-        
+        public static int sql(string qry, Hashtable ht)
+        {
+            MySqlConnection con = new MySqlConnection("datasource=localhost;database=guidancedb;port=3306;username=root;password=;");
+
+            int res = 0;
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand(qry, con);
+                cmd.CommandType = CommandType.Text;
+
+                foreach (DictionaryEntry item in ht)
+                {
+                    cmd.Parameters.AddWithValue(item.Key.ToString(), item.Value);
+                    //cmd.Parameters.AddWithValue(item.Key.ToString(), item.Key);
+                }
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+                res = cmd.ExecuteNonQuery();
+                if (con.State == ConnectionState.Open)
+                {
+                    con.Close();
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                con.Close();
+            }
+
+            return res;
+        }
+
+        public static class Delete
+        {
+            public static void DeleteRecord(string studentID)
+            {
+                string connectionString = "server=localhost;database=guidancedb;user=root;password=;";
+                string query = "DELETE FROM tbl_individual_record WHERE Student_ID = @StudentID";
+
+                try
+                {
+                    using (var connection = new MySqlConnection(connectionString))
+                    {
+                        connection.Open();
+
+                        using (var command = new MySqlCommand(query, connection))
+                        {
+                            command.Parameters.AddWithValue("@StudentID", studentID);
+
+                            int rowsAffected = command.ExecuteNonQuery();
+
+                            if (rowsAffected > 0)
+                            {
+                                MessageBox.Show("Record deleted successfully.");
+                            }
+                            else
+                            {
+                                MessageBox.Show("No record found to delete.");
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error deleting record: {ex.Message}");
+                }
+            }
+        }
+
+
     }
 }

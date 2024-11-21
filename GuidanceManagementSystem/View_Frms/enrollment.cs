@@ -18,6 +18,10 @@ using static GuidanceManagementSystem.StudentRecord;
 using CuoreUI;
 using System.Windows.Controls;
 using System.Web.UI.WebControls;
+using GuidanceManagementSystem.methods;
+using ZstdSharp.Unsafe;
+using GuidanceManagementSystem.View_Frms;
+using GuidanceManagementSystem.methods;
 
 
 namespace GuidanceManagementSystem
@@ -441,6 +445,8 @@ namespace GuidanceManagementSystem
         public enrollment()
         {
             InitializeComponent();
+
+            
         }
 
         private void iconButton2_Click(object sender, EventArgs e)
@@ -720,11 +726,13 @@ namespace GuidanceManagementSystem
                 {
                    
                 };
+           
  
             try
             {
                 // Call the async SaveAllRecords method with await
                 await SaveAllRecordsAsync(studentRecord, Education, Health, father, mother);
+
 
                 // If all records are saved successfully, show a success message
                 MessageBox.Show("Record saved successfully!");
@@ -902,17 +910,14 @@ namespace GuidanceManagementSystem
         private void cuiButton1_Click(object sender, EventArgs e)
         {
             this.Close();
+
+
         }
 
         private void enrollment_Load(object sender, EventArgs e)
         {
+            //MyMethods methods = new MyMethods();
             
-
-            //foreach (TabPage tabPage in tabControl1.TabPages)
-            //{
-            //    tabPage.Enabled = false;
-            //}
-            //tabControl1.TabPages[0].Enabled = true;
         }
 
       
@@ -974,7 +979,262 @@ namespace GuidanceManagementSystem
                     MessageBox.Show($"Error: {ex.Message}");
                 }
             }
+
+        private void rbScholarshipNo_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
+
+        private void txtFirstName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtFirstName_KeyDown(object sender, KeyEventArgs e)
+        {
+        
+        }
+
+        private void txtMiddleName_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+
+        private void txtLastName_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+
+        private void txtNickname_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void txtNickname_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+
+        private void txtAge_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+
+        private void txtContactNumber_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+
+        private void txtReligion_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+
+        private void txtLandlordName_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+
+        private void txtEmergencyContact_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+
+        private void txtHobbies_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+
+        private void txtSpouseName_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+
+        private void txtDescribeYourself_KeyDown(object sender, KeyEventArgs e)
+        {   
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                checkBox2.Checked = false;
+            }
+            else
+            {
+                checkBox2.Checked = true;
+            }
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox2.Checked)
+            {
+                checkBox1.Checked = false;
+            }
+            else
+            {
+                checkBox1.Checked = true;
+            }
+        }
+
+        private void txtFirstName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void txtMiddleName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void txtLastName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void txtAge_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsNumber(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void txtReligion_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void txtContactNumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsNumber(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void txtDescribeYourself_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void txtCompleteHomeAddress_KeyPress(object sender, KeyPressEventArgs e)
+        {
+           
+        }
+
+        private void txtCompleteHomeAddress_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void txtHobbies_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void txtSpouseName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void txtEmergencyContact_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void txtLandlordName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void txtGuardianphone_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsNumber(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void txtFatherName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void txtMotherName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void txtFatherPhone_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsNumber(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtFatherEducationalAttainment_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void txtFatherOccupation_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void txtFatherEmployerAgency_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void txtMotherName_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
+    }
     }
 
 

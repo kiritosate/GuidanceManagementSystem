@@ -21,5 +21,10 @@ namespace GuidanceManagementSystem.View_Frms
         {
 
         }
+
+        private void reports_view_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

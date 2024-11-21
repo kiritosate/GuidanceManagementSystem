@@ -1,5 +1,4 @@
 ﻿using GuidanceManagementSystem.methods;
-using GuidanceManagementSystem.View_Frms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,35 +8,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ZstdSharp.Unsafe;
 
-namespace GuidanceManagementSystem
+namespace GuidanceManagementSystem.View_Frms
 {
-    public partial class qrPrint : Form
+    public partial class view_irf : Form
     {
-        
-        
-        public qrPrint()
+        public view_irf()
         {
             InitializeComponent();
         }
 
-        private void qrPrint_Load(object sender, EventArgs e)
+        private void printFormToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            pictureBox1.Image = webserver_view._qrCodeBitmap;
-            cuiLabel2.Content = webserver_view._ipAddress;
-
+            //print
             PrinterHelper ph = new PrinterHelper();
 
             // Subscribe to the PrintCompleted event to close the form after printing
             ph.PrintCompleted += (s, args) => this.Close();
 
             // Start the print process
-            ph.PrintPanel(panel1);
+            ph.PrintPanel(panel2);
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        private void view_irf_Load(object sender, EventArgs e)
+        {
+            //asyncrounously get data from database and fill the form.
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void cuiButton1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -31,12 +31,12 @@
             this.components = new System.ComponentModel.Container();
             this.panel2 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.cuiButton1 = new CuoreUI.Controls.cuiButton();
-            this.cuiButton2 = new CuoreUI.Controls.cuiButton();
             this.cuiTextBox21 = new CuoreUI.Controls.cuiTextBox2();
             this.cuiLabel2 = new CuoreUI.Controls.cuiLabel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.cuiButton1 = new CuoreUI.Controls.cuiButton();
+            this.cuiButton2 = new CuoreUI.Controls.cuiButton();
             this.panel2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -63,6 +63,68 @@
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(1);
             this.flowLayoutPanel1.Size = new System.Drawing.Size(523, 46);
             this.flowLayoutPanel1.TabIndex = 8;
+            // 
+            // cuiTextBox21
+            // 
+            this.cuiTextBox21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cuiTextBox21.BackColor = System.Drawing.SystemColors.Control;
+            this.cuiTextBox21.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.cuiTextBox21.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(0)))));
+            this.cuiTextBox21.BorderSize = 1;
+            this.cuiTextBox21.Content = "";
+            this.cuiTextBox21.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.cuiTextBox21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cuiTextBox21.ForeColor = System.Drawing.Color.Gray;
+            this.cuiTextBox21.Location = new System.Drawing.Point(808, 0);
+            this.cuiTextBox21.Margin = new System.Windows.Forms.Padding(4);
+            this.cuiTextBox21.Multiline = false;
+            this.cuiTextBox21.Name = "cuiTextBox21";
+            this.cuiTextBox21.Padding = new System.Windows.Forms.Padding(15, 14, 15, 0);
+            this.cuiTextBox21.PasswordChar = false;
+            this.cuiTextBox21.PlaceholderColor = System.Drawing.Color.DimGray;
+            this.cuiTextBox21.PlaceholderText = "Search...";
+            this.cuiTextBox21.Rounding = 8;
+            this.cuiTextBox21.Size = new System.Drawing.Size(210, 42);
+            this.cuiTextBox21.TabIndex = 7;
+            this.cuiTextBox21.TextOffset = new System.Drawing.Size(0, 0);
+            this.cuiTextBox21.UnderlinedStyle = false;
+            this.cuiTextBox21.ContentChanged += new System.EventHandler(this.cuiTextBox21_ContentChanged);
+            // 
+            // cuiLabel2
+            // 
+            this.cuiLabel2.Content = "User/Registration";
+            this.cuiLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cuiLabel2.Font = new System.Drawing.Font("Segoe UI", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cuiLabel2.ForeColor = System.Drawing.Color.DimGray;
+            this.cuiLabel2.HorizontalAlignment = CuoreUI.Controls.cuiLabel.HorizontalAlignments.Left;
+            this.cuiLabel2.Location = new System.Drawing.Point(0, 0);
+            this.cuiLabel2.Margin = new System.Windows.Forms.Padding(4);
+            this.cuiLabel2.Name = "cuiLabel2";
+            this.cuiLabel2.Size = new System.Drawing.Size(1022, 49);
+            this.cuiLabel2.TabIndex = 6;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(15, 65);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 3);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.Size = new System.Drawing.Size(1022, 479);
+            this.dataGridView1.TabIndex = 10;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // cuiButton1
             // 
@@ -127,65 +189,6 @@
             this.cuiButton2.TabIndex = 1;
             this.cuiButton2.TextOffset = new System.Drawing.Point(0, 0);
             this.cuiButton2.Click += new System.EventHandler(this.cuiButton2_Click);
-            // 
-            // cuiTextBox21
-            // 
-            this.cuiTextBox21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cuiTextBox21.BackColor = System.Drawing.SystemColors.Control;
-            this.cuiTextBox21.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.cuiTextBox21.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(0)))));
-            this.cuiTextBox21.BorderSize = 1;
-            this.cuiTextBox21.Content = "";
-            this.cuiTextBox21.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.cuiTextBox21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cuiTextBox21.ForeColor = System.Drawing.Color.Gray;
-            this.cuiTextBox21.Location = new System.Drawing.Point(808, 0);
-            this.cuiTextBox21.Margin = new System.Windows.Forms.Padding(4);
-            this.cuiTextBox21.Multiline = false;
-            this.cuiTextBox21.Name = "cuiTextBox21";
-            this.cuiTextBox21.Padding = new System.Windows.Forms.Padding(15, 14, 15, 0);
-            this.cuiTextBox21.PasswordChar = false;
-            this.cuiTextBox21.PlaceholderColor = System.Drawing.Color.DimGray;
-            this.cuiTextBox21.PlaceholderText = "Search...";
-            this.cuiTextBox21.Rounding = 8;
-            this.cuiTextBox21.Size = new System.Drawing.Size(210, 42);
-            this.cuiTextBox21.TabIndex = 7;
-            this.cuiTextBox21.TextOffset = new System.Drawing.Size(0, 0);
-            this.cuiTextBox21.UnderlinedStyle = false;
-            this.cuiTextBox21.ContentChanged += new System.EventHandler(this.cuiTextBox21_ContentChanged);
-            // 
-            // cuiLabel2
-            // 
-            this.cuiLabel2.Content = "User/Registration";
-            this.cuiLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cuiLabel2.Font = new System.Drawing.Font("Segoe UI", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cuiLabel2.ForeColor = System.Drawing.Color.DimGray;
-            this.cuiLabel2.HorizontalAlignment = CuoreUI.Controls.cuiLabel.HorizontalAlignments.Left;
-            this.cuiLabel2.Location = new System.Drawing.Point(0, 0);
-            this.cuiLabel2.Name = "cuiLabel2";
-            this.cuiLabel2.Size = new System.Drawing.Size(1022, 49);
-            this.cuiLabel2.TabIndex = 6;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(15, 65);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 3);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(1022, 479);
-            this.dataGridView1.TabIndex = 10;
-            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // registration_view
             // 

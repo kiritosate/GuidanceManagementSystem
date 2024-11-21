@@ -34,42 +34,40 @@
             this.cuiLabel10 = new CuoreUI.Controls.cuiLabel();
             this._cicsTtl = new CuoreUI.Controls.cuiLabel();
             this.cuiLabel3 = new CuoreUI.Controls.cuiLabel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.cuiBorder2 = new CuoreUI.Controls.cuiBorder();
             this.cuiLabel11 = new CuoreUI.Controls.cuiLabel();
             this._ctedTtl = new CuoreUI.Controls.cuiLabel();
             this.cuiLabel4 = new CuoreUI.Controls.cuiLabel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.cuiBorder3 = new CuoreUI.Controls.cuiBorder();
             this.cuiLabel12 = new CuoreUI.Controls.cuiLabel();
             this._coaTtl = new CuoreUI.Controls.cuiLabel();
             this.cuiLabel5 = new CuoreUI.Controls.cuiLabel();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.cuiBorder4 = new CuoreUI.Controls.cuiBorder();
             this.cuiLabel13 = new CuoreUI.Controls.cuiLabel();
             this._chmTtl = new CuoreUI.Controls.cuiLabel();
             this.cuiLabel6 = new CuoreUI.Controls.cuiLabel();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.cuiLabel2 = new CuoreUI.Controls.cuiLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.cartesianChart1 = new LiveCharts.WinForms.CartesianChart();
-            this.solidGauge1 = new LiveCharts.WinForms.SolidGauge();
             this.flowLayoutPanel1.SuspendLayout();
             this.cuiBorder1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.cuiBorder2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.cuiBorder3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.cuiBorder4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -146,6 +144,17 @@
             this.cuiLabel3.Size = new System.Drawing.Size(100, 55);
             this.cuiLabel3.TabIndex = 1;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Image = global::GuidanceManagementSystem.Properties.Resources.people_500hfghfpx;
+            this.pictureBox1.Location = new System.Drawing.Point(87, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 72);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
             // cuiBorder2
             // 
             this.cuiBorder2.AutoSize = true;
@@ -202,6 +211,17 @@
             this.cuiLabel4.Name = "cuiLabel4";
             this.cuiLabel4.Size = new System.Drawing.Size(105, 55);
             this.cuiLabel4.TabIndex = 2;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox2.Image = global::GuidanceManagementSystem.Properties.Resources.people_500hfghfpx;
+            this.pictureBox2.Location = new System.Drawing.Point(90, 0);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(100, 72);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 1;
+            this.pictureBox2.TabStop = false;
             // 
             // cuiBorder3
             // 
@@ -260,6 +280,17 @@
             this.cuiLabel5.Size = new System.Drawing.Size(100, 55);
             this.cuiLabel5.TabIndex = 3;
             // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox3.Image = global::GuidanceManagementSystem.Properties.Resources.people_500hfghfpx;
+            this.pictureBox3.Location = new System.Drawing.Point(90, 0);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(100, 72);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 2;
+            this.pictureBox3.TabStop = false;
+            // 
             // cuiBorder4
             // 
             this.cuiBorder4.AutoSize = true;
@@ -317,6 +348,17 @@
             this.cuiLabel6.Size = new System.Drawing.Size(100, 55);
             this.cuiLabel6.TabIndex = 4;
             // 
+            // pictureBox4
+            // 
+            this.pictureBox4.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox4.Image = global::GuidanceManagementSystem.Properties.Resources.people_500hfghfpx;
+            this.pictureBox4.Location = new System.Drawing.Point(90, 0);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(100, 72);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox4.TabIndex = 3;
+            this.pictureBox4.TabStop = false;
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.cuiLabel2);
@@ -353,10 +395,6 @@
             this.splitContainer1.Location = new System.Drawing.Point(22, 232);
             this.splitContainer1.Name = "splitContainer1";
             // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.solidGauge1);
-            // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.Color.Transparent;
@@ -365,50 +403,6 @@
             this.splitContainer1.SplitterDistance = 298;
             this.splitContainer1.TabIndex = 8;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Image = global::GuidanceManagementSystem.Properties.Resources.people_500hfghfpx;
-            this.pictureBox1.Location = new System.Drawing.Point(87, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 72);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox2.Image = global::GuidanceManagementSystem.Properties.Resources.people_500hfghfpx;
-            this.pictureBox2.Location = new System.Drawing.Point(90, 0);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(100, 72);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 1;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox3.Image = global::GuidanceManagementSystem.Properties.Resources.people_500hfghfpx;
-            this.pictureBox3.Location = new System.Drawing.Point(90, 0);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(100, 72);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox3.TabIndex = 2;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox4.Image = global::GuidanceManagementSystem.Properties.Resources.people_500hfghfpx;
-            this.pictureBox4.Location = new System.Drawing.Point(90, 0);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(100, 72);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox4.TabIndex = 3;
-            this.pictureBox4.TabStop = false;
-            // 
             // cartesianChart1
             // 
             this.cartesianChart1.Location = new System.Drawing.Point(34, 32);
@@ -416,14 +410,6 @@
             this.cartesianChart1.Size = new System.Drawing.Size(523, 253);
             this.cartesianChart1.TabIndex = 0;
             this.cartesianChart1.Text = "cartesianChart1";
-            // 
-            // solidGauge1
-            // 
-            this.solidGauge1.Location = new System.Drawing.Point(18, 32);
-            this.solidGauge1.Name = "solidGauge1";
-            this.solidGauge1.Size = new System.Drawing.Size(251, 268);
-            this.solidGauge1.TabIndex = 0;
-            this.solidGauge1.Text = "solidGauge1";
             // 
             // dashboard_view
             // 
@@ -447,18 +433,17 @@
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.cuiBorder1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.cuiBorder2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.cuiBorder3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.cuiBorder4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.panel2.ResumeLayout(false);
-            this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -492,6 +477,5 @@
         private CuoreUI.Controls.cuiLabel cuiLabel13;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private LiveCharts.WinForms.CartesianChart cartesianChart1;
-        private LiveCharts.WinForms.SolidGauge solidGauge1;
     }
 }

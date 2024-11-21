@@ -16,7 +16,7 @@ namespace GuidanceManagementSystem
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new View_Frms.dashboardfrm());
+            Application.Run(new Loadingfrm());
         }
     }
 }

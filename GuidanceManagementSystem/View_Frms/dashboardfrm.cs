@@ -93,12 +93,30 @@ namespace GuidanceManagementSystem.View_Frms
 
 
         }
-
         private void cuiButton7_Click(object sender, EventArgs e)
         {
-            
-            LoginFrm.closeApp();
-             
+            // Show a confirmation dialog
+            var result = MessageBox.Show("Are you sure you want to log out?",
+                                         "Logout Confirmation",
+                                         MessageBoxButtons.YesNo,
+                                         MessageBoxIcon.Question);
+
+            // Check the user's response
+            if (result == DialogResult.Yes)
+            {
+                // Perform the logout logic here
+                MessageBox.Show("You have successfully logged out.", "Logout", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Example: Close the current form and show the login form
+                this.Hide();
+                LoginFrm loginForm = new LoginFrm(); // Replace with your login form's name
+                loginForm.Show();
+            }
+            else
+            {
+                // If "No" is selected, do nothing
+            }
         }
+
     }
 }

@@ -2,6 +2,7 @@
 using GuidanceManagementSystem.methods;
 using MySql.Data.MySqlClient;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static GuidanceManagementSystem.methods.MyMethods;
 
 namespace GuidanceManagementSystem.View_Frms
 {
@@ -89,7 +91,7 @@ namespace GuidanceManagementSystem.View_Frms
         private void registration_view_Load(object sender, EventArgs e)
         {
             timer1.Start();
-            
+
             LoadDataIntoDataGridView(dataGridView1);
         }
 
@@ -132,18 +134,37 @@ namespace GuidanceManagementSystem.View_Frms
                 // Check if the clicked column is one of the action columns
                 if (dataGridView1.Columns[columnIndex].Name == "imgView")
                 {
-                    MessageBox.Show("You clicked to view the record.");
+                    //MessageBox.Show("You clicked to view the record.");
+                    view_irf fm = new view_irf();
+                    fm.ShowDialog();
                 }
                 else if (dataGridView1.Columns[columnIndex].Name == "imgEdit")
                 {
                     MessageBox.Show("You clicked to edit the record.");
                 }
-                else if (dataGridView1.Columns[columnIndex].Name == "imgDelete")
-                {
-                    MessageBox.Show("You clicked to delete the record.");
-                }
 
                 //MessageBox.Show($"Student Id: {StudentId}: {row.Cells[1]}");
+            }
+        }
+
+        private void MoveOrInsertActionColumns(int sexColumnIndex)
+        {
+            // Check if the action columns exist, and move them to the correct position
+            int viewIndex = dataGridView1.Columns["imgView"]?.Index ?? -1;
+            int editIndex = dataGridView1.Columns["imgEdit"]?.Index ?? -1;
+            int deleteIndex = dataGridView1.Columns["imgDelete"]?.Index ?? -1;
+
+            if (viewIndex != -1 && editIndex != -1 && deleteIndex != -1)
+            {
+                // If the columns exist, move them after "Sex"
+                dataGridView1.Columns["imgView"].DisplayIndex = sexColumnIndex + 1;
+                dataGridView1.Columns["imgEdit"].DisplayIndex = sexColumnIndex + 2;
+                dataGridView1.Columns["imgDelete"].DisplayIndex = sexColumnIndex + 3;
+            }
+            else
+            {
+                // Otherwise, add them to the correct position
+                AddActionColumns();
             }
         }
 
@@ -151,6 +172,89 @@ namespace GuidanceManagementSystem.View_Frms
         {
             enrollment frm = new enrollment();
             frm.ShowDialog();
+
+        }
+        public void LoadData()
+        {
+            string connectionString = "server=localhost;database=guidancedb;user=root;password=;";
+             string query = @"SELECT ir.Student_ID, 
+                            ir.Course, 
+                            ir.Year,
+                            pd.FirstName, pd.MiddleName, pd.LastName, pd.Sex
+                     FROM tbl_individual_record ir
+                     INNER JOIN tbl_personal_data pd 
+                     ON ir.Student_ID = pd.Student_ID";
+
+            try
+            {
+                using (var connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    using (var adapter = new MySqlDataAdapter(query, connection))
+                    {
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Clear any existing data source before binding
+                        dataGridView1.DataSource = null;
+
+                        // Bind the new data
+                        dataGridView1.DataSource = dataTable;
+
+                        // Ensure action columns are added if they do not exist
+                        AddActionColumns();
+                    }
+                }
+
+                // Add the action columns after the "Sex" column, if the column exists
+                int sexColumnIndex = dataGridView1.Columns["Sex"]?.Index ?? -1;
+                if (sexColumnIndex != -1)
+                {
+                    // Only move the action columns if they exist, or add them
+                    MoveOrInsertActionColumns(sexColumnIndex);
+                }
+                else
+                {
+                    // If "Sex" column doesn't exist, just add action columns at the end
+                    AddActionColumns();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading data: {ex.Message}");
+            }
+        }
+
+
+
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && dataGridView1.Columns[e.ColumnIndex] is DataGridViewImageColumn)
+            {
+                // Get the Student_ID from the selected row
+                string studentID = dataGridView1.Rows[e.RowIndex].Cells["Student_ID"].Value?.ToString();
+
+                if (string.IsNullOrEmpty(studentID))
+                {
+                    MessageBox.Show("Invalid Student ID. Unable to delete.");
+                    return;
+                }
+                DialogResult confirmation = MessageBox.Show("Are you sure you want to delete this record?",
+                                                             "Confirmation",
+                                                             MessageBoxButtons.YesNo,
+                                                             MessageBoxIcon.Warning);
+
+                if (confirmation == DialogResult.Yes)
+                {
+                    Delete.DeleteRecord(studentID);
+                    MessageBox.Show("Successfully Deleted...");
+
+                    dataGridView1.Columns.Clear();
+                    LoadData();
+                }
+            }
         }
     }
 }

@@ -63,6 +63,26 @@ namespace GuidanceManagementSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _731402e0_fe47_46db_8ebb_295e66760000_0 {
+            get {
+                object obj = ResourceManager.GetObject("731402e0-fe47-46db-8ebb-295e66760000-0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _731402e0_fe47_46db_8ebb_295e66760000_1 {
+            get {
+                object obj = ResourceManager.GetObject("731402e0-fe47-46db-8ebb-295e66760000-1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap add_500px {
             get {
                 object obj = ResourceManager.GetObject("add_500px", resourceCulture);

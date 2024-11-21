@@ -24,7 +24,7 @@ namespace GuidanceManagementSystem.methods
             FROM 
                 tbl_Individual_Record ir
             JOIN 
-                tbl_Personal_Data pd ON ir.Personal_Data_ID = pd.Personal_Data_ID
+                tbl_Personal_Data pd ON ir.Student_ID = pd.Student_ID
              WHERE
                 ir.Status = 0;"; // Filtering for active records
 
@@ -188,7 +188,7 @@ namespace GuidanceManagementSystem.methods
                     string sql = @"
                 SELECT Course
                 FROM tbl_individual_record 
-                INNER JOIN tbl_personal_data ON tbl_individual_record.Personal_Data_ID = tbl_personal_data.Personal_Data_ID
+                INNER JOIN tbl_personal_data ON tbl_individual_record.Student_ID = tbl_personal_data.Student_ID
                 WHERE tbl_individual_record.Status = 1";
                     
                     using (var cmd = new MySqlCommand(sql, conn))
