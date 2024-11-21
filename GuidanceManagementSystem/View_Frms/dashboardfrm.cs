@@ -89,7 +89,7 @@ namespace GuidanceManagementSystem.View_Frms
         private void dashboardfrm_Load(object sender, EventArgs e)
         {
             ShowFormInPanel(new dashboard_view());
-            //cuiLabel1.Content = MyCon._loggedName.ToUpper();
+            cuiLabel1.Content = MyCon._loggedName.ToUpper();
 
 
         }

@@ -14,6 +14,7 @@ using System.Transactions;
 using System.Data.Common;
 using System.Diagnostics.Metrics;
 using System.Windows.Controls.Primitives;
+using static GuidanceManagementSystem.methods.MyMethods;
 using static GuidanceManagementSystem.StudentRecord;
 using CuoreUI;
 using System.Windows.Controls;
@@ -31,10 +32,14 @@ namespace GuidanceManagementSystem
         //private List<TextBox> siblingNameTextBoxes = new List<TextBox>();
         //private List<TextBox> siblingAgeTextBoxes = new List<TextBox>();
         // Add more lists as needed for other fields
+<<<<<<< HEAD
+        private int SiblingCount = 0; // Initialize counte
+=======
         private int SiblingCount = 0; // Initialize counter
 
 
         private bool isIndividualRecordSaved = false;
+>>>>>>> 09ac7e8cf7954fd816388b84366716eae427e426
 
         private async Task SaveFamilyData(FamilyData father, FamilyData mother, string studentID, MySqlConnection connection, MySqlTransaction transaction)
         {
@@ -914,6 +919,26 @@ namespace GuidanceManagementSystem
 
         }
 
+<<<<<<< HEAD
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBox1.Checked)
+            {
+                checkBox2.Checked = false;
+            } 
+             
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox2.Checked)
+            {
+                checkBox1.Checked = false;
+            }
+        }
+    }
+}
+=======
         private void enrollment_Load(object sender, EventArgs e)
         {
             //MyMethods methods = new MyMethods();
@@ -1237,4 +1262,5 @@ namespace GuidanceManagementSystem
     }
     }
 
+>>>>>>> 09ac7e8cf7954fd816388b84366716eae427e426
 

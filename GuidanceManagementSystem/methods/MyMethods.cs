@@ -38,7 +38,15 @@ namespace GuidanceManagementSystem.methods
                 };
 
                 // Start Apache using the ProcessStartInfo
-                await Task.Run(() => Process.Start(startInfo));
+                try
+                {
+                    await Task.Run(() => Process.Start(startInfo));
+                } catch (Exception ex)
+                
+                {
+                    //saas
+                }
+                
 
                 Console.WriteLine("Apache server started without showing CMD.");
                 return true; // Return true indicating success
@@ -49,71 +57,6 @@ namespace GuidanceManagementSystem.methods
                 return false; // Return false if an exception occurs
             }
         }
-
-        public static void txtInput_TextChanged_Letters(object sender, EventArgs e)
-        {
-            TextBox textBox = sender as TextBox;
-
-            // Initialize an empty string to hold the valid text
-            string filteredText = string.Empty;
-
-            foreach (char c in textBox.Text)
-            {
-                if (char.IsLetter(c) || char.IsWhiteSpace(c)) // Allow letters and spaces
-                {
-                    filteredText += c;
-                }
-            }
-
-            // Only update the text if it's different from the filtered text
-            if (textBox.Text != filteredText)
-            {
-                int cursorPosition = textBox.SelectionStart; // Save cursor position
-
-                // Set the filtered text and restore the cursor position
-                textBox.Text = filteredText;
-                textBox.SelectionStart = Math.Min(cursorPosition, filteredText.Length); // Prevent cursor jumping to the end
-            }
-        }
-
-        // Filters only digits
-        public static void txtInput_TextChanged_Numbers(object sender, EventArgs e)
-        {
-            TextBox textBox = sender as TextBox;
-
-            // Initialize an empty string to hold the valid text
-            string filteredText = string.Empty;
-
-            foreach (char c in textBox.Text)
-            {
-                if (char.IsDigit(c)) // Allow only digits
-                {
-                    filteredText += c;
-                }
-            }
-
-            // Only update the text if it's different from the filtered text
-            if (textBox.Text != filteredText)
-            {
-                int cursorPosition = textBox.SelectionStart; // Save cursor position
-
-                // Set the filtered text and restore the cursor position
-                textBox.Text = filteredText;
-                textBox.SelectionStart = Math.Min(cursorPosition, filteredText.Length); // Prevent cursor jumping to the end
-            }
-        }
-
-        // Method to attach the TextChanged event handler to multiple TextBoxes
-        public static void AttachTextChangedEventHandlers(EventHandler handler, params TextBox[] textBoxes)
-        {
-            foreach (var textBox in textBoxes)
-            {
-                textBox.TextChanged += handler;
-            }
-        }
-        
-
-
 
         public async Task<string> GetLocalIPAddressAsync()
         {
