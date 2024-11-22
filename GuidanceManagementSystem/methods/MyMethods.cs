@@ -58,6 +58,38 @@ namespace GuidanceManagementSystem.methods
             }
         }
 
+        public static void ApplyPlaceholder(TextBox textBox, string placeholder)
+        {
+            // Store the placeholder text
+            textBox.ForeColor = System.Drawing.Color.Gray; // Set the color of the placeholder text to gray
+
+            // Initially set the placeholder text when the TextBox is empty
+            if (string.IsNullOrEmpty(textBox.Text))
+            {
+                textBox.Text = placeholder;
+            }
+
+            // Event to handle when the TextBox gets focus
+            textBox.Enter += (sender, e) =>
+            {
+                if (textBox.Text == placeholder)
+                {
+                    textBox.Text = ""; // Remove the placeholder text
+                    textBox.ForeColor = System.Drawing.Color.Black; // Set text color to black when typing
+                }
+            };
+
+            // Event to handle when the TextBox loses focus
+            textBox.Leave += (sender, e) =>
+            {
+                if (string.IsNullOrEmpty(textBox.Text))
+                {
+                    textBox.Text = placeholder; // Restore the placeholder text if TextBox is empty
+                    textBox.ForeColor = System.Drawing.Color.Gray; // Set placeholder text color back to gray
+                }
+            };
+        }
+
         public async Task<string> GetLocalIPAddressAsync()
         {
             return await Task.Run(() =>

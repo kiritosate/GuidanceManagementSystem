@@ -28,12 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-<<<<<<< HEAD
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-=======
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(enrollment));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
->>>>>>> 09ac7e8cf7954fd816388b84366716eae427e426
             this.txtStudentID = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -821,6 +816,7 @@
             this.txtEmailAddress.Name = "txtEmailAddress";
             this.txtEmailAddress.Size = new System.Drawing.Size(217, 29);
             this.txtEmailAddress.TabIndex = 145;
+            this.txtEmailAddress.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEmailAddress_KeyPress);
             // 
             // label13
             // 
@@ -1903,7 +1899,7 @@
             this.cuiButton2.HoverBackground = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(0)))));
             this.cuiButton2.HoveredImageTint = System.Drawing.Color.White;
             this.cuiButton2.HoverOutline = System.Drawing.Color.Empty;
-            this.cuiButton2.Image = ((System.Drawing.Image)(resources.GetObject("cuiButton2.Image")));
+            this.cuiButton2.Image = null;
             this.cuiButton2.ImageAutoCenter = true;
             this.cuiButton2.ImageExpand = new System.Drawing.Point(0, 0);
             this.cuiButton2.ImageOffset = new System.Drawing.Point(0, 0);
@@ -1942,13 +1938,8 @@
             // 
             // Name
             // 
-<<<<<<< HEAD
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.Name.DefaultCellStyle = dataGridViewCellStyle2;
-=======
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.Name.DefaultCellStyle = dataGridViewCellStyle1;
->>>>>>> 09ac7e8cf7954fd816388b84366716eae427e426
             this.Name.FillWeight = 60F;
             this.Name.HeaderText = "Name";
             this.Name.MinimumWidth = 6;
@@ -3251,7 +3242,7 @@
             this.Controls.Add(this.panel3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(5);
-            this.Name = "enrollment";
+            
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "enrollment";
             this.TopMost = true;

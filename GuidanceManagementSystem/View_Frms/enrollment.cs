@@ -1,28 +1,12 @@
-﻿using System;
+﻿using GuidanceManagementSystem.methods;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
-using System.Collections;
-using System.Transactions;
-using System.Data.Common;
-using System.Diagnostics.Metrics;
-using System.Windows.Controls.Primitives;
 using static GuidanceManagementSystem.methods.MyMethods;
 using static GuidanceManagementSystem.StudentRecord;
-using CuoreUI;
-using System.Windows.Controls;
-using System.Web.UI.WebControls;
-using GuidanceManagementSystem.methods;
-using ZstdSharp.Unsafe;
-using GuidanceManagementSystem.View_Frms;
-using GuidanceManagementSystem.methods;
 
 
 namespace GuidanceManagementSystem
@@ -32,14 +16,16 @@ namespace GuidanceManagementSystem
         //private List<TextBox> siblingNameTextBoxes = new List<TextBox>();
         //private List<TextBox> siblingAgeTextBoxes = new List<TextBox>();
         // Add more lists as needed for other fields
-<<<<<<< HEAD
-        private int SiblingCount = 0; // Initialize counte
-=======
-        private int SiblingCount = 0; // Initialize counter
+
+        //private int SiblingCount = 0; // Initialize counte
+
+        // private int SiblingCount = 0; // Initialize counter
 
 
         private bool isIndividualRecordSaved = false;
->>>>>>> 09ac7e8cf7954fd816388b84366716eae427e426
+
+        MyMethods methods = new MyMethods();
+
 
         private async Task SaveFamilyData(FamilyData father, FamilyData mother, string studentID, MySqlConnection connection, MySqlTransaction transaction)
         {
@@ -451,7 +437,9 @@ namespace GuidanceManagementSystem
         {
             InitializeComponent();
 
-            
+            MyMethods.ApplyPlaceholder(txtEmailAddress, "example@gmail.com");
+            txtEmailAddress.KeyPress += new KeyPressEventHandler(InputValidator.OnKeyPress_EmailValidation);
+
         }
 
         private void iconButton2_Click(object sender, EventArgs e)
@@ -479,7 +467,7 @@ namespace GuidanceManagementSystem
             return null; // Default case
         }
 
-       
+
 
         private string GetGenderSexuallyAttracted()
         {
@@ -505,7 +493,7 @@ namespace GuidanceManagementSystem
 
             return "Unknown"; // Default case
         }
-       
+
 
         private string GetMotherMaritalStatus()
         {
@@ -582,7 +570,7 @@ namespace GuidanceManagementSystem
 
             return null; // Default case if neither is checked
         }
-      
+
         private async void button1_Click(object sender, EventArgs e)
         {
 
@@ -620,7 +608,7 @@ namespace GuidanceManagementSystem
             };
             var father = new StudentRecord.FamilyData
             {
-               
+
                 studentID = txtStudentID.Text,
                 Parents = "Father",
                 Name = txtFatherName.Text,
@@ -684,31 +672,31 @@ namespace GuidanceManagementSystem
                 WhyLeastFavoriteSubject = WhyLeastFavoriteSubject.Text,
                 SupportForStudies = SupportForStudies.Text,
                 Membership = Membership.Text,
-                LeftRightHanded = RightHanded.Checked ? "Right Handed" : LeftHanded.Checked ? "LeftHanded": null,
+                LeftRightHanded = RightHanded.Checked ? "Right Handed" : LeftHanded.Checked ? "LeftHanded" : null,
             };
 
 
             var Health = new HealthData
-                {
-                    studentID = SavedStudentID,
-                    SickFrequency = rbSickOften.Checked ? "Yes" :
+            {
+                studentID = SavedStudentID,
+                SickFrequency = rbSickOften.Checked ? "Yes" :
                     rbSickNo.Checked ? "No" :
                     rbSickSeldom.Checked ? "Seldom" :
                     rbSickSometimes.Checked ? "Sometimes" :
                     rbSickNever.Checked ? "Never" : null,
 
-                    HealthProblems = chkDysmenorrhea.Checked ? "Dysmenoria": chkHeadache.Checked ? "Headache" :
+                HealthProblems = chkDysmenorrhea.Checked ? "Dysmenoria" : chkHeadache.Checked ? "Headache" :
                                     chkAsthma.Checked ? "Asthma" : chkStomachache.Checked ? "Stomachache" : chkHeartProblems.Checked ? "HeartProblems" :
-                                    chkColdsFlu.Checked ? "Colds/Flu" : chkAbdominalPain.Checked ? "Abdominal Pain" : chkSeizureDisorders.Checked ? "Seizure Disorder" :null,
-               
-                    PhysicalDisabilities = chkVisualImpairment.Checked ? "Visual Impairment" :
+                                    chkColdsFlu.Checked ? "Colds/Flu" : chkAbdominalPain.Checked ? "Abdominal Pain" : chkSeizureDisorders.Checked ? "Seizure Disorder" : null,
+
+                PhysicalDisabilities = chkVisualImpairment.Checked ? "Visual Impairment" :
                            chkPolio.Checked ? "Polio" :
                            chkHearingImpairment.Checked ? "Hearing Impairment" :
                            chkCleftPalate.Checked ? "Cleft Palate" :
                            chkPhysicalDeformities.Checked ? "Physical Deformities" :
                            chkSeizureDisorders.Checked ? "Seizure Disorder" :
                            null
-                };
+            };
             if (string.IsNullOrEmpty(SavedStudentID))
             {
                 MessageBox.Show("Please save the Individual Record first.");
@@ -717,22 +705,22 @@ namespace GuidanceManagementSystem
             await TestSaveHealthData(Health);
 
 
-                var AdditionalInfo = new AdditionalProfile
-                {
-                    studentID =SavedStudentID,
-                    SexualPreference = GetGenderIdentity(),
-                    ExpressionPresent = GetGenderExpression(),
-                    GenderSexuallyAttracted = GetGenderSexuallyAttracted(),
-                    HasScholarship = rbScholarshipYes.Checked? "Yes": rbScholarshipNo.Checked? "No": null,
-                    ScholarshipName = txtScholarshipName.Text
-                };
+            var AdditionalInfo = new AdditionalProfile
+            {
+                studentID = SavedStudentID,
+                SexualPreference = GetGenderIdentity(),
+                ExpressionPresent = GetGenderExpression(),
+                GenderSexuallyAttracted = GetGenderSexuallyAttracted(),
+                HasScholarship = rbScholarshipYes.Checked ? "Yes" : rbScholarshipNo.Checked ? "No" : null,
+                ScholarshipName = txtScholarshipName.Text
+            };
             await TestSaveAdditionalProfile(AdditionalInfo);
             var siblingsData = new Sibling
-                {
-                   
-                };
-           
- 
+            {
+
+            };
+
+
             try
             {
                 // Call the async SaveAllRecords method with await
@@ -856,7 +844,7 @@ namespace GuidanceManagementSystem
                 // Add validation for PersonalDataTab
                 if (string.IsNullOrEmpty(txtStudentID.Text))
                 {
-                    
+
                     MessageBox.Show("Please fill in all identification fields.");
                     return;
                 }
@@ -919,14 +907,13 @@ namespace GuidanceManagementSystem
 
         }
 
-<<<<<<< HEAD
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if(checkBox1.Checked)
+            if (checkBox1.Checked)
             {
                 checkBox2.Checked = false;
-            } 
-             
+            }
+
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
@@ -936,74 +923,76 @@ namespace GuidanceManagementSystem
                 checkBox1.Checked = false;
             }
         }
-    }
-}
-=======
+
+
         private void enrollment_Load(object sender, EventArgs e)
         {
             //MyMethods methods = new MyMethods();
-            
+
+
+
+
         }
 
-      
-           
+
+
 
         private async void cuiButton2_Click_1(object sender, EventArgs e)
         {
-                try
+            try
+            {
+                // Step 1: Get the list of sibling data from the DataGridView
+                List<Sibling> siblingsData = GetSiblingsDataFromGrid();
+
+                if (siblingsData.Count == 0)
                 {
-                    // Step 1: Get the list of sibling data from the DataGridView
-                    List<Sibling> siblingsData = GetSiblingsDataFromGrid();
+                    MessageBox.Show("No sibling data to save.");
+                    return;
+                }
 
-                    if (siblingsData.Count == 0)
+                // Step 2: Assuming you have a student ID (from IndividualRecord or other source)
+                string studentID = txtStudentID.Text;  // Example of getting the Student ID
+
+                if (string.IsNullOrWhiteSpace(studentID))
+                {
+                    MessageBox.Show("Please enter a valid Student ID.");
+                    return;
+                }
+
+                // Step 3: Save each sibling record in the database
+                string connectionString = "server=localhost;database=guidancedb;user=root;password=;";
+                using (var connection = new MySqlConnection(connectionString))
+                {
+                    await connection.OpenAsync();
+                    using (var transaction = await connection.BeginTransactionAsync())
                     {
-                        MessageBox.Show("No sibling data to save.");
-                        return;
-                    }
-
-                    // Step 2: Assuming you have a student ID (from IndividualRecord or other source)
-                    string studentID = txtStudentID.Text;  // Example of getting the Student ID
-
-                    if (string.IsNullOrWhiteSpace(studentID))
-                    {
-                        MessageBox.Show("Please enter a valid Student ID.");
-                        return;
-                    }
-
-                    // Step 3: Save each sibling record in the database
-                    string connectionString = "server=localhost;database=guidancedb;user=root;password=;";
-                    using (var connection = new MySqlConnection(connectionString))
-                    {
-                        await connection.OpenAsync();
-                        using (var transaction = await connection.BeginTransactionAsync())
+                        try
                         {
-                            try
+                            // Loop through each sibling in the list and save it
+                            foreach (var sibling in siblingsData)
                             {
-                                // Loop through each sibling in the list and save it
-                                foreach (var sibling in siblingsData)
-                                {
-                                    await SaveSiblingsData(sibling, studentID, connection, transaction);
-                                }
+                                await SaveSiblingsData(sibling, studentID, connection, transaction);
+                            }
 
-                                // Commit the transaction
-                                await transaction.CommitAsync();
-                                MessageBox.Show("Siblings data saved successfully!");
-                            }
-                            catch (Exception ex)
-                            {
-                                // If an error occurs, roll back the transaction
-                                await transaction.RollbackAsync();
-                                MessageBox.Show($"Error: {ex.Message}");
-                            }
+                            // Commit the transaction
+                            await transaction.CommitAsync();
+                            MessageBox.Show("Siblings data saved successfully!");
+                        }
+                        catch (Exception ex)
+                        {
+                            // If an error occurs, roll back the transaction
+                            await transaction.RollbackAsync();
+                            MessageBox.Show($"Error: {ex.Message}");
                         }
                     }
                 }
-                catch (Exception ex)
-                {
-                    // Handle any unexpected errors
-                    MessageBox.Show($"Error: {ex.Message}");
-                }
             }
+            catch (Exception ex)
+            {
+                // Handle any unexpected errors
+                MessageBox.Show($"Error: {ex.Message}");
+            }
+        }
 
         private void rbScholarshipNo_CheckedChanged(object sender, EventArgs e)
         {
@@ -1017,7 +1006,7 @@ namespace GuidanceManagementSystem
 
         private void txtFirstName_KeyDown(object sender, KeyEventArgs e)
         {
-        
+
         }
 
         private void txtMiddleName_KeyDown(object sender, KeyEventArgs e)
@@ -1069,32 +1058,32 @@ namespace GuidanceManagementSystem
         }
 
         private void txtDescribeYourself_KeyDown(object sender, KeyEventArgs e)
-        {   
+        {
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox1.Checked)
-            {
-                checkBox2.Checked = false;
-            }
-            else
-            {
-                checkBox2.Checked = true;
-            }
-        }
+        //private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    if (checkBox1.Checked)
+        //    {
+        //        checkBox2.Checked = false;
+        //    }
+        //    else
+        //    {
+        //        checkBox2.Checked = true;
+        //    }
+        //}
 
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox2.Checked)
-            {
-                checkBox1.Checked = false;
-            }
-            else
-            {
-                checkBox1.Checked = true;
-            }
-        }
+        //private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    if (checkBox2.Checked)
+        //    {
+        //        checkBox1.Checked = false;
+        //    }
+        //    else
+        //    {
+        //        checkBox1.Checked = true;
+        //    }
+        //}
 
         private void txtFirstName_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -1154,7 +1143,7 @@ namespace GuidanceManagementSystem
 
         private void txtCompleteHomeAddress_KeyPress(object sender, KeyPressEventArgs e)
         {
-           
+
         }
 
         private void txtCompleteHomeAddress_KeyUp(object sender, KeyEventArgs e)
@@ -1259,8 +1248,13 @@ namespace GuidanceManagementSystem
         {
 
         }
-    }
-    }
 
->>>>>>> 09ac7e8cf7954fd816388b84366716eae427e426
+        private void txtEmailAddress_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+    }
+}
+
+
 

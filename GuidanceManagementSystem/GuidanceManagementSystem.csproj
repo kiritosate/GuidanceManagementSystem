@@ -204,6 +204,7 @@
     <Compile Include="Loadingfrm.Designer.cs">
       <DependentUpon>Loadingfrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="methods\InputValidator.cs" />
     <Compile Include="methods\MyCon.cs" />
     <Compile Include="methods\MyFetch.cs" />
     <Compile Include="methods\MyMethods.cs" />
