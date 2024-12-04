@@ -8,15 +8,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static GuidanceManagementSystem.View_Frms.LoginFrm;
 
 namespace GuidanceManagementSystem.View_Frms
 {
     public partial class dashboardfrm : Form
     {
-        
+        public string UserRole { get; set; } // This will be set during login
+
         public dashboardfrm()
         {
             InitializeComponent();
+            //if (UserSession.Role != "Admin")
+            //{
+            //    MessageBox.Show("Unauthorized access. This form is restricted to Admins only.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    this.Close(); // Close the form if the user is not an admin
+            //}
         }
 
         private void cuiButton1_Click(object sender, EventArgs e)
@@ -57,23 +64,23 @@ namespace GuidanceManagementSystem.View_Frms
 
         }
 
+
         private void cuiButton4_Click(object sender, EventArgs e)
         {
             //registration
             ShowFormInPanel(new registration_view());
         }
-
         private void cuiButton5_Click(object sender, EventArgs e)
         {
             //records
+            ShowFormInPanel(new recordfrm());
+            
         }
-
         private void cuiButton6_Click(object sender, EventArgs e)
         {
             //reports
             ShowFormInPanel(new reports_view());
         }
-
         private async void timer1_Tick(object sender, EventArgs e)
         {
             DateTime currentDateTime = await GetCurrentDateTimeAsync();
@@ -89,8 +96,8 @@ namespace GuidanceManagementSystem.View_Frms
         private void dashboardfrm_Load(object sender, EventArgs e)
         {
             ShowFormInPanel(new dashboard_view());
-            cuiLabel1.Content = MyCon._loggedName.ToUpper();
-
+            //cuiLabel1.Content = MyCon._loggedName.ToUpper();
+          
 
         }
         private void cuiButton7_Click(object sender, EventArgs e)
@@ -117,6 +124,31 @@ namespace GuidanceManagementSystem.View_Frms
                 // If "No" is selected, do nothing
             }
         }
+        public static class UserSession
+        {
+            public static string Role { get; set; } // "Admin" or "Staff"
+            public static string Username { get; set; } // Store the logged-in username if needed
+        }
 
+        private void cuiButton8_Click(object sender, EventArgs e)
+        {
+            if (UserSession.Role == "Admin")
+            {
+                // Open the Super Admin form
+                ShowFormInPanel(new Account_view());
+                //BlurEffectHelper.BlurBackground(Account_view); // or Show() depending on your preference
+            }
+            else if (UserSession.Role == "Staff")
+            {
+                // Show restricted access message
+                MessageBox.Show("Access restricted. Only Admins can access the Super Admin panel.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                // Handle cases where the role is not set (e.g., not logged in)
+                MessageBox.Show("Please log in to access this feature.", "Login Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+        }
     }
 }

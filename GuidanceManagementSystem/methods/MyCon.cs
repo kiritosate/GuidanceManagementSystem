@@ -63,7 +63,7 @@ namespace GuidanceManagementSystem.methods
                 MessageBox.Show("Invalid username or password.");
                 return (0, 0, string.Empty);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //MessageBox.Show("Error: " + ex.Message);
                 return (0, 0, string.Empty); // Indicate an error with (0, 0, "")

@@ -39,8 +39,10 @@
             this.cuiButton1 = new CuoreUI.Controls.cuiButton();
             this.cuiFormDrag1 = new CuoreUI.cuiFormDrag(this.components);
             this.cuiSpinner1 = new CuoreUI.Controls.cuiSpinner();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // cuiFormRounder1
@@ -177,20 +179,33 @@
             this.cuiSpinner1.Name = "cuiSpinner1";
             this.cuiSpinner1.RingColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
             this.cuiSpinner1.RotateSpeed = 1F;
-            this.cuiSpinner1.Rotation = 272.9648F;
+            this.cuiSpinner1.Rotation = 206.6928F;
             this.cuiSpinner1.Size = new System.Drawing.Size(30, 31);
             this.cuiSpinner1.TabIndex = 5;
             this.cuiSpinner1.Thickness = 3F;
             this.cuiSpinner1.Visible = false;
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(1, 2);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(44, 40);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox2.TabIndex = 6;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
+            // 
             // LoginFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(90)))), ((int)(((byte)(163)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.BackgroundImage = global::GuidanceManagementSystem.Properties.Resources.CCGSOMS;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(830, 560);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.cuiSpinner1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.cuiButton1);
@@ -206,6 +221,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -221,5 +237,6 @@
         private CuoreUI.Controls.cuiSpinner cuiSpinner1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }

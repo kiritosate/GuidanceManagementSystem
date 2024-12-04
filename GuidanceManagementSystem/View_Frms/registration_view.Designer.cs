@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cmbCourses = new System.Windows.Forms.ComboBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.cuiTextBox21 = new CuoreUI.Controls.cuiTextBox2();
             this.cuiLabel2 = new CuoreUI.Controls.cuiLabel();
@@ -44,6 +46,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.cmbCourses);
             this.panel2.Controls.Add(this.flowLayoutPanel1);
             this.panel2.Controls.Add(this.cuiTextBox21);
             this.panel2.Controls.Add(this.cuiLabel2);
@@ -53,15 +57,38 @@
             this.panel2.Size = new System.Drawing.Size(1022, 49);
             this.panel2.TabIndex = 9;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(302, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(116, 21);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Filter by course";
+            // 
+            // cmbCourses
+            // 
+            this.cmbCourses.FormattingEnabled = true;
+            this.cmbCourses.Items.AddRange(new object[] {
+            "COA",
+            "CICS",
+            "CHM",
+            "CTED",
+            "All"});
+            this.cmbCourses.Location = new System.Drawing.Point(424, 17);
+            this.cmbCourses.Name = "cmbCourses";
+            this.cmbCourses.Size = new System.Drawing.Size(99, 29);
+            this.cmbCourses.TabIndex = 2;
+            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.flowLayoutPanel1.Controls.Add(this.cuiButton1);
             this.flowLayoutPanel1.Controls.Add(this.cuiButton2);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(278, 0);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(789, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(1);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(523, 46);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(233, 46);
             this.flowLayoutPanel1.TabIndex = 8;
             // 
             // cuiTextBox21
@@ -75,7 +102,7 @@
             this.cuiTextBox21.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.cuiTextBox21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cuiTextBox21.ForeColor = System.Drawing.Color.Gray;
-            this.cuiTextBox21.Location = new System.Drawing.Point(808, 0);
+            this.cuiTextBox21.Location = new System.Drawing.Point(572, 6);
             this.cuiTextBox21.Margin = new System.Windows.Forms.Padding(4);
             this.cuiTextBox21.Multiline = false;
             this.cuiTextBox21.Name = "cuiTextBox21";
@@ -102,6 +129,7 @@
             this.cuiLabel2.Name = "cuiLabel2";
             this.cuiLabel2.Size = new System.Drawing.Size(1022, 49);
             this.cuiLabel2.TabIndex = 6;
+            this.cuiLabel2.Load += new System.EventHandler(this.cuiLabel2_Load);
             // 
             // dataGridView1
             // 
@@ -119,6 +147,7 @@
             this.dataGridView1.TabIndex = 10;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
             // 
             // timer1
             // 
@@ -205,6 +234,7 @@
             this.Text = "registration_view";
             this.Load += new System.EventHandler(this.registration_view_Load);
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
@@ -220,5 +250,7 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private CuoreUI.Controls.cuiButton cuiButton2;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ComboBox cmbCourses;
+        private System.Windows.Forms.Label label1;
     }
 }

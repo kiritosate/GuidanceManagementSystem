@@ -33,6 +33,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.lblRequired = new System.Windows.Forms.Label();
+            this.textBoxFilePath = new System.Windows.Forms.TextBox();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label45 = new System.Windows.Forms.Label();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.cmbCourse = new System.Windows.Forms.ComboBox();
             this.cmbYear = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -42,7 +49,9 @@
             this.rbIsTransferee = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.txtCitizenship = new System.Windows.Forms.ComboBox();
+            this.lblreq2 = new System.Windows.Forms.Label();
+            this.txtCivilStatus = new System.Windows.Forms.ComboBox();
+            this.txtCitizenship = new System.Windows.Forms.TextBox();
             this.txtNationality = new System.Windows.Forms.ComboBox();
             this.label43 = new System.Windows.Forms.Label();
             this.txtNickname = new System.Windows.Forms.TextBox();
@@ -70,10 +79,9 @@
             this.label11 = new System.Windows.Forms.Label();
             this.txtSpouseName = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.rbWithoutChild = new System.Windows.Forms.CheckBox();
+            this.rbWithChild = new System.Windows.Forms.CheckBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.txtCivilStatus = new System.Windows.Forms.TextBox();
             this.dtpDateOfBirth = new System.Windows.Forms.DateTimePicker();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -92,6 +100,9 @@
             this.txtLastName = new System.Windows.Forms.TextBox();
             this.txtFirstName = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.rbAbove25000 = new System.Windows.Forms.RadioButton();
+            this.rb10001To15000 = new System.Windows.Forms.RadioButton();
+            this.rbMotherWorkingAbroadNo = new System.Windows.Forms.RadioButton();
             this.txtFatherNoOfChildren = new System.Windows.Forms.NumericUpDown();
             this.txtMotherEmployerAgency = new System.Windows.Forms.TextBox();
             this.txtMotherOccupation = new System.Windows.Forms.TextBox();
@@ -103,43 +114,13 @@
             this.txtFatherOccupation = new System.Windows.Forms.TextBox();
             this.txtFatherEducationalAttainment = new System.Windows.Forms.TextBox();
             this.txtFatherNationality = new System.Windows.Forms.TextBox();
-            this.rbMotherWorkingAbroadNo = new System.Windows.Forms.CheckBox();
-            this.rbMotherWorkingAbroadYes = new System.Windows.Forms.CheckBox();
-            this.rbIndigenousNo = new System.Windows.Forms.CheckBox();
-            this.rbIndigenousYes = new System.Windows.Forms.CheckBox();
-            this.rbBeneficiaryNo = new System.Windows.Forms.CheckBox();
-            this.rbBeneficiaryYes = new System.Windows.Forms.CheckBox();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.rbExtended = new System.Windows.Forms.CheckBox();
-            this.rbNuclear = new System.Windows.Forms.CheckBox();
-            this.label28 = new System.Windows.Forms.Label();
             this.txtFatherLanguageDialect = new System.Windows.Forms.TextBox();
             this.label29 = new System.Windows.Forms.Label();
             this.txtFatherBirthOrder = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
-            this.rbAbove25000 = new System.Windows.Forms.CheckBox();
-            this.rb20001To25000 = new System.Windows.Forms.CheckBox();
-            this.rb15001To20000 = new System.Windows.Forms.CheckBox();
-            this.rb10001To15000 = new System.Windows.Forms.CheckBox();
-            this.rb5000To10000 = new System.Windows.Forms.CheckBox();
-            this.rbBelow5000 = new System.Windows.Forms.CheckBox();
             this.label32 = new System.Windows.Forms.Label();
-            this.rbMotherWithAnotherPartner = new System.Windows.Forms.CheckBox();
-            this.rbMotherWidowed = new System.Windows.Forms.CheckBox();
-            this.rbMotherAnnulled = new System.Windows.Forms.CheckBox();
-            this.rbFatherWithAnotherPartner = new System.Windows.Forms.CheckBox();
-            this.rbFatherSeparated = new System.Windows.Forms.CheckBox();
-            this.rbFatherLivingTogether = new System.Windows.Forms.CheckBox();
-            this.rbFatherWorkingAbroadNo = new System.Windows.Forms.CheckBox();
-            this.rbFatherWorkingAbroadYes = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox9 = new System.Windows.Forms.CheckBox();
-            this.checkBox11 = new System.Windows.Forms.CheckBox();
             this.label33 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
@@ -152,6 +133,43 @@
             this.label41 = new System.Windows.Forms.Label();
             this.label42 = new System.Windows.Forms.Label();
             this.txtFatherName = new System.Windows.Forms.TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rbliving = new System.Windows.Forms.RadioButton();
+            this.rbdeceased = new System.Windows.Forms.RadioButton();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.mrbliving = new System.Windows.Forms.RadioButton();
+            this.mrbdeceased = new System.Windows.Forms.RadioButton();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.rbFatherWorkingAbroadNo = new System.Windows.Forms.RadioButton();
+            this.rbFatherWorkingAbroadYes = new System.Windows.Forms.RadioButton();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.rbMotherWorkingAbroadYes = new System.Windows.Forms.RadioButton();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.rbFatherSeparated = new System.Windows.Forms.RadioButton();
+            this.rbFatherLivingTogether = new System.Windows.Forms.RadioButton();
+            this.rbFatherWithAnotherPartner = new System.Windows.Forms.RadioButton();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.rbMotherWithAnotherPartner = new System.Windows.Forms.RadioButton();
+            this.rbMotherAnnulled = new System.Windows.Forms.RadioButton();
+            this.rbMotherWidowed = new System.Windows.Forms.RadioButton();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.rb5000To10000 = new System.Windows.Forms.RadioButton();
+            this.rb15001To20000 = new System.Windows.Forms.RadioButton();
+            this.rb20001To25000 = new System.Windows.Forms.RadioButton();
+            this.rbBelow5000 = new System.Windows.Forms.RadioButton();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.rbNuclear = new System.Windows.Forms.RadioButton();
+            this.label28 = new System.Windows.Forms.Label();
+            this.rbExtended = new System.Windows.Forms.RadioButton();
+            this.label24 = new System.Windows.Forms.Label();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.rbIndigenousYes = new System.Windows.Forms.RadioButton();
+            this.rbIndigenousNo = new System.Windows.Forms.RadioButton();
+            this.label25 = new System.Windows.Forms.Label();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.rbBeneficiaryYes = new System.Windows.Forms.RadioButton();
+            this.rbBeneficiaryNo = new System.Windows.Forms.RadioButton();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
             this.cuiButton2 = new CuoreUI.Controls.cuiButton();
@@ -265,13 +283,27 @@
             this.PreviousButton = new System.Windows.Forms.Button();
             this.NextButton = new System.Windows.Forms.Button();
             this.cuiButton1 = new CuoreUI.Controls.cuiButton();
+            this.label44 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
             this.tabPage6.SuspendLayout();
+            this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumberOfChildren)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtFatherNoOfChildren)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            this.groupBox9.SuspendLayout();
+            this.groupBox10.SuspendLayout();
             this.tabPage7.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSiblings)).BeginInit();
@@ -280,6 +312,7 @@
             this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtStudentID
@@ -315,12 +348,18 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(964, 613);
+            this.tabControl1.Size = new System.Drawing.Size(964, 632);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabControl1.TabIndex = 3;
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.lblRequired);
+            this.tabPage6.Controls.Add(this.textBoxFilePath);
+            this.tabPage6.Controls.Add(this.panel6);
+            this.tabPage6.Controls.Add(this.button2);
+            this.tabPage6.Controls.Add(this.label45);
+            this.tabPage6.Controls.Add(this.panel5);
             this.tabPage6.Controls.Add(this.cmbCourse);
             this.tabPage6.Controls.Add(this.txtStudentID);
             this.tabPage6.Controls.Add(this.cmbYear);
@@ -331,10 +370,77 @@
             this.tabPage6.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage6.Size = new System.Drawing.Size(956, 579);
+            this.tabPage6.Size = new System.Drawing.Size(956, 598);
             this.tabPage6.TabIndex = 7;
             this.tabPage6.Text = "A.Identification";
             this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // lblRequired
+            // 
+            this.lblRequired.AutoSize = true;
+            this.lblRequired.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRequired.ForeColor = System.Drawing.Color.Firebrick;
+            this.lblRequired.Location = new System.Drawing.Point(167, 44);
+            this.lblRequired.Name = "lblRequired";
+            this.lblRequired.Size = new System.Drawing.Size(69, 19);
+            this.lblRequired.TabIndex = 15;
+            this.lblRequired.Text = "*Required";
+            this.lblRequired.Visible = false;
+            // 
+            // textBoxFilePath
+            // 
+            this.textBoxFilePath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxFilePath.Location = new System.Drawing.Point(614, 323);
+            this.textBoxFilePath.Name = "textBoxFilePath";
+            this.textBoxFilePath.Size = new System.Drawing.Size(304, 29);
+            this.textBoxFilePath.TabIndex = 14;
+            // 
+            // panel6
+            // 
+            this.panel6.BackColor = System.Drawing.Color.LightGray;
+            this.panel6.Location = new System.Drawing.Point(3, 381);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(953, 10);
+            this.panel6.TabIndex = 13;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.DarkGray;
+            this.button2.Location = new System.Drawing.Point(478, 323);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(130, 29);
+            this.button2.TabIndex = 12;
+            this.button2.Text = "Browse";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label45.Location = new System.Drawing.Point(27, 168);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(127, 21);
+            this.label45.TabIndex = 11;
+            this.label45.Text = "Year                     :";
+            // 
+            // panel5
+            // 
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel5.Controls.Add(this.pictureBox2);
+            this.panel5.Location = new System.Drawing.Point(478, 66);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(440, 251);
+            this.panel5.TabIndex = 10;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Location = new System.Drawing.Point(3, 4);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(434, 247);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 0;
+            this.pictureBox2.TabStop = false;
             // 
             // cmbCourse
             // 
@@ -345,10 +451,11 @@
             "CTED",
             "CHM",
             "COA"});
-            this.cmbCourse.Location = new System.Drawing.Point(166, 141);
+            this.cmbCourse.Location = new System.Drawing.Point(166, 116);
             this.cmbCourse.Name = "cmbCourse";
-            this.cmbCourse.Size = new System.Drawing.Size(121, 29);
+            this.cmbCourse.Size = new System.Drawing.Size(187, 29);
             this.cmbCourse.TabIndex = 6;
+            this.cmbCourse.SelectedIndexChanged += new System.EventHandler(this.cmbCourse_SelectedIndexChanged);
             // 
             // cmbYear
             // 
@@ -359,9 +466,9 @@
             "2",
             "3",
             "4"});
-            this.cmbYear.Location = new System.Drawing.Point(293, 141);
+            this.cmbYear.Location = new System.Drawing.Point(166, 160);
             this.cmbYear.Name = "cmbYear";
-            this.cmbYear.Size = new System.Drawing.Size(61, 29);
+            this.cmbYear.Size = new System.Drawing.Size(116, 29);
             this.cmbYear.TabIndex = 7;
             // 
             // panel1
@@ -371,56 +478,52 @@
             this.panel1.Controls.Add(this.rbIsReEntry);
             this.panel1.Controls.Add(this.rbIsTransferee);
             this.panel1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel1.Location = new System.Drawing.Point(131, 205);
+            this.panel1.Location = new System.Drawing.Point(121, 205);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(222, 112);
+            this.panel1.Size = new System.Drawing.Size(256, 112);
             this.panel1.TabIndex = 9;
             // 
             // rbisShifter
             // 
             this.rbisShifter.AutoSize = true;
-            this.rbisShifter.Location = new System.Drawing.Point(138, 63);
+            this.rbisShifter.Location = new System.Drawing.Point(155, 69);
             this.rbisShifter.Margin = new System.Windows.Forms.Padding(2);
             this.rbisShifter.Name = "rbisShifter";
             this.rbisShifter.Size = new System.Drawing.Size(74, 25);
             this.rbisShifter.TabIndex = 13;
-            this.rbisShifter.TabStop = true;
             this.rbisShifter.Text = "Shifter";
             this.rbisShifter.UseVisualStyleBackColor = true;
             // 
             // rbIsNewStudent
             // 
             this.rbIsNewStudent.AutoSize = true;
-            this.rbIsNewStudent.Location = new System.Drawing.Point(2, 12);
+            this.rbIsNewStudent.Location = new System.Drawing.Point(19, 18);
             this.rbIsNewStudent.Margin = new System.Windows.Forms.Padding(2);
             this.rbIsNewStudent.Name = "rbIsNewStudent";
             this.rbIsNewStudent.Size = new System.Drawing.Size(117, 25);
             this.rbIsNewStudent.TabIndex = 10;
-            this.rbIsNewStudent.TabStop = true;
             this.rbIsNewStudent.Text = "New Student";
             this.rbIsNewStudent.UseVisualStyleBackColor = true;
             // 
             // rbIsReEntry
             // 
             this.rbIsReEntry.AutoSize = true;
-            this.rbIsReEntry.Location = new System.Drawing.Point(31, 63);
+            this.rbIsReEntry.Location = new System.Drawing.Point(48, 69);
             this.rbIsReEntry.Margin = new System.Windows.Forms.Padding(2);
             this.rbIsReEntry.Name = "rbIsReEntry";
             this.rbIsReEntry.Size = new System.Drawing.Size(88, 25);
             this.rbIsReEntry.TabIndex = 12;
-            this.rbIsReEntry.TabStop = true;
             this.rbIsReEntry.Text = "Re-Entry";
             this.rbIsReEntry.UseVisualStyleBackColor = true;
             // 
             // rbIsTransferee
             // 
             this.rbIsTransferee.AutoSize = true;
-            this.rbIsTransferee.Location = new System.Drawing.Point(128, 12);
+            this.rbIsTransferee.Location = new System.Drawing.Point(145, 18);
             this.rbIsTransferee.Margin = new System.Windows.Forms.Padding(2);
             this.rbIsTransferee.Name = "rbIsTransferee";
             this.rbIsTransferee.Size = new System.Drawing.Size(100, 25);
             this.rbIsTransferee.TabIndex = 11;
-            this.rbIsTransferee.TabStop = true;
             this.rbIsTransferee.Text = "Transferee";
             this.rbIsTransferee.UseVisualStyleBackColor = true;
             // 
@@ -428,15 +531,17 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(17, 145);
+            this.label2.Location = new System.Drawing.Point(27, 120);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(113, 21);
+            this.label2.Size = new System.Drawing.Size(130, 21);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Course && Year:";
+            this.label2.Text = "Course                 :";
             // 
             // tabPage1
             // 
             this.tabPage1.AutoScroll = true;
+            this.tabPage1.Controls.Add(this.lblreq2);
+            this.tabPage1.Controls.Add(this.txtCivilStatus);
             this.tabPage1.Controls.Add(this.txtCitizenship);
             this.tabPage1.Controls.Add(this.txtNationality);
             this.tabPage1.Controls.Add(this.label43);
@@ -465,10 +570,9 @@
             this.tabPage1.Controls.Add(this.label11);
             this.tabPage1.Controls.Add(this.txtSpouseName);
             this.tabPage1.Controls.Add(this.label10);
-            this.tabPage1.Controls.Add(this.checkBox2);
-            this.tabPage1.Controls.Add(this.checkBox1);
+            this.tabPage1.Controls.Add(this.rbWithoutChild);
+            this.tabPage1.Controls.Add(this.rbWithChild);
             this.tabPage1.Controls.Add(this.label9);
-            this.tabPage1.Controls.Add(this.txtCivilStatus);
             this.tabPage1.Controls.Add(this.dtpDateOfBirth);
             this.tabPage1.Controls.Add(this.label8);
             this.tabPage1.Controls.Add(this.label7);
@@ -491,69 +595,44 @@
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tabPage1.Size = new System.Drawing.Size(956, 579);
+            this.tabPage1.Size = new System.Drawing.Size(956, 598);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "B.Personal Data";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // lblreq2
+            // 
+            this.lblreq2.AutoSize = true;
+            this.lblreq2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblreq2.ForeColor = System.Drawing.Color.Firebrick;
+            this.lblreq2.Location = new System.Drawing.Point(116, 23);
+            this.lblreq2.Name = "lblreq2";
+            this.lblreq2.Size = new System.Drawing.Size(69, 19);
+            this.lblreq2.TabIndex = 169;
+            this.lblreq2.Text = "*Required";
+            this.lblreq2.Visible = false;
+            // 
+            // txtCivilStatus
+            // 
+            this.txtCivilStatus.FormattingEnabled = true;
+            this.txtCivilStatus.Items.AddRange(new object[] {
+            "Single",
+            "Married",
+            "Widowed"});
+            this.txtCivilStatus.Location = new System.Drawing.Point(361, 104);
+            this.txtCivilStatus.Name = "txtCivilStatus";
+            this.txtCivilStatus.Size = new System.Drawing.Size(176, 29);
+            this.txtCivilStatus.TabIndex = 168;
+            this.txtCivilStatus.SelectedIndexChanged += new System.EventHandler(this.txtCivilStatus_SelectedIndexChanged_1);
+            // 
             // txtCitizenship
             // 
-            this.txtCitizenship.FormattingEnabled = true;
-            this.txtCitizenship.Items.AddRange(new object[] {
-            "Afghan",
-            "Armenian",
-            "Azerbaijani",
-            "Bahraini",
-            "Bangladeshi",
-            "Bhutanese",
-            "Bruneian",
-            "Burmese",
-            "Cambodian",
-            "Chinese",
-            "Cypriot",
-            "Georgian",
-            "Indian",
-            "Indonesian",
-            "Iranian",
-            "Iraqi",
-            "Israeli",
-            "Japanese",
-            "Jordanian",
-            "Kazakhstani",
-            "Kuwaiti",
-            "Kyrgyzstani",
-            "Laotian",
-            "Lebanese",
-            "Malaysian",
-            "Maldivian",
-            "Mongolian",
-            "Nepalese",
-            "North Korean",
-            "Omani",
-            "Pakistani",
-            "Palestinian",
-            "Filipino",
-            "Qatari",
-            "Russian",
-            "Saudi Arabian",
-            "Singaporean",
-            "South Korean",
-            "Sri Lankan",
-            "Syrian",
-            "Taiwanese",
-            "Tajikistani",
-            "Thai",
-            "Timorese",
-            "Turkish",
-            "Turkmenistani",
-            "UAE",
-            "Uzbekistani",
-            "Vietnamese",
-            "Yemeni"});
-            this.txtCitizenship.Location = new System.Drawing.Point(111, 260);
+            this.txtCitizenship.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCitizenship.Location = new System.Drawing.Point(111, 263);
+            this.txtCitizenship.Margin = new System.Windows.Forms.Padding(2);
             this.txtCitizenship.Name = "txtCitizenship";
             this.txtCitizenship.Size = new System.Drawing.Size(132, 29);
-            this.txtCitizenship.TabIndex = 165;
+            this.txtCitizenship.TabIndex = 167;
             // 
             // txtNationality
             // 
@@ -642,6 +721,7 @@
             this.numericUpDownNumberOfChildren.Name = "numericUpDownNumberOfChildren";
             this.numericUpDownNumberOfChildren.Size = new System.Drawing.Size(135, 29);
             this.numericUpDownNumberOfChildren.TabIndex = 161;
+            this.numericUpDownNumberOfChildren.ValueChanged += new System.EventHandler(this.numericUpDownNumberOfChildren_ValueChanged);
             // 
             // txtGuardianphone
             // 
@@ -651,6 +731,7 @@
             this.txtGuardianphone.Name = "txtGuardianphone";
             this.txtGuardianphone.Size = new System.Drawing.Size(120, 29);
             this.txtGuardianphone.TabIndex = 160;
+            this.txtGuardianphone.TextChanged += new System.EventHandler(this.txtGuardianphone_TextChanged);
             this.txtGuardianphone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtGuardianphone_KeyPress);
             // 
             // txtHobbies
@@ -711,7 +792,7 @@
             // txtDescribeYourself
             // 
             this.txtDescribeYourself.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDescribeYourself.Location = new System.Drawing.Point(436, 275);
+            this.txtDescribeYourself.Location = new System.Drawing.Point(448, 275);
             this.txtDescribeYourself.Margin = new System.Windows.Forms.Padding(2);
             this.txtDescribeYourself.Multiline = true;
             this.txtDescribeYourself.Name = "txtDescribeYourself";
@@ -837,6 +918,7 @@
             this.txtContactNumber.Name = "txtContactNumber";
             this.txtContactNumber.Size = new System.Drawing.Size(131, 29);
             this.txtContactNumber.TabIndex = 143;
+            this.txtContactNumber.TextChanged += new System.EventHandler(this.txtContactNumber_TextChanged);
             this.txtContactNumber.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtContactNumber_KeyDown);
             this.txtContactNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtContactNumber_KeyPress);
             // 
@@ -895,31 +977,31 @@
             this.label10.TabIndex = 138;
             this.label10.Text = "Number of children :";
             // 
-            // checkBox2
+            // rbWithoutChild
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox2.Location = new System.Drawing.Point(354, 154);
-            this.checkBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(122, 25);
-            this.checkBox2.TabIndex = 136;
-            this.checkBox2.Text = "Without child";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            this.rbWithoutChild.AutoSize = true;
+            this.rbWithoutChild.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbWithoutChild.Location = new System.Drawing.Point(354, 154);
+            this.rbWithoutChild.Margin = new System.Windows.Forms.Padding(2);
+            this.rbWithoutChild.Name = "rbWithoutChild";
+            this.rbWithoutChild.Size = new System.Drawing.Size(122, 25);
+            this.rbWithoutChild.TabIndex = 136;
+            this.rbWithoutChild.Text = "Without child";
+            this.rbWithoutChild.UseVisualStyleBackColor = true;
+            this.rbWithoutChild.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
-            // checkBox1
+            // rbWithChild
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox1.Location = new System.Drawing.Point(354, 132);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(99, 25);
-            this.checkBox1.TabIndex = 135;
-            this.checkBox1.Text = "With child";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.rbWithChild.AutoSize = true;
+            this.rbWithChild.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbWithChild.Location = new System.Drawing.Point(354, 132);
+            this.rbWithChild.Margin = new System.Windows.Forms.Padding(2);
+            this.rbWithChild.Name = "rbWithChild";
+            this.rbWithChild.Size = new System.Drawing.Size(99, 25);
+            this.rbWithChild.TabIndex = 135;
+            this.rbWithChild.Text = "With child";
+            this.rbWithChild.UseVisualStyleBackColor = true;
+            this.rbWithChild.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // label9
             // 
@@ -931,15 +1013,6 @@
             this.label9.Size = new System.Drawing.Size(86, 21);
             this.label9.TabIndex = 134;
             this.label9.Text = "Civil Status";
-            // 
-            // txtCivilStatus
-            // 
-            this.txtCivilStatus.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCivilStatus.Location = new System.Drawing.Point(361, 106);
-            this.txtCivilStatus.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCivilStatus.Name = "txtCivilStatus";
-            this.txtCivilStatus.Size = new System.Drawing.Size(77, 29);
-            this.txtCivilStatus.TabIndex = 133;
             // 
             // dtpDateOfBirth
             // 
@@ -1132,6 +1205,9 @@
             // tabPage2
             // 
             this.tabPage2.AutoScroll = true;
+            this.tabPage2.Controls.Add(this.rbAbove25000);
+            this.tabPage2.Controls.Add(this.rb10001To15000);
+            this.tabPage2.Controls.Add(this.rbMotherWorkingAbroadNo);
             this.tabPage2.Controls.Add(this.txtFatherNoOfChildren);
             this.tabPage2.Controls.Add(this.txtMotherEmployerAgency);
             this.tabPage2.Controls.Add(this.txtMotherOccupation);
@@ -1143,43 +1219,13 @@
             this.tabPage2.Controls.Add(this.txtFatherOccupation);
             this.tabPage2.Controls.Add(this.txtFatherEducationalAttainment);
             this.tabPage2.Controls.Add(this.txtFatherNationality);
-            this.tabPage2.Controls.Add(this.rbMotherWorkingAbroadNo);
-            this.tabPage2.Controls.Add(this.rbMotherWorkingAbroadYes);
-            this.tabPage2.Controls.Add(this.rbIndigenousNo);
-            this.tabPage2.Controls.Add(this.rbIndigenousYes);
-            this.tabPage2.Controls.Add(this.rbBeneficiaryNo);
-            this.tabPage2.Controls.Add(this.rbBeneficiaryYes);
-            this.tabPage2.Controls.Add(this.label24);
-            this.tabPage2.Controls.Add(this.label25);
             this.tabPage2.Controls.Add(this.label26);
-            this.tabPage2.Controls.Add(this.label27);
-            this.tabPage2.Controls.Add(this.rbExtended);
-            this.tabPage2.Controls.Add(this.rbNuclear);
-            this.tabPage2.Controls.Add(this.label28);
             this.tabPage2.Controls.Add(this.txtFatherLanguageDialect);
             this.tabPage2.Controls.Add(this.label29);
             this.tabPage2.Controls.Add(this.txtFatherBirthOrder);
             this.tabPage2.Controls.Add(this.label30);
             this.tabPage2.Controls.Add(this.label31);
-            this.tabPage2.Controls.Add(this.rbAbove25000);
-            this.tabPage2.Controls.Add(this.rb20001To25000);
-            this.tabPage2.Controls.Add(this.rb15001To20000);
-            this.tabPage2.Controls.Add(this.rb10001To15000);
-            this.tabPage2.Controls.Add(this.rb5000To10000);
-            this.tabPage2.Controls.Add(this.rbBelow5000);
             this.tabPage2.Controls.Add(this.label32);
-            this.tabPage2.Controls.Add(this.rbMotherWithAnotherPartner);
-            this.tabPage2.Controls.Add(this.rbMotherWidowed);
-            this.tabPage2.Controls.Add(this.rbMotherAnnulled);
-            this.tabPage2.Controls.Add(this.rbFatherWithAnotherPartner);
-            this.tabPage2.Controls.Add(this.rbFatherSeparated);
-            this.tabPage2.Controls.Add(this.rbFatherLivingTogether);
-            this.tabPage2.Controls.Add(this.rbFatherWorkingAbroadNo);
-            this.tabPage2.Controls.Add(this.rbFatherWorkingAbroadYes);
-            this.tabPage2.Controls.Add(this.checkBox4);
-            this.tabPage2.Controls.Add(this.checkBox3);
-            this.tabPage2.Controls.Add(this.checkBox9);
-            this.tabPage2.Controls.Add(this.checkBox11);
             this.tabPage2.Controls.Add(this.label33);
             this.tabPage2.Controls.Add(this.label34);
             this.tabPage2.Controls.Add(this.label35);
@@ -1192,20 +1238,63 @@
             this.tabPage2.Controls.Add(this.label41);
             this.tabPage2.Controls.Add(this.label42);
             this.tabPage2.Controls.Add(this.txtFatherName);
+            this.tabPage2.Controls.Add(this.groupBox1);
+            this.tabPage2.Controls.Add(this.groupBox2);
+            this.tabPage2.Controls.Add(this.groupBox3);
+            this.tabPage2.Controls.Add(this.groupBox4);
+            this.tabPage2.Controls.Add(this.groupBox5);
+            this.tabPage2.Controls.Add(this.groupBox6);
+            this.tabPage2.Controls.Add(this.groupBox7);
+            this.tabPage2.Controls.Add(this.groupBox8);
+            this.tabPage2.Controls.Add(this.groupBox9);
+            this.tabPage2.Controls.Add(this.groupBox10);
             this.tabPage2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage2.Location = new System.Drawing.Point(4, 30);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 50);
-            this.tabPage2.Size = new System.Drawing.Size(956, 579);
+            this.tabPage2.Size = new System.Drawing.Size(956, 598);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "C. Family Data";
             this.tabPage2.UseVisualStyleBackColor = true;
             this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
             // 
+            // rbAbove25000
+            // 
+            this.rbAbove25000.AutoSize = true;
+            this.rbAbove25000.Location = new System.Drawing.Point(548, 431);
+            this.rbAbove25000.Name = "rbAbove25000";
+            this.rbAbove25000.Size = new System.Drawing.Size(130, 25);
+            this.rbAbove25000.TabIndex = 217;
+            this.rbAbove25000.TabStop = true;
+            this.rbAbove25000.Text = "P25000 Above";
+            this.rbAbove25000.UseVisualStyleBackColor = true;
+            // 
+            // rb10001To15000
+            // 
+            this.rb10001To15000.AutoSize = true;
+            this.rb10001To15000.Location = new System.Drawing.Point(323, 399);
+            this.rb10001To15000.Name = "rb10001To15000";
+            this.rb10001To15000.Size = new System.Drawing.Size(158, 25);
+            this.rb10001To15000.TabIndex = 213;
+            this.rb10001To15000.TabStop = true;
+            this.rb10001To15000.Text = "P10001 to P15000";
+            this.rb10001To15000.UseVisualStyleBackColor = true;
+            // 
+            // rbMotherWorkingAbroadNo
+            // 
+            this.rbMotherWorkingAbroadNo.AutoSize = true;
+            this.rbMotherWorkingAbroadNo.Location = new System.Drawing.Point(713, 263);
+            this.rbMotherWorkingAbroadNo.Name = "rbMotherWorkingAbroadNo";
+            this.rbMotherWorkingAbroadNo.Size = new System.Drawing.Size(49, 25);
+            this.rbMotherWorkingAbroadNo.TabIndex = 205;
+            this.rbMotherWorkingAbroadNo.TabStop = true;
+            this.rbMotherWorkingAbroadNo.Text = "No";
+            this.rbMotherWorkingAbroadNo.UseVisualStyleBackColor = true;
+            // 
             // txtFatherNoOfChildren
             // 
             this.txtFatherNoOfChildren.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFatherNoOfChildren.Location = new System.Drawing.Point(365, 494);
+            this.txtFatherNoOfChildren.Location = new System.Drawing.Point(332, 469);
             this.txtFatherNoOfChildren.Name = "txtFatherNoOfChildren";
             this.txtFatherNoOfChildren.Size = new System.Drawing.Size(97, 29);
             this.txtFatherNoOfChildren.TabIndex = 197;
@@ -1213,52 +1302,58 @@
             // txtMotherEmployerAgency
             // 
             this.txtMotherEmployerAgency.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMotherEmployerAgency.Location = new System.Drawing.Point(632, 261);
+            this.txtMotherEmployerAgency.Location = new System.Drawing.Point(632, 229);
             this.txtMotherEmployerAgency.Margin = new System.Windows.Forms.Padding(2);
             this.txtMotherEmployerAgency.Name = "txtMotherEmployerAgency";
             this.txtMotherEmployerAgency.Size = new System.Drawing.Size(217, 29);
             this.txtMotherEmployerAgency.TabIndex = 196;
+            this.txtMotherEmployerAgency.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMotherEmployerAgency_KeyPress);
             // 
             // txtMotherOccupation
             // 
             this.txtMotherOccupation.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMotherOccupation.Location = new System.Drawing.Point(631, 228);
+            this.txtMotherOccupation.Location = new System.Drawing.Point(631, 196);
             this.txtMotherOccupation.Margin = new System.Windows.Forms.Padding(2);
             this.txtMotherOccupation.Name = "txtMotherOccupation";
             this.txtMotherOccupation.Size = new System.Drawing.Size(218, 29);
             this.txtMotherOccupation.TabIndex = 195;
+            this.txtMotherOccupation.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMotherOccupation_KeyPress);
             // 
             // txtMotherEducationalAttainment
             // 
             this.txtMotherEducationalAttainment.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMotherEducationalAttainment.Location = new System.Drawing.Point(632, 196);
+            this.txtMotherEducationalAttainment.Location = new System.Drawing.Point(632, 164);
             this.txtMotherEducationalAttainment.Margin = new System.Windows.Forms.Padding(2);
             this.txtMotherEducationalAttainment.Name = "txtMotherEducationalAttainment";
             this.txtMotherEducationalAttainment.Size = new System.Drawing.Size(217, 29);
             this.txtMotherEducationalAttainment.TabIndex = 194;
+            this.txtMotherEducationalAttainment.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMotherEducationalAttainment_KeyPress);
             // 
             // txtMotherNationality
             // 
             this.txtMotherNationality.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMotherNationality.Location = new System.Drawing.Point(631, 163);
+            this.txtMotherNationality.Location = new System.Drawing.Point(631, 131);
             this.txtMotherNationality.Margin = new System.Windows.Forms.Padding(2);
             this.txtMotherNationality.Name = "txtMotherNationality";
             this.txtMotherNationality.Size = new System.Drawing.Size(218, 29);
             this.txtMotherNationality.TabIndex = 193;
+            this.txtMotherNationality.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMotherNationality_KeyPress);
             // 
             // txtMotherTelCellNo
             // 
             this.txtMotherTelCellNo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMotherTelCellNo.Location = new System.Drawing.Point(631, 129);
+            this.txtMotherTelCellNo.Location = new System.Drawing.Point(631, 97);
             this.txtMotherTelCellNo.Margin = new System.Windows.Forms.Padding(2);
             this.txtMotherTelCellNo.Name = "txtMotherTelCellNo";
             this.txtMotherTelCellNo.Size = new System.Drawing.Size(217, 29);
             this.txtMotherTelCellNo.TabIndex = 192;
+            this.txtMotherTelCellNo.TextChanged += new System.EventHandler(this.txtMotherTelCellNo_TextChanged);
+            this.txtMotherTelCellNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMotherTelCellNo_KeyPress);
             // 
             // txtMotherName
             // 
             this.txtMotherName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMotherName.Location = new System.Drawing.Point(630, 96);
+            this.txtMotherName.Location = new System.Drawing.Point(630, 64);
             this.txtMotherName.Margin = new System.Windows.Forms.Padding(2);
             this.txtMotherName.Name = "txtMotherName";
             this.txtMotherName.Size = new System.Drawing.Size(218, 29);
@@ -1269,7 +1364,7 @@
             // txtFatherEmployerAgency
             // 
             this.txtFatherEmployerAgency.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFatherEmployerAgency.Location = new System.Drawing.Point(330, 266);
+            this.txtFatherEmployerAgency.Location = new System.Drawing.Point(330, 234);
             this.txtFatherEmployerAgency.Margin = new System.Windows.Forms.Padding(2);
             this.txtFatherEmployerAgency.Name = "txtFatherEmployerAgency";
             this.txtFatherEmployerAgency.Size = new System.Drawing.Size(217, 29);
@@ -1279,7 +1374,7 @@
             // txtFatherOccupation
             // 
             this.txtFatherOccupation.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFatherOccupation.Location = new System.Drawing.Point(329, 233);
+            this.txtFatherOccupation.Location = new System.Drawing.Point(329, 201);
             this.txtFatherOccupation.Margin = new System.Windows.Forms.Padding(2);
             this.txtFatherOccupation.Name = "txtFatherOccupation";
             this.txtFatherOccupation.Size = new System.Drawing.Size(218, 29);
@@ -1289,7 +1384,7 @@
             // txtFatherEducationalAttainment
             // 
             this.txtFatherEducationalAttainment.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFatherEducationalAttainment.Location = new System.Drawing.Point(330, 201);
+            this.txtFatherEducationalAttainment.Location = new System.Drawing.Point(330, 169);
             this.txtFatherEducationalAttainment.Margin = new System.Windows.Forms.Padding(2);
             this.txtFatherEducationalAttainment.Name = "txtFatherEducationalAttainment";
             this.txtFatherEducationalAttainment.Size = new System.Drawing.Size(217, 29);
@@ -1299,177 +1394,39 @@
             // txtFatherNationality
             // 
             this.txtFatherNationality.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFatherNationality.Location = new System.Drawing.Point(329, 168);
+            this.txtFatherNationality.Location = new System.Drawing.Point(329, 136);
             this.txtFatherNationality.Margin = new System.Windows.Forms.Padding(2);
             this.txtFatherNationality.Name = "txtFatherNationality";
             this.txtFatherNationality.Size = new System.Drawing.Size(218, 29);
             this.txtFatherNationality.TabIndex = 187;
-            // 
-            // rbMotherWorkingAbroadNo
-            // 
-            this.rbMotherWorkingAbroadNo.AutoSize = true;
-            this.rbMotherWorkingAbroadNo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbMotherWorkingAbroadNo.Location = new System.Drawing.Point(737, 297);
-            this.rbMotherWorkingAbroadNo.Margin = new System.Windows.Forms.Padding(2);
-            this.rbMotherWorkingAbroadNo.Name = "rbMotherWorkingAbroadNo";
-            this.rbMotherWorkingAbroadNo.Size = new System.Drawing.Size(50, 25);
-            this.rbMotherWorkingAbroadNo.TabIndex = 186;
-            this.rbMotherWorkingAbroadNo.Text = "No";
-            this.rbMotherWorkingAbroadNo.UseVisualStyleBackColor = true;
-            // 
-            // rbMotherWorkingAbroadYes
-            // 
-            this.rbMotherWorkingAbroadYes.AutoSize = true;
-            this.rbMotherWorkingAbroadYes.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbMotherWorkingAbroadYes.Location = new System.Drawing.Point(638, 297);
-            this.rbMotherWorkingAbroadYes.Margin = new System.Windows.Forms.Padding(2);
-            this.rbMotherWorkingAbroadYes.Name = "rbMotherWorkingAbroadYes";
-            this.rbMotherWorkingAbroadYes.Size = new System.Drawing.Size(52, 25);
-            this.rbMotherWorkingAbroadYes.TabIndex = 185;
-            this.rbMotherWorkingAbroadYes.Text = "Yes";
-            this.rbMotherWorkingAbroadYes.UseVisualStyleBackColor = true;
-            // 
-            // rbIndigenousNo
-            // 
-            this.rbIndigenousNo.AutoSize = true;
-            this.rbIndigenousNo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbIndigenousNo.Location = new System.Drawing.Point(591, 585);
-            this.rbIndigenousNo.Margin = new System.Windows.Forms.Padding(2);
-            this.rbIndigenousNo.Name = "rbIndigenousNo";
-            this.rbIndigenousNo.Size = new System.Drawing.Size(50, 25);
-            this.rbIndigenousNo.TabIndex = 184;
-            this.rbIndigenousNo.Text = "No";
-            this.rbIndigenousNo.UseVisualStyleBackColor = true;
-            // 
-            // rbIndigenousYes
-            // 
-            this.rbIndigenousYes.AutoSize = true;
-            this.rbIndigenousYes.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbIndigenousYes.Location = new System.Drawing.Point(591, 558);
-            this.rbIndigenousYes.Margin = new System.Windows.Forms.Padding(2);
-            this.rbIndigenousYes.Name = "rbIndigenousYes";
-            this.rbIndigenousYes.Size = new System.Drawing.Size(52, 25);
-            this.rbIndigenousYes.TabIndex = 183;
-            this.rbIndigenousYes.Text = "Yes";
-            this.rbIndigenousYes.UseVisualStyleBackColor = true;
-            // 
-            // rbBeneficiaryNo
-            // 
-            this.rbBeneficiaryNo.AutoSize = true;
-            this.rbBeneficiaryNo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbBeneficiaryNo.Location = new System.Drawing.Point(819, 590);
-            this.rbBeneficiaryNo.Margin = new System.Windows.Forms.Padding(2);
-            this.rbBeneficiaryNo.Name = "rbBeneficiaryNo";
-            this.rbBeneficiaryNo.Size = new System.Drawing.Size(50, 25);
-            this.rbBeneficiaryNo.TabIndex = 182;
-            this.rbBeneficiaryNo.Text = "No";
-            this.rbBeneficiaryNo.UseVisualStyleBackColor = true;
-            // 
-            // rbBeneficiaryYes
-            // 
-            this.rbBeneficiaryYes.AutoSize = true;
-            this.rbBeneficiaryYes.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbBeneficiaryYes.Location = new System.Drawing.Point(819, 563);
-            this.rbBeneficiaryYes.Margin = new System.Windows.Forms.Padding(2);
-            this.rbBeneficiaryYes.Name = "rbBeneficiaryYes";
-            this.rbBeneficiaryYes.Size = new System.Drawing.Size(52, 25);
-            this.rbBeneficiaryYes.TabIndex = 181;
-            this.rbBeneficiaryYes.Text = "Yes";
-            this.rbBeneficiaryYes.UseVisualStyleBackColor = true;
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(152, 585);
-            this.label24.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(76, 21);
-            this.label24.TabIndex = 180;
-            this.label24.Text = "Structure:";
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(424, 586);
-            this.label25.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(161, 21);
-            this.label25.TabIndex = 179;
-            this.label25.Text = "an indigenous group?";
+            this.txtFatherNationality.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFatherNationality_KeyPress);
             // 
             // label26
             // 
             this.label26.AutoSize = true;
             this.label26.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label26.Location = new System.Drawing.Point(693, 563);
+            this.label26.Location = new System.Drawing.Point(691, 544);
             this.label26.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(123, 21);
             this.label26.TabIndex = 178;
             this.label26.Text = "4P\'s Benefeciary";
             // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.Location = new System.Drawing.Point(432, 559);
-            this.label27.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(134, 21);
-            this.label27.TabIndex = 177;
-            this.label27.Text = "Do you belong to ";
-            // 
-            // rbExtended
-            // 
-            this.rbExtended.AutoSize = true;
-            this.rbExtended.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbExtended.Location = new System.Drawing.Point(246, 585);
-            this.rbExtended.Margin = new System.Windows.Forms.Padding(2);
-            this.rbExtended.Name = "rbExtended";
-            this.rbExtended.Size = new System.Drawing.Size(92, 25);
-            this.rbExtended.TabIndex = 176;
-            this.rbExtended.Text = "Extended";
-            this.rbExtended.UseVisualStyleBackColor = true;
-            // 
-            // rbNuclear
-            // 
-            this.rbNuclear.AutoSize = true;
-            this.rbNuclear.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbNuclear.Location = new System.Drawing.Point(246, 560);
-            this.rbNuclear.Margin = new System.Windows.Forms.Padding(2);
-            this.rbNuclear.Name = "rbNuclear";
-            this.rbNuclear.Size = new System.Drawing.Size(83, 25);
-            this.rbNuclear.TabIndex = 175;
-            this.rbNuclear.Text = "Nuclear";
-            this.rbNuclear.UseVisualStyleBackColor = true;
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.Location = new System.Drawing.Point(152, 562);
-            this.label28.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(59, 21);
-            this.label28.TabIndex = 174;
-            this.label28.Text = "Family ";
-            // 
             // txtFatherLanguageDialect
             // 
             this.txtFatherLanguageDialect.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFatherLanguageDialect.Location = new System.Drawing.Point(497, 525);
+            this.txtFatherLanguageDialect.Location = new System.Drawing.Point(462, 493);
             this.txtFatherLanguageDialect.Margin = new System.Windows.Forms.Padding(2);
             this.txtFatherLanguageDialect.Name = "txtFatherLanguageDialect";
             this.txtFatherLanguageDialect.Size = new System.Drawing.Size(274, 29);
             this.txtFatherLanguageDialect.TabIndex = 173;
+            this.txtFatherLanguageDialect.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFatherLanguageDialect_KeyPress);
             // 
             // label29
             // 
             this.label29.AutoSize = true;
             this.label29.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.Location = new System.Drawing.Point(91, 533);
+            this.label29.Location = new System.Drawing.Point(91, 501);
             this.label29.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(365, 21);
@@ -1479,17 +1436,18 @@
             // txtFatherBirthOrder
             // 
             this.txtFatherBirthOrder.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFatherBirthOrder.Location = new System.Drawing.Point(775, 496);
+            this.txtFatherBirthOrder.Location = new System.Drawing.Point(740, 464);
             this.txtFatherBirthOrder.Margin = new System.Windows.Forms.Padding(2);
             this.txtFatherBirthOrder.Name = "txtFatherBirthOrder";
             this.txtFatherBirthOrder.Size = new System.Drawing.Size(132, 29);
             this.txtFatherBirthOrder.TabIndex = 171;
+            this.txtFatherBirthOrder.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFatherBirthOrder_KeyPress);
             // 
             // label30
             // 
             this.label30.AutoSize = true;
             this.label30.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label30.Location = new System.Drawing.Point(503, 496);
+            this.label30.Location = new System.Drawing.Point(493, 470);
             this.label30.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(243, 21);
@@ -1500,245 +1458,29 @@
             // 
             this.label31.AutoSize = true;
             this.label31.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label31.Location = new System.Drawing.Point(91, 498);
+            this.label31.Location = new System.Drawing.Point(90, 472);
             this.label31.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(236, 21);
             this.label31.TabIndex = 168;
             this.label31.Text = "Number of children in the family";
             // 
-            // rbAbove25000
-            // 
-            this.rbAbove25000.AutoSize = true;
-            this.rbAbove25000.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbAbove25000.Location = new System.Drawing.Point(548, 461);
-            this.rbAbove25000.Margin = new System.Windows.Forms.Padding(2);
-            this.rbAbove25000.Name = "rbAbove25000";
-            this.rbAbove25000.Size = new System.Drawing.Size(162, 25);
-            this.rbAbove25000.TabIndex = 167;
-            this.rbAbove25000.Text = "P25,001 and above";
-            this.rbAbove25000.UseVisualStyleBackColor = true;
-            // 
-            // rb20001To25000
-            // 
-            this.rb20001To25000.AutoSize = true;
-            this.rb20001To25000.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rb20001To25000.Location = new System.Drawing.Point(548, 432);
-            this.rb20001To25000.Margin = new System.Windows.Forms.Padding(2);
-            this.rb20001To25000.Name = "rb20001To25000";
-            this.rb20001To25000.Size = new System.Drawing.Size(165, 25);
-            this.rb20001To25000.TabIndex = 166;
-            this.rb20001To25000.Text = "P20,001 to P25,000";
-            this.rb20001To25000.UseVisualStyleBackColor = true;
-            // 
-            // rb15001To20000
-            // 
-            this.rb15001To20000.AutoSize = true;
-            this.rb15001To20000.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rb15001To20000.Location = new System.Drawing.Point(323, 461);
-            this.rb15001To20000.Margin = new System.Windows.Forms.Padding(2);
-            this.rb15001To20000.Name = "rb15001To20000";
-            this.rb15001To20000.Size = new System.Drawing.Size(165, 25);
-            this.rb15001To20000.TabIndex = 165;
-            this.rb15001To20000.Text = "P15,001 to P20,000";
-            this.rb15001To20000.UseVisualStyleBackColor = true;
-            // 
-            // rb10001To15000
-            // 
-            this.rb10001To15000.AutoSize = true;
-            this.rb10001To15000.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rb10001To15000.Location = new System.Drawing.Point(323, 432);
-            this.rb10001To15000.Margin = new System.Windows.Forms.Padding(2);
-            this.rb10001To15000.Name = "rb10001To15000";
-            this.rb10001To15000.Size = new System.Drawing.Size(165, 25);
-            this.rb10001To15000.TabIndex = 164;
-            this.rb10001To15000.Text = "P10,001 to P15,000";
-            this.rb10001To15000.UseVisualStyleBackColor = true;
-            // 
-            // rb5000To10000
-            // 
-            this.rb5000To10000.AutoSize = true;
-            this.rb5000To10000.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rb5000To10000.Location = new System.Drawing.Point(135, 461);
-            this.rb5000To10000.Margin = new System.Windows.Forms.Padding(2);
-            this.rb5000To10000.Name = "rb5000To10000";
-            this.rb5000To10000.Size = new System.Drawing.Size(156, 25);
-            this.rb5000To10000.TabIndex = 163;
-            this.rb5000To10000.Text = "P5,001 to P10,000";
-            this.rb5000To10000.UseVisualStyleBackColor = true;
-            // 
-            // rbBelow5000
-            // 
-            this.rbBelow5000.AutoSize = true;
-            this.rbBelow5000.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbBelow5000.Location = new System.Drawing.Point(135, 432);
-            this.rbBelow5000.Margin = new System.Windows.Forms.Padding(2);
-            this.rbBelow5000.Name = "rbBelow5000";
-            this.rbBelow5000.Size = new System.Drawing.Size(123, 25);
-            this.rbBelow5000.TabIndex = 162;
-            this.rbBelow5000.Text = "Below P5,000";
-            this.rbBelow5000.UseVisualStyleBackColor = true;
-            // 
             // label32
             // 
             this.label32.AutoSize = true;
             this.label32.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label32.Location = new System.Drawing.Point(91, 394);
+            this.label32.Location = new System.Drawing.Point(91, 362);
             this.label32.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(268, 21);
             this.label32.TabIndex = 161;
             this.label32.Text = "Estimated Monthly Income of Parents";
             // 
-            // rbMotherWithAnotherPartner
-            // 
-            this.rbMotherWithAnotherPartner.AutoSize = true;
-            this.rbMotherWithAnotherPartner.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbMotherWithAnotherPartner.Location = new System.Drawing.Point(635, 359);
-            this.rbMotherWithAnotherPartner.Margin = new System.Windows.Forms.Padding(2);
-            this.rbMotherWithAnotherPartner.Name = "rbMotherWithAnotherPartner";
-            this.rbMotherWithAnotherPartner.Size = new System.Drawing.Size(227, 25);
-            this.rbMotherWithAnotherPartner.TabIndex = 160;
-            this.rbMotherWithAnotherPartner.Text = "Mother with another partner";
-            this.rbMotherWithAnotherPartner.UseVisualStyleBackColor = true;
-            // 
-            // rbMotherWidowed
-            // 
-            this.rbMotherWidowed.AutoSize = true;
-            this.rbMotherWidowed.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbMotherWidowed.Location = new System.Drawing.Point(737, 331);
-            this.rbMotherWidowed.Margin = new System.Windows.Forms.Padding(2);
-            this.rbMotherWidowed.Name = "rbMotherWidowed";
-            this.rbMotherWidowed.Size = new System.Drawing.Size(95, 25);
-            this.rbMotherWidowed.TabIndex = 159;
-            this.rbMotherWidowed.Text = "Widowed";
-            this.rbMotherWidowed.UseVisualStyleBackColor = true;
-            // 
-            // rbMotherAnnulled
-            // 
-            this.rbMotherAnnulled.AutoSize = true;
-            this.rbMotherAnnulled.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbMotherAnnulled.Location = new System.Drawing.Point(635, 328);
-            this.rbMotherAnnulled.Margin = new System.Windows.Forms.Padding(2);
-            this.rbMotherAnnulled.Name = "rbMotherAnnulled";
-            this.rbMotherAnnulled.Size = new System.Drawing.Size(91, 25);
-            this.rbMotherAnnulled.TabIndex = 158;
-            this.rbMotherAnnulled.Text = "Annulled";
-            this.rbMotherAnnulled.UseVisualStyleBackColor = true;
-            // 
-            // rbFatherWithAnotherPartner
-            // 
-            this.rbFatherWithAnotherPartner.AutoSize = true;
-            this.rbFatherWithAnotherPartner.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbFatherWithAnotherPartner.Location = new System.Drawing.Point(328, 359);
-            this.rbFatherWithAnotherPartner.Margin = new System.Windows.Forms.Padding(2);
-            this.rbFatherWithAnotherPartner.Name = "rbFatherWithAnotherPartner";
-            this.rbFatherWithAnotherPartner.Size = new System.Drawing.Size(219, 25);
-            this.rbFatherWithAnotherPartner.TabIndex = 157;
-            this.rbFatherWithAnotherPartner.Text = "Father with another partner";
-            this.rbFatherWithAnotherPartner.UseVisualStyleBackColor = true;
-            // 
-            // rbFatherSeparated
-            // 
-            this.rbFatherSeparated.AutoSize = true;
-            this.rbFatherSeparated.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbFatherSeparated.Location = new System.Drawing.Point(466, 328);
-            this.rbFatherSeparated.Margin = new System.Windows.Forms.Padding(2);
-            this.rbFatherSeparated.Name = "rbFatherSeparated";
-            this.rbFatherSeparated.Size = new System.Drawing.Size(99, 25);
-            this.rbFatherSeparated.TabIndex = 156;
-            this.rbFatherSeparated.Text = "Separated";
-            this.rbFatherSeparated.UseVisualStyleBackColor = true;
-            // 
-            // rbFatherLivingTogether
-            // 
-            this.rbFatherLivingTogether.AutoSize = true;
-            this.rbFatherLivingTogether.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbFatherLivingTogether.Location = new System.Drawing.Point(328, 328);
-            this.rbFatherLivingTogether.Margin = new System.Windows.Forms.Padding(2);
-            this.rbFatherLivingTogether.Name = "rbFatherLivingTogether";
-            this.rbFatherLivingTogether.Size = new System.Drawing.Size(134, 25);
-            this.rbFatherLivingTogether.TabIndex = 155;
-            this.rbFatherLivingTogether.Text = "Living together";
-            this.rbFatherLivingTogether.UseVisualStyleBackColor = true;
-            // 
-            // rbFatherWorkingAbroadNo
-            // 
-            this.rbFatherWorkingAbroadNo.AutoSize = true;
-            this.rbFatherWorkingAbroadNo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbFatherWorkingAbroadNo.Location = new System.Drawing.Point(427, 300);
-            this.rbFatherWorkingAbroadNo.Margin = new System.Windows.Forms.Padding(2);
-            this.rbFatherWorkingAbroadNo.Name = "rbFatherWorkingAbroadNo";
-            this.rbFatherWorkingAbroadNo.Size = new System.Drawing.Size(50, 25);
-            this.rbFatherWorkingAbroadNo.TabIndex = 154;
-            this.rbFatherWorkingAbroadNo.Text = "No";
-            this.rbFatherWorkingAbroadNo.UseVisualStyleBackColor = true;
-            // 
-            // rbFatherWorkingAbroadYes
-            // 
-            this.rbFatherWorkingAbroadYes.AutoSize = true;
-            this.rbFatherWorkingAbroadYes.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbFatherWorkingAbroadYes.Location = new System.Drawing.Point(328, 300);
-            this.rbFatherWorkingAbroadYes.Margin = new System.Windows.Forms.Padding(2);
-            this.rbFatherWorkingAbroadYes.Name = "rbFatherWorkingAbroadYes";
-            this.rbFatherWorkingAbroadYes.Size = new System.Drawing.Size(52, 25);
-            this.rbFatherWorkingAbroadYes.TabIndex = 153;
-            this.rbFatherWorkingAbroadYes.Text = "Yes";
-            this.rbFatherWorkingAbroadYes.UseVisualStyleBackColor = true;
-            // 
-            // checkBox4
-            // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox4.Location = new System.Drawing.Point(659, 55);
-            this.checkBox4.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(71, 25);
-            this.checkBox4.TabIndex = 152;
-            this.checkBox4.Text = "Living";
-            this.checkBox4.UseVisualStyleBackColor = true;
-            // 
-            // checkBox3
-            // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox3.Location = new System.Drawing.Point(411, 55);
-            this.checkBox3.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(95, 25);
-            this.checkBox3.TabIndex = 151;
-            this.checkBox3.Text = "Deceased";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            // 
-            // checkBox9
-            // 
-            this.checkBox9.AutoSize = true;
-            this.checkBox9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox9.Location = new System.Drawing.Point(737, 55);
-            this.checkBox9.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox9.Name = "checkBox9";
-            this.checkBox9.Size = new System.Drawing.Size(95, 25);
-            this.checkBox9.TabIndex = 150;
-            this.checkBox9.Text = "Deceased";
-            this.checkBox9.UseVisualStyleBackColor = true;
-            // 
-            // checkBox11
-            // 
-            this.checkBox11.AutoSize = true;
-            this.checkBox11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox11.Location = new System.Drawing.Point(329, 55);
-            this.checkBox11.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox11.Name = "checkBox11";
-            this.checkBox11.Size = new System.Drawing.Size(71, 25);
-            this.checkBox11.TabIndex = 149;
-            this.checkBox11.Text = "Living";
-            this.checkBox11.UseVisualStyleBackColor = true;
-            // 
             // label33
             // 
             this.label33.AutoSize = true;
             this.label33.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label33.Location = new System.Drawing.Point(655, 16);
+            this.label33.Location = new System.Drawing.Point(655, -16);
             this.label33.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(76, 21);
@@ -1749,7 +1491,7 @@
             // 
             this.label34.AutoSize = true;
             this.label34.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label34.Location = new System.Drawing.Point(325, 16);
+            this.label34.Location = new System.Drawing.Point(325, -16);
             this.label34.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(67, 21);
@@ -1760,7 +1502,7 @@
             // 
             this.label35.AutoSize = true;
             this.label35.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label35.Location = new System.Drawing.Point(95, 323);
+            this.label35.Location = new System.Drawing.Point(94, 310);
             this.label35.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(178, 21);
@@ -1771,7 +1513,7 @@
             // 
             this.label36.AutoSize = true;
             this.label36.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label36.Location = new System.Drawing.Point(107, 296);
+            this.label36.Location = new System.Drawing.Point(107, 264);
             this.label36.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(124, 21);
@@ -1782,7 +1524,7 @@
             // 
             this.label37.AutoSize = true;
             this.label37.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label37.Location = new System.Drawing.Point(103, 168);
+            this.label37.Location = new System.Drawing.Point(103, 136);
             this.label37.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(86, 21);
@@ -1793,7 +1535,7 @@
             // 
             this.label38.AutoSize = true;
             this.label38.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label38.Location = new System.Drawing.Point(99, 233);
+            this.label38.Location = new System.Drawing.Point(99, 201);
             this.label38.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(150, 21);
@@ -1804,7 +1546,7 @@
             // 
             this.label39.AutoSize = true;
             this.label39.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label39.Location = new System.Drawing.Point(101, 138);
+            this.label39.Location = new System.Drawing.Point(101, 106);
             this.label39.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label39.Name = "label39";
             this.label39.Size = new System.Drawing.Size(91, 21);
@@ -1814,18 +1556,19 @@
             // txtFatherPhone
             // 
             this.txtFatherPhone.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFatherPhone.Location = new System.Drawing.Point(329, 133);
+            this.txtFatherPhone.Location = new System.Drawing.Point(329, 101);
             this.txtFatherPhone.Margin = new System.Windows.Forms.Padding(2);
             this.txtFatherPhone.Name = "txtFatherPhone";
             this.txtFatherPhone.Size = new System.Drawing.Size(217, 29);
             this.txtFatherPhone.TabIndex = 141;
+            this.txtFatherPhone.TextChanged += new System.EventHandler(this.txtFatherPhone_TextChanged);
             this.txtFatherPhone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFatherPhone_KeyPress);
             // 
             // label40
             // 
             this.label40.AutoSize = true;
             this.label40.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label40.Location = new System.Drawing.Point(101, 200);
+            this.label40.Location = new System.Drawing.Point(101, 168);
             this.label40.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(171, 21);
@@ -1836,7 +1579,7 @@
             // 
             this.label41.AutoSize = true;
             this.label41.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label41.Location = new System.Drawing.Point(103, 266);
+            this.label41.Location = new System.Drawing.Point(103, 234);
             this.label41.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(133, 21);
@@ -1847,7 +1590,7 @@
             // 
             this.label42.AutoSize = true;
             this.label42.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label42.Location = new System.Drawing.Point(101, 106);
+            this.label42.Location = new System.Drawing.Point(101, 74);
             this.label42.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(79, 21);
@@ -1857,12 +1600,417 @@
             // txtFatherName
             // 
             this.txtFatherName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFatherName.Location = new System.Drawing.Point(329, 101);
+            this.txtFatherName.Location = new System.Drawing.Point(329, 69);
             this.txtFatherName.Margin = new System.Windows.Forms.Padding(2);
             this.txtFatherName.Name = "txtFatherName";
             this.txtFatherName.Size = new System.Drawing.Size(218, 29);
             this.txtFatherName.TabIndex = 137;
             this.txtFatherName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFatherName_KeyPress);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.rbliving);
+            this.groupBox1.Controls.Add(this.rbdeceased);
+            this.groupBox1.Location = new System.Drawing.Point(323, 8);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(223, 56);
+            this.groupBox1.TabIndex = 224;
+            this.groupBox1.TabStop = false;
+            // 
+            // rbliving
+            // 
+            this.rbliving.AutoSize = true;
+            this.rbliving.Location = new System.Drawing.Point(9, 20);
+            this.rbliving.Name = "rbliving";
+            this.rbliving.Size = new System.Drawing.Size(70, 25);
+            this.rbliving.TabIndex = 198;
+            this.rbliving.TabStop = true;
+            this.rbliving.Text = "Living";
+            this.rbliving.UseVisualStyleBackColor = true;
+            // 
+            // rbdeceased
+            // 
+            this.rbdeceased.AutoSize = true;
+            this.rbdeceased.Location = new System.Drawing.Point(111, 20);
+            this.rbdeceased.Name = "rbdeceased";
+            this.rbdeceased.Size = new System.Drawing.Size(94, 25);
+            this.rbdeceased.TabIndex = 199;
+            this.rbdeceased.TabStop = true;
+            this.rbdeceased.Text = "Deceased";
+            this.rbdeceased.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.mrbliving);
+            this.groupBox2.Controls.Add(this.mrbdeceased);
+            this.groupBox2.Location = new System.Drawing.Point(630, 8);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(217, 56);
+            this.groupBox2.TabIndex = 225;
+            this.groupBox2.TabStop = false;
+            // 
+            // mrbliving
+            // 
+            this.mrbliving.AutoSize = true;
+            this.mrbliving.Location = new System.Drawing.Point(12, 20);
+            this.mrbliving.Name = "mrbliving";
+            this.mrbliving.Size = new System.Drawing.Size(70, 25);
+            this.mrbliving.TabIndex = 200;
+            this.mrbliving.TabStop = true;
+            this.mrbliving.Text = "Living";
+            this.mrbliving.UseVisualStyleBackColor = true;
+            // 
+            // mrbdeceased
+            // 
+            this.mrbdeceased.AutoSize = true;
+            this.mrbdeceased.Location = new System.Drawing.Point(101, 20);
+            this.mrbdeceased.Name = "mrbdeceased";
+            this.mrbdeceased.Size = new System.Drawing.Size(94, 25);
+            this.mrbdeceased.TabIndex = 201;
+            this.mrbdeceased.TabStop = true;
+            this.mrbdeceased.Text = "Deceased";
+            this.mrbdeceased.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.rbFatherWorkingAbroadNo);
+            this.groupBox3.Controls.Add(this.rbFatherWorkingAbroadYes);
+            this.groupBox3.Location = new System.Drawing.Point(308, 235);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(239, 65);
+            this.groupBox3.TabIndex = 226;
+            this.groupBox3.TabStop = false;
+            // 
+            // rbFatherWorkingAbroadNo
+            // 
+            this.rbFatherWorkingAbroadNo.AutoSize = true;
+            this.rbFatherWorkingAbroadNo.Location = new System.Drawing.Point(99, 30);
+            this.rbFatherWorkingAbroadNo.Name = "rbFatherWorkingAbroadNo";
+            this.rbFatherWorkingAbroadNo.Size = new System.Drawing.Size(49, 25);
+            this.rbFatherWorkingAbroadNo.TabIndex = 203;
+            this.rbFatherWorkingAbroadNo.TabStop = true;
+            this.rbFatherWorkingAbroadNo.Text = "No";
+            this.rbFatherWorkingAbroadNo.UseVisualStyleBackColor = true;
+            // 
+            // rbFatherWorkingAbroadYes
+            // 
+            this.rbFatherWorkingAbroadYes.AutoSize = true;
+            this.rbFatherWorkingAbroadYes.Location = new System.Drawing.Point(22, 30);
+            this.rbFatherWorkingAbroadYes.Name = "rbFatherWorkingAbroadYes";
+            this.rbFatherWorkingAbroadYes.Size = new System.Drawing.Size(51, 25);
+            this.rbFatherWorkingAbroadYes.TabIndex = 202;
+            this.rbFatherWorkingAbroadYes.TabStop = true;
+            this.rbFatherWorkingAbroadYes.Text = "Yes";
+            this.rbFatherWorkingAbroadYes.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.rbMotherWorkingAbroadYes);
+            this.groupBox4.Location = new System.Drawing.Point(615, 235);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(232, 65);
+            this.groupBox4.TabIndex = 227;
+            this.groupBox4.TabStop = false;
+            // 
+            // rbMotherWorkingAbroadYes
+            // 
+            this.rbMotherWorkingAbroadYes.AutoSize = true;
+            this.rbMotherWorkingAbroadYes.Location = new System.Drawing.Point(17, 27);
+            this.rbMotherWorkingAbroadYes.Name = "rbMotherWorkingAbroadYes";
+            this.rbMotherWorkingAbroadYes.Size = new System.Drawing.Size(51, 25);
+            this.rbMotherWorkingAbroadYes.TabIndex = 204;
+            this.rbMotherWorkingAbroadYes.TabStop = true;
+            this.rbMotherWorkingAbroadYes.Text = "Yes";
+            this.rbMotherWorkingAbroadYes.UseVisualStyleBackColor = true;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.rbFatherSeparated);
+            this.groupBox5.Controls.Add(this.rbFatherLivingTogether);
+            this.groupBox5.Controls.Add(this.rbFatherWithAnotherPartner);
+            this.groupBox5.Location = new System.Drawing.Point(308, 296);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(248, 90);
+            this.groupBox5.TabIndex = 228;
+            this.groupBox5.TabStop = false;
+            // 
+            // rbFatherSeparated
+            // 
+            this.rbFatherSeparated.AutoSize = true;
+            this.rbFatherSeparated.Location = new System.Drawing.Point(144, 14);
+            this.rbFatherSeparated.Name = "rbFatherSeparated";
+            this.rbFatherSeparated.Size = new System.Drawing.Size(98, 25);
+            this.rbFatherSeparated.TabIndex = 207;
+            this.rbFatherSeparated.TabStop = true;
+            this.rbFatherSeparated.Text = "Separated";
+            this.rbFatherSeparated.UseVisualStyleBackColor = true;
+            // 
+            // rbFatherLivingTogether
+            // 
+            this.rbFatherLivingTogether.AutoSize = true;
+            this.rbFatherLivingTogether.Location = new System.Drawing.Point(6, 14);
+            this.rbFatherLivingTogether.Name = "rbFatherLivingTogether";
+            this.rbFatherLivingTogether.Size = new System.Drawing.Size(134, 25);
+            this.rbFatherLivingTogether.TabIndex = 206;
+            this.rbFatherLivingTogether.TabStop = true;
+            this.rbFatherLivingTogether.Text = "Living Together";
+            this.rbFatherLivingTogether.UseVisualStyleBackColor = true;
+            // 
+            // rbFatherWithAnotherPartner
+            // 
+            this.rbFatherWithAnotherPartner.AutoSize = true;
+            this.rbFatherWithAnotherPartner.Location = new System.Drawing.Point(6, 45);
+            this.rbFatherWithAnotherPartner.Name = "rbFatherWithAnotherPartner";
+            this.rbFatherWithAnotherPartner.Size = new System.Drawing.Size(175, 25);
+            this.rbFatherWithAnotherPartner.TabIndex = 210;
+            this.rbFatherWithAnotherPartner.TabStop = true;
+            this.rbFatherWithAnotherPartner.Text = "With Another Partner";
+            this.rbFatherWithAnotherPartner.UseVisualStyleBackColor = true;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.rbMotherWithAnotherPartner);
+            this.groupBox6.Controls.Add(this.rbMotherAnnulled);
+            this.groupBox6.Controls.Add(this.rbMotherWidowed);
+            this.groupBox6.Location = new System.Drawing.Point(616, 296);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(255, 90);
+            this.groupBox6.TabIndex = 229;
+            this.groupBox6.TabStop = false;
+            // 
+            // rbMotherWithAnotherPartner
+            // 
+            this.rbMotherWithAnotherPartner.AutoSize = true;
+            this.rbMotherWithAnotherPartner.Location = new System.Drawing.Point(14, 45);
+            this.rbMotherWithAnotherPartner.Name = "rbMotherWithAnotherPartner";
+            this.rbMotherWithAnotherPartner.Size = new System.Drawing.Size(175, 25);
+            this.rbMotherWithAnotherPartner.TabIndex = 211;
+            this.rbMotherWithAnotherPartner.TabStop = true;
+            this.rbMotherWithAnotherPartner.Text = "With Another Partner";
+            this.rbMotherWithAnotherPartner.UseVisualStyleBackColor = true;
+            // 
+            // rbMotherAnnulled
+            // 
+            this.rbMotherAnnulled.AutoSize = true;
+            this.rbMotherAnnulled.Location = new System.Drawing.Point(14, 16);
+            this.rbMotherAnnulled.Name = "rbMotherAnnulled";
+            this.rbMotherAnnulled.Size = new System.Drawing.Size(90, 25);
+            this.rbMotherAnnulled.TabIndex = 208;
+            this.rbMotherAnnulled.TabStop = true;
+            this.rbMotherAnnulled.Text = "Annulled";
+            this.rbMotherAnnulled.UseVisualStyleBackColor = true;
+            // 
+            // rbMotherWidowed
+            // 
+            this.rbMotherWidowed.AutoSize = true;
+            this.rbMotherWidowed.Location = new System.Drawing.Point(115, 16);
+            this.rbMotherWidowed.Name = "rbMotherWidowed";
+            this.rbMotherWidowed.Size = new System.Drawing.Size(94, 25);
+            this.rbMotherWidowed.TabIndex = 209;
+            this.rbMotherWidowed.TabStop = true;
+            this.rbMotherWidowed.Text = "Widowed";
+            this.rbMotherWidowed.UseVisualStyleBackColor = true;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.rb5000To10000);
+            this.groupBox7.Controls.Add(this.rb15001To20000);
+            this.groupBox7.Controls.Add(this.rb20001To25000);
+            this.groupBox7.Controls.Add(this.rbBelow5000);
+            this.groupBox7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.groupBox7.Location = new System.Drawing.Point(111, 372);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(601, 94);
+            this.groupBox7.TabIndex = 230;
+            this.groupBox7.TabStop = false;
+            // 
+            // rb5000To10000
+            // 
+            this.rb5000To10000.AutoSize = true;
+            this.rb5000To10000.Location = new System.Drawing.Point(24, 58);
+            this.rb5000To10000.Name = "rb5000To10000";
+            this.rb5000To10000.Size = new System.Drawing.Size(149, 25);
+            this.rb5000To10000.TabIndex = 215;
+            this.rb5000To10000.TabStop = true;
+            this.rb5000To10000.Text = "P5000 to P10000";
+            this.rb5000To10000.UseVisualStyleBackColor = true;
+            // 
+            // rb15001To20000
+            // 
+            this.rb15001To20000.AutoSize = true;
+            this.rb15001To20000.Location = new System.Drawing.Point(212, 58);
+            this.rb15001To20000.Name = "rb15001To20000";
+            this.rb15001To20000.Size = new System.Drawing.Size(158, 25);
+            this.rb15001To20000.TabIndex = 216;
+            this.rb15001To20000.TabStop = true;
+            this.rb15001To20000.Text = "P15001 to P20000";
+            this.rb15001To20000.UseVisualStyleBackColor = true;
+            // 
+            // rb20001To25000
+            // 
+            this.rb20001To25000.AutoSize = true;
+            this.rb20001To25000.Location = new System.Drawing.Point(437, 28);
+            this.rb20001To25000.Name = "rb20001To25000";
+            this.rb20001To25000.Size = new System.Drawing.Size(149, 25);
+            this.rb20001To25000.TabIndex = 214;
+            this.rb20001To25000.TabStop = true;
+            this.rb20001To25000.Text = "P20001 to 25000";
+            this.rb20001To25000.UseVisualStyleBackColor = true;
+            // 
+            // rbBelow5000
+            // 
+            this.rbBelow5000.AutoSize = true;
+            this.rbBelow5000.Location = new System.Drawing.Point(24, 27);
+            this.rbBelow5000.Name = "rbBelow5000";
+            this.rbBelow5000.Size = new System.Drawing.Size(119, 25);
+            this.rbBelow5000.TabIndex = 212;
+            this.rbBelow5000.TabStop = true;
+            this.rbBelow5000.Text = "Below P5000";
+            this.rbBelow5000.UseVisualStyleBackColor = true;
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.rbNuclear);
+            this.groupBox8.Controls.Add(this.label28);
+            this.groupBox8.Controls.Add(this.rbExtended);
+            this.groupBox8.Controls.Add(this.label24);
+            this.groupBox8.Location = new System.Drawing.Point(123, 517);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(258, 78);
+            this.groupBox8.TabIndex = 231;
+            this.groupBox8.TabStop = false;
+            // 
+            // rbNuclear
+            // 
+            this.rbNuclear.AutoSize = true;
+            this.rbNuclear.Location = new System.Drawing.Point(121, 19);
+            this.rbNuclear.Name = "rbNuclear";
+            this.rbNuclear.Size = new System.Drawing.Size(82, 25);
+            this.rbNuclear.TabIndex = 218;
+            this.rbNuclear.TabStop = true;
+            this.rbNuclear.Text = "Nuclear";
+            this.rbNuclear.UseVisualStyleBackColor = true;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label28.Location = new System.Drawing.Point(27, 19);
+            this.label28.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(59, 21);
+            this.label28.TabIndex = 174;
+            this.label28.Text = "Family ";
+            // 
+            // rbExtended
+            // 
+            this.rbExtended.AutoSize = true;
+            this.rbExtended.Location = new System.Drawing.Point(121, 45);
+            this.rbExtended.Name = "rbExtended";
+            this.rbExtended.Size = new System.Drawing.Size(91, 25);
+            this.rbExtended.TabIndex = 219;
+            this.rbExtended.TabStop = true;
+            this.rbExtended.Text = "Extended";
+            this.rbExtended.UseVisualStyleBackColor = true;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Location = new System.Drawing.Point(27, 45);
+            this.label24.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(76, 21);
+            this.label24.TabIndex = 180;
+            this.label24.Text = "Structure:";
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.label27);
+            this.groupBox9.Controls.Add(this.rbIndigenousYes);
+            this.groupBox9.Controls.Add(this.rbIndigenousNo);
+            this.groupBox9.Controls.Add(this.label25);
+            this.groupBox9.Location = new System.Drawing.Point(407, 517);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(257, 78);
+            this.groupBox9.TabIndex = 232;
+            this.groupBox9.TabStop = false;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.Location = new System.Drawing.Point(15, 19);
+            this.label27.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(134, 21);
+            this.label27.TabIndex = 177;
+            this.label27.Text = "Do you belong to ";
+            // 
+            // rbIndigenousYes
+            // 
+            this.rbIndigenousYes.AutoSize = true;
+            this.rbIndigenousYes.Location = new System.Drawing.Point(190, 19);
+            this.rbIndigenousYes.Name = "rbIndigenousYes";
+            this.rbIndigenousYes.Size = new System.Drawing.Size(51, 25);
+            this.rbIndigenousYes.TabIndex = 220;
+            this.rbIndigenousYes.TabStop = true;
+            this.rbIndigenousYes.Text = "Yes";
+            this.rbIndigenousYes.UseVisualStyleBackColor = true;
+            // 
+            // rbIndigenousNo
+            // 
+            this.rbIndigenousNo.AutoSize = true;
+            this.rbIndigenousNo.Location = new System.Drawing.Point(192, 45);
+            this.rbIndigenousNo.Name = "rbIndigenousNo";
+            this.rbIndigenousNo.Size = new System.Drawing.Size(49, 25);
+            this.rbIndigenousNo.TabIndex = 221;
+            this.rbIndigenousNo.TabStop = true;
+            this.rbIndigenousNo.Text = "No";
+            this.rbIndigenousNo.UseVisualStyleBackColor = true;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.Location = new System.Drawing.Point(15, 47);
+            this.label25.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(161, 21);
+            this.label25.TabIndex = 179;
+            this.label25.Text = "an indigenous group?";
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.rbBeneficiaryYes);
+            this.groupBox10.Controls.Add(this.rbBeneficiaryNo);
+            this.groupBox10.Location = new System.Drawing.Point(680, 517);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(225, 81);
+            this.groupBox10.TabIndex = 233;
+            this.groupBox10.TabStop = false;
+            // 
+            // rbBeneficiaryYes
+            // 
+            this.rbBeneficiaryYes.AutoSize = true;
+            this.rbBeneficiaryYes.Location = new System.Drawing.Point(143, 19);
+            this.rbBeneficiaryYes.Name = "rbBeneficiaryYes";
+            this.rbBeneficiaryYes.Size = new System.Drawing.Size(51, 25);
+            this.rbBeneficiaryYes.TabIndex = 222;
+            this.rbBeneficiaryYes.TabStop = true;
+            this.rbBeneficiaryYes.Text = "Yes";
+            this.rbBeneficiaryYes.UseVisualStyleBackColor = true;
+            // 
+            // rbBeneficiaryNo
+            // 
+            this.rbBeneficiaryNo.AutoSize = true;
+            this.rbBeneficiaryNo.Location = new System.Drawing.Point(143, 45);
+            this.rbBeneficiaryNo.Name = "rbBeneficiaryNo";
+            this.rbBeneficiaryNo.Size = new System.Drawing.Size(49, 25);
+            this.rbBeneficiaryNo.TabIndex = 223;
+            this.rbBeneficiaryNo.TabStop = true;
+            this.rbBeneficiaryNo.Text = "No";
+            this.rbBeneficiaryNo.UseVisualStyleBackColor = true;
             // 
             // tabPage7
             // 
@@ -1872,7 +2020,7 @@
             this.tabPage7.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage7.Size = new System.Drawing.Size(956, 579);
+            this.tabPage7.Size = new System.Drawing.Size(956, 598);
             this.tabPage7.TabIndex = 6;
             this.tabPage7.Text = "D. Siblings Data";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -1933,7 +2081,7 @@
             this.dgvSiblings.Name = "dgvSiblings";
             this.dgvSiblings.RowHeadersWidth = 51;
             this.dgvSiblings.RowTemplate.Height = 24;
-            this.dgvSiblings.Size = new System.Drawing.Size(956, 471);
+            this.dgvSiblings.Size = new System.Drawing.Size(956, 437);
             this.dgvSiblings.TabIndex = 250;
             // 
             // Name
@@ -1982,7 +2130,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 30);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(956, 579);
+            this.tabPage3.Size = new System.Drawing.Size(956, 598);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "E. Educational Data";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -2094,6 +2242,7 @@
             this.Membership.Name = "Membership";
             this.Membership.Size = new System.Drawing.Size(413, 29);
             this.Membership.TabIndex = 275;
+            this.Membership.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Membership_KeyPress);
             // 
             // label65
             // 
@@ -2114,6 +2263,7 @@
             this.SupportForStudies.Name = "SupportForStudies";
             this.SupportForStudies.Size = new System.Drawing.Size(669, 29);
             this.SupportForStudies.TabIndex = 273;
+            this.SupportForStudies.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SupportForStudies_KeyPress);
             // 
             // WhyLeastFavoriteSubject
             // 
@@ -2123,6 +2273,7 @@
             this.WhyLeastFavoriteSubject.Name = "WhyLeastFavoriteSubject";
             this.WhyLeastFavoriteSubject.Size = new System.Drawing.Size(350, 29);
             this.WhyLeastFavoriteSubject.TabIndex = 272;
+            this.WhyLeastFavoriteSubject.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.WhyLeastFavoriteSubject_KeyPress);
             // 
             // label63
             // 
@@ -2154,6 +2305,7 @@
             this.LeastFavoriteSubject.Name = "LeastFavoriteSubject";
             this.LeastFavoriteSubject.Size = new System.Drawing.Size(233, 29);
             this.LeastFavoriteSubject.TabIndex = 269;
+            this.LeastFavoriteSubject.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.LeastFavoriteSubject_KeyPress);
             // 
             // WhyFavoriteSubject
             // 
@@ -2163,6 +2315,7 @@
             this.WhyFavoriteSubject.Name = "WhyFavoriteSubject";
             this.WhyFavoriteSubject.Size = new System.Drawing.Size(350, 29);
             this.WhyFavoriteSubject.TabIndex = 268;
+            this.WhyFavoriteSubject.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.WhyFavoriteSubject_KeyPress);
             // 
             // label62
             // 
@@ -2194,6 +2347,7 @@
             this.FavoriteSubject.Name = "FavoriteSubject";
             this.FavoriteSubject.Size = new System.Drawing.Size(233, 29);
             this.FavoriteSubject.TabIndex = 265;
+            this.FavoriteSubject.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FavoriteSubject_KeyPress);
             // 
             // textBox94
             // 
@@ -2203,6 +2357,7 @@
             this.textBox94.Name = "textBox94";
             this.textBox94.Size = new System.Drawing.Size(258, 29);
             this.textBox94.TabIndex = 264;
+            this.textBox94.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox94_KeyPress);
             // 
             // label60
             // 
@@ -2234,6 +2389,7 @@
             this.CollegeIfTransferee.Name = "CollegeIfTransferee";
             this.CollegeIfTransferee.Size = new System.Drawing.Size(377, 29);
             this.CollegeIfTransferee.TabIndex = 261;
+            this.CollegeIfTransferee.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CollegeIfTransferee_KeyPress);
             // 
             // textBox92
             // 
@@ -2272,6 +2428,7 @@
             this.VocationalTechnical.Name = "VocationalTechnical";
             this.VocationalTechnical.Size = new System.Drawing.Size(317, 29);
             this.VocationalTechnical.TabIndex = 257;
+            this.VocationalTechnical.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.VocationalTechnical_KeyPress);
             // 
             // SHSAverageGrade
             // 
@@ -2281,6 +2438,7 @@
             this.SHSAverageGrade.Name = "SHSAverageGrade";
             this.SHSAverageGrade.Size = new System.Drawing.Size(111, 29);
             this.SHSAverageGrade.TabIndex = 256;
+            this.SHSAverageGrade.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SHSAverageGrade_KeyPress);
             // 
             // label57
             // 
@@ -2323,6 +2481,7 @@
             this.StrandCompleted.Name = "StrandCompleted";
             this.StrandCompleted.Size = new System.Drawing.Size(338, 29);
             this.StrandCompleted.TabIndex = 252;
+            this.StrandCompleted.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.StrandCompleted_KeyPress);
             // 
             // label54
             // 
@@ -2352,6 +2511,7 @@
             this.SeniorHighHonorAwards.Name = "SeniorHighHonorAwards";
             this.SeniorHighHonorAwards.Size = new System.Drawing.Size(270, 29);
             this.SeniorHighHonorAwards.TabIndex = 249;
+            this.SeniorHighHonorAwards.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SeniorHighHonorAwards_KeyPress);
             // 
             // SeniorHighSchool
             // 
@@ -2361,6 +2521,7 @@
             this.SeniorHighSchool.Name = "SeniorHighSchool";
             this.SeniorHighSchool.Size = new System.Drawing.Size(338, 29);
             this.SeniorHighSchool.TabIndex = 248;
+            this.SeniorHighSchool.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SeniorHighSchool_KeyPress);
             // 
             // label53
             // 
@@ -2390,6 +2551,7 @@
             this.JuniorHighHonorAwards.Name = "JuniorHighHonorAwards";
             this.JuniorHighHonorAwards.Size = new System.Drawing.Size(270, 29);
             this.JuniorHighHonorAwards.TabIndex = 245;
+            this.JuniorHighHonorAwards.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.JuniorHighHonorAwards_KeyPress);
             // 
             // HighSchool
             // 
@@ -2399,6 +2561,7 @@
             this.HighSchool.Name = "HighSchool";
             this.HighSchool.Size = new System.Drawing.Size(338, 29);
             this.HighSchool.TabIndex = 244;
+            this.HighSchool.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HighSchool_KeyPress);
             // 
             // label52
             // 
@@ -2428,6 +2591,7 @@
             this.ElementaryHonorAwards.Name = "ElementaryHonorAwards";
             this.ElementaryHonorAwards.Size = new System.Drawing.Size(270, 29);
             this.ElementaryHonorAwards.TabIndex = 241;
+            this.ElementaryHonorAwards.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ElementaryHonorAwards_KeyPress);
             // 
             // Elementary
             // 
@@ -2437,6 +2601,7 @@
             this.Elementary.Name = "Elementary";
             this.Elementary.Size = new System.Drawing.Size(394, 29);
             this.Elementary.TabIndex = 240;
+            this.Elementary.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Elementary_KeyPress);
             // 
             // label51
             // 
@@ -2504,7 +2669,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 30);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(956, 579);
+            this.tabPage4.Size = new System.Drawing.Size(956, 598);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "F. Healty Data";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -2693,6 +2858,7 @@
             this.txtHealthProblemsOther.Name = "txtHealthProblemsOther";
             this.txtHealthProblemsOther.Size = new System.Drawing.Size(258, 29);
             this.txtHealthProblemsOther.TabIndex = 243;
+            this.txtHealthProblemsOther.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtHealthProblemsOther_KeyPress);
             // 
             // label70
             // 
@@ -2855,7 +3021,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 30);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(956, 579);
+            this.tabPage5.Size = new System.Drawing.Size(956, 598);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "G. Additional Profile";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -2863,12 +3029,13 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.Green;
+            this.button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.button1.Location = new System.Drawing.Point(829, 519);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(122, 58);
             this.button1.TabIndex = 265;
-            this.button1.Text = "button1";
+            this.button1.Text = "DONE";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -2905,6 +3072,7 @@
             this.txtScholarshipName.Name = "txtScholarshipName";
             this.txtScholarshipName.Size = new System.Drawing.Size(351, 29);
             this.txtScholarshipName.TabIndex = 261;
+            this.txtScholarshipName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtScholarshipName_KeyPress);
             // 
             // label78
             // 
@@ -3066,6 +3234,7 @@
             this.textBox103.Name = "textBox103";
             this.textBox103.Size = new System.Drawing.Size(155, 29);
             this.textBox103.TabIndex = 245;
+            this.textBox103.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox103_KeyPress);
             // 
             // label74
             // 
@@ -3169,15 +3338,15 @@
             this.panel3.Controls.Add(this.NextButton);
             this.panel3.Controls.Add(this.tabControl1);
             this.panel3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel3.Location = new System.Drawing.Point(16, 48);
+            this.panel3.Location = new System.Drawing.Point(16, 45);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(970, 675);
+            this.panel3.Size = new System.Drawing.Size(970, 704);
             this.panel3.TabIndex = 11;
             // 
             // PreviousButton
             // 
             this.PreviousButton.BackColor = System.Drawing.Color.Green;
-            this.PreviousButton.Location = new System.Drawing.Point(791, 634);
+            this.PreviousButton.Location = new System.Drawing.Point(794, 651);
             this.PreviousButton.Margin = new System.Windows.Forms.Padding(2);
             this.PreviousButton.Name = "PreviousButton";
             this.PreviousButton.Size = new System.Drawing.Size(84, 39);
@@ -3189,10 +3358,10 @@
             // NextButton
             // 
             this.NextButton.BackColor = System.Drawing.Color.Green;
-            this.NextButton.Location = new System.Drawing.Point(879, 632);
+            this.NextButton.Location = new System.Drawing.Point(884, 651);
             this.NextButton.Margin = new System.Windows.Forms.Padding(2);
             this.NextButton.Name = "NextButton";
-            this.NextButton.Size = new System.Drawing.Size(84, 39);
+            this.NextButton.Size = new System.Drawing.Size(84, 37);
             this.NextButton.TabIndex = 164;
             this.NextButton.Text = "Next";
             this.NextButton.UseVisualStyleBackColor = false;
@@ -3212,12 +3381,12 @@
             this.cuiButton1.HoverBackground = System.Drawing.Color.Maroon;
             this.cuiButton1.HoveredImageTint = System.Drawing.Color.Transparent;
             this.cuiButton1.HoverOutline = System.Drawing.Color.Empty;
-            this.cuiButton1.Image = global::GuidanceManagementSystem.Properties.Resources.multiply_50px;
+            this.cuiButton1.Image = null;
             this.cuiButton1.ImageAutoCenter = true;
             this.cuiButton1.ImageExpand = new System.Drawing.Point(3, 3);
             this.cuiButton1.ImageOffset = new System.Drawing.Point(0, 0);
             this.cuiButton1.ImageTint = System.Drawing.Color.White;
-            this.cuiButton1.Location = new System.Drawing.Point(949, 12);
+            this.cuiButton1.Location = new System.Drawing.Point(956, 9);
             this.cuiButton1.Name = "cuiButton1";
             this.cuiButton1.NormalBackground = System.Drawing.Color.Red;
             this.cuiButton1.NormalOutline = System.Drawing.Color.Empty;
@@ -3231,18 +3400,44 @@
             this.cuiButton1.TextOffset = new System.Drawing.Point(0, 0);
             this.cuiButton1.Click += new System.EventHandler(this.cuiButton1_Click);
             // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.BackColor = System.Drawing.Color.Transparent;
+            this.label44.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label44.Font = new System.Drawing.Font("Segoe UI Black", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label44.Location = new System.Drawing.Point(416, 9);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(172, 32);
+            this.label44.TabIndex = 13;
+            this.label44.Text = "Student Data";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Image = global::GuidanceManagementSystem.Properties.Resources.COUNSELING;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(59, 39);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 14;
+            this.pictureBox1.TabStop = false;
+            // 
             // enrollment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(994, 731);
+            this.BackgroundImage = global::GuidanceManagementSystem.Properties.Resources.asdasdad;
+            this.ClientSize = new System.Drawing.Size(994, 772);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.label44);
             this.Controls.Add(this.cuiButton1);
             this.Controls.Add(this.panel3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(5);
-            
+            this.Name = "enrollment";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "enrollment";
             this.TopMost = true;
@@ -3250,6 +3445,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tabPage1.ResumeLayout(false);
@@ -3258,6 +3455,26 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtFatherNoOfChildren)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
+            this.groupBox10.ResumeLayout(false);
+            this.groupBox10.PerformLayout();
             this.tabPage7.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSiblings)).EndInit();
@@ -3269,6 +3486,7 @@
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
             this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3312,10 +3530,9 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtSpouseName;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox rbWithoutChild;
+        private System.Windows.Forms.CheckBox rbWithChild;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox txtCivilStatus;
         private System.Windows.Forms.DateTimePicker dtpDateOfBirth;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
@@ -3343,42 +3560,17 @@
         private System.Windows.Forms.TextBox txtFatherOccupation;
         private System.Windows.Forms.TextBox txtFatherEducationalAttainment;
         private System.Windows.Forms.TextBox txtFatherNationality;
-        private System.Windows.Forms.CheckBox rbMotherWorkingAbroadNo;
-        private System.Windows.Forms.CheckBox rbMotherWorkingAbroadYes;
-        private System.Windows.Forms.CheckBox rbIndigenousYes;
-        private System.Windows.Forms.CheckBox rbBeneficiaryNo;
-        private System.Windows.Forms.CheckBox rbBeneficiaryYes;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.CheckBox rbExtended;
-        private System.Windows.Forms.CheckBox rbNuclear;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.TextBox txtFatherLanguageDialect;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.TextBox txtFatherBirthOrder;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.CheckBox rbAbove25000;
-        private System.Windows.Forms.CheckBox rb20001To25000;
-        private System.Windows.Forms.CheckBox rb15001To20000;
-        private System.Windows.Forms.CheckBox rb10001To15000;
-        private System.Windows.Forms.CheckBox rb5000To10000;
-        private System.Windows.Forms.CheckBox rbBelow5000;
         private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.CheckBox rbMotherWithAnotherPartner;
-        private System.Windows.Forms.CheckBox rbMotherWidowed;
-        private System.Windows.Forms.CheckBox rbMotherAnnulled;
-        private System.Windows.Forms.CheckBox rbFatherWithAnotherPartner;
-        private System.Windows.Forms.CheckBox rbFatherSeparated;
-        private System.Windows.Forms.CheckBox rbFatherLivingTogether;
-        private System.Windows.Forms.CheckBox rbFatherWorkingAbroadNo;
-        private System.Windows.Forms.CheckBox rbFatherWorkingAbroadYes;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox9;
-        private System.Windows.Forms.CheckBox checkBox11;
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.Label label34;
         private System.Windows.Forms.Label label35;
@@ -3480,8 +3672,6 @@
         private System.Windows.Forms.TextBox txtScholarshipName;
         private System.Windows.Forms.Label label78;
         private System.Windows.Forms.Label label77;
-        //private FontAwesome.Sharp.IconButton iconButton2;
-        private System.Windows.Forms.CheckBox rbIndigenousNo;
         private System.Windows.Forms.RadioButton rbSickNever;
         private System.Windows.Forms.RadioButton rbSickSometimes;
         private System.Windows.Forms.RadioButton rbSickSeldom;
@@ -3512,6 +3702,53 @@
         private CuoreUI.Controls.cuiButton cuiButton2;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ComboBox txtNationality;
-        private System.Windows.Forms.ComboBox txtCitizenship;
+        private System.Windows.Forms.TextBox txtCitizenship;
+        private System.Windows.Forms.ComboBox txtCivilStatus;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox textBoxFilePath;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label lblRequired;
+        private System.Windows.Forms.RadioButton rbMotherWorkingAbroadNo;
+        private System.Windows.Forms.RadioButton rbMotherWorkingAbroadYes;
+        private System.Windows.Forms.RadioButton rbFatherWorkingAbroadNo;
+        private System.Windows.Forms.RadioButton rbFatherWorkingAbroadYes;
+        private System.Windows.Forms.RadioButton mrbdeceased;
+        private System.Windows.Forms.RadioButton mrbliving;
+        private System.Windows.Forms.RadioButton rbdeceased;
+        private System.Windows.Forms.RadioButton rbliving;
+        private System.Windows.Forms.RadioButton rb10001To15000;
+        private System.Windows.Forms.RadioButton rbBelow5000;
+        private System.Windows.Forms.RadioButton rbMotherWithAnotherPartner;
+        private System.Windows.Forms.RadioButton rbFatherWithAnotherPartner;
+        private System.Windows.Forms.RadioButton rbMotherWidowed;
+        private System.Windows.Forms.RadioButton rbMotherAnnulled;
+        private System.Windows.Forms.RadioButton rbFatherSeparated;
+        private System.Windows.Forms.RadioButton rbFatherLivingTogether;
+        private System.Windows.Forms.RadioButton rbBeneficiaryYes;
+        private System.Windows.Forms.RadioButton rbIndigenousNo;
+        private System.Windows.Forms.RadioButton rbIndigenousYes;
+        private System.Windows.Forms.RadioButton rbExtended;
+        private System.Windows.Forms.RadioButton rbNuclear;
+        private System.Windows.Forms.RadioButton rbAbove25000;
+        private System.Windows.Forms.RadioButton rb15001To20000;
+        private System.Windows.Forms.RadioButton rb5000To10000;
+        private System.Windows.Forms.RadioButton rb20001To25000;
+        private System.Windows.Forms.RadioButton rbBeneficiaryNo;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Label lblreq2;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.GroupBox groupBox10;
     }
 }

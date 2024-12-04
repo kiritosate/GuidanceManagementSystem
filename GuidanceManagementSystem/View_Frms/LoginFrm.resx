@@ -120,10 +120,34 @@
   <metadata name="cuiFormRounder1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="pictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
+        6QAAAOkBVJIUSwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAP6SURBVFhHvZdd
+        aBRXFMfH1lYKUn31sT744lt9qeDMrjZudrNWoaD0odAWCkKLUooPRakI9q0PVtHZ2Ro/stkPjR/QVAmo
+        raKUam1apCESSwxYFWuphkTM7P06PXfm7jgzezPZNaZ/+JHZOfee/50799y5MXSCvvRCXspsZaXOEill
+        r7BydpRVcuOs0vWUVbsIq+UZreUFO7YOPOR1bR3Hv5RV8k+x7SNSzt4mhzrKxDY/po5lQd/yV1X66QVg
+        vER7MqdZFZM1ks+Gcg7qBcuDFKy/Xcfcgh7zlF1UcDDzBu3NPdQmmgWkmA4G4eFYZ2BPerGy9QXl3Os4
+        bZO6BLOFHH47OgCJbQ5A38aXlb1hkN7sZV3nFwEtZZoH4GF+6ZnDqc4l7FhoQbVC/0fA/yiD+OsnEP+O
+        gPhnGMStM8DPfdbctpzVmHtMwIH0QoMezXzV1CkBPlgEYHXQS+BAvgd2/J2gPa106cx9HHODQUvZ82GD
+        JPi1vcooWWKoFvSh1bze3GeHgfU6FjaZlpMbAcgTZaE0cRfE2AUQD27gD+Hfk8IZYqc2ef1oNWEGClbZ
+        wI2jpdXPr+xW2X2Ju1dxqtcHcXHzpIr44he3+7HKs72gCdu6auAI640kSfCBT9GVq+wU2NnN0fjv3X5M
+        if/whXefljr15j43DbmthhMlwS/uADHSD/xH9XTB/e0A9UlljaJTwE6/58XokbU64wb3jLZLMMyJd70B
+        Rd4/SpZoo03929U64waTOIBY0laR5g+HlGVDWIbDJzDul6G/AFNx0zBMvoLnmgE+6ChTJXcc+KWdkTbk
+        aOL0S8blImx5DYSRu2CgqcfAvvugqU3dSXx6yR05ADfesRXE/evKHScer+NxeqRDZxjFSQ0ZrIoHjVjn
+        VuC/7JPWHvzaN9G4rH1HYxjDLViX5ZdwJNK5DeTewAc+id6v5YEkr/wA17a68VuQ6Y8kaAdZ66refdD8
+        4BqtmQ7XsbYZtGft55GkLSL+POu9fyn5KfaevA1ziWunO/AAuvK1dnbDBuLxmLLHATy6jRtO7Og1M/eg
+        uOIV71DCStmiziSJ8CYk7t/QGSRjm+975g2R3s5hnZEW/MbT/s3Af8Mtd7AXyPEP9SbTgCfkvcr2mWBf
+        bgHOxCUsIYFn/qih/I1HbNKTAdLd3nuOwbA8d8Ou9Hxl2yxqp0wc4QW/8Yw7WaswUjDPy9zKZmZBsWMR
+        KZpvYq2udwuprXh4+BoTjcYS6xiVbb0+eOaTOZr+D3heETv9FhqwmGEYRp3UStV8biTfocbYB2Oq2dxJ
+        LiA0+7nJvJD6NajruZZrr1qKphOBuW09cfevWqbC/4+mDqRWo7lclKPyWt1uU4bxH1l6uFOBlEM5AAAA
+        AElFTkSuQmCC
+</value>
+  </data>
   <metadata name="cuiButton1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAAAAAAAEAIADjPgEAFgAAAIlQTkcNChoKAAAADUlIRFIAAAEAAAABAAgGAAAAXHKoZgAAgABJ

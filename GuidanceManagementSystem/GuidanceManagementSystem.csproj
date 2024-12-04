@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\ReportGenerator.5.4.0\build\netstandard2.0\ReportGenerator.props" Condition="Exists('..\packages\ReportGenerator.5.4.0\build\netstandard2.0\ReportGenerator.props')" />
+  <Import Project="..\packages\PieChart.1.0.1\build\PieChart.props" Condition="Exists('..\packages\PieChart.1.0.1\build\PieChart.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -12,6 +14,8 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -37,7 +41,7 @@
       <HintPath>..\packages\CrystalReports.AxShockwaveFlashObjects.13.0.4003\lib\net40\AxShockwaveFlashObjects.dll</HintPath>
     </Reference>
     <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
-      <HintPath>..\packages\BouncyCastle.Cryptography.2.3.1\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
+      <HintPath>..\packages\BouncyCastle.Cryptography.2.4.0\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
       <HintPath>..\packages\CrystalReports.Engine.13.0.4003\lib\net40\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
@@ -104,6 +108,9 @@
     <Reference Include="Google.Protobuf, Version=3.26.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.26.1\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.4, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.4\lib\net461\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="K4os.Compression.LZ4, Version=1.3.8.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
       <HintPath>..\packages\K4os.Compression.LZ4.1.3.8\lib\net462\K4os.Compression.LZ4.dll</HintPath>
     </Reference>
@@ -168,6 +175,7 @@
     </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -198,11 +206,20 @@
     <Compile Include="docsFrm\individual_record_frm.Designer.cs">
       <DependentUpon>individual_record_frm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_AboutUs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_AboutUs.Designer.cs">
+      <DependentUpon>Form_AboutUs.cs</DependentUpon>
+    </Compile>
     <Compile Include="Loadingfrm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Loadingfrm.Designer.cs">
       <DependentUpon>Loadingfrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="methods\CustomTextBox.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="methods\InputValidator.cs" />
     <Compile Include="methods\MyCon.cs" />
@@ -218,6 +235,17 @@
     </Compile>
     <Compile Include="qrPrint.Designer.cs">
       <DependentUpon>qrPrint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Resource1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource1.resx</DependentUpon>
+    </Compile>
+    <Compile Include="View_Frms\Account_view.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View_Frms\Account_view.Designer.cs">
+      <DependentUpon>Account_view.cs</DependentUpon>
     </Compile>
     <Compile Include="View_Frms\dashboardfrm.cs">
       <SubType>Form</SubType>
@@ -237,11 +265,23 @@
     <Compile Include="View_Frms\enrollment.Designer.cs">
       <DependentUpon>enrollment.cs</DependentUpon>
     </Compile>
+    <Compile Include="View_Frms\individual_progress_report.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View_Frms\individual_progress_report.designer.cs">
+      <DependentUpon>individual_progress_report.cs</DependentUpon>
+    </Compile>
     <Compile Include="View_Frms\LoginFrm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View_Frms\LoginFrm.Designer.cs">
       <DependentUpon>LoginFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View_Frms\recordfrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View_Frms\recordfrm.Designer.cs">
+      <DependentUpon>recordfrm.cs</DependentUpon>
     </Compile>
     <Compile Include="View_Frms\registration_view.cs">
       <SubType>Form</SubType>
@@ -254,6 +294,12 @@
     </Compile>
     <Compile Include="View_Frms\reports_view.Designer.cs">
       <DependentUpon>reports_view.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View_Frms\superadmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View_Frms\superadmin.Designer.cs">
+      <DependentUpon>superadmin.cs</DependentUpon>
     </Compile>
     <Compile Include="View_Frms\view_irf.cs">
       <SubType>Form</SubType>
@@ -269,6 +315,9 @@
     </Compile>
     <EmbeddedResource Include="docsFrm\individual_record_frm.resx">
       <DependentUpon>individual_record_frm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_AboutUs.resx">
+      <DependentUpon>Form_AboutUs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Loadingfrm.resx">
       <DependentUpon>Loadingfrm.cs</DependentUpon>
@@ -286,6 +335,13 @@
     <EmbeddedResource Include="qrPrint.resx">
       <DependentUpon>qrPrint.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Resource1.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View_Frms\Account_view.resx">
+      <DependentUpon>Account_view.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View_Frms\dashboardfrm.resx">
       <DependentUpon>dashboardfrm.cs</DependentUpon>
     </EmbeddedResource>
@@ -295,14 +351,23 @@
     <EmbeddedResource Include="View_Frms\enrollment.resx">
       <DependentUpon>enrollment.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View_Frms\individual_progress_report.resx">
+      <DependentUpon>individual_progress_report.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View_Frms\LoginFrm.resx">
       <DependentUpon>LoginFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View_Frms\recordfrm.resx">
+      <DependentUpon>recordfrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View_Frms\registration_view.resx">
       <DependentUpon>registration_view.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View_Frms\reports_view.resx">
       <DependentUpon>reports_view.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View_Frms\superadmin.resx">
+      <DependentUpon>superadmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View_Frms\view_irf.resx">
       <DependentUpon>view_irf.cs</DependentUpon>
@@ -376,9 +441,6 @@
     <None Include="Resources\home_500px.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\fire_exit_500px.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\settings_500px.png" />
   </ItemGroup>
   <ItemGroup>
@@ -413,6 +475,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Apache\" />
+    <Folder Include="Reports\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\pen_50px.png" />
@@ -426,5 +489,27 @@
   <ItemGroup>
     <None Include="Resources\731402e0-fe47-46db-8ebb-295e66760000-1.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\csu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Image1.png" />
+    <None Include="Resources\approve.png" />
+    <None Include="Resources\employees.png" />
+    <Content Include="Resources\Icon1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\PieChart.1.0.1\build\PieChart.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PieChart.1.0.1\build\PieChart.props'))" />
+    <Error Condition="!Exists('..\packages\ReportGenerator.5.4.0\build\netstandard2.0\ReportGenerator.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ReportGenerator.5.4.0\build\netstandard2.0\ReportGenerator.props'))" />
+  </Target>
 </Project>

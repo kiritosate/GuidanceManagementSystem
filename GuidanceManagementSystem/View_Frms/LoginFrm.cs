@@ -10,14 +10,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
+using static GuidanceManagementSystem.View_Frms.dashboardfrm;
 
 namespace GuidanceManagementSystem.View_Frms
 {
     public partial class LoginFrm : Form
     {
+       // static LoginFrm _obj;
+        public static LoginFrm instance;
         public LoginFrm()
         {
             InitializeComponent();
+            instance = this;
         }
 
         public static void closeApp()
@@ -37,42 +42,72 @@ namespace GuidanceManagementSystem.View_Frms
         {
             
         }
+        public static class BlurEffectHelper
+        {
+            public static void BlurBackground(Form model)
+            {
+                Form background = new Form();
+                try
+                {
+                    // Configure background form
+                    background.StartPosition = FormStartPosition.CenterScreen;
+                    background.FormBorderStyle = FormBorderStyle.None;
+                    background.Opacity = 0.6d;
+                    background.BackColor = Color.Black;
+                    background.Size = model.Size;  // Size of the model form
+                    background.WindowState = FormWindowState.Maximized;
+                    background.Location = model.Location;  // Position of the model form
+                    background.ShowInTaskbar = false;
+                    background.Show();
+
+                    // Set the owner of the model to the background form
+                    model.Owner = background;
+
+                    // Show the model form as a dialog
+                    model.ShowDialog(background);
+
+                    // Dispose the background form after the model form is closed
+                    background.Dispose();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error: {ex.Message}");
+                }
+            }
+        }
 
         private void cuiButton1_Click(object sender, EventArgs e)
         {
             closeApp();
         }
-
         private async void cuiButton2_Click(object sender, EventArgs e)
         {
             cuiSpinner1.Visible = true;
             dashboardfrm frm = new dashboardfrm();
-            await Task.Delay(3000);
 
+            // Call the login function
             (int UserType, int ID, string Name) loginResult = MyCon._Login(textBox1.Text, textBox2.Text);
 
             if (loginResult.UserType > 0)
             {
-                // If UserType > 0, the login was successful, so show the form
-                
-
-                // Optionally, you can use loginResult.ID and loginResult.Name
-
+                // Login successful
                 MyCon._loggedName = loginResult.Name;
                 MyCon._loggedId = loginResult.ID;
 
+                // Set user session information based on the UserType
+                UserSession.Role = loginResult.UserType == 1 ? "Admin" : "Staff"; // Assume 1 = Admin, otherwise Staff
+                UserSession.Username = loginResult.Name;
 
+                // Pass role information to the dashboard
+                frm.UserRole = UserSession.Role; // Pass the role to the dashboard form
                 frm.Show();
-                this.Hide();
-
-                // Example: Display the user's name in a label (if you have a label for this purpose)
-                //frm.userNameLabel.Text = $"Welcome, {loggedInUserName}!";
+                this.Hide(); // Hide the login form
             }
             else
             {
-                // If login fails, display the spinner and show an error message
+                // Login failed
                 cuiSpinner1.Visible = false;
-                MessageBox.Show("Invalid username or password.");
+                MessageBox.Show("Invalid username or password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
 
@@ -81,7 +116,7 @@ namespace GuidanceManagementSystem.View_Frms
         private void LoginFrm_Load(object sender, EventArgs e)
         {
             
-            
+
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -96,6 +131,15 @@ namespace GuidanceManagementSystem.View_Frms
                 textBox2.PasswordChar = '●'; // Hide password by setting PasswordChar back to '●'
                 pictureBox1.Image = Properties.Resources.eye_480px;
             }
+        }
+        
+    
+
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            Form model = new Form_AboutUs();  // Assuming 'Form_AboutUs' is the model to be blurred
+            //BlurEffectHelper.BlurBackground(model);
         }
     }
 }

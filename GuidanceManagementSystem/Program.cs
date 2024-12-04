@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GuidanceManagementSystem.View_Frms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace GuidanceManagementSystem
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Loadingfrm());
+            Application.Run(new LoginFrm());
         }
     }
 }

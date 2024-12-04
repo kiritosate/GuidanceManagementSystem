@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using CrystalDecisions.ReportAppServer.DataDefModel;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,27 +11,75 @@ namespace GuidanceManagementSystem.methods
 {
     internal class MyFetch
     {
-        public MySqlDataAdapter GetIndividualDataPending()
+        public MySqlDataAdapter GetIndividualDataPending(string course = null)
         {
-            string query = @"
-            SELECT 
-                ir.Student_ID,
-                ir.Course,
-                ir.Year,
-                pd.Firstname,
-                pd.Middlename,
-                pd.Lastname,
-                pd.Sex
-            FROM 
-                tbl_Individual_Record ir
-            JOIN 
-                tbl_Personal_Data pd ON ir.Student_ID = pd.Student_ID
-             WHERE
-                ir.Status = 0;"; // Filtering for active records
 
-            MySqlDataAdapter dataAdapter = new MySqlDataAdapter(query, MyCon.GetConnection());
+            MySqlDataAdapter dataAdapter;
+            string query = @"SELECT ir.Student_ID, 
+                     ir.Course, 
+                     ir.Year,
+                     pd.Firstname, pd.Middlename, pd.Lastname, pd.Sex,
+                     CASE WHEN ir.Status = 1 THEN 'Approved' ELSE 'Pending' END AS Status
+              FROM tbl_individual_record ir
+              INNER JOIN tbl_personal_data pd 
+              ON ir.Student_ID = pd.Student_ID
+              WHERE status=0";
+
+            if (!string.IsNullOrEmpty(course) && course != "All")
+            {
+                query += " AND ir.Course = @Course";
+            }
+
+            using (var command = new MySqlCommand(query, MyCon.GetConnection()))
+            {
+                if (!string.IsNullOrEmpty(course) && course != "All")
+                {
+                    command.Parameters.AddWithValue("@Course", course);
+                }
+
+                dataAdapter = new MySqlDataAdapter(command);
+            }
+
+
+            //        MySqlDataAdapter dataAdapter = new MySqlDataAdapter(query, MyCon.GetConnection());
             return dataAdapter;
         }
+
+        public MySqlDataAdapter GetIndividualDataActive(string course = null)
+        {
+
+            MySqlDataAdapter dataAdapter;
+            string query = @"SELECT ir.Student_ID, 
+                     ir.Course, 
+                     ir.Year,
+                     pd.Firstname, pd.Middlename, pd.Lastname, pd.Sex,
+                     CASE WHEN ir.Status = 1 THEN 'Approved' ELSE 'Pending' END AS Status
+              FROM tbl_individual_record ir
+              INNER JOIN tbl_personal_data pd 
+              ON ir.Student_ID = pd.Student_ID
+              WHERE status=1";
+
+            if (!string.IsNullOrEmpty(course) && course != "All")
+            {
+                query += " AND ir.Course = @Course";
+            }
+
+            using (var command = new MySqlCommand(query, MyCon.GetConnection()))
+            {
+                if (!string.IsNullOrEmpty(course) && course != "All")
+                {
+                    command.Parameters.AddWithValue("@Course", course);
+                }
+
+                dataAdapter = new MySqlDataAdapter(command);
+            }
+
+
+            //        MySqlDataAdapter dataAdapter = new MySqlDataAdapter(query, MyCon.GetConnection());
+            return dataAdapter;
+        }
+
+
 
         public MySqlDataAdapter GetIndividualData()
         {

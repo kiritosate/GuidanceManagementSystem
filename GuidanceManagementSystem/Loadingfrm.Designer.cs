@@ -64,7 +64,7 @@
             this.cuiButton1.HoverBackground = System.Drawing.Color.Maroon;
             this.cuiButton1.HoveredImageTint = System.Drawing.Color.Transparent;
             this.cuiButton1.HoverOutline = System.Drawing.Color.Empty;
-            this.cuiButton1.Image = global::GuidanceManagementSystem.Properties.Resources.multiply_50px;
+            this.cuiButton1.Image = null;
             this.cuiButton1.ImageAutoCenter = true;
             this.cuiButton1.ImageExpand = new System.Drawing.Point(3, 3);
             this.cuiButton1.ImageOffset = new System.Drawing.Point(0, 0);

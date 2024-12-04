@@ -29,154 +29,125 @@
         private void InitializeComponent()
         {
             this.panel2 = new System.Windows.Forms.Panel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.cuiTextBox21 = new CuoreUI.Controls.cuiTextBox2();
+            this.txtStudentID = new CuoreUI.Controls.cuiTextBox2();
             this.cuiLabel2 = new CuoreUI.Controls.cuiLabel();
-            this.cuiButton1 = new CuoreUI.Controls.cuiButton();
-            this.cuiButton2 = new CuoreUI.Controls.cuiButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.flowLayoutPanel1);
-            this.panel2.Controls.Add(this.cuiTextBox21);
+            this.panel2.Controls.Add(this.txtStudentID);
             this.panel2.Controls.Add(this.cuiLabel2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(15, 16);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(905, 49);
+            this.panel2.Size = new System.Drawing.Size(1028, 49);
             this.panel2.TabIndex = 10;
             // 
-            // flowLayoutPanel1
+            // txtStudentID
             // 
-            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanel1.Controls.Add(this.cuiButton1);
-            this.flowLayoutPanel1.Controls.Add(this.cuiButton2);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(209, 0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(1);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(475, 46);
-            this.flowLayoutPanel1.TabIndex = 8;
-            // 
-            // cuiTextBox21
-            // 
-            this.cuiTextBox21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cuiTextBox21.BackColor = System.Drawing.SystemColors.Control;
-            this.cuiTextBox21.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.cuiTextBox21.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(0)))));
-            this.cuiTextBox21.BorderSize = 1;
-            this.cuiTextBox21.Content = "";
-            this.cuiTextBox21.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.cuiTextBox21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cuiTextBox21.ForeColor = System.Drawing.Color.Gray;
-            this.cuiTextBox21.Location = new System.Drawing.Point(691, 0);
-            this.cuiTextBox21.Margin = new System.Windows.Forms.Padding(4);
-            this.cuiTextBox21.Multiline = false;
-            this.cuiTextBox21.Name = "cuiTextBox21";
-            this.cuiTextBox21.Padding = new System.Windows.Forms.Padding(15, 14, 15, 0);
-            this.cuiTextBox21.PasswordChar = false;
-            this.cuiTextBox21.PlaceholderColor = System.Drawing.Color.DimGray;
-            this.cuiTextBox21.PlaceholderText = "Search...";
-            this.cuiTextBox21.Rounding = 8;
-            this.cuiTextBox21.Size = new System.Drawing.Size(210, 42);
-            this.cuiTextBox21.TabIndex = 7;
-            this.cuiTextBox21.TextOffset = new System.Drawing.Size(0, 0);
-            this.cuiTextBox21.UnderlinedStyle = false;
+            this.txtStudentID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtStudentID.BackColor = System.Drawing.SystemColors.Control;
+            this.txtStudentID.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtStudentID.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(0)))));
+            this.txtStudentID.BorderSize = 1;
+            this.txtStudentID.Content = "";
+            this.txtStudentID.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtStudentID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtStudentID.ForeColor = System.Drawing.Color.Gray;
+            this.txtStudentID.Location = new System.Drawing.Point(814, 0);
+            this.txtStudentID.Margin = new System.Windows.Forms.Padding(4);
+            this.txtStudentID.Multiline = false;
+            this.txtStudentID.Name = "txtStudentID";
+            this.txtStudentID.Padding = new System.Windows.Forms.Padding(15, 14, 15, 0);
+            this.txtStudentID.PasswordChar = false;
+            this.txtStudentID.PlaceholderColor = System.Drawing.Color.DimGray;
+            this.txtStudentID.PlaceholderText = "Search...";
+            this.txtStudentID.Rounding = 8;
+            this.txtStudentID.Size = new System.Drawing.Size(210, 42);
+            this.txtStudentID.TabIndex = 7;
+            this.txtStudentID.TextOffset = new System.Drawing.Size(0, 0);
+            this.txtStudentID.UnderlinedStyle = false;
             // 
             // cuiLabel2
             // 
             this.cuiLabel2.Content = "User/Reports";
-            this.cuiLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cuiLabel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.cuiLabel2.Font = new System.Drawing.Font("Segoe UI", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cuiLabel2.ForeColor = System.Drawing.Color.DimGray;
             this.cuiLabel2.HorizontalAlignment = CuoreUI.Controls.cuiLabel.HorizontalAlignments.Left;
             this.cuiLabel2.Location = new System.Drawing.Point(0, 0);
             this.cuiLabel2.Name = "cuiLabel2";
-            this.cuiLabel2.Size = new System.Drawing.Size(905, 49);
+            this.cuiLabel2.Size = new System.Drawing.Size(1028, 49);
             this.cuiLabel2.TabIndex = 6;
             // 
-            // cuiButton1
+            // panel1
             // 
-            this.cuiButton1.CheckButton = false;
-            this.cuiButton1.Checked = false;
-            this.cuiButton1.CheckedBackground = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(0)))));
-            this.cuiButton1.CheckedImageTint = System.Drawing.Color.White;
-            this.cuiButton1.CheckedOutline = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(0)))));
-            this.cuiButton1.Content = "Add New";
-            this.cuiButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
-            this.cuiButton1.ForeColor = System.Drawing.Color.White;
-            this.cuiButton1.HoverBackground = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(0)))));
-            this.cuiButton1.HoveredImageTint = System.Drawing.Color.White;
-            this.cuiButton1.HoverOutline = System.Drawing.Color.Empty;
-            this.cuiButton1.Image = global::GuidanceManagementSystem.Properties.Resources.add_500px;
-            this.cuiButton1.ImageAutoCenter = true;
-            this.cuiButton1.ImageExpand = new System.Drawing.Point(3, 3);
-            this.cuiButton1.ImageOffset = new System.Drawing.Point(-3, 0);
-            this.cuiButton1.ImageTint = System.Drawing.Color.White;
-            this.cuiButton1.Location = new System.Drawing.Point(4, 4);
-            this.cuiButton1.Name = "cuiButton1";
-            this.cuiButton1.NormalBackground = System.Drawing.Color.SeaGreen;
-            this.cuiButton1.NormalOutline = System.Drawing.Color.Empty;
-            this.cuiButton1.OutlineThickness = 1.6F;
-            this.cuiButton1.PressedBackground = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(0)))));
-            this.cuiButton1.PressedImageTint = System.Drawing.Color.White;
-            this.cuiButton1.PressedOutline = System.Drawing.Color.Empty;
-            this.cuiButton1.Rounding = new System.Windows.Forms.Padding(8);
-            this.cuiButton1.Size = new System.Drawing.Size(100, 41);
-            this.cuiButton1.TabIndex = 0;
-            this.cuiButton1.TextOffset = new System.Drawing.Point(0, 0);
-            this.cuiButton1.Visible = false;
-            this.cuiButton1.Click += new System.EventHandler(this.cuiButton1_Click);
+            this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel1.Controls.Add(this.button3);
+            this.panel1.Controls.Add(this.button2);
+            this.panel1.Controls.Add(this.button1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(15, 16);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1028, 590);
+            this.panel1.TabIndex = 11;
+           // this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // cuiButton2
+            // button1
             // 
-            this.cuiButton2.CheckButton = false;
-            this.cuiButton2.Checked = false;
-            this.cuiButton2.CheckedBackground = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(0)))));
-            this.cuiButton2.CheckedImageTint = System.Drawing.Color.White;
-            this.cuiButton2.CheckedOutline = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(0)))));
-            this.cuiButton2.Content = "Web Server";
-            this.cuiButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
-            this.cuiButton2.ForeColor = System.Drawing.Color.White;
-            this.cuiButton2.HoverBackground = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(0)))));
-            this.cuiButton2.HoveredImageTint = System.Drawing.Color.White;
-            this.cuiButton2.HoverOutline = System.Drawing.Color.Empty;
-            this.cuiButton2.Image = global::GuidanceManagementSystem.Properties.Resources.cloud_cross_480px;
-            this.cuiButton2.ImageAutoCenter = true;
-            this.cuiButton2.ImageExpand = new System.Drawing.Point(3, 3);
-            this.cuiButton2.ImageOffset = new System.Drawing.Point(-3, 0);
-            this.cuiButton2.ImageTint = System.Drawing.Color.White;
-            this.cuiButton2.Location = new System.Drawing.Point(110, 4);
-            this.cuiButton2.Name = "cuiButton2";
-            this.cuiButton2.NormalBackground = System.Drawing.Color.RoyalBlue;
-            this.cuiButton2.NormalOutline = System.Drawing.Color.Empty;
-            this.cuiButton2.OutlineThickness = 1.6F;
-            this.cuiButton2.PressedBackground = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(0)))));
-            this.cuiButton2.PressedImageTint = System.Drawing.Color.White;
-            this.cuiButton2.PressedOutline = System.Drawing.Color.Empty;
-            this.cuiButton2.Rounding = new System.Windows.Forms.Padding(8);
-            this.cuiButton2.Size = new System.Drawing.Size(117, 41);
-            this.cuiButton2.TabIndex = 1;
-            this.cuiButton2.TextOffset = new System.Drawing.Point(0, 0);
-            this.cuiButton2.Visible = false;
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(89)))));
+            this.button1.ForeColor = System.Drawing.SystemColors.Control;
+            this.button1.Location = new System.Drawing.Point(19, 94);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(275, 112);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = false;
+          //  this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(89)))));
+            this.button2.ForeColor = System.Drawing.SystemColors.Control;
+            this.button2.Location = new System.Drawing.Point(384, 94);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(275, 112);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = false;
+            // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(89)))));
+            this.button3.ForeColor = System.Drawing.SystemColors.Control;
+            this.button3.Location = new System.Drawing.Point(732, 94);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(275, 112);
+            this.button3.TabIndex = 2;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = false;
             // 
             // reports_view
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(935, 560);
+            this.ClientSize = new System.Drawing.Size(1058, 622);
             this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "reports_view";
             this.Padding = new System.Windows.Forms.Padding(15, 16, 15, 16);
             this.Text = "reports_view";
-            this.Load += new System.EventHandler(this.reports_view_Load);
             this.panel2.ResumeLayout(false);
-            this.flowLayoutPanel1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -184,10 +155,11 @@
         #endregion
 
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private CuoreUI.Controls.cuiButton cuiButton1;
-        private CuoreUI.Controls.cuiButton cuiButton2;
-        private CuoreUI.Controls.cuiTextBox2 cuiTextBox21;
+        private CuoreUI.Controls.cuiTextBox2 txtStudentID;
         private CuoreUI.Controls.cuiLabel cuiLabel2;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
     }
 }

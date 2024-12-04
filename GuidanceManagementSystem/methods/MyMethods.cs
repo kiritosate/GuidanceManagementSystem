@@ -41,7 +41,7 @@ namespace GuidanceManagementSystem.methods
                 try
                 {
                     await Task.Run(() => Process.Start(startInfo));
-                } catch (Exception ex)
+                } catch (Exception)
                 
                 {
                     //saas

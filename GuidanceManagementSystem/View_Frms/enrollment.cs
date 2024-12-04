@@ -7,12 +7,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static GuidanceManagementSystem.methods.MyMethods;
 using static GuidanceManagementSystem.StudentRecord;
+using System.Drawing;
+using Org.BouncyCastle.Asn1.Cmp;
+
 
 
 namespace GuidanceManagementSystem
 {
     public partial class enrollment : Form
     {
+
+        public string SavedStudentID { get; private set; }
+
         //private List<TextBox> siblingNameTextBoxes = new List<TextBox>();
         //private List<TextBox> siblingAgeTextBoxes = new List<TextBox>();
         // Add more lists as needed for other fields
@@ -25,104 +31,383 @@ namespace GuidanceManagementSystem
         private bool isIndividualRecordSaved = false;
 
         MyMethods methods = new MyMethods();
-
-
-        private async Task SaveFamilyData(FamilyData father, FamilyData mother, string studentID, MySqlConnection connection, MySqlTransaction transaction)
+        public void LoadIndividualRecord(string studentId)
         {
-            // Save Father's Data
-            string query = @"INSERT INTO tbl_family_data (Student_ID,
-                        Parents_Name, 
-                        Tel_Cell_No, 
-                        Nationality, 
-                        Educational_Attainment, 
-                        Occupation, 
-                        Employer_Agency, 
-                        Working_Abroad, 
-                        Marital_Status, 
-                        Monthly_Income, 
-                        No_of_Children, 
-                        Students_Birth_Order, 
-                        Language_Dialect, 
-                        Family_Structure, 
-                        Indigenous_Group, 
-                        Beneficiary_4Ps
-                    ) 
-                    VALUES 
-                    (   @StudentID, 
-                        @ParentsName, 
-                        @TelCellNo, 
-                        @Nationality, 
-                        @EducationalAttainment, 
-                        @Occupation, 
-                        @EmployerAgency, 
-                        @WorkingAbroad, 
-                        @MaritalStatus, 
-                        @MonthlyIncome, 
-                        @NoOfChildren, 
-                        @StudentsBirthOrder, 
-                        @LanguageDialect, 
-                        @FamilyStructure, 
-                        @IndigenousGroup, 
-                        @Beneficiary4Ps
-                    );";
+            DataAccess dataAccess = new DataAccess();
+            PersonalData studentData = dataAccess.GetPersonalData(studentId);
+            IndividualRecord record = dataAccess.GetIndividualRecord(studentId);
 
-            using (var command = new MySqlCommand(query, connection, transaction))
+            if (record != null)
             {
-                // Parameter assignments for Father's data
-                command.Parameters.AddWithValue("@FamilyDataId", father.FamilyDataId);
-                command.Parameters.AddWithValue("@StudentID", studentID);
-                command.Parameters.AddWithValue("@ParentsName", "Father");
-                command.Parameters.AddWithValue("@TelCellNo", father.TelCellNo);
-                command.Parameters.AddWithValue("@Nationality", father.Nationality);
-                command.Parameters.AddWithValue("@EducationalAttainment", father.EducationalAttainment);
-                command.Parameters.AddWithValue("@Occupation", father.Occupation);
-                command.Parameters.AddWithValue("@EmployerAgency", father.EmployerAgency);
-                command.Parameters.AddWithValue("@WorkingAbroad", father.WorkingAbroad);
-                command.Parameters.AddWithValue("@MaritalStatus", father.MaritalStatus);
-                command.Parameters.AddWithValue("@MonthlyIncome", father.MonthlyIncome);
-                command.Parameters.AddWithValue("@NoOfChildren", father.NoOfChildren);
-                command.Parameters.AddWithValue("@StudentsBirthOrder", father.StudentsBirthOrder);
-                command.Parameters.AddWithValue("@LanguageDialect", father.LanguageDialect);
-                command.Parameters.AddWithValue("@FamilyStructure", father.FamilyStructure);
-                command.Parameters.AddWithValue("@IndigenousGroup", father.IndigenousGroup);
-                command.Parameters.AddWithValue("@Beneficiary4Ps", father.Beneficiary4Ps);
-
-                await command.ExecuteNonQueryAsync();
+                txtStudentID.Text = record.studentID;
+                cmbCourse.Text = record.Course;
+                cmbYear.Text = record.Year.ToString();
+                if (record != null)
+                {
+                    // Set the radio button based on the StudentStatus value
+                    switch (record.StudentStatus)
+                    {
+                        case "New Student":
+                            rbIsNewStudent.Checked = true;
+                            break;
+                        case "Re-entry":
+                            rbIsReEntry.Checked = true;
+                            break;
+                        case "Shifter":
+                            rbisShifter.Checked = true;
+                            break;
+                        case "Transferee":
+                            rbIsTransferee.Checked = true;
+                            break;
+                        default:
+                            // Optional: Clear all radio buttons if the value is unexpected
+                            rbIsNewStudent.Checked = false;
+                            rbIsReEntry.Checked = false;
+                            rbisShifter.Checked = false;
+                            rbIsTransferee.Checked = false;
+                            break;
+                    }
+                }
+                //txtPersonalDataID.Text = record.PersonalDataID?.ToString();
+                //txtFamilyDataID.Text = record.FamilyDataID?.ToString();
+                //txtSiblingsID.Text = record.SiblingsID?.ToString();
+                //txtEducationalID.Text = record.EducationalID?.ToString();
+                //txtAdditionalProfileID.Text = record.AdditionalProfileID?.ToString();
+                //txtHealthDataID.Text = record.HealthDataID?.ToString();
+                // chkStatus.Checked = record.Status;
             }
-
-            // Save Mother's Data
-            using (var command = new MySqlCommand(query, connection, transaction))
+            else
             {
-                // Parameter assignments for Mother's data
-                command.Parameters.AddWithValue("@StudentID", studentID);
-                command.Parameters.AddWithValue("@ParentsName", "Mother");
-                command.Parameters.AddWithValue("@TelCellNo", mother.TelCellNo);
-                command.Parameters.AddWithValue("@Nationality", mother.Nationality);
-                command.Parameters.AddWithValue("@EducationalAttainment", mother.EducationalAttainment);
-                command.Parameters.AddWithValue("@Occupation", mother.Occupation);
-                command.Parameters.AddWithValue("@EmployerAgency", mother.EmployerAgency);
-                command.Parameters.AddWithValue("@WorkingAbroad", mother.WorkingAbroad);
-                command.Parameters.AddWithValue("@MaritalStatus", mother.MaritalStatus);
-                command.Parameters.AddWithValue("@MonthlyIncome", mother.MonthlyIncome);
-                command.Parameters.AddWithValue("@NoOfChildren", mother.NoOfChildren);
-                command.Parameters.AddWithValue("@StudentsBirthOrder", mother.StudentsBirthOrder);
-                command.Parameters.AddWithValue("@LanguageDialect", mother.LanguageDialect);
-                command.Parameters.AddWithValue("@FamilyStructure", mother.FamilyStructure);
-                command.Parameters.AddWithValue("@IndigenousGroup", mother.IndigenousGroup);
-                command.Parameters.AddWithValue("@Beneficiary4Ps", mother.Beneficiary4Ps);
-
-                await command.ExecuteNonQueryAsync();
+                MessageBox.Show("Record not found!");
             }
         }
-        private async Task SaveAllRecordsAsync(
 
-        StudentRecord studentRecord,
-        EducationalData Education,
-        HealthData healthData,
-        FamilyData father,
-        FamilyData mother)
+
+
+            public void LoadHealthDataToForm(string studentId)
+             {
+            DataAccess dataAccess = new DataAccess();
+            HealthData healthData = dataAccess.LoadHealthData(studentId);
+
+            if (healthData != null)
+            {
+            
+                switch (healthData.SickFrequency)
+                {
+                    case "Yes":
+                        rbSickOften.Checked = true;
+                        break;
+                    case "No":
+                        rbSickNo.Checked = true;
+                        break;
+                    case "Seldom":
+                        rbSickSeldom.Checked = true;
+                        break;
+                    case "Sometimes":
+                        rbSickSometimes.Checked = true;
+                        break;
+                    case "Never":
+                        rbSickNever.Checked = true;
+                        break;
+                    default:
+                        // Optional: Clear all radio buttons if the value is unexpected
+                        rbSickOften.Checked = false;
+                        rbSickNo.Checked = false;
+                        rbSickSeldom.Checked = false;
+                        rbSickSometimes.Checked = false;
+                        rbSickNever.Checked = false;
+                        break;
+                }
+
+                // Optionally, set the checkboxes for Health Problems and Physical Disabilities
+                if (healthData.HealthProblems != null)
+                {
+                    chkDysmenorrhea.Checked = healthData.HealthProblems.Contains("Dysmenorrhea");
+                    chkHeadache.Checked = healthData.HealthProblems.Contains("Headache");
+                    chkAsthma.Checked = healthData.HealthProblems.Contains("Asthma");
+                    chkStomachache.Checked = healthData.HealthProblems.Contains("Stomachache");
+                    chkHeartProblems.Checked = healthData.HealthProblems.Contains("Heart Problems");
+                    chkColdsFlu.Checked = healthData.HealthProblems.Contains("Colds/Flu");
+                    chkAbdominalPain.Checked = healthData.HealthProblems.Contains("Abdominal Pain");
+                    chkSeizureDisorders.Checked = healthData.HealthProblems.Contains("Seizure Disorder");
+                }
+
+                if (healthData.PhysicalDisabilities != null)
+                {
+                    chkVisualImpairment.Checked = healthData.PhysicalDisabilities.Contains("Visual Impairment");
+                    chkPolio.Checked = healthData.PhysicalDisabilities.Contains("Polio");
+                    chkHearingImpairment.Checked = healthData.PhysicalDisabilities.Contains("Hearing Impairment");
+                    chkCleftPalate.Checked = healthData.PhysicalDisabilities.Contains("Cleft Palate");
+                    chkPhysicalDeformities.Checked = healthData.PhysicalDisabilities.Contains("Physical Deformities");
+                    chkSeizureDisorders.Checked = healthData.PhysicalDisabilities.Contains("Seizure Disorder");
+                }
+            }
+            else
+            {
+                // If no data is found for the student, show a message
+                MessageBox.Show("No health data found for this student.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+
+        public void LoadStudentData(string studentId)
         {
-            string connectionString = "server=localhost;database=guidancedb;user=root;password=;";
+            DataAccess dataAccess = new DataAccess();
+            PersonalData studentData = dataAccess.GetPersonalData(studentId);
+
+            if (studentData != null)
+            {
+                // Fill form controls with the student data
+                txtFirstName.Text = studentData.Firstname;
+                txtMiddleName.Text = studentData.Middlename;
+                txtLastName.Text = studentData.Lastname;
+                txtNickname.Text = studentData.Nickname;
+                txtAge.Text = studentData.Age.ToString();
+                txtNationality.Text = studentData.Nationality;
+                txtCitizenship.Text = studentData.Citizenship;
+                dtpDateOfBirth.Text = studentData.DateOfBirth.HasValue
+                    ? studentData.DateOfBirth.Value.ToString("yyyy-MM-dd")
+                    : string.Empty;
+                txtPlaceOfBirth.Text = studentData.PlaceOfBirth;
+                txtCivilStatus.Text = studentData.CivilStatus;
+
+                if (studentData.Children == "With Child")
+                    rbWithChild.Checked = true;
+                else if (studentData.Children == "Without Child")
+                    rbWithoutChild.Checked = true;
+
+                txtSpouseName.Text = studentData.SpouseName;
+                numericUpDownNumberOfChildren.Value = studentData.NumberOfChildren;
+                txtReligion.Text = studentData.Religion;
+                txtContactNumber.Text = studentData.ContactNumber;
+                txtEmailAddress.Text = studentData.EmailAddress;
+                txtCompleteHomeAddress.Text = studentData.CompleteHomeAddress;
+                txtBoardingHouseAddress.Text = studentData.BoardingHouseAddress;
+                txtLandlordName.Text = studentData.LandlordName;
+                txtEmergencyContact.Text = studentData.PersonToContact;
+                txtGuardianphone.Text = studentData.CellNumber;
+                txtHobbies.Text = studentData.Hobbies;
+                txtDescribeYourself.Text = studentData.DescribeYourself;
+
+                // Set the gender radio buttons based on the student data
+                if (studentData.Sex == "Male")
+                    rbMale.Checked = true;
+                else if (studentData.Sex == "Female")
+                    rbFemale.Checked = true;
+            }
+            else
+            {
+                MessageBox.Show("Student data not found.");
+            }
+        }
+        public void LoadFamilyDataToForm(string studentId, string parentType)
+        {
+            DataAccess dataAccess = new DataAccess();
+            FamilyData familyData = dataAccess.GetFamilyData(studentId, parentType);
+
+            if (familyData != null)
+            {
+                rbBelow5000.Checked = false;
+                rb5000To10000.Checked = false;
+                rb10001To15000.Checked = false;
+                rb15001To20000.Checked = false;
+                rb20001To25000.Checked = false;
+                rbAbove25000.Checked = false;
+                // Populate the text fields with the retrieved data
+                txtFatherName.Text = familyData.Name ?? string.Empty;
+                txtFatherPhone.Text = familyData.TelCellNo ?? string.Empty;
+                txtFatherNationality.Text = familyData.Nationality ?? string.Empty;
+                txtFatherEducationalAttainment.Text = familyData.EducationalAttainment ?? string.Empty;
+                txtFatherOccupation.Text = familyData.Occupation ?? string.Empty;
+                txtFatherEmployerAgency.Text = familyData.EmployerAgency ?? string.Empty;
+                txtFatherLanguageDialect.Text = familyData.LanguageDialect ?? string.Empty;
+                if (familyData.NoOfChildren.HasValue)
+                    txtFatherNoOfChildren.Value = familyData.NoOfChildren.Value;
+                if (familyData.StudentsBirthOrder.HasValue)
+                    txtFatherBirthOrder.Text = familyData.StudentsBirthOrder.Value.ToString();
+
+                if (familyData.LivingStatus == "Yes")
+                    rbliving.Checked = true;
+                else if (familyData.LivingStatus == "No")
+                    rbdeceased.Checked = true;
+                if (familyData.WorkingAbroad == "Yes")
+                    rbFatherWorkingAbroadYes.Checked = true;
+                else if (familyData.WorkingAbroad == "No")
+                    rbFatherWorkingAbroadNo.Checked = true;
+                if (familyData.FamilyStructure == "Nuclear")
+                    rbNuclear.Checked = true;
+                else if (familyData.FamilyStructure == "Extended")
+                    rbExtended.Checked = true;
+                if (familyData.IndigenousGroup == "Yes")
+                    rbIndigenousYes.Checked = true;
+                else if (familyData.IndigenousGroup == "No")
+                    rbIndigenousNo.Checked = true;
+                if (familyData.Beneficiary4Ps == "Yes")
+                    rbBeneficiaryYes.Checked = true;
+                else if (familyData.Beneficiary4Ps == "No")
+                    rbBeneficiaryNo.Checked = true;
+                switch (familyData.MaritalStatus)
+                {
+                    case "Living Together":
+                        rbFatherLivingTogether.Checked = true;
+                        break;
+                    case "Separated":
+                        rbFatherSeparated.Checked = true;
+                        break;
+                    case "Father with Another Partner":
+                        rbFatherWithAnotherPartner.Checked = true;
+                        break;
+                    default:
+                        // Optionally clear all radio buttons if the value is unexpected
+                        rbFatherLivingTogether.Checked = false;
+                        rbFatherSeparated.Checked = false;
+                        rbFatherWithAnotherPartner.Checked = false;
+                        break;
+                }
+                // Optionally, set the radio buttons based on Monthly Income or Marital Status
+                if (familyData.MaritalStatus == "Living Together")
+                    rbFatherLivingTogether.Checked = true;
+                else if (familyData.MaritalStatus == "Separated")
+                    rbFatherSeparated.Checked = true;
+                else if (familyData.MaritalStatus == "Father with Another Partner")
+                    rbFatherWithAnotherPartner.Checked = true;
+
+                Console.WriteLine(familyData.MonthlyIncome);
+                switch (familyData.MonthlyIncome)
+                {
+                    case "Below P5000":
+                        rbBelow5000.Checked = true;
+                        break;
+                    case "P5000 - P10000":
+                        rb5000To10000.Checked = true;
+                        break;
+                    case "P10,001 - P15000":
+                        rb10001To15000.Checked = true;
+                        break;
+                    case "P15001 - P20000":
+                        rb15001To20000.Checked = true;
+                        break;
+                    case "P20001 - P25000":
+                        rb20001To25000.Checked = true;
+                        break;
+                    case "P25000 above":
+                        rbAbove25000.Checked = true;
+                        break;
+                    default:
+                        // Optional: Handle the case where the income is null or unknown
+                        break;
+                }
+
+                if (familyData.LivingStatus == "Below 5000")
+                    rbBelow5000.Checked = true;
+                else if (familyData.LivingStatus == "5000 - 10000")
+                    rb5000To10000.Checked = true;
+                else if (familyData.LivingStatus == "10001 - 15000")
+                    rb10001To15000.Checked = true;
+                else if (familyData.LivingStatus == "15001 - 20000")
+                    rb15001To20000.Checked = true;
+                else if (familyData.LivingStatus == "20001 - 25000")
+                    rb20001To25000.Checked = true;
+                else if (familyData.LivingStatus == "25000 Above")
+                    rbAbove25000.Checked = true;
+
+              
+
+           
+               
+            }
+            else
+            {
+                MessageBox.Show("No family data found for this student and parent type.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        private PersonalData GetStudentDataFromForm()
+        {
+            var studentData = new PersonalData
+            {
+                studentID = txtStudentID.Text,
+                Firstname = txtFirstName.Text,
+                Middlename = txtMiddleName.Text,
+                Lastname = txtLastName.Text,
+                Nickname = txtNickname.Text,
+                Sex = rbMale.Checked ? "Male" : rbFemale.Checked ? "Female" : null,
+                Age = int.TryParse(txtAge.Text, out var age) ? age : 0,
+                Nationality = txtNationality.Text,
+                Citizenship = txtCitizenship.Text,
+                DateOfBirth = dtpDateOfBirth.Value,
+                PlaceOfBirth = txtPlaceOfBirth.Text,
+                CivilStatus = txtCivilStatus.Text,
+                Children = rbWithChild.Checked ? "With Child" : rbWithoutChild.Checked ? "Without Child" : null,
+                SpouseName = txtCivilStatus.Text == "Married" ? txtSpouseName.Text : null,
+                NumberOfChildren = (int)numericUpDownNumberOfChildren.Value,
+                Religion = txtReligion.Text,
+                ContactNumber = txtContactNumber.Text,
+                EmailAddress = txtEmailAddress.Text,
+                CompleteHomeAddress = txtCompleteHomeAddress.Text,
+                BoardingHouseAddress = txtBoardingHouseAddress.Text,
+                LandlordName = txtLandlordName.Text,
+                PersonToContact = txtEmergencyContact.Text,
+                CellNumber = txtGuardianphone.Text,
+                Hobbies = txtHobbies.Text,
+                DescribeYourself = txtDescribeYourself.Text
+            };
+
+            return studentData;
+        }
+
+        private async Task SaveFamilyData(FamilyData family)
+        {
+            string connectionString = "server=localhost;port=3306;database=guidancedb;user=root;password=;";
+            using (var connection = new MySqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
+
+                string query = @"INSERT INTO tbl_family_data 
+                        (Student_ID, Parent_Type,Living_Status,Parents_Name, Tel_Cell_No, Nationality, Educational_Attainment, Occupation, Employer_Agency, Working_Abroad, Marital_Status, Monthly_Income,
+                        No_of_Children, Students_Birth_Order, Language_Dialect, Family_Structure, Indigenous_Group, 4Ps_Beneficiary)
+                        VALUES
+                        (@StudentID, @ParentType, @LivingStatus,@ParentsName, @TelCellNo, @Nationality, @EducationalAttainment, @Occupation, @EmployerAgency, @WorkingAbroad, @MaritalStatus, @MonthlyIncome, @NoOfChildren, @StudentsBirthOrder, @LanguageDialect, @FamilyStructure, @IndigenousGroup, @Beneficiary4Ps);";
+
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    // Assign parameters
+                    command.Parameters.AddWithValue("@StudentID", SavedStudentID);
+                    command.Parameters.AddWithValue("@ParentType", family.ParentType);
+                    command.Parameters.AddWithValue("@LivingStatus", family.LivingStatus);
+                    command.Parameters.AddWithValue("@ParentsName", family.Name);
+                    command.Parameters.AddWithValue("@TelCellNo", family.TelCellNo);
+                    command.Parameters.AddWithValue("@Nationality", family.Nationality);
+                    command.Parameters.AddWithValue("@EducationalAttainment", family.EducationalAttainment);
+                    command.Parameters.AddWithValue("@Occupation", family.Occupation);
+                    command.Parameters.AddWithValue("@EmployerAgency", family.EmployerAgency);
+                    command.Parameters.AddWithValue("@WorkingAbroad", family.WorkingAbroad);
+                    command.Parameters.AddWithValue("@MaritalStatus", family.MaritalStatus);
+                    command.Parameters.AddWithValue("@MonthlyIncome", family.MonthlyIncome);
+                    command.Parameters.AddWithValue("@NoOfChildren", family.NoOfChildren);
+                    command.Parameters.AddWithValue("@StudentsBirthOrder", family.StudentsBirthOrder);
+                    command.Parameters.AddWithValue("@LanguageDialect", family.LanguageDialect);
+                    command.Parameters.AddWithValue("@FamilyStructure", family.FamilyStructure);
+                    command.Parameters.AddWithValue("@IndigenousGroup", family.IndigenousGroup);
+                    command.Parameters.AddWithValue("@Beneficiary4Ps", family.Beneficiary4Ps);
+
+                    try
+                    {
+                        int result = await command.ExecuteNonQueryAsync();
+                        MessageBox.Show(result > 0 ? "Family data saved!" : "Family data not saved.");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error: {ex.Message}");
+                    }
+                }
+            }
+        }
+
+        private async Task SaveAllRecordsAsync(
+        EducationalData Education
+        )
+        {
+            string connectionString = "server=localhost;port=3306;database=guidancedb;user=root;password=;";
 
             using (var connection = new MySqlConnection(connectionString))
             {
@@ -134,14 +419,14 @@ namespace GuidanceManagementSystem
                     try
                     {
                         // Save individual record
-                        string studentID = txtStudentID.Text;
+                        string studentID = SavedStudentID;
                         //string studentID = await SaveIndividualRecord(IndividualInfo, connection, transaction);
 
                         // Save other records asynchronously
-                        await SaveStudentRecord(studentRecord, studentID, connection, transaction);
+                       // await SaveStudentRecord(studentRecord, studentID, connection, transaction);
                         await SaveEducationalRecord(Education, studentID, connection, transaction);
-                        await TestSaveHealthData(healthData);
-                        await SaveFamilyData(father, mother, studentID, connection, transaction);
+                        //await TestSaveHealthData(healthData);
+                       //await SaveFamilyData(father, mother, studentID, connection, transaction);
                         //await SaveAdditionalProfile(AdditionalInfo, studentID, connection, transaction);
                         // Save siblings with StudentID as a foreign key
                         //foreach (var siblingData in sibling)
@@ -150,7 +435,7 @@ namespace GuidanceManagementSystem
                         //}
                         // Commit the transaction if all inserts succeed
                         await transaction.CommitAsync();
-                        MessageBox.Show("Health data saved successfully!");
+                        //MessageBox.Show("Health data saved successfully!");
                     }
                     catch (Exception ex)
                     {
@@ -161,90 +446,87 @@ namespace GuidanceManagementSystem
                 }
             }
         }
-        private async Task SaveStudentRecord(StudentRecord record, string studentID, MySqlConnection connection, MySqlTransaction transaction)
+        private async Task SaveStudentRecord(PersonalData PersonalInfo)
         {
-            try
+
+            string connectionString = "server=localhost;port=3306;database=guidancedb;user=root;password=;";
+            //string studentID = SavedStudentID.ToString();
+            // Create the connection
+            using (var connection = new MySqlConnection(connectionString))
             {
-                // SQL query to insert data into tbl_personal_data
+                await connection.OpenAsync();  // Open the connection asynchronously
+
                 string query = @"
-        INSERT INTO tbl_personal_data (
-            Student_ID, Firstname, Middlename, Lastname, Nickname, Sex, Age, 
-            Nationality, Citizenship, Date_of_Birth, Place_of_Birth, 
-            Civil_Status, Spouse_Name, Number_of_Children, Religion, 
-            Contact_No, E_mail_Address, Complete_Home_Address, 
-            Boarding_House_Address, Landlord_Name, Person_to_contact, 
-            Cell_no, Hobbies_Skills_Talents, Describe_Yourself
-        ) 
-        VALUES (
-            @StudentID, @Firstname, @Middlename, @Lastname, @Nickname, @Sex, @Age, 
-            @Nationality, @Citizenship, @DateOfBirth, @PlaceOfBirth, 
-            @Civil_Status, @Spouse_Name, @Number_of_Children, @Religion, 
-            @Contact_No, @E_mail_Address, @CompleteHomeAddress, 
-            @BoardingHouseAddress, @LandlordName, @PersonToContact, 
-            @CellNumber, @Hobbies, @DescribeYourself
-        ); ";
-                // Ensure the connection is open
-                if (connection.State != ConnectionState.Open)
+            INSERT INTO tbl_personal_data (
+                Student_ID, Firstname, Middlename, Lastname, Nickname, Sex, Age, 
+                Nationality, Citizenship, Date_of_Birth, Place_of_Birth, Civil_Status, 
+                With_or_Without_Child, Spouse_Name, Number_of_Children, Religion, 
+                Contact_No, E_mail_Address, Complete_Home_Address, Boarding_House_Address, 
+                Landlord_Name, Person_to_contact, Cell_no, Hobbies_Skills_Talents, Describe_Yourself
+            ) 
+            VALUES (
+                @StudentID, @FirstName, @MiddleName, @LastName, @NickName, @Sex, @Age, 
+                @Nationality, @Citizenship, @DateOfBirth, @PlaceOfBirth, @Civil_Status, 
+                @Children, @Spouse_Name, @Number_of_Children, @Religion, 
+                @Contact_No, @E_mail_Address, @CompleteHomeAddress, @BoardingHouseAddress, 
+                @LandlordName, @PersonToContact, @CellNumber, @Hobbies, @DescribeYourself
+            );";
+
+                // Use the connection and a command
+                using (var command = new MySqlCommand(query, connection))
                 {
-                    connection.Open();
+                    // Assign parameter values for the query
+                   // command.Parameters.AddWithValue("PersonalDataID", PersonalInfo.PersonalDataID);
+                    command.Parameters.AddWithValue("@StudentID", SavedStudentID);
+                    command.Parameters.AddWithValue("@FirstName", PersonalInfo.Firstname);
+                    command.Parameters.AddWithValue("@MiddleName", PersonalInfo.Middlename);
+                    command.Parameters.AddWithValue("@LastName", PersonalInfo.Lastname);
+                    command.Parameters.AddWithValue("@NickName", PersonalInfo.Nickname);
+                    command.Parameters.AddWithValue("@Sex", PersonalInfo.Sex);
+                    command.Parameters.AddWithValue("@Age", PersonalInfo.Age);
+                    command.Parameters.AddWithValue("@Nationality", PersonalInfo.Nationality);
+                    command.Parameters.AddWithValue("@Citizenship", PersonalInfo.Citizenship);
+                    command.Parameters.AddWithValue("@DateOfBirth", PersonalInfo.DateOfBirth);
+                    command.Parameters.AddWithValue("@PlaceOfBirth", PersonalInfo.PlaceOfBirth);
+                    command.Parameters.AddWithValue("@Civil_Status", PersonalInfo.CivilStatus);
+                    command.Parameters.AddWithValue("@Children", PersonalInfo.Children); // Match "With Child" or "Without Child"
+                    command.Parameters.AddWithValue("@Spouse_Name", PersonalInfo.SpouseName);
+                    command.Parameters.AddWithValue("@Number_of_Children", PersonalInfo.NumberOfChildren);
+                    command.Parameters.AddWithValue("@Religion", PersonalInfo.Religion);
+                    command.Parameters.AddWithValue("@Contact_No", PersonalInfo.ContactNumber);
+                    command.Parameters.AddWithValue("@E_mail_Address", PersonalInfo.EmailAddress);
+                    command.Parameters.AddWithValue("@CompleteHomeAddress", PersonalInfo.CompleteHomeAddress);
+                    command.Parameters.AddWithValue("@BoardingHouseAddress", PersonalInfo.BoardingHouseAddress);
+                    command.Parameters.AddWithValue("@LandlordName", PersonalInfo.LandlordName);
+                    command.Parameters.AddWithValue("@PersonToContact", PersonalInfo.PersonToContact);
+                    command.Parameters.AddWithValue("@CellNumber", PersonalInfo.CellNumber);
+                    command.Parameters.AddWithValue("@Hobbies", PersonalInfo.Hobbies);
+                    command.Parameters.AddWithValue("@DescribeYourself", PersonalInfo.DescribeYourself);
+
+                    try
+                    {
+                        int result = await command.ExecuteNonQueryAsync();
+                        MessageBox.Show(result > 0 ? "Personal data saved!" : "Personal data not saved.");
+
+                    }
+                    catch (Exception ex)
+                    {
+                        
+                        Console.WriteLine("Error Details: " + ex);
+                        MessageBox.Show("Error bobo: " + ex.Message);
+                    }
                 }
-
-                using (var command = new MySqlCommand(query, connection, transaction))
-                {
-                    // Parameter assignments
-                    //command.Parameters.AddWithValue("@PersonalDataID", record.PersonalInfo.PersonalDataID);
-                    command.Parameters.AddWithValue("@StudentID", record.PersonalInfo.studentID);
-                    command.Parameters.AddWithValue("@Firstname", record.PersonalInfo.FirstName);
-                    command.Parameters.AddWithValue("@Middlename", record.PersonalInfo.MiddleName);
-                    command.Parameters.AddWithValue("@Lastname", record.PersonalInfo.LastName);
-                    command.Parameters.AddWithValue("@Nickname", record.PersonalInfo.Nickname);
-                    command.Parameters.AddWithValue("@Sex", record.PersonalInfo.Sex);
-                    command.Parameters.AddWithValue("@Age", record.PersonalInfo.Age);
-                    command.Parameters.AddWithValue("@Nationality", record.PersonalInfo.Nationality);
-                    command.Parameters.AddWithValue("@Citizenship", record.PersonalInfo.Citizenship);
-                    command.Parameters.AddWithValue("@DateOfBirth", record.PersonalInfo.DateOfBirth);
-                    command.Parameters.AddWithValue("@PlaceOfBirth", record.PersonalInfo.PlaceOfBirth);
-                    command.Parameters.AddWithValue("@Civil_Status", record.PersonalInfo.CivilStatus);
-                    command.Parameters.AddWithValue("@Spouse_Name", record.PersonalInfo.SpouseName ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@Number_of_Children", record.PersonalInfo.NumberOfChildren);
-                    command.Parameters.AddWithValue("@Religion", record.PersonalInfo.Religion);
-                    command.Parameters.AddWithValue("@Contact_No", record.PersonalInfo.ContactNumber);
-                    command.Parameters.AddWithValue("@E_mail_Address", record.PersonalInfo.EmailAddress);
-                    command.Parameters.AddWithValue("@CompleteHomeAddress", record.PersonalInfo.CompleteHomeAddress);
-                    command.Parameters.AddWithValue("@BoardingHouseAddress", record.PersonalInfo.BoardingHouseAddress);
-                    command.Parameters.AddWithValue("@LandlordName", record.PersonalInfo.LandlordName);
-                    command.Parameters.AddWithValue("@PersonToContact", record.PersonalInfo.PersonToContact);
-                    command.Parameters.AddWithValue("@CellNumber", record.PersonalInfo.CellNumber);
-                    command.Parameters.AddWithValue("@Hobbies", record.PersonalInfo.Hobbies);
-                    command.Parameters.AddWithValue("@DescribeYourself", record.PersonalInfo.DescribeYourself);
-
-                    // Execute the command
-                    await command.ExecuteNonQueryAsync();
-                    //record.PersonalInfo.PersonalDataID = Convert.ToInt32(new MySqlCommand("SELECT LAST_INSERT_ID();", connection, transaction).ExecuteScalar());
-                }
-
-                // Commit the transaction if all went well
-                transaction.Commit();
-            }
-            catch (Exception ex)
-            {
-                // Rollback the transaction if an error occurs
-                MessageBox.Show($"Error saving student record: {ex.Message}");
-                throw;
             }
         }
-
-
-
         private async Task SaveEducationalRecord(EducationalData Education, string studentID, MySqlConnection connection, MySqlTransaction transaction)
         {
             try
             {
                 // SQL query to insert educational record into tbl_educational_data
                 string query = @"
-            INSERT INTO tbl_educational_data_final(Student_ID, Elementary, ElementaryHonorAwards, ElementaryYearGraduated, HighSchool, JuniorHighYearGraduated, JuniorHighHonorAwards, SeniorHighSchool, SeniorHighYearGraduated, SeniorHighHonorAwards, StrandCompleted, VocationalTechnical, SHSAverageGrade, College, FavoriteSubject, WhyFavoriteSubject, 
-        LeastFavoriteSubject, WhyLeastFavoriteSubject, SupportForStudies, Membership, LeftRightHanded)
-            VALUES (
+                    INSERT INTO tbl_educational_data_final(Student_ID, Elementary, ElementaryHonorAwards, ElementaryYearGraduated, HighSchool, JuniorHighYearGraduated, JuniorHighHonorAwards, SeniorHighSchool, SeniorHighYearGraduated, SeniorHighHonorAwards, StrandCompleted, VocationalTechnical, SHSAverageGrade, College, FavoriteSubject, WhyFavoriteSubject, 
+                LeastFavoriteSubject, WhyLeastFavoriteSubject, SupportForStudies, Membership, LeftRightHanded)
+                    VALUES (
                  @StudentID, 
                  @Elementary, 
                  @ElementaryHonorAwards,  
@@ -278,7 +560,7 @@ namespace GuidanceManagementSystem
                 {
                     // Parameter assignments for educational data fields
                     //command.Parameters.AddWithValue("@EducationalID", Education.EducationalID);
-                    command.Parameters.AddWithValue("@StudentID", Education.studentID);
+                    command.Parameters.AddWithValue("@StudentID", SavedStudentID);
                     command.Parameters.AddWithValue("@Elementary", Education.Elementary);
                     command.Parameters.AddWithValue("@ElementaryHonorAwards", Education.ElementaryHonorAwards);
                     command.Parameters.AddWithValue("@ElementaryYearGraduated", Education.ElementaryYearGraduated);
@@ -323,7 +605,7 @@ namespace GuidanceManagementSystem
         }
         private async Task TestSaveHealthData(HealthData Health)
         {
-            string connectionString = "server=localhost;database=guidancedb;user=root;password=;";
+            string connectionString = "server=localhost;port=3306;database=guidancedb;user=root;password=;";
             using (var connection = new MySqlConnection(connectionString))
             {
                 await connection.OpenAsync();
@@ -332,7 +614,7 @@ namespace GuidanceManagementSystem
 
                 using (var command = new MySqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@StudentID", Health.studentID);
+                    command.Parameters.AddWithValue("@StudentID", SavedStudentID);
                     command.Parameters.AddWithValue("@SickFrequency", Health.SickFrequency);
                     command.Parameters.AddWithValue("@HealthProblems", Health.HealthProblems);
                     command.Parameters.AddWithValue("@PhysicalDisabilities", Health.PhysicalDisabilities);
@@ -344,7 +626,7 @@ namespace GuidanceManagementSystem
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Error: {ex.Message}");
+                        MessageBox.Show($"Error message: {ex.Message}");
                     }
                 }
             }
@@ -352,7 +634,7 @@ namespace GuidanceManagementSystem
 
         private async Task TestSaveAdditionalProfile(AdditionalProfile AdditionalInfo)
         {
-            string connectionString = "server=localhost;database=guidancedb;user=root;password=;";
+            string connectionString = "server=localhost;port=3306;database=guidancedb;user=root;password=;";
             using (var connection = new MySqlConnection(connectionString))
             {
                 await connection.OpenAsync();
@@ -374,7 +656,7 @@ namespace GuidanceManagementSystem
 
                 using (var command = new MySqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@StudentID", AdditionalInfo.studentID);
+                    command.Parameters.AddWithValue("@StudentID", SavedStudentID);
                     command.Parameters.AddWithValue("@SexualPreference", AdditionalInfo.SexualPreference);
                     command.Parameters.AddWithValue("@ExpressionPresent", AdditionalInfo.ExpressionPresent);
                     command.Parameters.AddWithValue("@GenderSexuallyAttracted", AdditionalInfo.GenderSexuallyAttracted);
@@ -388,14 +670,14 @@ namespace GuidanceManagementSystem
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Error: {ex.Message}");
+                        MessageBox.Show($"Error tanga: {ex.Message}");
                     }
                 }
             }
         }
         private async Task SaveIndividualRecordAsync(IndividualRecord IndividualInfo)
         {
-            string connectionString = "server=localhost;database=guidancedb;user=root;password=;";
+            string connectionString = "server=localhost;port=3306;database=guidancedb;user=root;password=;";
             string query = @"INSERT INTO tbl_individual_record (Student_ID, Course, Year,Student_Status) 
                      VALUES (@StudentID, @Course, @Year,@StudentStatus);";
 
@@ -423,7 +705,7 @@ namespace GuidanceManagementSystem
 
             using (var command = new MySqlCommand(query, connection, transaction))
             {
-                command.Parameters.AddWithValue("@StudentID", studentID);
+                command.Parameters.AddWithValue("@StudentID", SavedStudentID);
                 command.Parameters.AddWithValue("@Name", sibling.Name);
                 command.Parameters.AddWithValue("@Age", sibling.Age);
                 command.Parameters.AddWithValue("@School", sibling.School);
@@ -482,163 +764,126 @@ namespace GuidanceManagementSystem
             return null; // Default case
         }
 
-        private string GetFatherMaritalStatus()
-        {
-            if (rbFatherLivingTogether.Checked)
-                return "Living Together";
-            if (rbFatherSeparated.Checked)
-                return "Separated";
-            if (rbFatherWithAnotherPartner.Checked)
-                return "Father with Another Partner";
+        private string GetFatherMaritalStatus() =>
+            rbFatherLivingTogether.Checked ? "Living Together" :
+            rbFatherSeparated.Checked ? "Separated" :
+            rbFatherWithAnotherPartner.Checked ? "Father with Another Partner" :
+            "Unknown";
 
-            return "Unknown"; // Default case
-        }
+        private string GetMotherMaritalStatus() =>
+            rbMotherAnnulled.Checked ? "Annulled" :
+            rbMotherWidowed.Checked ? "Widowed" :
+            rbMotherWithAnotherPartner.Checked ? "Mother with Another Partner" :
+            "Unknown";
+
+       
+           private string GetMonthlyIncome() =>
+            rbBelow5000.Checked ? "Below 5000" :
+            rb5000To10000.Checked ? "5000 - 10,000" :  // Corrected the radio button condition
+            rb10001To15000.Checked ? "10,001 - 15,000" :
+            rb15001To20000.Checked ? "15,001 - 20,000" :
+            rb20001To25000.Checked ? "20,001 - 25,000" :
+            rbAbove25000.Checked ? "25,001 above" :
+            "Unknown";  // Default if no radio button is checked
 
 
-        private string GetMotherMaritalStatus()
-        {
-            if (rbMotherAnnulled.Checked)
-                return "Annulled";
-            if (rbMotherWidowed.Checked)
-                return "Widowed";
-            if (rbMotherWithAnotherPartner.Checked)
-                return "Mother with Another Partner";
+        private string GetFamilyStructure() =>
+            rbNuclear.Checked ? "Nuclear" :
+            rbExtended.Checked ? "Extended" :
+            null;
 
-            return "Unknown"; // Default case
-        }
-        private string GetMonthlyIncome()
-        {
-            if (rbBelow5000.Checked)
-                return "Below 5000";
-            if (rb10001To15000.Checked)
-                return "5000 - 10,000";
-            if (rb10001To15000.Checked)
-                return "10,001 - 15,000";
-            if (rb15001To20000.Checked)
-                return "15,001 - 20,000";
-            if (rb20001To25000.Checked)
-                return "20,001 - 25,000";
-            if (rbAbove25000.Checked)
-                return "25,001 and above";
+        private string GetIndigenousGroup() =>
+            rbIndigenousYes.Checked ? "Yes" :
+            rbIndigenousNo.Checked ? "No" :
+            null;
 
-            return "Unknown"; // Default case
-        }
-        private string GetFamilyStructure()
-        {
-            if (rbNuclear.Checked)
-                return "Nuclear";
-            if (rbExtended.Checked)
-                return "Extended";
+        private string GetBeneficiary4Ps() =>
+            rbBeneficiaryYes.Checked ? "Yes" :
+            rbBeneficiaryNo.Checked ? "No" :
+            null;
 
-            return null; // Default case
-        }
+        private string GetFatherWorkingAbroad() =>
+            rbFatherWorkingAbroadYes.Checked ? "Yes" :
+            rbFatherWorkingAbroadNo.Checked ? "No" :
+            null;
 
-        private string GetIndigenousGroup()
-        {
-            if (rbIndigenousYes.Checked)
-                return "Yes";
-            if (rbIndigenousNo.Checked)
-                return "No";
-
-            return null; // Default
-        }
-
-        private string GetBeneficiary4Ps()
-        {
-            if (rbBeneficiaryYes.Checked)
-                return "Yes";
-            if (rbBeneficiaryNo.Checked)
-                return "No";
-
-            return null; // Default
-        }
-        private string GetFatherWorkingAbroad()
-        {
-            if (rbFatherWorkingAbroadYes.Checked)
-                return "Yes";
-            if (rbFatherWorkingAbroadNo.Checked)
-                return "No";
-
-            return null; // Default case if neither is checked
-        }
-        private string GetMotherWorkingAbroad()
-        {
-            if (rbMotherWorkingAbroadYes.Checked)
-                return "Yes";
-            if (rbMotherWorkingAbroadNo.Checked)
-                return "No";
-
-            return null; // Default case if neither is checked
-        }
+        private string GetMotherWorkingAbroad() =>
+            rbMotherWorkingAbroadYes.Checked ? "Yes" :
+            rbMotherWorkingAbroadNo.Checked ? "No" :
+            null;
+        private string GetLivingStatus() =>
+            rbliving.Checked ? "Living" :
+            rbdeceased.Checked ? "Deceased" :
+            null;
 
         private async void button1_Click(object sender, EventArgs e)
         {
-
-            var studentRecord = new StudentRecord
+             var PersonalInfo = new PersonalData
             {
+                studentID = txtStudentID.Text,
+                Firstname = txtFirstName.Text,
+                Middlename = txtMiddleName.Text,
+                Lastname = txtLastName.Text,
+                Nickname = txtNickname.Text,
+                Sex = rbMale.Checked ? "Male" : rbFemale.Checked ? "Female" : null,
+                Age = int.TryParse(txtAge.Text, out var age) ? age : 0,
+                Nationality = txtNationality.Text,
+                Citizenship = txtCitizenship.Text,
+                DateOfBirth = dtpDateOfBirth.Value,
+                PlaceOfBirth = txtPlaceOfBirth.Text,
+                CivilStatus = Civilstatus,
+                Children = rbWithChild.Checked ? "With Child" : rbWithoutChild.Checked ? "Without Child" : null,
+                SpouseName = txtCivilStatus.Text == "Married" ? txtSpouseName.Text : null,
+                NumberOfChildren = (int)numericUpDownNumberOfChildren.Value,
+                Religion = txtReligion.Text,
+                ContactNumber = txtContactNumber.Text,
+                EmailAddress = txtEmailAddress.Text,
+                CompleteHomeAddress = txtCompleteHomeAddress.Text,
+                BoardingHouseAddress = txtBoardingHouseAddress.Text,
+                LandlordName = txtLandlordName.Text,
+                PersonToContact = txtEmergencyContact.Text,
+                CellNumber = txtGuardianphone.Text,
+                Hobbies = txtHobbies.Text,
+                DescribeYourself = txtDescribeYourself.Text // // Uncomment if needed
 
-                PersonalInfo = new StudentRecord.PersonalData
-                {
-                    studentID = txtStudentID.Text,
-                    FirstName = txtFirstName.Text,
-                    MiddleName = txtMiddleName.Text,
-                    LastName = txtLastName.Text,
-                    Nickname = txtNickname.Text,
-                    Sex = rbMale.Checked ? "Male" : rbFemale.Checked ? "Female" : null,
-                    Age = int.TryParse(txtAge.Text, out var age) ? age : 0,
-                    Nationality = txtNationality.Text,
-                    Citizenship = txtCitizenship.Text,
-                    DateOfBirth = dtpDateOfBirth.Value,
-                    PlaceOfBirth = txtPlaceOfBirth.Text,
-                    CivilStatus = txtCivilStatus.Text,
-                    SpouseName = txtCivilStatus.Text == "Married" ? txtSpouseName.Text : null,
-                    NumberOfChildren = (int)numericUpDownNumberOfChildren.Value,
-                    Religion = txtReligion.Text,
-                    ContactNumber = txtContactNumber.Text,
-                    EmailAddress = txtEmailAddress.Text,
-                    CompleteHomeAddress = txtCompleteHomeAddress.Text,
-                    BoardingHouseAddress = txtBoardingHouseAddress.Text,
-                    LandlordName = txtLandlordName.Text,
-                    PersonToContact = txtEmergencyContact.Text,
-                    CellNumber = txtGuardianphone.Text,
-                    Hobbies = txtHobbies.Text,
-                    DescribeYourself = txtDescribeYourself.Text // // Uncomment if needed
-
-                }
             };
+            
+            await SaveStudentRecord(PersonalInfo);
             var father = new StudentRecord.FamilyData
             {
 
                 studentID = txtStudentID.Text,
-                Parents = "Father",
-                Name = txtFatherName.Text,
-                TelCellNo = txtFatherPhone.Text,
-                Nationality = txtFatherNationality.Text,
-                EducationalAttainment = txtFatherEducationalAttainment.Text,
-                Occupation = txtFatherOccupation.Text,
-                EmployerAgency = txtFatherEmployerAgency.Text,
-                WorkingAbroad = GetFatherWorkingAbroad(), // Assuming you have radio buttons
-                MaritalStatus = GetFatherMaritalStatus(), // Implement this to return based on your UI
+                ParentType = "Father",
+                LivingStatus = GetLivingStatus(),
+                Name = txtFatherName.Text ?? string.Empty,  // Ensure Name is not null
+                TelCellNo = txtFatherPhone.Text ?? string.Empty,  // Ensure phone number is not null
+                Nationality = txtFatherNationality.Text ?? string.Empty,  // Ensure nationality is not null
+                EducationalAttainment = txtFatherEducationalAttainment.Text ?? string.Empty,  // Ensure educational attainment is not null
+                Occupation = txtFatherOccupation.Text ?? string.Empty,  // Ensure occupation is not null
+                EmployerAgency = txtFatherEmployerAgency.Text ?? string.Empty,  // Ensure employer agency is not null
+                WorkingAbroad = GetFatherWorkingAbroad(),
+                MaritalStatus = GetFatherMaritalStatus(),  // Marital Status can return null if no radio button is selected
                 MonthlyIncome = GetMonthlyIncome(),
                 NoOfChildren = int.TryParse(txtFatherNoOfChildren.Text, out var fatherChildren) ? fatherChildren : 0,
                 StudentsBirthOrder = int.TryParse(txtFatherBirthOrder.Text, out var fatherBirthOrder) ? fatherBirthOrder : 0,
-                LanguageDialect = txtFatherLanguageDialect.Text,
-                FamilyStructure = GetFamilyStructure(),
-                IndigenousGroup = GetIndigenousGroup(),
-                Beneficiary4Ps = GetBeneficiary4Ps(),
+                LanguageDialect = txtFatherLanguageDialect.Text ?? string.Empty,  // Ensure language dialect is not null
+                FamilyStructure = GetFamilyStructure(),  // Family Structure can return null if no radio button is selected
+                IndigenousGroup = GetIndigenousGroup(),  // Indigenous Group can return null if no radio button is selected
+                Beneficiary4Ps = GetBeneficiary4Ps()
             };
 
-            var mother = new StudentRecord.FamilyData
+            var mother = new FamilyData
             {
                 studentID = txtStudentID.Text,
-                Parents = "Mother",
+                ParentType = "Mother",
+                LivingStatus = GetLivingStatus(),
                 Name = txtMotherName.Text,
                 TelCellNo = txtMotherTelCellNo.Text,
                 Nationality = txtMotherNationality.Text,
                 EducationalAttainment = txtMotherEducationalAttainment.Text,
                 Occupation = txtMotherOccupation.Text,
                 EmployerAgency = txtMotherEmployerAgency.Text,
-                WorkingAbroad = GetFatherWorkingAbroad(),
+                WorkingAbroad = GetMotherWorkingAbroad(),
                 MaritalStatus = GetMotherMaritalStatus(), // Similar function for mother
                 MonthlyIncome = GetMonthlyIncome(),
                 NoOfChildren = father.NoOfChildren, // Use the same value as the father
@@ -646,8 +891,10 @@ namespace GuidanceManagementSystem
                 LanguageDialect = father.LanguageDialect, // Use the same value as the father
                 FamilyStructure = father.FamilyStructure, // Use the same value as the father
                 IndigenousGroup = father.IndigenousGroup, // Use the same value as the father
-                Beneficiary4Ps = father.Beneficiary4Ps, // Use the same value as the father
+                Beneficiary4Ps = GetBeneficiary4Ps() // Us   e the same value as the father
             };
+            await SaveFamilyData(father);
+            await SaveFamilyData(mother);
             var Education = new StudentRecord.EducationalData
             {
                 studentID = txtStudentID.Text,
@@ -724,7 +971,7 @@ namespace GuidanceManagementSystem
             try
             {
                 // Call the async SaveAllRecords method with await
-                await SaveAllRecordsAsync(studentRecord, Education, Health, father, mother);
+              // await SaveAllRecordsAsync( Education);
 
 
                 // If all records are saved successfully, show a success message
@@ -790,7 +1037,7 @@ namespace GuidanceManagementSystem
             }
         }
 
-        public string SavedStudentID { get; private set; }
+
         private async void button2_Click(object sender, EventArgs e)
         {
             try
@@ -798,9 +1045,10 @@ namespace GuidanceManagementSystem
                 // Validate that StudentID is not empty
                 if (string.IsNullOrWhiteSpace(txtStudentID.Text))
                 {
-                    MessageBox.Show("Please enter the Student ID before proceeding.");
+                    lblRequired.Visible = true;
                     return;
                 }
+
 
                 // Save Individual Record only if it hasn't been saved yet
                 if (!isIndividualRecordSaved)
@@ -819,6 +1067,7 @@ namespace GuidanceManagementSystem
 
                     // Save the Individual Record to the database
                     await SaveIndividualRecordAsync(individualRecord);
+                    lblRequired.Visible = false;
                     isIndividualRecordSaved = true; // Mark as saved
                     SavedStudentID = txtStudentID.Text; // Store the StudentID globally if needed
 
@@ -830,8 +1079,16 @@ namespace GuidanceManagementSystem
                 int currentTabIndex = tabControl1.SelectedIndex;
                 if (currentTabIndex < tabControl1.TabPages.Count - 1)
                 {
+
+                    // Enable the next tab page
                     tabControl1.TabPages[currentTabIndex + 1].Enabled = true;
+
+                    // Move to the next tab
                     tabControl1.SelectedIndex = currentTabIndex + 1;
+                }
+                else
+                {
+                    MessageBox.Show("You are already on the last tab page.");
                 }
             }
             catch (Exception ex)
@@ -842,53 +1099,18 @@ namespace GuidanceManagementSystem
             if (tabControl1.SelectedIndex == 0) // PersonalDataTab validation
             {
                 // Add validation for PersonalDataTab
-                if (string.IsNullOrEmpty(txtStudentID.Text))
+                if (string.IsNullOrEmpty(txtFirstName.Text))
                 {
 
                     MessageBox.Show("Please fill in all identification fields.");
                     return;
                 }
-            }
-            else if (tabControl1.SelectedIndex == 1) // FamilyDataTab validation
-            {
-                // Add validation for FamilyDataTab
-                if (string.IsNullOrEmpty(tabPage6.Text))
+
+                // Move to the next tab if validation passes
+                if (tabControl1.SelectedIndex < tabControl1.TabCount - 1)
                 {
-                    MessageBox.Show("Please fill in all personal data fields.");
-                    return;
+                    tabControl1.SelectedIndex++;
                 }
-            }
-            else if (tabControl1.SelectedIndex == 2) // FamilyDataTab validation
-            {
-                // Add validation for FamilyDataTab
-                if (string.IsNullOrEmpty(tabPage2.Text))
-                {
-                    MessageBox.Show("Please fill in all family data fields.");
-                    return;
-                }
-            }
-            else if (tabControl1.SelectedIndex == 3) // FamilyDataTab validation
-            {
-                // Add validation for FamilyDataTab
-                if (string.IsNullOrEmpty(tabPage3.Text))
-                {
-                    MessageBox.Show("Please fill in all family data fields.");
-                    return;
-                }
-            }
-            else if (tabControl1.SelectedIndex == 4) // FamilyDataTab validation
-            {
-                // Add validation for FamilyDataTab
-                if (string.IsNullOrEmpty(tabPage2.Text))
-                {
-                    MessageBox.Show("Please fill in all family data fields.");
-                    return;
-                }
-            }
-            // Move to the next tab if validation passes
-            if (tabControl1.SelectedIndex < tabControl1.TabCount - 1)
-            {
-                tabControl1.SelectedIndex++;
             }
         }
 
@@ -909,18 +1131,21 @@ namespace GuidanceManagementSystem
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox1.Checked)
+            if (rbWithChild.Checked)
             {
-                checkBox2.Checked = false;
+                rbWithoutChild.Checked = false;
+                numericUpDownNumberOfChildren.Enabled = true;
             }
 
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox2.Checked)
+            if (rbWithoutChild.Checked)
             {
-                checkBox1.Checked = false;
+                rbWithChild.Checked = false;
+                numericUpDownNumberOfChildren.Enabled = false;
+                numericUpDownNumberOfChildren.Value = 0;
             }
         }
 
@@ -930,13 +1155,7 @@ namespace GuidanceManagementSystem
             //MyMethods methods = new MyMethods();
 
 
-
-
         }
-
-
-
-
         private async void cuiButton2_Click_1(object sender, EventArgs e)
         {
             try
@@ -960,7 +1179,7 @@ namespace GuidanceManagementSystem
                 }
 
                 // Step 3: Save each sibling record in the database
-                string connectionString = "server=localhost;database=guidancedb;user=root;password=;";
+                string connectionString = "server=localhost;port=3306;database=guidancedb;user=root;password=;";
                 using (var connection = new MySqlConnection(connectionString))
                 {
                     await connection.OpenAsync();
@@ -1060,31 +1279,6 @@ namespace GuidanceManagementSystem
         private void txtDescribeYourself_KeyDown(object sender, KeyEventArgs e)
         {
         }
-
-        //private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    if (checkBox1.Checked)
-        //    {
-        //        checkBox2.Checked = false;
-        //    }
-        //    else
-        //    {
-        //        checkBox2.Checked = true;
-        //    }
-        //}
-
-        //private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    if (checkBox2.Checked)
-        //    {
-        //        checkBox1.Checked = false;
-        //    }
-        //    else
-        //    {
-        //        checkBox1.Checked = true;
-        //    }
-        //}
-
         private void txtFirstName_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
@@ -1252,6 +1446,392 @@ namespace GuidanceManagementSystem
         private void txtEmailAddress_KeyPress(object sender, KeyPressEventArgs e)
         {
 
+        }
+
+        private void txtMotherEmployerAgency_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void txtMotherOccupation_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void txtMotherEducationalAttainment_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void txtMotherNationality_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void txtMotherTelCellNo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsNumber(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void txtFatherNationality_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void txtFatherLanguageDialect_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void txtFatherBirthOrder_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsNumber(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void Elementary_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void ElementaryHonorAwards_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void HighSchool_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void JuniorHighHonorAwards_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void SeniorHighSchool_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void SeniorHighHonorAwards_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void StrandCompleted_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void SHSAverageGrade_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsNumber(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void VocationalTechnical_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void CollegeIfTransferee_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void textBox94_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void FavoriteSubject_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void LeastFavoriteSubject_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void WhyFavoriteSubject_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void WhyLeastFavoriteSubject_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void SupportForStudies_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void Membership_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void txtScholarshipName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void textBox103_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void txtHealthProblemsOther_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            {
+                e.Handled = true;  // Block the key press
+            }
+        }
+
+        private void txtPhysicalDisabilitiesOther_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void txtCitizenship_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbCourse_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtCivil_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        private string Civilstatus;
+        private void txtCivilStatus_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            Civilstatus = txtCivilStatus.SelectedItem?.ToString();
+
+            // Handle the enabling/disabling of the radio buttons
+            if (Civilstatus == "Married" || Civilstatus == "Widowed")
+            {
+                // Enable the radio buttons for "With Child" and "Without Child"
+                rbWithChild.Enabled = true;
+                rbWithoutChild.Enabled = true;
+
+                txtSpouseName.Enabled = Civilstatus == "Married";
+
+                // Check the state of the radio buttons to manage the NumericUpDown
+                if (rbWithoutChild.Checked)
+                {
+                    numericUpDownNumberOfChildren.Enabled = false; // Disable NumericUpDown for "Without Child"
+                    numericUpDownNumberOfChildren.Value = 0;      // Reset the value to 0
+                }
+                else if (rbWithChild.Checked)
+                {
+                    numericUpDownNumberOfChildren.Enabled = true; // Enable NumericUpDown for "With Child"
+                }
+
+                // Combine CivilStatus with Children status
+                string ChildrenStatus = rbWithChild.Checked ? "With Child" :
+                                        rbWithoutChild.Checked ? "Without Child" : null;
+
+                if (!string.IsNullOrEmpty(ChildrenStatus))
+                {
+                    Civilstatus += $" - {ChildrenStatus}";
+                }
+            }
+            else if (Civilstatus == "Single")
+            {
+                // Disable the radio buttons and NumericUpDown for "Single"
+                rbWithChild.Enabled = false;
+                rbWithoutChild.Enabled = false;
+                rbWithChild.Checked = false;
+                rbWithoutChild.Checked = false;
+
+                txtSpouseName.Enabled = false; // Disable spouse name textbox
+                txtSpouseName.Text = "";
+                numericUpDownNumberOfChildren.Enabled = false; // Disable NumericUpDown
+                numericUpDownNumberOfChildren.Value = 0;      // Reset the value to 0
+
+                // For Single, the CivilStatus remains just "Single"
+                Civilstatus = "Single";
+            }
+            else
+            {
+                // For other cases (if any), reset radio buttons and handle as needed
+                rbWithChild.Enabled = false;
+                rbWithoutChild.Enabled = false;
+                rbWithChild.Checked = false;
+                rbWithoutChild.Checked = false;
+
+                txtSpouseName.Enabled = false; // Disable spouse name textbox
+                txtSpouseName.Text = "";       // Clear spouse name textbox
+                numericUpDownNumberOfChildren.Enabled = false; // Disable NumericUpDown
+                numericUpDownNumberOfChildren.Value = 0;      // Reset the value to 0
+            }
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp|All Files|*.*";  // Filter for image files
+
+            // Show the dialog and check if a file is selected
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                // Get the file path of the selected image
+                string filePath = openFileDialog.FileName;
+
+                // Optionally, you can display the image in a PictureBox (if you have one on the form)
+                pictureBox1.Image = new System.Drawing.Bitmap(filePath);
+
+                // Optionally, you can store the file path somewhere if you need it later
+                textBoxFilePath.Text = filePath; // (Assuming you have a TextBox to show the file path)
+            }
+        }
+
+        private void numericUpDownNumberOfChildren_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void txtContactNumber_TextChanged(object sender, EventArgs e)
+        {
+            if (txtContactNumber.Text.Length == 11 )
+            {
+                txtContactNumber.BackColor = Color.White; // Reset background to default
+                txtContactNumber.ForeColor = Color.Black; // Reset text color
+            }
+            else
+            {
+                txtContactNumber.BackColor = Color.Red;    // Highlight background in red
+                txtContactNumber.ForeColor = Color.White; // Change text color for visibility
+            }
+        }
+
+        private void txtGuardianphone_TextChanged(object sender, EventArgs e)
+        {
+            if (txtGuardianphone.Text.Length == 11)
+            {
+                txtGuardianphone.BackColor = Color.White; // Reset background to default
+                txtGuardianphone.ForeColor = Color.Black; // Reset text color
+            }
+            else
+            {
+                txtGuardianphone.BackColor = Color.Red;    // Highlight background in red
+                txtGuardianphone.ForeColor = Color.White; // Change text color for visibility
+            }
+        }
+        private void txtFatherPhone_TextChanged(object sender, EventArgs e)
+        {
+            if (txtFatherPhone.Text.Length == 11)
+            {
+                txtFatherPhone.BackColor = Color.White; // Reset background to default
+                txtFatherPhone.ForeColor = Color.Black; // Reset text color
+            }
+            else
+            {
+                txtFatherPhone.BackColor = Color.Red;    // Highlight background in red
+                txtFatherPhone.ForeColor = Color.White; // Change text color for visibility
+            }
+        }
+
+        private void txtMotherTelCellNo_TextChanged(object sender, EventArgs e)
+        {
+            if (txtMotherTelCellNo.Text.Length == 11)
+            {
+                txtMotherTelCellNo.BackColor = Color.White; // Reset background to default
+                txtMotherTelCellNo.ForeColor = Color.Black; // Reset text color
+            }
+            else
+            {
+                txtMotherTelCellNo.BackColor = Color.Red;    // Highlight background in red
+                txtMotherTelCellNo.ForeColor = Color.White; // Change text color for visibility
+            }
         }
     }
 }
