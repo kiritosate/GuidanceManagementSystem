@@ -18,14 +18,14 @@ namespace GuidanceManagementSystem.View_Frms
 {
     public partial class registration_view : Form
     {
-        private string connectionString = "server=localhost;port=3306;username=root;password=;database=guidancedb;";
-
-
-        public registration_view()
+        public string SavedStudentID { get; set; }
+        public registration_view(string StudentID)
         {
             InitializeComponent();
             fetchService = new MyFetch();
             methods = new MyMethods();
+            SavedStudentID = StudentID;
+            GlobalData.SavedStudentID = this.SavedStudentID;
 
 
             cmbCourses.SelectedIndexChanged += (sender, args) =>
@@ -33,6 +33,10 @@ namespace GuidanceManagementSystem.View_Frms
                 string selectedCourse = cmbCourses.SelectedItem?.ToString();
                 LoadDataIntoDataGridView(dataGridView1, selectedCourse); // Filter the grid
             };
+        }
+        public static class GlobalData
+        {
+            public static string SavedStudentID { get; set; }
         }
 
         private BindingSource bindingSource = new BindingSource();
@@ -70,6 +74,11 @@ namespace GuidanceManagementSystem.View_Frms
         {
             MySqlDataAdapter adapter = fetchService.GetIndividualDataPending(course);
             DataTable dataTable = new DataTable();
+            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.LightGray;
+            dataGridView1.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.LightGray;
+            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+
 
             adapter.Fill(dataTable);
 
@@ -166,8 +175,8 @@ namespace GuidanceManagementSystem.View_Frms
                 cuiButton2.Image = Properties.Resources.cloud_cross_480px;
             }
         }
-
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+       
+        private async void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
@@ -204,6 +213,7 @@ namespace GuidanceManagementSystem.View_Frms
                     // Call a method to approve the student record
                     ApproveStudent(studentID);
                 }
+
                 else if (dataGridView1.Columns[columnIndex].Name == "imgEdit")
                 {
                     // Retrieve the selected student ID from the DataGridView
@@ -218,30 +228,38 @@ namespace GuidanceManagementSystem.View_Frms
                     enrollmentForm.LoadHealthDataToForm(studentId);
                     string parentType = "Father";  // or dynamically set this based on your context
                     enrollmentForm.LoadFamilyDataToForm(studentId, parentType);
-                    // Show the Enrollment Form
+                    string parenrType = "Mother";
+                    enrollmentForm.LoadMotherDataToForm(studentId, parenrType);
+                    enrollmentForm.LoadEducationalDataToForm(studentId);
+                    enrollmentForm.LoadHealthData(studentId);
+                    enrollmentForm.LoadAdditionalProfileData(studentId);
+                    //update button
+                    enrollmentForm.button1.Text = "Update";
+                    isEditMode = true;
+
+
+                    List<Sibling> siblings = enrollmentForm.GetSiblingsByStudentId(studentId); // Method to fetch siblings data
+                    enrollmentForm.LoadSiblingsDataToDataGridView(siblings);
                     BlurEffectHelper.BlurBackground(enrollmentForm);
                 }
+             
+              
+
             }
 
             //MessageBox.Show($"Student Id: {StudentId}: {row.Cells[1]}");      
-    }
+       }
 
 
 
         private void ApproveStudent(string studentID)
-        {
-            string connectionString = "server=localhost;database=guidancedb;user=root;password=;";
+        {            
             string query = @"UPDATE tbl_individual_record 
                      SET Status = 1 
                      WHERE Student_ID = @StudentID";
-
             try
             {
-                using (var connection = new MySqlConnection(connectionString))
-                {
-                    connection.Open();
-
-                    using (var command = new MySqlCommand(query, connection))
+                    using (var command = new MySqlCommand(query, MyCon.GetConnection()))
                     {
                         command.Parameters.AddWithValue("@StudentID", studentID);
 
@@ -259,7 +277,7 @@ namespace GuidanceManagementSystem.View_Frms
                             MessageBox.Show("Error: Student record not found or could not be approved.");
                         }
                     }
-                }
+                
             }
             catch (Exception ex)
             {
@@ -298,7 +316,6 @@ namespace GuidanceManagementSystem.View_Frms
         }
         public void LoadData(string course = null)
         {
-            string connectionString = "server=localhost;database=guidancedb;user=root;password=;";
             string query = @"SELECT ir.Student_ID, 
                      ir.Course, 
                      ir.Year,
@@ -315,11 +332,7 @@ namespace GuidanceManagementSystem.View_Frms
 
             try
             {
-                using (var connection = new MySqlConnection(connectionString))
-                {
-                    connection.Open();
-
-                    using (var command = new MySqlCommand(query, connection))
+                    using (var command = new MySqlCommand(query, MyCon.GetConnection()))
                     {
                         if (!string.IsNullOrEmpty(course) && course != "All")
                         {
@@ -342,7 +355,7 @@ namespace GuidanceManagementSystem.View_Frms
                             AddActionColumns();
                         }
                     }
-                }
+                
             }
             catch (Exception ex)
             {
@@ -371,26 +384,19 @@ namespace GuidanceManagementSystem.View_Frms
                 if (confirmation == DialogResult.Yes)
                 {
                     Delete.DeleteRecord(studentID);
-                    MessageBox.Show("Successfully Deleted...");
-
                     dataGridView1.Columns.Clear();
                     LoadData();
                 }
-
             }
         }
         private void LoadCourses()
         {
-            string connectionString = "server=localhost;database=guidancedb;user=root;password=;";
             string query = "SELECT DISTINCT Course FROM tbl_individual_record WHERE status=0";
-
             try
             {
-                using (var connection = new MySqlConnection(connectionString))
-                {
-                    connection.Open();
+               
 
-                    using (var command = new MySqlCommand(query, connection))
+                    using (var command = new MySqlCommand(query, MyCon.GetConnection()))
                     using (var reader = command.ExecuteReader())
                     {
                         cmbCourses.Items.Clear();
@@ -403,7 +409,7 @@ namespace GuidanceManagementSystem.View_Frms
 
                         cmbCourses.SelectedIndex = 0; // Default to "All Courses"
                     }
-                }
+                
             }
             catch (Exception ex)
             {

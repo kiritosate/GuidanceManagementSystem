@@ -2081,7 +2081,7 @@
             this.dgvSiblings.Name = "dgvSiblings";
             this.dgvSiblings.RowHeadersWidth = 51;
             this.dgvSiblings.RowTemplate.Height = 24;
-            this.dgvSiblings.Size = new System.Drawing.Size(956, 437);
+            this.dgvSiblings.Size = new System.Drawing.Size(956, 471);
             this.dgvSiblings.TabIndex = 250;
             // 
             // Name
@@ -3437,7 +3437,7 @@
             this.Controls.Add(this.panel3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(5);
-            this.Name = "enrollment";
+           // this.Name = "enrollment";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "enrollment";
             this.TopMost = true;
@@ -3688,7 +3688,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Employment_Business_Agency;
         private System.Windows.Forms.Label label43;
         private System.Windows.Forms.TextBox txtNickname;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button NextButton;
         private System.Windows.Forms.Button PreviousButton;
         private System.Windows.Forms.TabPage tabPage6;
@@ -3750,5 +3749,6 @@
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.GroupBox groupBox10;
+        public System.Windows.Forms.Button button1;
     }
 }

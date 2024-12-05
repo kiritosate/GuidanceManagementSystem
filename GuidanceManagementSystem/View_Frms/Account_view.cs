@@ -1,4 +1,5 @@
 ﻿using CrystalDecisions.ReportAppServer.Prompting;
+using GuidanceManagementSystem.methods;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -55,14 +56,10 @@ namespace GuidanceManagementSystem.View_Frms
         }
         private void DeleteAccount(string tableName, int accountID)
         {
-            string connectionString = "server=localhost;port=3306;database=guidancedb;user=root;password=;";
-
-            using (var connection = new MySqlConnection(connectionString))
-            {
-                connection.Open();
+         
                 string query = $"DELETE FROM {tableName} WHERE Admin_ID = @AccountID OR Staff_ID = @AccountID;";
 
-                using (var command = new MySqlCommand(query, connection))
+                using (var command = new MySqlCommand(query, MyCon.GetConnection()))
                 {
                     command.Parameters.AddWithValue("@AccountID", accountID);
                     int rowsAffected = command.ExecuteNonQuery();
@@ -73,29 +70,9 @@ namespace GuidanceManagementSystem.View_Frms
                     }
                 }
             }
-        }
-        private void ChangePassword(string tableName, int accountID, string newPassword)
-        {
-            string connectionString = "server=localhost;port=3306;database=guidancedb;user=root;password=;";
+        
 
-            using (var connection = new MySqlConnection(connectionString))
-            {
-                connection.Open();
-                string query = $"UPDATE {tableName} SET Admin_Password = @NewPassword, Staff_Pass = @NewPassword WHERE Admin_ID = @AccountID OR Staff_ID = @AccountID;";
-
-                using (var command = new MySqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@NewPassword", newPassword);
-                    command.Parameters.AddWithValue("@AccountID", accountID);
-                    int rowsAffected = command.ExecuteNonQuery();
-
-                    if (rowsAffected == 0)
-                    {
-                        throw new Exception("Account not found or password not updated.");
-                    }
-                }
-            }
-        }
+        
 
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -191,12 +168,9 @@ namespace GuidanceManagementSystem.View_Frms
             string tableName = selectedType == "Admin" ? "tbl_admin_account" : "tbl_staff_account";
             string query = $"SELECT * FROM {tableName}";
 
-            string connectionString = "server=localhost;port=3306;database=guidancedb;user=root;password=;";
 
-            using (var connection = new MySqlConnection(connectionString))
-            {
-                connection.Open();
-                MySqlCommand command = new MySqlCommand(query, connection);
+          
+                MySqlCommand command = new MySqlCommand(query, MyCon.GetConnection());
 
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {
@@ -221,7 +195,7 @@ namespace GuidanceManagementSystem.View_Frms
                     }
                 }
             }
-        }
+        
 
 
         private void Account_view_Load(object sender, EventArgs e)

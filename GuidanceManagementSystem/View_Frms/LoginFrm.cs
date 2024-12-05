@@ -75,11 +75,11 @@ namespace GuidanceManagementSystem.View_Frms
                 }
             }
         }
-
         private void cuiButton1_Click(object sender, EventArgs e)
         {
             closeApp();
         }
+
         private async void cuiButton2_Click(object sender, EventArgs e)
         {
             cuiSpinner1.Visible = true;
@@ -101,6 +101,7 @@ namespace GuidanceManagementSystem.View_Frms
                 // Pass role information to the dashboard
                 frm.UserRole = UserSession.Role; // Pass the role to the dashboard form
                 frm.Show();
+
                 this.Hide(); // Hide the login form
             }
             else

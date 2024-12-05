@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using GuidanceManagementSystem.methods;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,16 +23,13 @@ namespace GuidanceManagementSystem.View_Frms
         }
         private void UpdateAccountPassword(string table, int accountID, string newPassword)
         {
-            string connectionString = "server=localhost;port=3306;database=guidancedb;user=root;password=;";
+
             string query = table == "tbl_admin_account"
                 ? "UPDATE tbl_admin_account SET Admin_Password = @NewPassword WHERE Admin_ID = @AccountID"
                 : "UPDATE tbl_staff_account SET Staff_Pass = @NewPassword WHERE Staff_ID = @AccountID";
 
-            using (var connection = new MySqlConnection(connectionString))
-            {
-                connection.Open();
 
-                using (var command = new MySqlCommand(query, connection))
+                using (var command = new MySqlCommand(query, MyCon.GetConnection()))
                 {
                     command.Parameters.AddWithValue("@NewPassword", newPassword);
                     command.Parameters.AddWithValue("@AccountID", accountID);
@@ -43,7 +41,7 @@ namespace GuidanceManagementSystem.View_Frms
                         throw new Exception("Account not found or password not updated.");
                     }
                 }
-            }
+            
         }
  
 
@@ -95,13 +93,10 @@ namespace GuidanceManagementSystem.View_Frms
         private void LoadAccountDetails(int accountID)
         {
             // You can load more details, like password, from the database and display them in the form
-            string connectionString = "server=localhost;port=3306;database=guidancedb;user=root;password=;";
-            using (var connection = new MySqlConnection(connectionString))
-            {
-                connection.Open();
+        
                 string query = $"SELECT * FROM tbl_admin_account WHERE Admin_ID = @AccountID"; // Use appropriate query for Admin or Staff
 
-                using (var command = new MySqlCommand(query, connection))
+                using (var command = new MySqlCommand(query, MyCon.GetConnection()))
                 {
                     command.Parameters.AddWithValue("@AccountID", accountID);
 
@@ -117,4 +112,4 @@ namespace GuidanceManagementSystem.View_Frms
             }
         }
     }
-}
+

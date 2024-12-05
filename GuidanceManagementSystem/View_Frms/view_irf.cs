@@ -16,12 +16,10 @@ namespace GuidanceManagementSystem.View_Frms
 {
     public partial class view_irf : Form
     {
-        private string connectionString = "server=localhost;port=3306;username=root;password=;database=guidancedb;";
         public view_irf(string studentId)
         {
             InitializeComponent();
             //label1.Text =  studentId;
-
         }
         private string GetStudentName(string studentId)
         {
@@ -30,14 +28,12 @@ namespace GuidanceManagementSystem.View_Frms
             string query = "SELECT Name FROM tbl_personal_data WHERE Student_ID = @Student_ID";
             string name = "";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
-            {
-                MySqlCommand command = new MySqlCommand(query, connection);
+           
+                MySqlCommand command = new MySqlCommand(query, MyCon.GetConnection());
                 command.Parameters.AddWithValue("@Student_ID", studentId);
-                connection.Open();
                 var result = command.ExecuteScalar();
                 name = result?.ToString();
-            }
+            
 
             return name;
         }

@@ -68,7 +68,9 @@ namespace GuidanceManagementSystem.View_Frms
         private void cuiButton4_Click(object sender, EventArgs e)
         {
             //registration
-            ShowFormInPanel(new registration_view());
+            string studentID = "StudentId"; // Replace with the actual student ID you need
+            ShowFormInPanel(new registration_view(studentID));
+            
         }
         private void cuiButton5_Click(object sender, EventArgs e)
         {

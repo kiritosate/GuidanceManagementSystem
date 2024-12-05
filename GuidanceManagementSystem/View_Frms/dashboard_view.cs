@@ -18,6 +18,7 @@ namespace GuidanceManagementSystem.View_Frms
 {
     public partial class dashboard_view : Form
     {
+        
         public dashboard_view()
         {
             InitializeComponent();
@@ -125,7 +126,7 @@ namespace GuidanceManagementSystem.View_Frms
         }
         private void LoadStatistics(string type = "courseStatistics")
         {
-            string connectionString = "Server=127.0.0.1;Port=3306;Database=guidancedb;Uid=root;Pwd=your_password;";
+           
             try
             {
                 string query = "";
@@ -170,10 +171,9 @@ namespace GuidanceManagementSystem.View_Frms
                         throw new Exception("Invalid statistics type.");
                 }
 
-                using (MySqlConnection con = new MySqlConnection(connectionString))
+
                 {
-                    MySqlCommand cmd = new MySqlCommand(query, con);
-                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand(query, MyCon.GetConnection());
                     MySqlDataReader reader = cmd.ExecuteReader();
 
                     List<string> labels = new List<string>();
@@ -259,7 +259,7 @@ namespace GuidanceManagementSystem.View_Frms
         }
         private void GetStudentCountByCollege()
         {
-            string connectionString = "server=localhost;port=3306;username=root;password=;database=guidancedb;";
+        
             string query = @"
         SELECT Course, COUNT(*) AS TotalStudents
         FROM tbl_individual_record
@@ -267,11 +267,9 @@ namespace GuidanceManagementSystem.View_Frms
 
             try
             {
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
-                {
-                    connection.Open();
+             
 
-                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    using (MySqlCommand cmd = new MySqlCommand(query, MyCon.GetConnection()))
                     {
                         using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
@@ -301,7 +299,7 @@ namespace GuidanceManagementSystem.View_Frms
                             }
                         }
                     }
-                }
+                
             }
             catch (Exception ex)
             {
@@ -337,14 +335,12 @@ namespace GuidanceManagementSystem.View_Frms
 
         private void GetTotalStudents()
         {
-            string connectionString = "server=localhost;port=3306;username=root;password=;database=guidancedb;";
+    
             string query = "SELECT COUNT(*) AS TotalStudents FROM tbl_individual_record";
             try
             {
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
-                {
-                    connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
+              
+                    using (MySqlCommand command = new MySqlCommand(query, MyCon.GetConnection()))
                     {
                         object result = command.ExecuteScalar();
                         int totalStudents = result != null ? Convert.ToInt32(result) : 0;
@@ -352,7 +348,7 @@ namespace GuidanceManagementSystem.View_Frms
                         // Assign the total to a label
                         lblTotalStudents.Text = $"{totalStudents}";
                     }
-                }
+                
             }
             catch (Exception ex)
             {
@@ -361,7 +357,7 @@ namespace GuidanceManagementSystem.View_Frms
         }
         private void LoadCivilStatusPieChart()
         {
-            string connectionString = "server=127.0.0.1;port=3306;username=root;password=;database=guidancedb;";
+
             string query = @"
             SELECT Civil_Status, COUNT(*) AS Total
             FROM tbl_personal_data
@@ -370,10 +366,9 @@ namespace GuidanceManagementSystem.View_Frms
 
             try
             {
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
-                {
-                    connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                
+                   
+                    using (MySqlCommand command = new MySqlCommand(query, MyCon.GetConnection()))
                     {
                         using (MySqlDataReader reader = command.ExecuteReader())
                         {
@@ -417,7 +412,6 @@ namespace GuidanceManagementSystem.View_Frms
                             pieChart1.LegendLocation = LegendLocation.Bottom;
                         }
                     }
-                }
             }
             catch (Exception ex)
             {
@@ -426,7 +420,7 @@ namespace GuidanceManagementSystem.View_Frms
         }
         private void LoadStudentStatusPieChart()
         {
-            string connectionString = "server=127.0.0.1;port=3306;username=root;password=;database=guidancedb;";
+          
             string query = @"
             SELECT Student_Status, COUNT(*) AS Total
             FROM tbl_individual_record
@@ -435,10 +429,9 @@ namespace GuidanceManagementSystem.View_Frms
 
             try
             {
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
-                {
-                    connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
+               
+                  
+                    using (MySqlCommand command = new MySqlCommand(query, MyCon.GetConnection()))
                     {
                         using (MySqlDataReader reader = command.ExecuteReader())
                         {
@@ -490,7 +483,7 @@ namespace GuidanceManagementSystem.View_Frms
                             pieChart2.LegendLocation = LegendLocation.Bottom;
                         }
                     }
-                }
+                
             }
             catch (Exception ex)
             {

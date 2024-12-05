@@ -57,7 +57,24 @@ namespace GuidanceManagementSystem.methods
                 return false; // Return false if an exception occurs
             }
         }
+        public async Task<int> ExecuteUpdateQuery(string query, MySqlParameter[] parameters)
+        {
+            using (var command = new MySqlCommand(query, MyCon.GetConnection()))
+            {
+                command.Parameters.AddRange(parameters);
 
+                try
+                {
+                    int result = await command.ExecuteNonQueryAsync();
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error message: {ex.Message}");
+                    return 0; // Return 0 if an error occurs
+                }
+            }
+        }
         public static void ApplyPlaceholder(TextBox textBox, string placeholder)
         {
             // Store the placeholder text
@@ -89,7 +106,6 @@ namespace GuidanceManagementSystem.methods
                 }
             };
         }
-
         public async Task<string> GetLocalIPAddressAsync()
         {
             return await Task.Run(() =>
@@ -284,6 +300,7 @@ namespace GuidanceManagementSystem.methods
                 }
             }
         }
+        
 
 
     }

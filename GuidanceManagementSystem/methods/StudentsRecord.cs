@@ -1,6 +1,7 @@
 ﻿using System;
 using MySql.Data.MySqlClient;
 using System.Collections.Generic;
+using GuidanceManagementSystem.methods;
 
 namespace GuidanceManagementSystem
 {
@@ -60,6 +61,7 @@ namespace GuidanceManagementSystem
             //public int HealthDataID { get; set; }
              public bool Status { get; set; }
         }
+       
 
         private string connectionString = "server=localhost;database=guidancedb;user=root;password=;";
         public class DataAccess
@@ -86,8 +88,9 @@ namespace GuidanceManagementSystem
                             {
                                 FamilyDataId = reader.GetInt32("Family_Data_ID"),
                                 studentID = reader.GetString("Student_ID"),
-                                LivingStatus = reader.GetString("Living_Status"),
+                                ParentType = reader.GetString("Parent_Type"),
                                 Name = reader.IsDBNull(reader.GetOrdinal("Parents_Name")) ? null : reader.GetString("Parents_Name"),
+                                LivingStatus = reader.GetString("Living_Status"),
                                 TelCellNo = reader.IsDBNull(reader.GetOrdinal("Tel_Cell_No")) ? null : reader.GetString("Tel_Cell_No"),
                                 Nationality = reader.IsDBNull(reader.GetOrdinal("Nationality")) ? null : reader.GetString("Nationality"),
                                 EducationalAttainment = reader.IsDBNull(reader.GetOrdinal("Educational_Attainment")) ? null : reader.GetString("Educational_Attainment"),
@@ -112,6 +115,52 @@ namespace GuidanceManagementSystem
                 }
 
                 return familyData;
+            }
+            public EducationalData GetEducationalDataByStudentId(string studentId)
+            {
+                EducationalData educationalData = null;
+
+                string query = "SELECT * FROM tbl_educational_data_final WHERE Student_ID = @Student_ID";
+
+               
+                    MySqlCommand command = new MySqlCommand(query, MyCon.GetConnection());
+                    command.Parameters.AddWithValue("@Student_ID", studentId);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            educationalData = new EducationalData
+                            {
+                                studentID = reader["Student_ID"]?.ToString(),
+                                Elementary = reader["Elementary"]?.ToString(),
+                                ElementaryHonorAwards = reader["ElementaryHonorAwards"]?.ToString(),
+                                ElementaryYearGraduated = reader["ElementaryYearGraduated"]?.ToString(),
+                                HighSchool = reader["HighSchool"]?.ToString(),
+                                JuniorHighYearGraduated = reader["JuniorHighYearGraduated"]?.ToString(),
+                                JuniorHighHonorAwards = reader["JuniorHighHonorAwards"]?.ToString(),
+                                SeniorHighSchool = reader["SeniorHighSchool"]?.ToString(),
+                                SeniorHighYearGraduated = reader["SeniorHighYearGraduated"]?.ToString(),
+                                SeniorHighHonorAwards = reader["SeniorHighHonorAwards"]?.ToString(),
+                                StrandCompleted = reader["StrandCompleted"]?.ToString(),
+                                VocationalTechnical = reader["VocationalTechnical"]?.ToString(),
+                                SHSAverageGrade = reader.IsDBNull(reader.GetOrdinal("SHSAverageGrade"))
+                                                    ? 0
+                                                    : reader.GetInt32("SHSAverageGrade"),
+                                College = reader["College"]?.ToString(),
+                                FavoriteSubject = reader["FavoriteSubject"]?.ToString(),
+                                WhyFavoriteSubject = reader["WhyFavoriteSubject"]?.ToString(),
+                                LeastFavoriteSubject = reader["LeastFavoriteSubject"]?.ToString(),
+                                WhyLeastFavoriteSubject = reader["WhyLeastFavoriteSubject"]?.ToString(),
+                                SupportForStudies = reader["SupportForStudies"]?.ToString(),
+                                Membership = reader["Membership"]?.ToString(),
+                                LeftRightHanded = reader["LeftRightHanded"]?.ToString()
+                            };
+                        }
+                    
+                }
+
+                return educationalData;
             }
 
             public HealthData LoadHealthData(string studentId)
@@ -236,15 +285,70 @@ namespace GuidanceManagementSystem
 
                 return personalData;
             }
+            // Method to fetch sibling data from the database (this should already exist, or you can adapt it)
+            public HealthData GetHealthDataByStudentId(string studentId)
+            {
+                HealthData healthData = null;
+
+                string query = "SELECT * FROM tbl_health_data WHERE Student_ID = @Student_ID";
+                    MySqlCommand command = new MySqlCommand(query, MyCon.GetConnection());
+                    command.Parameters.AddWithValue("@Student_ID", studentId);
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            healthData = new HealthData
+                            {
+                                studentID = reader["Student_ID"]?.ToString(),
+                                SickFrequency = reader["Sick_Frequency"]?.ToString(),
+                                HealthProblems = reader["Health_Problems"]?.ToString(),
+                                PhysicalDisabilities = reader["Physical_Disabilities"]?.ToString()
+                            };
+                        }
+                    
+                }
+
+                return healthData;
+            }
+            public AdditionalProfile GetAdditionalProfileByStudentId(string studentId)
+            {
+                AdditionalProfile additionalProfile = null;
+
+                string query = "SELECT * FROM tbl_additional_profile WHERE Student_ID = @Student_ID";
+
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@Student_ID", studentId);
+
+                    connection.Open();
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            additionalProfile = new AdditionalProfile
+                            {
+                                studentID = reader["Student_ID"]?.ToString(),
+                                SexualPreference = reader["Sexual_Preference"]?.ToString(),
+                                ExpressionPresent = reader["Expression_Present"]?.ToString(),
+                                GenderSexuallyAttracted = reader["Gender_Sexually_Attracted"]?.ToString(),
+                                HasScholarship = reader["Scholarship"]?.ToString(),
+                                ScholarshipName = reader["Name_of_Scholarship"]?.ToString()
+                            };
+                        }
+                    }
+                }
+
+                return additionalProfile;
+            }
+
+
             public FamilyData GetFamilyData(string studentId, string parentType)
             {
-                FamilyData familyData = null;
-
-                using (MySqlConnection conn = new MySqlConnection(connectionString))
-                {
-                    conn.Open();
+                FamilyData familyData = null;       
                     string query = "SELECT * FROM tbl_family_data WHERE Student_ID = @studentId AND Parent_Type = @parentType";
-                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    MySqlCommand cmd = new MySqlCommand(query, MyCon.GetConnection());
                     cmd.Parameters.AddWithValue("@studentId", studentId);
                     cmd.Parameters.AddWithValue("@parentType", parentType);
 
@@ -252,57 +356,38 @@ namespace GuidanceManagementSystem
                     {
                         if (reader.Read())
                         {
-                            familyData = new FamilyData
-                            {
-                                FamilyDataId = reader.GetInt32("Family_Data_ID"),
-                                studentID = reader.GetString("Student_ID"),
 
-                                // Check if Parent_Type is NULL before retrieving
-                                Name = reader.IsDBNull(reader.GetOrdinal("Parent_Type")) ? null : reader.GetString("Parent_Type"),
+                        familyData = new FamilyData
+                        {
+                            FamilyDataId = reader.GetInt32("Family_Data_ID"),
+                            studentID = reader.GetString("Student_ID"),
+                            ParentType = reader.GetString("Parent_Type"), // Correct assignment
+                            Name = reader.IsDBNull(reader.GetOrdinal("Parents_Name")) ? null : reader.GetString("Parents_Name"),
+                            LivingStatus = reader.IsDBNull(reader.GetOrdinal("Living_Status")) ? null : reader.GetString("Living_Status"),
+                            TelCellNo = reader.IsDBNull(reader.GetOrdinal("Tel_Cell_No")) ? null : reader.GetString("Tel_Cell_No"),
+                            Nationality = reader.IsDBNull(reader.GetOrdinal("Nationality")) ? null : reader.GetString("Nationality"),
+                            EducationalAttainment = reader.IsDBNull(reader.GetOrdinal("Educational_Attainment")) ? null : reader.GetString("Educational_Attainment"),
+                            Occupation = reader.IsDBNull(reader.GetOrdinal("Occupation")) ? null : reader.GetString("Occupation"),
+                            EmployerAgency = reader.IsDBNull(reader.GetOrdinal("Employer_Agency")) ? null : reader.GetString("Employer_Agency"),
+                            WorkingAbroad = reader.IsDBNull(reader.GetOrdinal("Working_Abroad")) ? null : reader.GetString("Working_Abroad"),
+                            MaritalStatus = reader.IsDBNull(reader.GetOrdinal("Marital_Status")) ? null : reader.GetString("Marital_Status"),
+                            MonthlyIncome = reader.IsDBNull(reader.GetOrdinal("Monthly_Income")) ? null : reader.GetString("Monthly_Income"),
+                            NoOfChildren = reader.IsDBNull(reader.GetOrdinal("No_of_Children")) ? (int?)null : reader.GetInt32("No_of_Children"),
+                            StudentsBirthOrder = reader.IsDBNull(reader.GetOrdinal("Students_Birth_Order")) ? (int?)null : reader.GetInt32("Students_Birth_Order"),
+                            LanguageDialect = reader.IsDBNull(reader.GetOrdinal("Language_Dialect")) ? null : reader.GetString("Language_Dialect"),
+                            FamilyStructure = reader.IsDBNull(reader.GetOrdinal("Family_Structure")) ? null : reader.GetString("Family_Structure"),
+                            IndigenousGroup = reader.IsDBNull(reader.GetOrdinal("Indigenous_Group")) ? null : reader.GetString("Indigenous_Group"),
+                            Beneficiary4Ps = reader.IsDBNull(reader.GetOrdinal("4Ps_Beneficiary")) ? null : reader.GetString("4Ps_Beneficiary"),
+                        };
 
-                                // Handle NULL values for other fields similarly
-                                LivingStatus = reader.IsDBNull(reader.GetOrdinal("Living_Status")) ? null : reader.GetString("Living_Status"),
-                                TelCellNo = reader.IsDBNull(reader.GetOrdinal("Tel_Cell_No")) ? null : reader.GetString("Tel_Cell_No"),
-                                Nationality = reader.IsDBNull(reader.GetOrdinal("Nationality")) ? null : reader.GetString("Nationality"),
-                                EducationalAttainment = reader.IsDBNull(reader.GetOrdinal("Educational_Attainment")) ? null : reader.GetString("Educational_Attainment"),
-                                Occupation = reader.IsDBNull(reader.GetOrdinal("Occupation")) ? null : reader.GetString("Occupation"),
-                                EmployerAgency = reader.IsDBNull(reader.GetOrdinal("Employer_Agency")) ? null : reader.GetString("Employer_Agency"),
-                                WorkingAbroad = reader.IsDBNull(reader.GetOrdinal("Working_Abroad")) ? null : reader.GetString("Working_Abroad"),
-                                MaritalStatus = reader.IsDBNull(reader.GetOrdinal("Marital_Status")) ? null : reader.GetString("Marital_Status"),
-
-                                // Handle decimal values for MonthlyIncome
-                                MonthlyIncome = reader.IsDBNull(reader.GetOrdinal("Monthly_Income"))
-                                 ? null
-                                 : reader.GetString("Monthly_Income"),
-
-                                // Handle nullable integer values for NoOfChildren and StudentsBirthOrder
-                                NoOfChildren = reader.IsDBNull(reader.GetOrdinal("No_of_Children"))
-                             ? (int?)null
-                             : reader.GetInt32("No_of_Children"),
-
-                                StudentsBirthOrder = reader.IsDBNull(reader.GetOrdinal("Students_Birth_Order"))
-                                 ? (int?)null
-                                 : reader.GetInt32("Students_Birth_Order"),
-
-                                // Handle NULL values for string columns
-                                LanguageDialect = reader.IsDBNull(reader.GetOrdinal("Language_Dialect")) ? null : reader.GetString("Language_Dialect"),
-                                FamilyStructure = reader.IsDBNull(reader.GetOrdinal("Family_Structure")) ? null : reader.GetString("Family_Structure"),
-                                IndigenousGroup = reader.IsDBNull(reader.GetOrdinal("Indigenous_Group")) ? null : reader.GetString("Indigenous_Group"),
-
-                                // Handle boolean value for Beneficiary4Ps
-                                Beneficiary4Ps = reader.IsDBNull(reader.GetOrdinal("4Ps_Beneficiary"))
-                             ? null
-                             : reader.GetString("4Ps_Beneficiary")
-                            };
-
-                        }
                     }
-                }
+                    }
+                
 
                 return familyData;
             }
-
         }
+
 
 
         // A. Personal Data

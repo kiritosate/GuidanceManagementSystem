@@ -16,6 +16,7 @@ namespace GuidanceManagementSystem
 {
     public partial class enrollment : Form
     {
+        private DataGridView dataGridView1;
 
         public string SavedStudentID { get; private set; }
 
@@ -265,13 +266,6 @@ namespace GuidanceManagementSystem
                         break;
                 }
                 // Optionally, set the radio buttons based on Monthly Income or Marital Status
-                if (familyData.MaritalStatus == "Living Together")
-                    rbFatherLivingTogether.Checked = true;
-                else if (familyData.MaritalStatus == "Separated")
-                    rbFatherSeparated.Checked = true;
-                else if (familyData.MaritalStatus == "Father with Another Partner")
-                    rbFatherWithAnotherPartner.Checked = true;
-
                 Console.WriteLine(familyData.MonthlyIncome);
                 switch (familyData.MonthlyIncome)
                 {
@@ -297,7 +291,12 @@ namespace GuidanceManagementSystem
                         // Optional: Handle the case where the income is null or unknown
                         break;
                 }
-
+                if (familyData.MaritalStatus == "Living Together")
+                    rbFatherLivingTogether.Checked = true;
+                else if (familyData.MaritalStatus == "Separated")
+                    rbFatherSeparated.Checked = true;
+                else if (familyData.MaritalStatus == "Father with Another Partner")
+                    rbFatherWithAnotherPartner.Checked = true;
                 if (familyData.LivingStatus == "Below 5000")
                     rbBelow5000.Checked = true;
                 else if (familyData.LivingStatus == "5000 - 10000")
@@ -310,17 +309,98 @@ namespace GuidanceManagementSystem
                     rb20001To25000.Checked = true;
                 else if (familyData.LivingStatus == "25000 Above")
                     rbAbove25000.Checked = true;
-
-              
-
-           
-               
             }
             else
             {
                 MessageBox.Show("No family data found for this student and parent type.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+        //Mother Retrive
+        public void LoadMotherDataToForm(string studentId, string parentType)
+        {
+            DataAccess dataAccess = new DataAccess();
+            FamilyData motherData = dataAccess.GetFamilyData(studentId, parentType);
+
+            if (motherData != null)
+            {
+                // Populate the text fields with the retrieved data
+                txtMotherName.Text = motherData.Name ?? string.Empty;
+                txtMotherTelCellNo.Text = motherData.TelCellNo ?? string.Empty;
+                txtMotherNationality.Text = motherData.Nationality ?? string.Empty;
+                txtMotherEducationalAttainment.Text = motherData.EducationalAttainment ?? string.Empty;
+                txtMotherOccupation.Text = motherData.Occupation ?? string.Empty;
+                txtMotherEmployerAgency.Text = motherData.EmployerAgency ?? string.Empty;
+
+                if (motherData.NoOfChildren.HasValue)
+                    txtFatherNoOfChildren.Text = motherData.NoOfChildren.Value.ToString();
+                if (motherData.StudentsBirthOrder.HasValue)
+                    txtFatherBirthOrder.Text = motherData.StudentsBirthOrder.Value.ToString();
+
+                // Set radio button values for Living Status
+                if (motherData.LivingStatus == "Yes")
+                    mrbliving.Checked = true;
+                else if (motherData.LivingStatus == "No")
+                    mrbdeceased.Checked = true;
+
+                // Set radio button values for Working Abroad
+                if (motherData.WorkingAbroad == "Yes")
+                    rbMotherWorkingAbroadYes.Checked = true;
+                else if (motherData.WorkingAbroad == "No")
+                    rbMotherWorkingAbroadNo.Checked = true;
+
+                // Set radio button values for Family Structure
+                if (motherData.FamilyStructure == "Nuclear")
+                    rbNuclear.Checked = true;
+                else if (motherData.FamilyStructure == "Extended")
+                    rbExtended.Checked = true;
+
+                // Set radio button values for Indigenous Group
+                if (motherData.IndigenousGroup == "Yes")
+                    rbIndigenousYes.Checked = true;
+                else if (motherData.IndigenousGroup == "No")
+                    rbIndigenousNo.Checked = true;
+
+                // Set radio button values for Beneficiary 4Ps
+                if (motherData.Beneficiary4Ps == "Yes")
+                    rbBeneficiaryYes.Checked = true;
+                else if (motherData.Beneficiary4Ps == "No")
+                    rbBeneficiaryNo.Checked = true;
+
+                // Set radio button values for Marital Status
+                switch (motherData.MaritalStatus)
+                {
+                    case "Living Together":
+                        rbMotherAnnulled.Checked = true;
+                        break;
+                    case "Separated":
+                        rbMotherWidowed.Checked = true;
+                        break;
+                    case "Mother with Another Partner":
+                        rbMotherWithAnotherPartner.Checked = true;
+                        break;
+                    default:
+                        // Optionally clear all radio buttons if the value is unexpected
+                        rbMotherAnnulled.Checked = false;
+                        rbMotherWidowed.Checked = false;
+                        rbMotherWithAnotherPartner.Checked = false;
+                        break;
+                }
+                if (motherData.MaritalStatus == "Annulled")
+                    rbMotherAnnulled.Checked = true;
+                else if (motherData.MaritalStatus == "Widowed")
+                    rbMotherWidowed.Checked = true;
+                else if (motherData.MaritalStatus == "Mother with Another Partner")
+                    rbMotherWithAnotherPartner.Checked = true;
+
+
+                // Set radio button values for Monthly Income
+            }
+            else
+            {
+                MessageBox.Show("No family data found for this student and parent type.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
         private PersonalData GetStudentDataFromForm()
         {
             var studentData = new PersonalData
@@ -354,6 +434,30 @@ namespace GuidanceManagementSystem
 
             return studentData;
         }
+        public Sibling GetSiblingDataFromDataGridView()
+        {
+            // Assuming you're retrieving data from the first selected row
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                DataGridViewRow row = dataGridView1.SelectedRows[0]; // Get the first selected row
+
+                var siblingData = new Sibling
+                {
+                    SiblingsID = row.Cells["SiblingsID"].Value != DBNull.Value ? Convert.ToInt32(row.Cells["SiblingsID"].Value) : 0,
+                    studentID = row.Cells["studentID"].Value != DBNull.Value ? row.Cells["studentID"].Value.ToString() : null,
+                    Name = row.Cells["Name"].Value != DBNull.Value ? row.Cells["Name"].Value.ToString() : null,
+                    Age = row.Cells["Age"].Value != DBNull.Value ? Convert.ToInt32(row.Cells["Age"].Value) : 0,
+                    School = row.Cells["School"].Value != DBNull.Value ? row.Cells["School"].Value.ToString() : null,
+                    EducationalAttainment = row.Cells["EducationalAttainment"].Value != DBNull.Value ? row.Cells["EducationalAttainment"].Value.ToString() : null,
+                    EmploymentBusinessAgency = row.Cells["EmploymentBusinessAgency"].Value != DBNull.Value ? row.Cells["EmploymentBusinessAgency"].Value.ToString() : null
+                };
+
+                return siblingData;
+            }
+
+            return null; // If no row is selected
+        }
+
 
         private async Task SaveFamilyData(FamilyData family)
         {
@@ -424,7 +528,7 @@ namespace GuidanceManagementSystem
 
                         // Save other records asynchronously
                        // await SaveStudentRecord(studentRecord, studentID, connection, transaction);
-                        await SaveEducationalRecord(Education, studentID, connection, transaction);
+                       // await SaveEducationalRecord(Education, studentID, connection, transaction);
                         //await TestSaveHealthData(healthData);
                        //await SaveFamilyData(father, mother, studentID, connection, transaction);
                         //await SaveAdditionalProfile(AdditionalInfo, studentID, connection, transaction);
@@ -449,12 +553,7 @@ namespace GuidanceManagementSystem
         private async Task SaveStudentRecord(PersonalData PersonalInfo)
         {
 
-            string connectionString = "server=localhost;port=3306;database=guidancedb;user=root;password=;";
-            //string studentID = SavedStudentID.ToString();
-            // Create the connection
-            using (var connection = new MySqlConnection(connectionString))
-            {
-                await connection.OpenAsync();  // Open the connection asynchronously
+             // Open the connection asynchronously
 
                 string query = @"
             INSERT INTO tbl_personal_data (
@@ -473,7 +572,7 @@ namespace GuidanceManagementSystem
             );";
 
                 // Use the connection and a command
-                using (var command = new MySqlCommand(query, connection))
+                using (var command = new MySqlCommand(query, MyCon.GetConnection()))
                 {
                     // Assign parameter values for the query
                    // command.Parameters.AddWithValue("PersonalDataID", PersonalInfo.PersonalDataID);
@@ -516,103 +615,72 @@ namespace GuidanceManagementSystem
                         MessageBox.Show("Error bobo: " + ex.Message);
                     }
                 }
-            }
+            
         }
-        private async Task SaveEducationalRecord(EducationalData Education, string studentID, MySqlConnection connection, MySqlTransaction transaction)
+        private async Task TestSaveEducationalData(EducationalData Education)
         {
-            try
+            string query = @"
+        INSERT INTO tbl_educational_data_final (
+            Student_ID, Elementary, ElementaryHonorAwards, ElementaryYearGraduated, 
+            HighSchool, JuniorHighYearGraduated, JuniorHighHonorAwards, SeniorHighSchool, 
+            SeniorHighYearGraduated, SeniorHighHonorAwards, StrandCompleted, VocationalTechnical, 
+            SHSAverageGrade, College, FavoriteSubject, WhyFavoriteSubject, LeastFavoriteSubject, 
+            WhyLeastFavoriteSubject, SupportForStudies, Membership, LeftRightHanded
+        )
+        VALUES (
+            @StudentID, @Elementary, @ElementaryHonorAwards, @ElementaryYearGraduated, 
+            @HighSchool, @JuniorHighYearGraduated, @JuniorHighHonorAwards, @SeniorHighSchool, 
+            @SeniorHighYearGraduated, @SeniorHighHonorAwards, @StrandCompleted, @VocationalTechnical, 
+            @SHSAverageGrade, @College, @FavoriteSubject, @WhyFavoriteSubject, @LeastFavoriteSubject, 
+            @WhyLeastFavoriteSubject, @SupportForStudies, @Membership, @LeftRightHanded
+        );";
+
+            using (var command = new MySqlCommand(query, MyCon.GetConnection()))
             {
-                // SQL query to insert educational record into tbl_educational_data
-                string query = @"
-                    INSERT INTO tbl_educational_data_final(Student_ID, Elementary, ElementaryHonorAwards, ElementaryYearGraduated, HighSchool, JuniorHighYearGraduated, JuniorHighHonorAwards, SeniorHighSchool, SeniorHighYearGraduated, SeniorHighHonorAwards, StrandCompleted, VocationalTechnical, SHSAverageGrade, College, FavoriteSubject, WhyFavoriteSubject, 
-                LeastFavoriteSubject, WhyLeastFavoriteSubject, SupportForStudies, Membership, LeftRightHanded)
-                    VALUES (
-                 @StudentID, 
-                 @Elementary, 
-                 @ElementaryHonorAwards,  
-                 @ElementaryYearGraduated, 
-                 @HighSchool, 
-                 @JuniorHighYearGraduated, 
-                 @JuniorHighHonorAwards, 
-                 @SeniorHighSchool, 
-                 @SeniorHighYearGraduated, 
-                 @SeniorHighHonorAwards, 
-                 @StrandCompleted, 
-                 @VocationalTechnical, 
-                 @SHSAverageGrade, 
-                 @College, 
-                 @FavoriteSubject, 
-                 @WhyFavoriteSubject, 
-                 @LeastFavoriteSubject, 
-                 @WhyLeastFavoriteSubject, 
-                 @SupportForStudies, 
-                 @Membership, 
-                 @LeftRightHanded
-            );";
+                // Adding parameter values
+                command.Parameters.AddWithValue("@StudentID", SavedStudentID);
+                command.Parameters.AddWithValue("@Elementary", Education.Elementary);
+                command.Parameters.AddWithValue("@ElementaryHonorAwards", Education.ElementaryHonorAwards);
+                command.Parameters.AddWithValue("@ElementaryYearGraduated", Education.ElementaryYearGraduated);
+                command.Parameters.AddWithValue("@HighSchool", Education.HighSchool);
+                command.Parameters.AddWithValue("@JuniorHighYearGraduated", Education.JuniorHighYearGraduated);
+                command.Parameters.AddWithValue("@JuniorHighHonorAwards", Education.JuniorHighHonorAwards);
+                command.Parameters.AddWithValue("@SeniorHighSchool", Education.SeniorHighSchool);
+                command.Parameters.AddWithValue("@SeniorHighYearGraduated", Education.SeniorHighYearGraduated);
+                command.Parameters.AddWithValue("@SeniorHighHonorAwards", Education.SeniorHighHonorAwards);
+                command.Parameters.AddWithValue("@StrandCompleted", Education.StrandCompleted);
+                command.Parameters.AddWithValue("@VocationalTechnical", Education.VocationalTechnical);
+                command.Parameters.AddWithValue("@SHSAverageGrade", Education.SHSAverageGrade);
+                command.Parameters.AddWithValue("@College", Education.College);
+                command.Parameters.AddWithValue("@FavoriteSubject", Education.FavoriteSubject);
+                command.Parameters.AddWithValue("@WhyFavoriteSubject", Education.WhyFavoriteSubject);
+                command.Parameters.AddWithValue("@LeastFavoriteSubject", Education.LeastFavoriteSubject);
+                command.Parameters.AddWithValue("@WhyLeastFavoriteSubject", Education.WhyLeastFavoriteSubject);
+                command.Parameters.AddWithValue("@SupportForStudies", Education.SupportForStudies);
+                command.Parameters.AddWithValue("@Membership", Education.Membership);
+                command.Parameters.AddWithValue("@LeftRightHanded", Education.LeftRightHanded);
 
-                // Ensure the connection is open
-                if (connection.State != ConnectionState.Open)
+                try
                 {
-                    connection.Open();
+                    // Execute the query
+                    int result = await command.ExecuteNonQueryAsync();
+                    MessageBox.Show(result > 0 ? "Educational data saved!" : "Educational data not saved.");
                 }
-
-                using (var command = new MySqlCommand(query, connection, transaction))
+                catch (Exception ex)
                 {
-                    // Parameter assignments for educational data fields
-                    //command.Parameters.AddWithValue("@EducationalID", Education.EducationalID);
-                    command.Parameters.AddWithValue("@StudentID", SavedStudentID);
-                    command.Parameters.AddWithValue("@Elementary", Education.Elementary);
-                    command.Parameters.AddWithValue("@ElementaryHonorAwards", Education.ElementaryHonorAwards);
-                    command.Parameters.AddWithValue("@ElementaryYearGraduated", Education.ElementaryYearGraduated);
-                    command.Parameters.AddWithValue("@HighSchool", Education.HighSchool);
-                    command.Parameters.AddWithValue("@JuniorHighYearGraduated", Education.JuniorHighYearGraduated);
-                    command.Parameters.AddWithValue("@JuniorHighHonorAwards", Education.JuniorHighHonorAwards);
-                    command.Parameters.AddWithValue("@SeniorHighSchool", Education.SeniorHighSchool);
-                    command.Parameters.AddWithValue("@SeniorHighYearGraduated", Education.SeniorHighYearGraduated);
-                    command.Parameters.AddWithValue("@SeniorHighHonorAwards", Education.SeniorHighHonorAwards);
-                    command.Parameters.AddWithValue("@StrandCompleted", Education.StrandCompleted);
-                    command.Parameters.AddWithValue("@VocationalTechnical", Education.VocationalTechnical);
-                    command.Parameters.AddWithValue("@SHSAverageGrade", Education.SHSAverageGrade);
-                    command.Parameters.AddWithValue("@College", Education.College);
-                    command.Parameters.AddWithValue("@FavoriteSubject", Education.FavoriteSubject);
-                    command.Parameters.AddWithValue("@WhyFavoriteSubject", Education.WhyFavoriteSubject);
-                    command.Parameters.AddWithValue("@LeastFavoriteSubject", Education.LeastFavoriteSubject);
-                    command.Parameters.AddWithValue("@WhyLeastFavoriteSubject", Education.WhyLeastFavoriteSubject);
-                    command.Parameters.AddWithValue("@SupportForStudies", Education.SupportForStudies);
-                    command.Parameters.AddWithValue("@Membership", Education.Membership);
-                    command.Parameters.AddWithValue("@LeftRightHanded", Education.LeftRightHanded);
-
-
-                    // Execute the command asynchronously
-                    await command.ExecuteNonQueryAsync();
-
-                    // Optionally, if you need to fetch the last inserted ID
-                    // long lastInsertId = command.LastInsertedId;
-
-                    // Commit the transaction if everything was successful
-
+                    // Catch and display errors
+                    MessageBox.Show($"Error message: {ex.Message}");
                 }
-                transaction.Commit();
-
-            }
-            catch (Exception)
-            {
-                // Rollback the transaction in case of an error
-                //MessageBox.Show($": {ex.Message}");
-                // transaction.Rollback(); 
-                throw;
             }
         }
+
         private async Task TestSaveHealthData(HealthData Health)
         {
-            string connectionString = "server=localhost;port=3306;database=guidancedb;user=root;password=;";
-            using (var connection = new MySqlConnection(connectionString))
-            {
-                await connection.OpenAsync();
+           
                 string query = @"INSERT INTO tbl_health_data (Student_ID, Sick_Frequency, Health_Problems, Physical_Disabilities)
                          VALUES (@StudentID, @SickFrequency, @HealthProblems, @PhysicalDisabilities);";
 
-                using (var command = new MySqlCommand(query, connection))
+                using (var command = new MySqlCommand(query, MyCon.GetConnection()))
                 {
                     command.Parameters.AddWithValue("@StudentID", SavedStudentID);
                     command.Parameters.AddWithValue("@SickFrequency", Health.SickFrequency);
@@ -629,15 +697,11 @@ namespace GuidanceManagementSystem
                         MessageBox.Show($"Error message: {ex.Message}");
                     }
                 }
-            }
         }
 
         private async Task TestSaveAdditionalProfile(AdditionalProfile AdditionalInfo)
         {
-            string connectionString = "server=localhost;port=3306;database=guidancedb;user=root;password=;";
-            using (var connection = new MySqlConnection(connectionString))
-            {
-                await connection.OpenAsync();
+           
                 string query = @"INSERT INTO tbl_additional_profile (
                             Student_ID, 
                             Sexual_Preference, 
@@ -654,7 +718,7 @@ namespace GuidanceManagementSystem
                             @ScholarshipName
                          );";
 
-                using (var command = new MySqlCommand(query, connection))
+                using (var command = new MySqlCommand(query, MyCon.GetConnection()))
                 {
                     command.Parameters.AddWithValue("@StudentID", SavedStudentID);
                     command.Parameters.AddWithValue("@SexualPreference", AdditionalInfo.SexualPreference);
@@ -674,18 +738,16 @@ namespace GuidanceManagementSystem
                     }
                 }
             }
-        }
+        
         private async Task SaveIndividualRecordAsync(IndividualRecord IndividualInfo)
         {
-            string connectionString = "server=localhost;port=3306;database=guidancedb;user=root;password=;";
             string query = @"INSERT INTO tbl_individual_record (Student_ID, Course, Year,Student_Status) 
                      VALUES (@StudentID, @Course, @Year,@StudentStatus);";
 
-            using (var connection = new MySqlConnection(connectionString))
-            {
-                await connection.OpenAsync();
+         
+              
 
-                using (var command = new MySqlCommand(query, connection))
+                using (var command = new MySqlCommand(query, MyCon.GetConnection()))
                 {
                     command.Parameters.AddWithValue("@StudentID", IndividualInfo.studentID);
                     command.Parameters.AddWithValue("@Course", IndividualInfo.Course);
@@ -695,7 +757,7 @@ namespace GuidanceManagementSystem
                     await command.ExecuteNonQueryAsync();
                 }
             }
-        }
+        
 
 
 
@@ -703,7 +765,7 @@ namespace GuidanceManagementSystem
         {
             string query = "INSERT INTO tbl_brothers_sisters (Student_ID, Name, Age, School, Educational_Attainment, Employment_Business_Agency) VALUES (@StudentID, @Name, @Age, @School, @EducationalAttainment, @EmploymentBusinessAgency)";
 
-            using (var command = new MySqlCommand(query, connection, transaction))
+            using (var command = new MySqlCommand(query, MyCon.GetConnection(), transaction))
             {
                 command.Parameters.AddWithValue("@StudentID", SavedStudentID);
                 command.Parameters.AddWithValue("@Name", sibling.Name);
@@ -811,11 +873,16 @@ namespace GuidanceManagementSystem
             rbMotherWorkingAbroadYes.Checked ? "Yes" :
             rbMotherWorkingAbroadNo.Checked ? "No" :
             null;
-        private string GetLivingStatus() =>
-            rbliving.Checked ? "Living" :
-            rbdeceased.Checked ? "Deceased" :
-            null;
+        private string GetLivingStatus(string parentType)
+        {
+            if (parentType == "Father")
+                return rbliving.Checked ? "Yes" : rbdeceased.Checked ? "No" : "Unknown";
+            if (parentType == "Mother")
+                return mrbliving.Checked ? "Yes" : mrbdeceased.Checked ? "No" : "Unknown";
+            return "Unknown";
+        }
 
+        
         private async void button1_Click(object sender, EventArgs e)
         {
              var PersonalInfo = new PersonalData
@@ -854,7 +921,7 @@ namespace GuidanceManagementSystem
 
                 studentID = txtStudentID.Text,
                 ParentType = "Father",
-                LivingStatus = GetLivingStatus(),
+                LivingStatus = GetLivingStatus("Father"),
                 Name = txtFatherName.Text ?? string.Empty,  // Ensure Name is not null
                 TelCellNo = txtFatherPhone.Text ?? string.Empty,  // Ensure phone number is not null
                 Nationality = txtFatherNationality.Text ?? string.Empty,  // Ensure nationality is not null
@@ -876,7 +943,7 @@ namespace GuidanceManagementSystem
             {
                 studentID = txtStudentID.Text,
                 ParentType = "Mother",
-                LivingStatus = GetLivingStatus(),
+                LivingStatus = GetLivingStatus("Mother"),
                 Name = txtMotherName.Text,
                 TelCellNo = txtMotherTelCellNo.Text,
                 Nationality = txtMotherNationality.Text,
@@ -921,6 +988,7 @@ namespace GuidanceManagementSystem
                 Membership = Membership.Text,
                 LeftRightHanded = RightHanded.Checked ? "Right Handed" : LeftHanded.Checked ? "LeftHanded" : null,
             };
+            await TestSaveEducationalData(Education);
 
 
             var Health = new HealthData
@@ -1153,6 +1221,7 @@ namespace GuidanceManagementSystem
         private void enrollment_Load(object sender, EventArgs e)
         {
             //MyMethods methods = new MyMethods();
+
 
 
         }
@@ -1832,6 +1901,240 @@ namespace GuidanceManagementSystem
                 txtMotherTelCellNo.BackColor = Color.Red;    // Highlight background in red
                 txtMotherTelCellNo.ForeColor = Color.White; // Change text color for visibility
             }
+        }
+        // Enrollment Form - Load Existing Siblings Data to dgvSiblings
+        public void LoadSiblingsDataToDataGridView(List<Sibling> siblings)
+        {
+            // Clear any existing rows in dgvSiblings before adding new data
+            dgvSiblings.Rows.Clear();
+            dgvSiblings.EnableHeadersVisualStyles = false;
+            dgvSiblings.ColumnHeadersDefaultCellStyle.BackColor = Color.LightGray;
+            dgvSiblings.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
+            dgvSiblings.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Bold);
+            dgvSiblings.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvSiblings.RowsDefaultCellStyle.BackColor = Color.White;
+            dgvSiblings.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+          
+
+
+
+            // Loop through the list of siblings and add rows to dgvSiblings
+            foreach (var sibling in siblings)
+            {
+                // Add a new row and populate the data
+                int rowIndex = dgvSiblings.Rows.Add();
+                dgvSiblings.Rows[rowIndex].Cells["Name"].Value = sibling.Name;
+                dgvSiblings.Rows[rowIndex].Cells["Age"].Value = sibling.Age;
+                dgvSiblings.Rows[rowIndex].Cells["School"].Value = sibling.School;
+                dgvSiblings.Rows[rowIndex].Cells["Educational_Attainment"].Value = sibling.EducationalAttainment;
+                dgvSiblings.Rows[rowIndex].Cells["Employment_Business_Agency"].Value = sibling.EmploymentBusinessAgency;
+            }
+        }
+
+        // Method to retrieve sibling data from DataGridView
+        private List<Sibling> GetSiblingsFromGrid()
+        {
+            List<Sibling> siblings = new List<Sibling>();
+
+            // Loop through all rows in dgvSiblings to get sibling data
+            foreach (DataGridViewRow row in dgvSiblings.Rows)
+            {
+                // Skip the new row placeholder (empty row at the bottom)
+                if (row.IsNewRow) continue;
+
+                // Retrieve values for each column
+                string name = row.Cells["Name"].Value?.ToString();
+                int age = row.Cells["Age"].Value != null ? Convert.ToInt32(row.Cells["Age"].Value) : 0;
+                string school = row.Cells["School"].Value?.ToString();
+                string educationalAttainment = row.Cells["Educational_Attainment"].Value?.ToString();
+                string employmentBusinessAgency = row.Cells["Employment_Business_Agency"].Value?.ToString();
+
+                // Create and add sibling object to the list
+                siblings.Add(new Sibling
+                {
+                    Name = name,
+                    Age = age,
+                    School = school,
+                    EducationalAttainment = educationalAttainment,
+                    EmploymentBusinessAgency = employmentBusinessAgency
+                });
+            }
+
+            return siblings;
+        }
+
+        // Allow adding new rows to dgvSiblings (already enabled in the DataGridView settings)
+        private void EnableAddingRowsInDGV()
+        {
+            dgvSiblings.AllowUserToAddRows = true; // Allow new rows at the bottom of the DataGridView for adding new sibling data
+        }
+        public List<Sibling> GetSiblingsByStudentId(string studentId)
+        {
+            List<Sibling> siblings = new List<Sibling>();
+
+            string query = "SELECT * FROM tbl_brothers_sisters WHERE Student_ID = @Student_ID";
+
+         
+                MySqlCommand command = new MySqlCommand(query, MyCon.GetConnection());
+                command.Parameters.AddWithValue("@Student_ID", studentId);
+
+               
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        siblings.Add(new Sibling
+                        {
+                            SiblingsID = !reader.IsDBNull(reader.GetOrdinal("Siblings_ID")) ? reader.GetInt32(reader.GetOrdinal("Siblings_ID")) : 0,
+                            studentID = !reader.IsDBNull(reader.GetOrdinal("Student_ID")) ? reader.GetString(reader.GetOrdinal("Student_ID")) : string.Empty,
+                            Name = !reader.IsDBNull(reader.GetOrdinal("Name")) ? reader.GetString(reader.GetOrdinal("Name")) : string.Empty,
+                            Age = !reader.IsDBNull(reader.GetOrdinal("Age")) ? reader.GetInt32(reader.GetOrdinal("Age")) : 0,
+                            School = !reader.IsDBNull(reader.GetOrdinal("School")) ? reader.GetString(reader.GetOrdinal("School")) : string.Empty,
+                            EducationalAttainment = !reader.IsDBNull(reader.GetOrdinal("Educational_Attainment")) ? reader.GetString(reader.GetOrdinal("Educational_Attainment")) : string.Empty,
+                            EmploymentBusinessAgency = !reader.IsDBNull(reader.GetOrdinal("Employment_Business_Agency")) ? reader.GetString(reader.GetOrdinal("Employment_Business_Agency")) : string.Empty
+                        });
+                }
+                
+            }
+
+            return siblings;
+        }
+        public void LoadEducationalDataToForm(string studentId)
+        {
+            DataAccess dataAccess = new DataAccess();
+            var educationalData = dataAccess.GetEducationalDataByStudentId(studentId);
+
+            if (educationalData != null)
+            {
+                txtStudentID.Text = educationalData.studentID;
+                Elementary.Text = educationalData.Elementary;
+                ElementaryHonorAwards.Text = educationalData.ElementaryHonorAwards;
+                ElementaryYearGraduated.Text = educationalData.ElementaryYearGraduated;
+
+                HighSchool.Text = educationalData.HighSchool;
+                JuniorHighYearGraduated.Text = educationalData.JuniorHighYearGraduated;
+                JuniorHighHonorAwards.Text = educationalData.JuniorHighHonorAwards;
+                SeniorHighSchool.Text = educationalData.SeniorHighSchool;
+                SeniorHighYearGraduated.Text = educationalData.SeniorHighYearGraduated;
+                SeniorHighHonorAwards.Text = educationalData.SeniorHighHonorAwards;
+
+                StrandCompleted.Text = educationalData.StrandCompleted;
+                VocationalTechnical.Text = educationalData.VocationalTechnical;
+                SHSAverageGrade.Text = educationalData.SHSAverageGrade.ToString();
+                CollegeIfTransferee.Text = educationalData.College;
+
+                FavoriteSubject.Text = educationalData.FavoriteSubject;
+                WhyFavoriteSubject.Text = educationalData.WhyFavoriteSubject;
+                LeastFavoriteSubject.Text = educationalData.LeastFavoriteSubject;
+                WhyLeastFavoriteSubject.Text = educationalData.WhyLeastFavoriteSubject;
+                SupportForStudies.Text = educationalData.SupportForStudies;
+                Membership.Text = educationalData.Membership;
+                RightHanded.Checked = educationalData.LeftRightHanded == "Right Handed";
+                LeftHanded.Checked = educationalData.LeftRightHanded == "Left Handed";
+            }
+            else
+            {
+                MessageBox.Show("No educational data found for the student.");
+            }
+        }
+        public void LoadHealthData(string studentId)
+        {
+            DataAccess dataAccess = new DataAccess();
+            HealthData healthData = dataAccess.GetHealthDataByStudentId(studentId);
+
+            if (healthData != null)
+            {
+                // Populate the form with the retrieved health data
+                // Example:
+                if (healthData.SickFrequency == "Yes")
+                    rbSickOften.Checked = true;
+                else if (healthData.SickFrequency == "No")
+                    rbSickNo.Checked = true;
+                else if (healthData.SickFrequency == "Seldom")
+                    rbSickSeldom.Checked = true;
+                else if (healthData.SickFrequency == "Sometimes")
+                    rbSickSometimes.Checked = true;
+                else if (healthData.SickFrequency == "Never")
+                    rbSickNever.Checked = true;
+
+                // Set checkboxes for Health Problems
+                if (healthData.HealthProblems.Contains("Dysmenorrhea"))
+                    chkDysmenorrhea.Checked = true;
+                if (healthData.HealthProblems.Contains("Headache"))
+                    chkHeadache.Checked = true;
+                if (healthData.HealthProblems.Contains("Asthma"))
+                    chkAsthma.Checked = true;
+                // Add other health problems similarly...
+
+                // Set checkboxes for Physical Disabilities
+                if (healthData.PhysicalDisabilities.Contains("Visual Impairment"))
+                    chkVisualImpairment.Checked = true;
+                if (healthData.PhysicalDisabilities.Contains("Polio"))
+                    chkPolio.Checked = true;
+                if (healthData.PhysicalDisabilities.Contains("Hearing Impairment"))
+                    chkHearingImpairment.Checked = true;
+                // Add other physical disabilities similarly...
+
+            }
+            else
+            {
+                MessageBox.Show("No health data found for this student.");
+            }
+        }
+        public void LoadAdditionalProfileData(string studentId)
+        {
+            DataAccess dataAccess = new DataAccess();   
+            var additionalProfile = dataAccess.GetAdditionalProfileByStudentId(studentId);
+
+            if (additionalProfile != null)
+            {
+                // Populate the form fields with the retrieved data
+                // Example:
+                txtScholarshipName.Text = additionalProfile.ScholarshipName;
+
+                // Handle HasScholarship
+                if (additionalProfile.HasScholarship == "Yes")
+                {
+                    rbScholarshipYes.Checked = true;
+                }
+                else if (additionalProfile.HasScholarship == "No")
+                {
+                    rbScholarshipNo.Checked = true;
+                }
+
+                // Handle Gender Identity
+                if (additionalProfile.SexualPreference == "Male") rbMaleindentity.Checked = true;
+                else if (additionalProfile.SexualPreference == "Female") rbFemaleidentity.Checked = true;
+                else if (additionalProfile.SexualPreference == "Lesbian") rbLezbian.Checked = true;
+                else if (additionalProfile.SexualPreference == "Gay") rbGay.Checked = true;
+                else if (additionalProfile.SexualPreference == "Bisexual") rbBisexual.Checked = true;
+                else if (additionalProfile.SexualPreference == "Transgender") rbTransgender.Checked = true;
+
+                // Handle Gender Expression
+                if (additionalProfile.ExpressionPresent == "Masculine") rbExpressionMasculine.Checked = true;
+                else if (additionalProfile.ExpressionPresent == "Feminine") rbExpressionFeminine.Checked = true;
+                else if (additionalProfile.ExpressionPresent == "Androgynous") rbExpressionAndrogynous.Checked = true;
+
+                // Handle Gender Sexually Attracted
+                if (additionalProfile.GenderSexuallyAttracted == "Male") rbAttractedToMale.Checked = true;
+                else if (additionalProfile.GenderSexuallyAttracted == "Female") rbAttractedToFemale.Checked = true;
+                else if (additionalProfile.GenderSexuallyAttracted == "Lesbian") rbAttractedToLesbian.Checked = true;
+                else if (additionalProfile.GenderSexuallyAttracted == "Gay") rbAttractedToGay.Checked = true;
+                else if (additionalProfile.GenderSexuallyAttracted == "Bisexual") rbAttractedToBisexual.Checked = true;
+                else if (additionalProfile.GenderSexuallyAttracted == "Transgender") rbAttractedToTransgender.Checked = true;
+
+            }
+            else
+            {
+                MessageBox.Show("No additional profile data found for this student.");
+            }
+        }
+
+       
+
+        private void btnaddrow_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
