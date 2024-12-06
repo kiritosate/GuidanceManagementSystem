@@ -263,6 +263,7 @@ namespace GuidanceManagementSystem.View_Frms
             string query = @"
         SELECT Course, COUNT(*) AS TotalStudents
         FROM tbl_individual_record
+        WHERE Status = 1
         GROUP BY Course";
 
             try
@@ -336,7 +337,7 @@ namespace GuidanceManagementSystem.View_Frms
         private void GetTotalStudents()
         {
     
-            string query = "SELECT COUNT(*) AS TotalStudents FROM tbl_individual_record";
+            string query = "SELECT COUNT(*) AS TotalStudents FROM tbl_individual_record WHERE Status = 1";
             try
             {
               

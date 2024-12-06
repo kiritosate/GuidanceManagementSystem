@@ -230,6 +230,18 @@
     <Compile Include="docsFrm\individual_record_frm.Designer.cs">
       <DependentUpon>individual_record_frm.cs</DependentUpon>
     </Compile>
+    <Compile Include="docsFrm\irfp1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="docsFrm\irfp1.Designer.cs">
+      <DependentUpon>irfp1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="docsFrm\irfp2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="docsFrm\irfp2.Designer.cs">
+      <DependentUpon>irfp2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_AboutUs.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -357,6 +369,12 @@
     </Compile>
     <EmbeddedResource Include="docsFrm\individual_record_frm.resx">
       <DependentUpon>individual_record_frm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="docsFrm\irfp1.resx">
+      <DependentUpon>irfp1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="docsFrm\irfp2.resx">
+      <DependentUpon>irfp2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_AboutUs.resx">
       <DependentUpon>Form_AboutUs.cs</DependentUpon>

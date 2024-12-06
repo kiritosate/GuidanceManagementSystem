@@ -150,8 +150,6 @@ namespace GuidanceManagementSystem.View_Frms
             //LoadCourses();
             dataGridView1.CellFormatting += dataGridView1_CellFormatting;
 
-
-
         }
 
         private void cuiButton2_Click(object sender, EventArgs e)

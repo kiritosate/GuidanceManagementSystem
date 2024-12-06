@@ -2,10 +2,12 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DataSet = System.Data.DataSet;
 
 namespace GuidanceManagementSystem.methods
 {
@@ -43,6 +45,38 @@ namespace GuidanceManagementSystem.methods
 
             //        MySqlDataAdapter dataAdapter = new MySqlDataAdapter(query, MyCon.GetConnection());
             return dataAdapter;
+        }
+
+        public DataSet GetStudentData(string studentId)
+        {
+            DataSet studentData = new DataSet();
+
+            // Define the queries for each table
+            string[] queries = new string[]
+            {
+                "SELECT * FROM tbl_individual_record WHERE Student_ID = @StudentID", // A. Individual
+                "SELECT * FROM tbl_personal_data WHERE Student_ID = @StudentID",     // B. Personal Data
+                "SELECT * FROM tbl_family_data WHERE Student_ID = @StudentID",       // C. Family Data
+                "SELECT * FROM tbl_brothers_sisters WHERE Student_ID = @StudentID",  // D. Siblings Data
+                "SELECT * FROM tbl_educational_data_final WHERE Student_ID = @StudentID",  // E. Educational Data
+                "SELECT * FROM tbl_health_data WHERE Student_ID = @StudentID",       // F. Health Data
+                "SELECT * FROM tbl_additional_profile WHERE Student_ID = @StudentID" // G. Additional Profile
+            };
+
+            foreach (var query in queries)
+            {
+                using (MySqlCommand command = new MySqlCommand(query, MyCon.GetConnection()))
+                {
+                    command.Parameters.AddWithValue("@StudentID", studentId);
+                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
+                    {
+                        DataTable table = new DataTable();
+                        adapter.Fill(table);
+                        studentData.Tables.Add(table);
+                    }
+                }
+            }
+            return studentData;
         }
 
         public MySqlDataAdapter GetIndividualDataActive(string course = null)
