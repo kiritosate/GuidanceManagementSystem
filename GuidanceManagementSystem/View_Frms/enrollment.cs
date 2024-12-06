@@ -9,6 +9,13 @@ using static GuidanceManagementSystem.methods.MyMethods;
 using static GuidanceManagementSystem.StudentRecord;
 using System.Drawing;
 using Org.BouncyCastle.Asn1.Cmp;
+using static GuidanceManagementSystem.View_Frms.registration_view;
+using System.Windows.Controls.Primitives;
+using CrystalDecisions.ReportAppServer.Prompting;
+using System.Diagnostics.Metrics;
+using System.Drawing.Drawing2D;
+using System.Diagnostics.Eventing.Reader;
+using System.IO;
 
 
 
@@ -69,23 +76,16 @@ namespace GuidanceManagementSystem
                             break;
                     }
                 }
-                //txtPersonalDataID.Text = record.PersonalDataID?.ToString();
-                //txtFamilyDataID.Text = record.FamilyDataID?.ToString();
-                //txtSiblingsID.Text = record.SiblingsID?.ToString();
-                //txtEducationalID.Text = record.EducationalID?.ToString();
-                //txtAdditionalProfileID.Text = record.AdditionalProfileID?.ToString();
-                //txtHealthDataID.Text = record.HealthDataID?.ToString();
-                // chkStatus.Checked = record.Status;
+              
             }
             else
             {
                 MessageBox.Show("Record not found!");
             }
-        }
+             }
+ 
 
-
-
-            public void LoadHealthDataToForm(string studentId)
+        public void LoadHealthDataToForm(string studentId)
              {
             DataAccess dataAccess = new DataAccess();
             HealthData healthData = dataAccess.LoadHealthData(studentId);
@@ -132,7 +132,6 @@ namespace GuidanceManagementSystem
                     chkAbdominalPain.Checked = healthData.HealthProblems.Contains("Abdominal Pain");
                     chkSeizureDisorders.Checked = healthData.HealthProblems.Contains("Seizure Disorder");
                 }
-
                 if (healthData.PhysicalDisabilities != null)
                 {
                     chkVisualImpairment.Checked = healthData.PhysicalDisabilities.Contains("Visual Impairment");
@@ -149,8 +148,6 @@ namespace GuidanceManagementSystem
                 MessageBox.Show("No health data found for this student.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-
-
         public void LoadStudentData(string studentId)
         {
             DataAccess dataAccess = new DataAccess();
@@ -405,7 +402,7 @@ namespace GuidanceManagementSystem
         {
             var studentData = new PersonalData
             {
-                studentID = txtStudentID.Text,
+                studentID = SavedStudentID,
                 Firstname = txtFirstName.Text,
                 Middlename = txtMiddleName.Text,
                 Lastname = txtLastName.Text,
@@ -497,7 +494,7 @@ namespace GuidanceManagementSystem
                     try
                     {
                         int result = await command.ExecuteNonQueryAsync();
-                        MessageBox.Show(result > 0 ? "Family data saved!" : "Family data not saved.");
+                       
                     }
                     catch (Exception ex)
                     {
@@ -508,7 +505,13 @@ namespace GuidanceManagementSystem
         }
 
         private async Task SaveAllRecordsAsync(
-        EducationalData Education
+           
+        PersonalData PersonalInfo,
+        HealthData Health,
+        AdditionalProfile AdditionalInfo,
+        EducationalData Education,
+        FamilyData father,
+        FamilyData mother
         )
         {
             string connectionString = "server=localhost;port=3306;database=guidancedb;user=root;password=;";
@@ -524,13 +527,19 @@ namespace GuidanceManagementSystem
                     {
                         // Save individual record
                         string studentID = SavedStudentID;
-                        //string studentID = await SaveIndividualRecord(IndividualInfo, connection, transaction);
-
+                        //await SaveIndividualRecordAsync(IndividualInfo);
+                       //  studentID = await SaveIndividualRecordAsync(indi);
+                        await SaveStudentRecord(PersonalInfo);
+                        await TestSaveHealthData(Health);
+                        await TestSaveAdditionalProfile(AdditionalInfo);
+                        await TestSaveEducationalData(Education);
+                        await SaveFamilyData(father);
+                        await SaveFamilyData(mother);
                         // Save other records asynchronously
-                       // await SaveStudentRecord(studentRecord, studentID, connection, transaction);
-                       // await SaveEducationalRecord(Education, studentID, connection, transaction);
+                        // await SaveStudentRecord(studentRecord, studentID, connection, transaction);
+                        // await SaveEducationalRecord(Education, studentID, connection, transaction);
                         //await TestSaveHealthData(healthData);
-                       //await SaveFamilyData(father, mother, studentID, connection, transaction);
+                        //await SaveFamilyData(father, mother, studentID, connection, transaction);
                         //await SaveAdditionalProfile(AdditionalInfo, studentID, connection, transaction);
                         // Save siblings with StudentID as a foreign key
                         //foreach (var siblingData in sibling)
@@ -605,7 +614,7 @@ namespace GuidanceManagementSystem
                     try
                     {
                         int result = await command.ExecuteNonQueryAsync();
-                        MessageBox.Show(result > 0 ? "Personal data saved!" : "Personal data not saved.");
+                       // MessageBox.Show(result > 0 ? "Personal data saved!" : "Personal data not saved.");
 
                     }
                     catch (Exception ex)
@@ -664,7 +673,7 @@ namespace GuidanceManagementSystem
                 {
                     // Execute the query
                     int result = await command.ExecuteNonQueryAsync();
-                    MessageBox.Show(result > 0 ? "Educational data saved!" : "Educational data not saved.");
+                    //MessageBox.Show(result > 0 ? "Educational data saved!" : "Educational data not saved.");
                 }
                 catch (Exception ex)
                 {
@@ -690,7 +699,7 @@ namespace GuidanceManagementSystem
                     try
                     {
                         int result = await command.ExecuteNonQueryAsync();
-                        MessageBox.Show(result > 0 ? "Health data saved!" : "Health data not saved.");
+                        //MessageBox.Show(result > 0 ? "Health data saved!" : "Health data not saved.");
                     }
                     catch (Exception ex)
                     {
@@ -730,7 +739,7 @@ namespace GuidanceManagementSystem
                     try
                     {
                         int result = await command.ExecuteNonQueryAsync();
-                        MessageBox.Show(result > 0 ? "Additional profile saved!" : "Additional profile not saved.");
+                      //  MessageBox.Show(result > 0 ? "Additional profile saved!" : "Additional profile not saved.");
                     }
                     catch (Exception ex)
                     {
@@ -824,18 +833,22 @@ namespace GuidanceManagementSystem
 
 
             return null; // Default case
-        }
-
-        private string GetFatherMaritalStatus() =>
+            }
+            private string GetFatherMaritalStatus() =>
+            rbMotherAnnulled.Checked ? "Annulled" :
+            rbMotherWidowed.Checked ? "Widowed" :
+            rbFatherWithAnotherPartner.Checked ? "Father with Another Partner" :
             rbFatherLivingTogether.Checked ? "Living Together" :
             rbFatherSeparated.Checked ? "Separated" :
-            rbFatherWithAnotherPartner.Checked ? "Father with Another Partner" :
             "Unknown";
+
 
         private string GetMotherMaritalStatus() =>
             rbMotherAnnulled.Checked ? "Annulled" :
             rbMotherWidowed.Checked ? "Widowed" :
             rbMotherWithAnotherPartner.Checked ? "Mother with Another Partner" :
+            rbFatherLivingTogether.Checked ? "Living Together" :
+            rbFatherSeparated.Checked ? "Separated" :
             "Unknown";
 
        
@@ -881,25 +894,682 @@ namespace GuidanceManagementSystem
                 return mrbliving.Checked ? "Yes" : mrbdeceased.Checked ? "No" : "Unknown";
             return "Unknown";
         }
-
-        
-        private async void button1_Click(object sender, EventArgs e)
+        private string GetSickFrequency()
         {
-             var PersonalInfo = new PersonalData
+            if (rbSickOften.Checked) return "Yes";
+            if (rbSickNo.Checked) return "No";
+            if (rbSickSeldom.Checked) return "Seldom";
+            if (rbSickSometimes.Checked) return "Sometimes";
+            if (rbSickNever.Checked) return "Never";
+            return null; // Default case
+        }
+
+            private string GetHealthProblems()
             {
-                studentID = txtStudentID.Text,
+            List<string> selectedProblems = new List<string>();
+
+            if (chkDysmenorrhea.Checked) selectedProblems.Add("Dysmenorrhea");
+            if (chkHeadache.Checked) selectedProblems.Add("Headache");
+            if (chkAsthma.Checked) selectedProblems.Add("Asthma");
+            if (chkStomachache.Checked) selectedProblems.Add("Stomachache");
+            if (chkHeartProblems.Checked) selectedProblems.Add("Heart Problems");
+            if (chkColdsFlu.Checked) selectedProblems.Add("Colds/Flu");
+            if (chkAbdominalPain.Checked) selectedProblems.Add("Abdominal Pain");
+            if (chkSeizureDisorders.Checked) selectedProblems.Add("Seizure Disorder");
+
+            return selectedProblems.Count > 0 ? string.Join(",", selectedProblems) : null;
+        }
+
+        private string GetPhysicalDisabilities()
+        {
+            List<string> selectedDisablities = new List<string>();
+            if (chkVisualImpairment.Checked) return "Visual Impairment";
+            if (chkPolio.Checked) return "Polio";
+            if (chkHearingImpairment.Checked) return "Hearing Impairment";
+            if (chkCleftPalate.Checked) return "Cleft Palate";
+            if (chkPhysicalDeformities.Checked) return "Physical Deformities";
+            if (chkSeizureDisorders.Checked) return "Seizure Disorder";
+            return selectedDisablities.Count > 0 ? string.Join(",", selectedDisablities) : null;
+        }
+
+        private string GetStudentStatus()
+        {
+            if (rbIsNewStudent.Checked) return "New Student";
+            if (rbIsTransferee.Checked) return "Transferee";
+            if (rbIsReEntry.Checked) return "Re-entry";
+            if (rbisShifter.Checked) return "Shifter";
+
+            return null;
+        }
+        public string GetGender()
+        {
+            if (rbMale.Checked)
+            {
+                return "Male";
+            }
+            else if (rbFemale.Checked)
+            {
+                return "Female";
+            }
+            else
+            {
+                return null; // Default value if neither is selected
+            }
+        }
+        public string GetChildStatus()
+        {
+            if (rbWithChild.Checked)
+            {
+                return "With Child";
+            }
+            else if (rbWithoutChild.Checked)
+            {
+                return "Without Child";
+            }
+            else
+            {
+                return null; // Default value if neither is selected
+            }
+        }
+        private int CalculateAge(DateTime birthDate)
+        {
+            var today = DateTime.Today;
+            var age = today.Year - birthDate.Year;
+            if (birthDate.Date > today.AddYears(-age)) age--; 
+            return age;
+        }
+        private string GetScholarshipStatus()
+        {
+            if (rbScholarshipYes.Checked)
+                return "Yes";
+            else if (rbScholarshipNo.Checked)
+                return "No";
+            else
+                return null;
+        }
+        private string GetHanded()
+        {
+            if (LeftHanded.Checked)
+                return "Left";
+            else if (RightHanded.Checked)
+                return "Right";
+            else
+                return null;
+        }
+
+        public async Task UpdateEducationalData(string studentId)
+        {
+            MyMethods md = new MyMethods();
+            string query = @"UPDATE tbl_educational_data_final
+                     SET Elementary = @Elementary, 
+                         ElementaryHonorAwards = @ElementaryHonorAwards, 
+                         ElementaryYearGraduated = @ElementaryYearGraduated, 
+                         HighSchool = @HighSchool, 
+                         JuniorHighYearGraduated = @JuniorHighYearGraduated, 
+                         JuniorHighHonorAwards = @JuniorHighHonorAwards, 
+                         SeniorHighSchool = @SeniorHighSchool, 
+                         SeniorHighYearGraduated = @SeniorHighYearGraduated, 
+                         SeniorHighHonorAwards = @SeniorHighHonorAwards, 
+                         StrandCompleted = @StrandCompleted, 
+                         VocationalTechnical = @VocationalTechnical, 
+                         SHSAverageGrade = @SHSAverageGrade, 
+                         College = @College, 
+                         FavoriteSubject = @FavoriteSubject, 
+                         WhyFavoriteSubject = @WhyFavoriteSubject, 
+                         LeastFavoriteSubject = @LeastFavoriteSubject, 
+                         WhyLeastFavoriteSubject = @WhyLeastFavoriteSubject, 
+                         SupportForStudies = @SupportForStudies, 
+                         Membership = @Membership, 
+                         LeftRightHanded = @LeftRightHanded
+                     WHERE Student_ID = @StudentID";
+
+            MySqlParameter[] parameters = new MySqlParameter[]
+            {
+                new MySqlParameter("@StudentID", studentId),
+                new MySqlParameter("@Elementary", Elementary.Text),
+                new MySqlParameter("@ElementaryHonorAwards", ElementaryHonorAwards.Text),
+                new MySqlParameter("@ElementaryYearGraduated", ElementaryYearGraduated.Text),
+                new MySqlParameter("@HighSchool", HighSchool.Text),
+                new MySqlParameter("@JuniorHighYearGraduated", JuniorHighYearGraduated.Text),
+                new MySqlParameter("@JuniorHighHonorAwards", JuniorHighHonorAwards.Text),
+                new MySqlParameter("@SeniorHighSchool", SeniorHighSchool.Text),
+                new MySqlParameter("@SeniorHighYearGraduated", SeniorHighYearGraduated.Text),
+                new MySqlParameter("@SeniorHighHonorAwards", SeniorHighHonorAwards.Text),
+                new MySqlParameter("@StrandCompleted", StrandCompleted.Text),
+                new MySqlParameter("@VocationalTechnical", VocationalTechnical.Text),
+                new MySqlParameter("@SHSAverageGrade", int.TryParse(SHSAverageGrade.Text, out var average) ? average : 0),
+                new MySqlParameter("@College", CollegeIfTransferee.Text),
+                new MySqlParameter("@FavoriteSubject", FavoriteSubject.Text),
+                new MySqlParameter("@WhyFavoriteSubject", WhyFavoriteSubject.Text),
+                new MySqlParameter("@LeastFavoriteSubject", LeastFavoriteSubject.Text),
+                new MySqlParameter("@WhyLeastFavoriteSubject", WhyLeastFavoriteSubject.Text),
+                new MySqlParameter("@SupportForStudies", SupportForStudies.Text),
+                new MySqlParameter("@Membership", Membership.Text),
+                new MySqlParameter("@LeftRightHanded", GetHanded())
+                    };
+
+            int result = await md.ExecuteUpdateQuery(query, parameters);
+            if (result > 0)
+            {
+                MessageBox.Show("Educational data updated successfully!");
+            }
+        }
+
+
+        public async Task UpdateIndividualRecord(string studentId)
+        {
+            MyMethods md = new MyMethods();
+            string query = @"UPDATE tbl_individual_record 
+                     SET Course = @Course, 
+                         Year = @Year, 
+                         Student_Status = @StudentStatus
+                     WHERE Student_ID = @StudentID";
+
+            MySqlParameter[] parameters = new MySqlParameter[]
+            {
+            new MySqlParameter("@StudentID", studentId),
+            new MySqlParameter("@Course", cmbCourse.Text),
+            new MySqlParameter("@Year", cmbYear.Text),
+            new MySqlParameter("@StudentStatus", GetStudentStatus())
+            };
+
+            int result = await md.ExecuteUpdateQuery(query, parameters);
+            if (result > 0) MessageBox.Show("Individual record updated successfully!");
+        }
+        public async Task UpdateHealthData(string studentId)
+        {
+            MyMethods md = new MyMethods();
+
+            string query = @"UPDATE tbl_health_data 
+                     SET Sick_Frequency = @SickFrequency, 
+                         Health_Problems = @HealthProblems, 
+                         Physical_Disabilities = @PhysicalDisabilities
+                     WHERE Student_ID = @StudentID";
+
+            MySqlParameter[] parameters = new MySqlParameter[]
+            {
+            new MySqlParameter("@StudentID", studentId),
+            new MySqlParameter("@SickFrequency", GetSickFrequency()),
+            new MySqlParameter("@HealthProblems", GetHealthProblems()),
+            new MySqlParameter("@PhysicalDisabilities", GetPhysicalDisabilities())
+            };
+
+            int result = await md.ExecuteUpdateQuery(query, parameters);
+            if (result > 0) MessageBox.Show("Health data updated successfully!");
+        }
+        public async Task UpdateAdditionalProfile(string studentId)
+        {
+            MyMethods md = new MyMethods();
+
+            // SQL query to update additional profile data
+            string query = @"
+            UPDATE tbl_additional_profile
+            SET Sexual_Preference = @SexualPreference, 
+            Expression_Present = @ExpressionPresent, 
+            Gender_Sexually_Attracted = @GenderSexuallyAttracted, 
+            Scholarship = @HasScholarship,
+            Name_of_Scholarship = @ScholarshipName
+            WHERE Student_ID = @StudentID";
+
+            // Parameters for the query
+            MySqlParameter[] parameters = new MySqlParameter[]
+            {
+            new MySqlParameter("@StudentID", studentId),
+            new MySqlParameter("@SexualPreference", GetGenderIdentity()),
+            new MySqlParameter("@ExpressionPresent", GetGenderExpression()),
+            new MySqlParameter("@GenderSexuallyAttracted", GetGenderSexuallyAttracted()),
+            new MySqlParameter("@HasScholarship", GetScholarshipStatus()),
+            new MySqlParameter("@ScholarshipName", txtScholarshipName.Text)
+                };
+
+           
+                // Execute the update query using MyMethods class and MyCon.GetConnection
+                int result = await md.ExecuteUpdateQuery(query, parameters);
+            if (result > 0) MessageBox.Show("Health data updated successfully!");
+        }
+        public async Task UpdateSiblingsDataAsync(string studentId, List<Sibling> siblingsList)
+        {
+            
+            MyMethods md = new MyMethods();
+
+            // SQL query to update sibling data (in case you want to update existing records)
+            string query = @"
+        INSERT INTO tbl_brothers_sisters (Student_ID, Name, Age, School, Educational_Attainment, Employment_Business_Agency) 
+        VALUES (@StudentID, @Name, @Age, @School, @EducationalAttainment, @EmploymentBusinessAgency)";
+
+            // Loop through each sibling record
+            foreach (var sibling in siblingsList)
+            {
+                // Parameters for the query
+                MySqlParameter[] parameters = new MySqlParameter[]
+                {
+            new MySqlParameter("@StudentID", studentId),
+            new MySqlParameter("@Name", sibling.Name ?? string.Empty),
+            new MySqlParameter("@Age", sibling.Age),
+            new MySqlParameter("@School", sibling.School ?? string.Empty),
+            new MySqlParameter("@EducationalAttainment", sibling.EducationalAttainment ?? string.Empty),
+            new MySqlParameter("@EmploymentBusinessAgency", sibling.EmploymentBusinessAgency ?? string.Empty)
+                };
+
+                // Execute the insert query using the ExecuteUpdateQuery method
+                int result = await md.ExecuteUpdateQuery(query, parameters);
+
+                if (result > 0)
+                {
+                    MessageBox.Show("Sibling data updated successfully!");
+                }
+                else
+                {
+                    MessageBox.Show("Error updating sibling data.");
+                }
+            }
+        }
+
+        public async Task UpdateFamilyData(string studentId)
+        {
+            MyMethods md = new MyMethods();
+
+            // SQL query to update family data
+            string query = @"
+            UPDATE tbl_family_data
+            SET 
+                Parent_Type = @ParentType,
+                Living_Status = @LivingStatus,
+                Parents_Name = @Name,
+                Tel_Cell_No = @TelCellNo,
+                Nationality = @Nationality,
+                Educational_Attainment = @EducationalAttainment,
+                Occupation = @Occupation,
+                Employer_Agency = @EmployerAgency,
+                Working_Abroad = @WorkingAbroad,
+                Marital_Status = @MaritalStatus,
+                Monthly_Income = @MonthlyIncome,
+                No_of_Children = @NoOfChildren,
+                Students_Birth_Order = @StudentsBirthOrder,
+                Language_Dialect = @LanguageDialect,
+                Family_Structure = @FamilyStructure,
+                Indigenous_Group = @IndigenousGroup,
+                4Ps_Beneficiary = @Beneficiary4Ps
+            WHERE 
+                Student_ID = @StudentID AND Parent_Type = @ParentType;
+            ";
+
+            // Parameters for the query for Father
+            MySqlParameter[] fatherParameters = new MySqlParameter[]
+            {
+            new MySqlParameter("@StudentID", studentId),
+            new MySqlParameter("@ParentType", "Father"),
+            new MySqlParameter("@LivingStatus", GetLivingStatus("Father")),
+            new MySqlParameter("@Name", txtFatherName.Text ?? string.Empty),
+            new MySqlParameter("@TelCellNo", txtFatherPhone.Text ?? string.Empty),
+            new MySqlParameter("@Nationality", txtFatherNationality.Text ?? string.Empty),
+            new MySqlParameter("@EducationalAttainment", txtFatherEducationalAttainment.Text ?? string.Empty),
+            new MySqlParameter("@Occupation", txtFatherOccupation.Text ?? string.Empty),
+            new MySqlParameter("@EmployerAgency", txtFatherEmployerAgency.Text ?? string.Empty),
+            new MySqlParameter("@WorkingAbroad", GetFatherWorkingAbroad()),
+            new MySqlParameter("@MaritalStatus", GetFatherMaritalStatus() ?? (object)DBNull.Value),
+            new MySqlParameter("@MonthlyIncome", GetMonthlyIncome() ?? (object)DBNull.Value),
+            new MySqlParameter("@NoOfChildren", int.TryParse(txtFatherNoOfChildren.Text, out var fatherChildren) ? fatherChildren : 0),
+            new MySqlParameter("@StudentsBirthOrder", int.TryParse(txtFatherBirthOrder.Text, out var fatherBirthOrder) ? fatherBirthOrder : 0),
+            new MySqlParameter("@LanguageDialect", txtFatherLanguageDialect.Text ?? string.Empty),
+            new MySqlParameter("@FamilyStructure", GetFamilyStructure() ?? (object)DBNull.Value),
+            new MySqlParameter("@IndigenousGroup", GetIndigenousGroup() ?? (object)DBNull.Value),
+            new MySqlParameter("@Beneficiary4Ps", GetBeneficiary4Ps() ?? (object)DBNull.Value)
+            };
+
+            // Parameters for the query for Mother
+            MySqlParameter[] motherParameters = new MySqlParameter[]
+            {
+            new MySqlParameter("@StudentID", studentId),
+            new MySqlParameter("@ParentType", "Mother"),
+            new MySqlParameter("@LivingStatus", GetLivingStatus("Mother")),
+            new MySqlParameter("@Name", txtMotherName.Text ?? string.Empty),
+            new MySqlParameter("@TelCellNo", txtMotherTelCellNo.Text ?? string.Empty),
+            new MySqlParameter("@Nationality", txtMotherNationality.Text ?? string.Empty),
+            new MySqlParameter("@EducationalAttainment", txtMotherEducationalAttainment.Text ?? string.Empty),
+            new MySqlParameter("@Occupation", txtMotherOccupation.Text ?? string.Empty),
+            new MySqlParameter("@EmployerAgency", txtMotherEmployerAgency.Text ?? string.Empty),
+            new MySqlParameter("@WorkingAbroad", GetMotherWorkingAbroad()),
+            new MySqlParameter("@MaritalStatus", GetMotherMaritalStatus() ?? (object)DBNull.Value),
+            new MySqlParameter("@MonthlyIncome", GetMonthlyIncome() ?? (object)DBNull.Value),
+            new MySqlParameter("@NoOfChildren", txtFatherNoOfChildren.Text),
+            new MySqlParameter("@StudentsBirthOrder", txtFatherBirthOrder.Text),
+            new MySqlParameter("@LanguageDialect", txtFatherLanguageDialect.Text),
+            new MySqlParameter("@FamilyStructure", GetFamilyStructure()),
+            new MySqlParameter("@IndigenousGroup", GetIndigenousGroup() ),
+            new MySqlParameter("@Beneficiary4Ps", GetBeneficiary4Ps() ?? (object)DBNull.Value)
+            };
+
+            try
+            {
+                // Execute the update query for Father
+                int fatherResult = await md.ExecuteUpdateQuery(query, fatherParameters);
+
+                // Execute the update query for Mother
+                int motherResult = await md.ExecuteUpdateQuery(query, motherParameters);
+
+                // Provide feedback to user
+                if (fatherResult > 0 && motherResult > 0)
+                {
+                    MessageBox.Show("Family data updated successfully!");
+                }
+                else
+                {
+                    MessageBox.Show("No records were updated. Please check the input data.");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Display error message
+                MessageBox.Show($"An error occurred while updating family data: {ex.Message}");
+            }
+        }
+
+        public async Task UpdatePersonalData(string studentId)
+        {
+            MyMethods md = new MyMethods();
+
+            // SQL query to update personal data
+            string query = @"
+            UPDATE tbl_personal_data
+            SET 
+                Firstname = @FirstName,
+                Middlename = @MiddleName,
+                Lastname = @LastName,
+                Nickname = @NickName,
+                Sex = @Sex,
+                Age = @Age,
+                Nationality = @Nationality,
+                Citizenship = @Citizenship,
+                Date_of_Birth = @DateOfBirth,
+                Place_of_Birth = @PlaceOfBirth,
+                Civil_Status = @CivilStatus,
+                With_or_Without_Child = @WithChild,
+                Spouse_Name = @SpouseName,
+                Number_of_Children = @NumberOfChildren,
+                Religion = @Religion,
+                Contact_No = @ContactNo,
+                E_mail_Address = @Email,
+                Complete_Home_Address = @CompleteHomeAddress,
+                Boarding_House_Address = @BoardingHouseAddress,
+                Landlord_Name = @LandlordName,
+                Person_to_contact = @PersonToContact,
+                Cell_no = @CellNo,
+                Hobbies_Skills_Talents = @Hobbies,
+                Describe_Yourself = @DescribeYourself
+            WHERE 
+                Student_ID = @StudentID;
+            ";
+                    // Parameters for the query
+                    MySqlParameter[] parameters = new MySqlParameter[]
+                    {
+                new MySqlParameter("@StudentID", string.IsNullOrEmpty(studentId) ? DBNull.Value : (object)studentId),
+                new MySqlParameter("@FirstName", string.IsNullOrEmpty(txtFirstName.Text) ? DBNull.Value : (object)txtFirstName.Text),
+                new MySqlParameter("@MiddleName", string.IsNullOrEmpty(txtMiddleName.Text) ? DBNull.Value : (object)txtMiddleName.Text),
+                new MySqlParameter("@LastName", string.IsNullOrEmpty(txtLastName.Text) ? DBNull.Value : (object)txtLastName.Text),
+                new MySqlParameter("@NickName", string.IsNullOrEmpty(txtNickname.Text) ? DBNull.Value : (object)txtNickname.Text),
+                new MySqlParameter("@Sex", string.IsNullOrEmpty(GetGender()) ? "Not Specified" : GetGender()),
+                new MySqlParameter("@Age", CalculateAge(dtpDateOfBirth.Value) > 0 ? (object)CalculateAge(dtpDateOfBirth.Value) : DBNull.Value),
+                new MySqlParameter("@Nationality", string.IsNullOrEmpty(txtNationality.Text) ? DBNull.Value : (object)txtNationality.Text),
+                new MySqlParameter("@Citizenship", string.IsNullOrEmpty(txtCitizenship.Text) ? DBNull.Value : (object)txtCitizenship.Text),
+                new MySqlParameter("@DateOfBirth", dtpDateOfBirth.Value.ToString("yyyy-MM-dd")),
+                new MySqlParameter("@PlaceOfBirth", string.IsNullOrEmpty(txtPlaceOfBirth.Text) ? DBNull.Value : (object)txtPlaceOfBirth.Text),
+                new MySqlParameter("@CivilStatus", string.IsNullOrEmpty(txtCivilStatus.SelectedItem?.ToString()) ? DBNull.Value : (object)txtCivilStatus.SelectedItem),
+                new MySqlParameter("@WithChild", string.IsNullOrEmpty(GetChildStatus()) ? "Not Specified" : GetChildStatus()),
+                new MySqlParameter("@SpouseName", string.IsNullOrEmpty(txtSpouseName.Text) ? DBNull.Value : (object)txtSpouseName.Text),
+                new MySqlParameter("@NumberOfChildren", string.IsNullOrEmpty(numericUpDownNumberOfChildren.Text) ? DBNull.Value : (object)numericUpDownNumberOfChildren.Text),
+                new MySqlParameter("@Religion", string.IsNullOrEmpty(txtReligion.Text) ? DBNull.Value : (object)txtReligion.Text),
+                new MySqlParameter("@ContactNo", string.IsNullOrEmpty(txtContactNumber.Text) ? DBNull.Value : (object)txtContactNumber.Text),
+                new MySqlParameter("@Email", string.IsNullOrEmpty(txtEmailAddress.Text) ? DBNull.Value : (object)txtEmailAddress.Text),
+                new MySqlParameter("@CompleteHomeAddress", string.IsNullOrEmpty(txtCompleteHomeAddress.Text) ? DBNull.Value : (object)txtCompleteHomeAddress.Text),
+                new MySqlParameter("@BoardingHouseAddress", string.IsNullOrEmpty(txtBoardingHouseAddress.Text) ? DBNull.Value : (object)txtBoardingHouseAddress.Text),
+                new MySqlParameter("@LandlordName", string.IsNullOrEmpty(txtLandlordName.Text) ? DBNull.Value : (object)txtLandlordName.Text),
+                new MySqlParameter("@PersonToContact", string.IsNullOrEmpty(txtEmergencyContact.Text) ? DBNull.Value : (object)txtEmergencyContact.Text),
+                new MySqlParameter("@CellNo", string.IsNullOrEmpty(txtGuardianphone.Text) ? DBNull.Value : (object)txtGuardianphone.Text),
+                new MySqlParameter("@Hobbies", string.IsNullOrEmpty(txtHobbies.Text) ? DBNull.Value : (object)txtHobbies.Text),
+                new MySqlParameter("@DescribeYourself", string.IsNullOrEmpty(txtDescribeYourself.Text) ? DBNull.Value : (object)txtDescribeYourself.Text)
+                    };
+                    try
+                    {
+                        // Execute the update query using MyMethods helper class
+                        int result = await md.ExecuteUpdateQuery(query, parameters);
+
+                        // Provide feedback based on the execution result
+                        if (result > 0)
+                        {
+                            MessageBox.Show("Personal data updated successfully!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("No records were updated. Please check if the Student_ID exists.");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // Display a meaningful error message
+                        MessageBox.Show($"An error occurred while updating personal data: {ex.Message}");
+                    }
+                }
+        private async Task SaveImageToDatabaseAsync(byte[] imageBytes, string studentID, string imageType)
+        {
+            try
+            {
+                using (var connection = MyCon.GetConnection())
+                {
+                    // Open the connection if not already opened
+                    if (connection.State != System.Data.ConnectionState.Open)
+                    {
+                        await connection.OpenAsync();
+                    }
+
+                    // Define the query for inserting the image
+                    string query = "INSERT INTO StudentImages (Student_ID, ImageData, ImageType) " +
+                                   "VALUES (@StudentID, @ImageData, @ImageType)";
+
+                    using (var command = new MySqlCommand(query, connection))
+                    {
+                        // Add parameters for the query
+                        command.Parameters.AddWithValue("@StudentID", studentID);
+                        command.Parameters.AddWithValue("@ImageData", imageBytes);
+                        command.Parameters.AddWithValue("@ImageType", imageType);
+
+                        // Execute the query asynchronously
+                        int result = await command.ExecuteNonQueryAsync();
+
+                        // Provide feedback on success or failure
+                        if (result > 0)
+                        {
+                            //MessageBox.Show("Image saved successfully!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Failed to save image.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors that occur during the query execution
+                MessageBox.Show($"Error: {ex.Message}");
+            }
+        }
+        public async Task UpdateStudentImageAsync(string studentID, Image newImage)
+        {
+            try
+            {
+                // Convert the image to byte array
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    newImage.Save(ms, newImage.RawFormat);  // Save image in stream
+                    byte[] imageBytes = ms.ToArray();
+
+                    // Get image type (e.g., "jpg", "png")
+                    string imageType = newImage.RawFormat.ToString().ToLower();
+
+                    // Update the image in the database
+                    await UpdateImageInDatabaseAsync(studentID, imageBytes, imageType);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error updating image: {ex.Message}");
+            }
+        }
+
+        private async Task UpdateImageInDatabaseAsync(string studentID, byte[] imageBytes, string imageType)
+        {
+            try
+            {
+                // Database update query
+                string query = "UPDATE studentimages SET ImageData = @ImageData, ImageType = @ImageType WHERE Student_ID = @StudentID";
+
+                using (var conn = MyCon.GetConnection()) // Use your existing connection method
+                {
+                    await conn.OpenAsync();
+                    using (var cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@StudentID", studentID);
+                        cmd.Parameters.AddWithValue("@ImageData", imageBytes);
+                        cmd.Parameters.AddWithValue("@ImageType", imageType);
+
+                        int rowsAffected = await cmd.ExecuteNonQueryAsync();
+
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Image updated successfully.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("No image found for this student.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error updating image in database: {ex.Message}");
+            }
+        }
+
+
+        private bool isEditMode;
+            private async void button1_Click(object sender, EventArgs e)
+            {
+            if (isEditMode)
+            {
+                // Update the existing data
+                try
+                {
+                    // Update Individual Record
+                    await UpdateIndividualRecord(GlobalData.SavedStudentID);
+                    await UpdateHealthData(GlobalData.SavedStudentID);
+                    await UpdatePersonalData(GlobalData.SavedStudentID);
+                    await UpdateAdditionalProfile(GlobalData.SavedStudentID);
+                    await UpdateEducationalData(GlobalData.SavedStudentID);
+                    await UpdateFamilyData(GlobalData.SavedStudentID);
+
+                    List<Sibling> siblingsList = GetSiblingsDataFromGrid(); // This method gets the sibling data from the grid
+
+                    // Call the UpdateSiblingsDataAsync method to update the database
+                    await UpdateSiblingsDataAsync(GlobalData.SavedStudentID, siblingsList);
+                    MessageBox.Show("Data updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred while updating: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                // For saving sibling data, if not in edit mode
+                try
+                {
+                    // Step 1: Get the list of sibling data from the DataGridView
+                    List<Sibling> siblingsList = GetSiblingsDataFromGrid();
+
+                    // Check if there is sibling data to save
+                    if (siblingsList.Count == 0)
+                    {
+                        MessageBox.Show("No sibling data to save.");
+                        return;
+                    }
+
+                    // Step 2: Assuming you have a student ID (from IndividualRecord or other source)
+                    string studentID = GlobalData.SavedStudentID;  // Use the globally saved student ID
+
+                    // Check if Student ID is valid
+                    if (string.IsNullOrWhiteSpace(studentID))
+                    {
+                        MessageBox.Show("Please enter a valid Student ID.");
+                        return;
+                    }
+
+                    // Step 3: Save each sibling record in the database with a transaction
+                    string connectionString = "server=localhost;port=3306;database=guidancedb;user=root;password=;";
+                    using (var connection = new MySqlConnection(connectionString))
+                    {
+                        await connection.OpenAsync();
+                        using (var transaction = await connection.BeginTransactionAsync())
+                        {
+                            try
+                            {
+                                // Loop through each sibling in the list and save it
+                                foreach (var sibling in siblingsList)
+                                {
+                                    await SaveSiblingsData(sibling, studentID, connection, transaction);
+                                }
+
+                                // Commit the transaction
+                                await transaction.CommitAsync();
+                               // MessageBox.Show("Siblings data saved successfully!");
+                            }
+                            catch (Exception ex)
+                            {
+                                // If an error occurs, roll back the transaction
+                                await transaction.RollbackAsync();
+                                MessageBox.Show($"Error: {ex.Message}");
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Handle unexpected errors in saving process
+                    MessageBox.Show($"Error: {ex.Message}");
+                }
+            }
+            if (picturestudent.Image != null) // Check if there is an image selected
+            {
+                // Convert image to byte array
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    picturestudent.Image.Save(ms, picturestudent.Image.RawFormat); // Save the image in the stream
+                    byte[] imageBytes = ms.ToArray();
+
+                    // Get the file type (e.g., "jpg", "png")
+                    string imageType = picturestudent.Image.RawFormat.ToString().ToLower(); // Getting image type
+
+                    // Save the image to the database
+                    await SaveImageToDatabaseAsync(imageBytes, SavedStudentID, imageType);
+                }
+            }
+
+            var PersonalInfo = new PersonalData
+            {
+                studentID = SavedStudentID,
                 Firstname = txtFirstName.Text,
                 Middlename = txtMiddleName.Text,
                 Lastname = txtLastName.Text,
                 Nickname = txtNickname.Text,
-                Sex = rbMale.Checked ? "Male" : rbFemale.Checked ? "Female" : null,
+                Sex = GetGender(),
                 Age = int.TryParse(txtAge.Text, out var age) ? age : 0,
                 Nationality = txtNationality.Text,
                 Citizenship = txtCitizenship.Text,
                 DateOfBirth = dtpDateOfBirth.Value,
                 PlaceOfBirth = txtPlaceOfBirth.Text,
                 CivilStatus = Civilstatus,
-                Children = rbWithChild.Checked ? "With Child" : rbWithoutChild.Checked ? "Without Child" : null,
+                Children = GetChildStatus(),
                 SpouseName = txtCivilStatus.Text == "Married" ? txtSpouseName.Text : null,
                 NumberOfChildren = (int)numericUpDownNumberOfChildren.Value,
                 Religion = txtReligion.Text,
@@ -912,14 +1582,13 @@ namespace GuidanceManagementSystem
                 CellNumber = txtGuardianphone.Text,
                 Hobbies = txtHobbies.Text,
                 DescribeYourself = txtDescribeYourself.Text // // Uncomment if needed
-
             };
             
-            await SaveStudentRecord(PersonalInfo);
+            //await SaveStudentRecord(PersonalInfo);
             var father = new StudentRecord.FamilyData
             {
 
-                studentID = txtStudentID.Text,
+                studentID = SavedStudentID,
                 ParentType = "Father",
                 LivingStatus = GetLivingStatus("Father"),
                 Name = txtFatherName.Text ?? string.Empty,  // Ensure Name is not null
@@ -941,7 +1610,7 @@ namespace GuidanceManagementSystem
 
             var mother = new FamilyData
             {
-                studentID = txtStudentID.Text,
+                studentID = SavedStudentID,
                 ParentType = "Mother",
                 LivingStatus = GetLivingStatus("Mother"),
                 Name = txtMotherName.Text,
@@ -960,11 +1629,11 @@ namespace GuidanceManagementSystem
                 IndigenousGroup = father.IndigenousGroup, // Use the same value as the father
                 Beneficiary4Ps = GetBeneficiary4Ps() // Us   e the same value as the father
             };
-            await SaveFamilyData(father);
-            await SaveFamilyData(mother);
+            //await SaveFamilyData(father);
+            //await SaveFamilyData(mother);
             var Education = new StudentRecord.EducationalData
             {
-                studentID = txtStudentID.Text,
+                studentID = SavedStudentID,
                 Elementary = Elementary.Text,
                 ElementaryHonorAwards = ElementaryHonorAwards.Text,
                 ElementaryYearGraduated = ElementaryYearGraduated.Text,
@@ -988,36 +1657,24 @@ namespace GuidanceManagementSystem
                 Membership = Membership.Text,
                 LeftRightHanded = RightHanded.Checked ? "Right Handed" : LeftHanded.Checked ? "LeftHanded" : null,
             };
-            await TestSaveEducationalData(Education);
+            //await TestSaveEducationalData(Education);
 
 
             var Health = new HealthData
             {
                 studentID = SavedStudentID,
-                SickFrequency = rbSickOften.Checked ? "Yes" :
-                    rbSickNo.Checked ? "No" :
-                    rbSickSeldom.Checked ? "Seldom" :
-                    rbSickSometimes.Checked ? "Sometimes" :
-                    rbSickNever.Checked ? "Never" : null,
+                SickFrequency = GetSickFrequency(),
 
-                HealthProblems = chkDysmenorrhea.Checked ? "Dysmenoria" : chkHeadache.Checked ? "Headache" :
-                                    chkAsthma.Checked ? "Asthma" : chkStomachache.Checked ? "Stomachache" : chkHeartProblems.Checked ? "HeartProblems" :
-                                    chkColdsFlu.Checked ? "Colds/Flu" : chkAbdominalPain.Checked ? "Abdominal Pain" : chkSeizureDisorders.Checked ? "Seizure Disorder" : null,
+                HealthProblems = GetHealthProblems(),
 
-                PhysicalDisabilities = chkVisualImpairment.Checked ? "Visual Impairment" :
-                           chkPolio.Checked ? "Polio" :
-                           chkHearingImpairment.Checked ? "Hearing Impairment" :
-                           chkCleftPalate.Checked ? "Cleft Palate" :
-                           chkPhysicalDeformities.Checked ? "Physical Deformities" :
-                           chkSeizureDisorders.Checked ? "Seizure Disorder" :
-                           null
+                PhysicalDisabilities = GetPhysicalDisabilities()
             };
             if (string.IsNullOrEmpty(SavedStudentID))
             {
                 MessageBox.Show("Please save the Individual Record first.");
                 return;
             }
-            await TestSaveHealthData(Health);
+           // await TestSaveHealthData(Health);
 
 
             var AdditionalInfo = new AdditionalProfile
@@ -1029,7 +1686,7 @@ namespace GuidanceManagementSystem
                 HasScholarship = rbScholarshipYes.Checked ? "Yes" : rbScholarshipNo.Checked ? "No" : null,
                 ScholarshipName = txtScholarshipName.Text
             };
-            await TestSaveAdditionalProfile(AdditionalInfo);
+            //await TestSaveAdditionalProfile(AdditionalInfo);
             var siblingsData = new Sibling
             {
 
@@ -1038,8 +1695,15 @@ namespace GuidanceManagementSystem
 
             try
             {
+                if (string.IsNullOrEmpty(SavedStudentID))
+                {
+                    // If StudentID is empty, show a message and stop further execution
+                    MessageBox.Show("Please save the Individual Record first and ensure the Student ID is filled.");
+                    return; // Exit the method, no saving will occur
+                }
                 // Call the async SaveAllRecords method with await
-              // await SaveAllRecordsAsync( Education);
+               await SaveAllRecordsAsync(PersonalInfo, Health, AdditionalInfo,Education,father,mother);
+                
 
 
                 // If all records are saved successfully, show a success message
@@ -1051,6 +1715,55 @@ namespace GuidanceManagementSystem
                 MessageBox.Show($"Await: {ex.Message}");
             }
         }
+        private bool ValidateSiblingRow(DataGridViewRow row)
+        {
+            // Validate the "Name" field
+            if (string.IsNullOrWhiteSpace(row.Cells["Name"].Value?.ToString()))
+            {
+                MessageBox.Show("Name cannot be empty in the sibling's data.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            // Validate the "School" field
+            if (string.IsNullOrWhiteSpace(row.Cells["School"].Value?.ToString()))
+            {
+                MessageBox.Show("School cannot be empty in the sibling's data.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            // Validate the "Educational_Attainment" field
+            if (string.IsNullOrWhiteSpace(row.Cells["Educational_Attainment"].Value?.ToString()))
+            {
+                MessageBox.Show("Educational Attainment cannot be empty in the sibling's data.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            // Validate the "Employment_Business_Agency" field
+            if (string.IsNullOrWhiteSpace(row.Cells["Employment_Business_Agency"].Value?.ToString()))
+            {
+                MessageBox.Show("Employment/Business/Agency cannot be empty in the sibling's data.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            return true; // All fields are valid
+            }
+            private bool ValidateSiblingsDataGridView(DataGridView dataGridView)
+            {
+                foreach (DataGridViewRow row in dataGridView.Rows)
+                {
+                    // Skip new rows (if the user hasn't added anything)
+                    if (row.IsNewRow) continue;
+
+                    // Validate the current row
+                    if (!ValidateSiblingRow(row))
+                    {
+                        return false; // Stop further validation if one row fails
+                    }
+                }
+
+                return true; // All rows are valid
+            }
+
 
         private List<Sibling> GetSiblingsDataFromGrid()
         {
@@ -1105,6 +1818,66 @@ namespace GuidanceManagementSystem
             }
         }
 
+        private async Task<bool> CheckStudentIDExistsAsync(string studentID)
+        {
+            string connectionString = "server=localhost;port=3306;database=guidancedb;user=root;password=;";
+
+            using (var connection = new MySqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
+
+                string query = "SELECT COUNT(*) FROM tbl_individual_record WHERE Student_ID = @StudentID";
+
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@StudentID", studentID);
+
+                    var result = await command.ExecuteScalarAsync();
+                    return Convert.ToInt32(result) > 0; // Return true if the record exists
+                }
+            }
+        }
+        public async Task<bool> IsStudentIDExist(string studentID)
+        {
+            MySqlConnection conn = null;
+
+            try
+            {
+                // Get the connection object
+                conn = MyCon.GetConnection();
+
+                // Open the connection asynchronously
+                await conn.OpenAsync();
+
+                string query = "SELECT COUNT(*) FROM tbl_individual_record WHERE Student_ID = @StudentID";
+
+                using (var cmd = new MySqlCommand(query, conn))
+                {
+                    // Add the parameter for SQL query
+                    cmd.Parameters.AddWithValue("@StudentID", studentID);
+
+                    // Execute the query and retrieve the count asynchronously
+                    var result = await cmd.ExecuteScalarAsync();
+
+                    // Return true if a record was found, otherwise false
+                    return Convert.ToInt32(result) > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Catch any exceptions and display the error message
+                MessageBox.Show($"Error checking existing Student ID: {ex.Message}");
+                return false;
+            }
+            finally
+            {
+                // Ensure the connection is closed after the operation
+                if (conn != null && conn.State == System.Data.ConnectionState.Open)
+                {
+                    await conn.CloseAsync();
+                }
+            }
+        }
 
         private async void button2_Click(object sender, EventArgs e)
         {
@@ -1116,8 +1889,26 @@ namespace GuidanceManagementSystem
                     lblRequired.Visible = true;
                     return;
                 }
+               
+                //bool studentExists = await CheckStudentIDExistsAsync(txtStudentID.Text);
+                //if (studentExists)
+                //{
+                //    // If the student exists, show a message and do not save again
+                //    MessageBox.Show("This Student ID already exists. You cannot save it again.", "Duplicate Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //    return; // Prevent further saving
+                //}
+                if (!ValidateCurrentTabPage())
+                {
+                    return; // Stop if validation fails
+                }
 
-
+                if (tabControl1.SelectedIndex == 1) // Assuming siblings data is in the second tab
+                {
+                    if (!ValidateSiblingsDataGridView(dgvSiblings))
+                    {
+                        return; // Stop if siblings data is invalid
+                    }
+                }
                 // Save Individual Record only if it hasn't been saved yet
                 if (!isIndividualRecordSaved)
                 {
@@ -1138,21 +1929,22 @@ namespace GuidanceManagementSystem
                     lblRequired.Visible = false;
                     isIndividualRecordSaved = true; // Mark as saved
                     SavedStudentID = txtStudentID.Text; // Store the StudentID globally if needed
-
+                    
                     // Show success message
                     MessageBox.Show("Individual record saved successfully! You can now proceed to the next section.");
                 }
-
+                else
+                {
+                    // If the IndividualRecord has already been saved, just navigate to the next tab
+                    MessageBox.Show("Individual record already saved. Proceeding to next section.");
+                }
                 // Enable the next tab and navigate to it
                 int currentTabIndex = tabControl1.SelectedIndex;
                 if (currentTabIndex < tabControl1.TabPages.Count - 1)
                 {
-
-                    // Enable the next tab page
-                    tabControl1.TabPages[currentTabIndex + 1].Enabled = true;
-
-                    // Move to the next tab
-                    tabControl1.SelectedIndex = currentTabIndex + 1;
+                    allowTabChange = true; // Allow tab change
+                    tabControl1.SelectedIndex = currentTabIndex + 1; // Navigate to the next tab
+                    allowTabChange = false; // Disable tab change again
                 }
                 else
                 {
@@ -1180,6 +1972,131 @@ namespace GuidanceManagementSystem
                     tabControl1.SelectedIndex++;
                 }
             }
+        }
+    
+
+        private bool allowTabChange = false; // Default to false
+
+        private bool ValidateSiblingsDataTab()
+        {
+            // Validate the DataGridView rows for siblings
+            if (!ValidateSiblingsDataGridView(dgvSiblings))
+            {
+                MessageBox.Show("Please complete all sibling data before proceeding.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            return true; // All sibling data is valid
+        }
+        private bool ValidateHealthDataTab()
+        {
+            // Validate Sick Frequency
+            string sickFrequency = GetSickFrequency();
+            if (string.IsNullOrEmpty(sickFrequency))
+            {
+                MessageBox.Show("Please select how often you get sick.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            // Validate Health Problems
+            string healthProblems = GetHealthProblems();
+            if (string.IsNullOrEmpty(healthProblems))
+            {
+                MessageBox.Show("Please select at least one health problem.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            // Validate Physical Disabilities
+            string physicalDisabilities = GetPhysicalDisabilities();
+            if (string.IsNullOrEmpty(physicalDisabilities))
+            {
+                MessageBox.Show("Please select at least one physical disability or confirm if none.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            return true; // All validations passed
+        }
+
+
+        private bool ValidateCurrentTabPage()
+        {
+            // Get the current tab index
+            int currentTabIndex = tabControl1.SelectedIndex;
+
+            // Perform validation based on the current tab page
+            switch (currentTabIndex)
+            {
+                case 0: // Individual Form Tab
+                    return ValidateIndividualForm();
+
+                case 1: // Family Data Tab
+                    return ValidatePersonalDataTab();
+
+                case 2: // Educational Data Tab
+                    return ValidateFamilyDataTab();
+
+                case 3: // Additional Profile Data Tab
+                    return ValidateSiblingsDataTab(); 
+
+                case 4: // Sibling Data Tab
+                    return ValidateEducationalDataTab();
+                case 5: // Health Data Tab
+                    return ValidateHealthDataTab();
+                // Add more cases for other tabs as needed
+
+                default:
+                    return true;
+            }
+        }
+        private bool ValidateIndividualForm()
+        {
+            // Check required fields in the Individual Form tab
+            if (string.IsNullOrWhiteSpace(txtStudentID.Text) ||
+                string.IsNullOrWhiteSpace(cmbCourse.Text) ||
+                string.IsNullOrWhiteSpace(cmbYear.Text) ||
+                (!rbIsNewStudent.Checked && !rbIsTransferee.Checked &&
+                 !rbIsReEntry.Checked && !rbisShifter.Checked))
+            {
+                MessageBox.Show("Please fill in all required fields in the Individual Form tab.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            return true;
+        }
+        private bool ValidatePersonalDataTab()
+        {
+            // Check required fields in the Personal Data tab
+            if (string.IsNullOrWhiteSpace(txtFirstName.Text) ||
+                string.IsNullOrWhiteSpace(txtLastName.Text) ||
+                string.IsNullOrWhiteSpace(txtContactNumber.Text))
+            {
+                MessageBox.Show("Please fill in all required fields in the Personal Data tab.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            return true;
+        }
+
+        private bool ValidateFamilyDataTab()
+        {
+            // Check required fields in the Family Data tab
+            if (string.IsNullOrWhiteSpace(txtFatherName.Text) ||
+                string.IsNullOrWhiteSpace(txtMotherName.Text))
+            {
+                MessageBox.Show("Please fill in all required fields in the Family Data tab.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            return true;
+        }
+
+        private bool ValidateEducationalDataTab()
+        {
+            // Check required fields in the Educational Data tab
+            if (string.IsNullOrWhiteSpace(HighSchool.Text) ||
+                string.IsNullOrWhiteSpace(SHSAverageGrade.Text))
+            {
+                MessageBox.Show("Please fill in all required fields in the Educational Data tab.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            return true;
         }
 
         private void PreviousButton_Click(object sender, EventArgs e)
@@ -1227,59 +2144,6 @@ namespace GuidanceManagementSystem
         }
         private async void cuiButton2_Click_1(object sender, EventArgs e)
         {
-            try
-            {
-                // Step 1: Get the list of sibling data from the DataGridView
-                List<Sibling> siblingsData = GetSiblingsDataFromGrid();
-
-                if (siblingsData.Count == 0)
-                {
-                    MessageBox.Show("No sibling data to save.");
-                    return;
-                }
-
-                // Step 2: Assuming you have a student ID (from IndividualRecord or other source)
-                string studentID = txtStudentID.Text;  // Example of getting the Student ID
-
-                if (string.IsNullOrWhiteSpace(studentID))
-                {
-                    MessageBox.Show("Please enter a valid Student ID.");
-                    return;
-                }
-
-                // Step 3: Save each sibling record in the database
-                string connectionString = "server=localhost;port=3306;database=guidancedb;user=root;password=;";
-                using (var connection = new MySqlConnection(connectionString))
-                {
-                    await connection.OpenAsync();
-                    using (var transaction = await connection.BeginTransactionAsync())
-                    {
-                        try
-                        {
-                            // Loop through each sibling in the list and save it
-                            foreach (var sibling in siblingsData)
-                            {
-                                await SaveSiblingsData(sibling, studentID, connection, transaction);
-                            }
-
-                            // Commit the transaction
-                            await transaction.CommitAsync();
-                            MessageBox.Show("Siblings data saved successfully!");
-                        }
-                        catch (Exception ex)
-                        {
-                            // If an error occurs, roll back the transaction
-                            await transaction.RollbackAsync();
-                            MessageBox.Show($"Error: {ex.Message}");
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                // Handle any unexpected errors
-                MessageBox.Show($"Error: {ex.Message}");
-            }
         }
 
         private void rbScholarshipNo_CheckedChanged(object sender, EventArgs e)
@@ -1828,19 +2692,14 @@ namespace GuidanceManagementSystem
         private void button2_Click_1(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp|All Files|*.*";  // Filter for image files
+            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
+            openFileDialog.Title = "Select an Image";
 
-            // Show the dialog and check if a file is selected
+            // Show the dialog and check if the user selected a file
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                // Get the file path of the selected image
-                string filePath = openFileDialog.FileName;
-
-                // Optionally, you can display the image in a PictureBox (if you have one on the form)
-                pictureBox1.Image = new System.Drawing.Bitmap(filePath);
-
-                // Optionally, you can store the file path somewhere if you need it later
-                textBoxFilePath.Text = filePath; // (Assuming you have a TextBox to show the file path)
+                // Load and display the image in the PictureBox
+                picturestudent.Image = new Bitmap(openFileDialog.FileName);
             }
         }
 
@@ -2129,13 +2988,133 @@ namespace GuidanceManagementSystem
                 MessageBox.Show("No additional profile data found for this student.");
             }
         }
+        public void SetEditMode(string studentId)
+        {
+            
+            txtStudentID.Enabled = false;
+            // Load the data for the student
+            LoadStudentData(studentId);
+            LoadIndividualRecord(studentId);
+            LoadHealthDataToForm(studentId);
 
-       
+            // Load father's family data
+            LoadFamilyDataToForm(studentId, "Father");
 
+            
+            string parenrType = "Mother";
+            LoadMotherDataToForm(studentId, parenrType);
+
+            // Load educational and health data
+            LoadEducationalDataToForm(studentId);
+            LoadHealthData(studentId);
+
+            // Load additional profile data
+            LoadAdditionalProfileData(studentId);
+
+            // Load siblings and set them in the data grid
+            List<Sibling> siblings = GetSiblingsByStudentId(studentId);
+            LoadSiblingsDataToDataGridView(siblings);
+
+            // Update the save button to indicate Edit Mode
+            button1.Text = "Update";
+
+            // Set the global edit mode flag
+            isEditMode = true;
+
+            // Save the Student ID globally
+            GlobalData.SavedStudentID = studentId;
+        }
         private void btnaddrow_Click(object sender, EventArgs e)
         {
 
         }
+        //public bool isTabLocked = true; // Initially locked
+
+        //private void tabControl1_MouseDown(object sender, MouseEventArgs e)
+        //{
+        //    if (!isTabLocked) return; // Allow clicking if tabs are unlocked
+
+        //    for (int i = 0; i < tabControl1.TabCount; i++)
+        //    {
+        //        Rectangle tabRect = tabControl1.GetTabRect(i);
+
+        //        // Check if the click is within the tab header
+        //        if (tabRect.Contains(e.Location))
+        //        {
+        //            e = null; // Nullify the click to prevent tab change
+        //            break;
+        //        }
+        //    }
+        //}
+        private async Task LoadImageFromDatabaseAsync(string studentID, PictureBox pictureBox)
+        {
+            try
+            {
+                // Get the connection
+                var conn = MyCon.GetConnection(); // Assuming MyCon.GetConnection() returns the correct MySqlConnection
+
+                // Open the connection if it's not already open
+                if (conn.State == System.Data.ConnectionState.Closed)
+                {
+                    await conn.OpenAsync();
+                }
+
+                // SQL query to fetch image
+                string query = "SELECT ImageData FROM studentimages WHERE Student_ID = @StudentID LIMIT 1";
+
+                using (var cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@StudentID", studentID);
+
+                    // Execute the query and retrieve the image data
+                    using (var reader = await cmd.ExecuteReaderAsync())
+                    {
+                        if (reader.HasRows)
+                        {
+                            await reader.ReadAsync();
+                            byte[] imageBytes = reader["ImageData"] as byte[];
+
+                            if (imageBytes != null)
+                            {
+                                // Convert byte[] to an image and set it in the PictureBox
+                                using (var ms = new MemoryStream(imageBytes))
+                                {
+                                    pictureBox.Image = Image.FromStream(ms);
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Image data is empty for this Student ID.");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("No image found for this Student ID.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while retrieving the image: {ex.Message}");
+            }
+        }
+        public async void LLoadStudentData(string studentID,PictureBox pictureBox)
+        {
+            // Load other student data (like name, course, etc.)
+
+            // Load image from database
+             await LoadImageFromDatabaseAsync(studentID,pictureBox);
+        }
+
+        //private void tabControl1_Selecting_1(object sender, TabControlCancelEventArgs e)
+        //{
+        //    if (e.Action == TabControlAction.Selecting && !allowTabChange)
+        //    {
+        //        e.Cancel = true; // Cancel the manual tab change
+        //    }
+        //}
+
     }
 }
 

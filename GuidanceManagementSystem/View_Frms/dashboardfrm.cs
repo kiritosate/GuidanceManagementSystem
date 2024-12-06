@@ -25,7 +25,6 @@ namespace GuidanceManagementSystem.View_Frms
             //    this.Close(); // Close the form if the user is not an admin
             //}
         }
-
         private void cuiButton1_Click(object sender, EventArgs e)
         {
             LoginFrm.closeApp();

@@ -17,7 +17,7 @@ namespace GuidanceManagementSystem.View_Frms
 {
     public partial class LoginFrm : Form
     {
-       // static LoginFrm _obj;
+       //static LoginFrm _obj;
         public static LoginFrm instance;
         public LoginFrm()
         {

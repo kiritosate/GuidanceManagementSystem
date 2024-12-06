@@ -33,6 +33,7 @@ namespace GuidanceManagementSystem.View_Frms
             // Check if the "View" column already exists
             if (dataGridView1.Columns["imgView"] == null)
             {
+
                 DataGridViewImageColumn viewColumn = new DataGridViewImageColumn
                 {
                     HeaderText = "View",
@@ -40,6 +41,7 @@ namespace GuidanceManagementSystem.View_Frms
                     Image = Properties.Resources.eye_96px, // Replace with your resource image
                     ImageLayout = DataGridViewImageCellLayout.Zoom // Ensures the image is resized proportionally
                 };
+
                 dataGridView1.Columns.Add(viewColumn);
             }
 
@@ -57,20 +59,18 @@ namespace GuidanceManagementSystem.View_Frms
             }
 
             // Check if the "Delete" column already exists
-            if (dataGridView1.Columns["imgDelete"] == null)
-            {
-                DataGridViewImageColumn deleteColumn = new DataGridViewImageColumn
-                {
-                    HeaderText = "Delete",
-                    Name = "imgDelete",
-                    Image = Properties.Resources.Delete_Trash_50px, // Replace with your resource image
-                    ImageLayout = DataGridViewImageCellLayout.Zoom // Ensures the image is resized proportionally
-                };
-                dataGridView1.Columns.Add(deleteColumn);
-            }
+            //if (dataGridView1.Columns["imgDelete"] == null)
+            //{
+            //    DataGridViewImageColumn deleteColumn = new DataGridViewImageColumn
+            //    {
+            //        HeaderText = "Delete",
+            //        Name = "imgDelete",
+            //        Image = Properties.Resources.Delete_Trash_50px, // Replace with your resource image
+            //        ImageLayout = DataGridViewImageCellLayout.Zoom // Ensures the image is resized proportionally
+            //    };
+            //    dataGridView1.Columns.Add(deleteColumn);
+            //}
         }
-
-
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             int viewColumnIndex = dataGridView1.Columns["ImgView"].Index;
@@ -182,6 +182,32 @@ namespace GuidanceManagementSystem.View_Frms
             dataGridView.DataSource = bindingSource; // Bind the DataTable to the DataGridView
             AddActionColumns();
 
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)  // Make sure it's not the header row
+            {
+                // Get the data from the clicked row
+                var row = dataGridView1.Rows[e.RowIndex];
+
+                // Retrieve values from the clicked row
+                string studentID = row.Cells["Student_ID"].Value.ToString();
+                string course = row.Cells["Course"].Value.ToString();
+                string year = row.Cells["Year"].Value.ToString();
+                string firstName = row.Cells["FirstName"].Value.ToString();
+                string lastName = row.Cells["LastName"].Value.ToString();
+                // Continue fetching the rest of the data as needed...
+
+                // Create a new instance of the form to display the data
+                var displayForm = new approve_view(
+                    studentID, course, year, firstName, lastName
+                // Add any additional fields you want to pass
+                );
+
+                // Show the form with the data
+                displayForm.Show();
+            }
         }
     }
 }

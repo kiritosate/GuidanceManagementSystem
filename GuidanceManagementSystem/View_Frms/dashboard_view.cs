@@ -28,12 +28,12 @@ namespace GuidanceManagementSystem.View_Frms
         {
             // Call loadData asynchronously when the form loads
             timer1.Start();
-            LoadStatistics("courseStatistics");
-            GetTotalStudents();
-            LoadCivilStatusPieChart();
-            LoadStudentStatusPieChart();
-            GetStudentCountByCollege();
-            LoadPendingCount();
+            //LoadStatistics("courseStatistics");
+            //GetTotalStudents();
+            //LoadCivilStatusPieChart();
+            //LoadStudentStatusPieChart();
+            //GetStudentCountByCollege();
+            //LoadPendingCount();
         }
 
         public static void loadData()
@@ -519,6 +519,21 @@ namespace GuidanceManagementSystem.View_Frms
         private void cuiLabel2_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            
+            GetTotalStudents();
+            LoadPendingCount();
+        }
+
+        private void lblPendingCount_TextChanged(object sender, EventArgs e)
+        {
+            LoadCivilStatusPieChart();
+            LoadStudentStatusPieChart();
+            GetStudentCountByCollege();
+            LoadStatistics("courseStatistics");
         }
     }
 }

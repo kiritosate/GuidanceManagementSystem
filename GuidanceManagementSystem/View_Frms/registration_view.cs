@@ -218,37 +218,27 @@ namespace GuidanceManagementSystem.View_Frms
                 {
                     // Retrieve the selected student ID from the DataGridView
                     string studentId = dataGridView1.Rows[e.RowIndex].Cells["Student_ID"].Value.ToString();
-
+                   
                     // Create a new instance of the Enrollment Form
                     enrollment enrollmentForm = new enrollment();
 
-                    // Load the student data into the Enrollment form by passing the student ID
-                    enrollmentForm.LoadStudentData(studentId);
-                    enrollmentForm.LoadIndividualRecord(studentId);
-                    enrollmentForm.LoadHealthDataToForm(studentId);
-                    string parentType = "Father";  // or dynamically set this based on your context
-                    enrollmentForm.LoadFamilyDataToForm(studentId, parentType);
-                    string parenrType = "Mother";
-                    enrollmentForm.LoadMotherDataToForm(studentId, parenrType);
+                    foreach (TabPage tabPage in enrollmentForm.tabControl1.TabPages)
+                    {
+                        tabPage.Enabled = true; // Enable each tab page
+                    }
+
+                    // Optionally, set a specific tab as the selected one
+                    //enrollmentForm.tabControl1.SelectedTab = enrollmentForm.tabControl1.TabPages["tabPage1"]; // Replace "tabPage1" with the tab you want to select
+
                     enrollmentForm.LoadEducationalDataToForm(studentId);
-                    enrollmentForm.LoadHealthData(studentId);
-                    enrollmentForm.LoadAdditionalProfileData(studentId);
-                    //update button
-                    enrollmentForm.button1.Text = "Update";
-                    isEditMode = true;
-
-
-                    List<Sibling> siblings = enrollmentForm.GetSiblingsByStudentId(studentId); // Method to fetch siblings data
-                    enrollmentForm.LoadSiblingsDataToDataGridView(siblings);
+            
+                    enrollmentForm.SetEditMode(studentId);
                     BlurEffectHelper.BlurBackground(enrollmentForm);
                 }
-             
-              
-
             }
-
             //MessageBox.Show($"Student Id: {StudentId}: {row.Cells[1]}");      
        }
+    
 
 
 
@@ -435,6 +425,15 @@ namespace GuidanceManagementSystem.View_Frms
         private void cuiLabel2_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            // Assuming the first column is the StudentID
+            string studentID = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+            enrollment enrollment = new enrollment();
+            // Call method to load student data, including image
+            enrollment.LoadStudentData(studentID);
         }
     }
 }

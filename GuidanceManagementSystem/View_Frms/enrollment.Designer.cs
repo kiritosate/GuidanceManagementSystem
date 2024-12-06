@@ -39,7 +39,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.label45 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.picturestudent = new System.Windows.Forms.PictureBox();
             this.cmbCourse = new System.Windows.Forms.ComboBox();
             this.cmbYear = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -100,6 +100,9 @@
             this.txtLastName = new System.Windows.Forms.TextBox();
             this.txtFirstName = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.rbMotherWithAnotherPartner = new System.Windows.Forms.RadioButton();
+            this.rbMotherWidowed = new System.Windows.Forms.RadioButton();
+            this.rbMotherAnnulled = new System.Windows.Forms.RadioButton();
             this.rbAbove25000 = new System.Windows.Forms.RadioButton();
             this.rb10001To15000 = new System.Windows.Forms.RadioButton();
             this.rbMotherWorkingAbroadNo = new System.Windows.Forms.RadioButton();
@@ -144,14 +147,6 @@
             this.rbFatherWorkingAbroadYes = new System.Windows.Forms.RadioButton();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.rbMotherWorkingAbroadYes = new System.Windows.Forms.RadioButton();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.rbFatherSeparated = new System.Windows.Forms.RadioButton();
-            this.rbFatherLivingTogether = new System.Windows.Forms.RadioButton();
-            this.rbFatherWithAnotherPartner = new System.Windows.Forms.RadioButton();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.rbMotherWithAnotherPartner = new System.Windows.Forms.RadioButton();
-            this.rbMotherAnnulled = new System.Windows.Forms.RadioButton();
-            this.rbMotherWidowed = new System.Windows.Forms.RadioButton();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.rb5000To10000 = new System.Windows.Forms.RadioButton();
             this.rb15001To20000 = new System.Windows.Forms.RadioButton();
@@ -170,9 +165,11 @@
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.rbBeneficiaryYes = new System.Windows.Forms.RadioButton();
             this.rbBeneficiaryNo = new System.Windows.Forms.RadioButton();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.rbFatherSeparated = new System.Windows.Forms.RadioButton();
+            this.rbFatherLivingTogether = new System.Windows.Forms.RadioButton();
+            this.rbFatherWithAnotherPartner = new System.Windows.Forms.RadioButton();
             this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.cuiButton2 = new CuoreUI.Controls.cuiButton();
             this.dgvSiblings = new System.Windows.Forms.DataGridView();
             this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Age = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -284,11 +281,10 @@
             this.NextButton = new System.Windows.Forms.Button();
             this.cuiButton1 = new CuoreUI.Controls.cuiButton();
             this.label44 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
             this.tabPage6.SuspendLayout();
             this.panel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picturestudent)).BeginInit();
             this.panel1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumberOfChildren)).BeginInit();
@@ -298,21 +294,18 @@
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.groupBox10.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.tabPage7.SuspendLayout();
-            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSiblings)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtStudentID
@@ -427,20 +420,20 @@
             // panel5
             // 
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel5.Controls.Add(this.pictureBox2);
+            this.panel5.Controls.Add(this.picturestudent);
             this.panel5.Location = new System.Drawing.Point(478, 66);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(440, 251);
             this.panel5.TabIndex = 10;
             // 
-            // pictureBox2
+            // picturestudent
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(3, 4);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(434, 247);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 0;
-            this.pictureBox2.TabStop = false;
+            this.picturestudent.Location = new System.Drawing.Point(3, 4);
+            this.picturestudent.Name = "picturestudent";
+            this.picturestudent.Size = new System.Drawing.Size(434, 247);
+            this.picturestudent.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picturestudent.TabIndex = 0;
+            this.picturestudent.TabStop = false;
             // 
             // cmbCourse
             // 
@@ -1205,6 +1198,9 @@
             // tabPage2
             // 
             this.tabPage2.AutoScroll = true;
+            this.tabPage2.Controls.Add(this.rbMotherWithAnotherPartner);
+            this.tabPage2.Controls.Add(this.rbMotherWidowed);
+            this.tabPage2.Controls.Add(this.rbMotherAnnulled);
             this.tabPage2.Controls.Add(this.rbAbove25000);
             this.tabPage2.Controls.Add(this.rb10001To15000);
             this.tabPage2.Controls.Add(this.rbMotherWorkingAbroadNo);
@@ -1242,12 +1238,11 @@
             this.tabPage2.Controls.Add(this.groupBox2);
             this.tabPage2.Controls.Add(this.groupBox3);
             this.tabPage2.Controls.Add(this.groupBox4);
-            this.tabPage2.Controls.Add(this.groupBox5);
-            this.tabPage2.Controls.Add(this.groupBox6);
             this.tabPage2.Controls.Add(this.groupBox7);
             this.tabPage2.Controls.Add(this.groupBox8);
             this.tabPage2.Controls.Add(this.groupBox9);
             this.tabPage2.Controls.Add(this.groupBox10);
+            this.tabPage2.Controls.Add(this.groupBox5);
             this.tabPage2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage2.Location = new System.Drawing.Point(4, 30);
             this.tabPage2.Name = "tabPage2";
@@ -1257,6 +1252,39 @@
             this.tabPage2.Text = "C. Family Data";
             this.tabPage2.UseVisualStyleBackColor = true;
             this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
+            // 
+            // rbMotherWithAnotherPartner
+            // 
+            this.rbMotherWithAnotherPartner.AutoSize = true;
+            this.rbMotherWithAnotherPartner.Location = new System.Drawing.Point(631, 341);
+            this.rbMotherWithAnotherPartner.Name = "rbMotherWithAnotherPartner";
+            this.rbMotherWithAnotherPartner.Size = new System.Drawing.Size(175, 25);
+            this.rbMotherWithAnotherPartner.TabIndex = 211;
+            this.rbMotherWithAnotherPartner.TabStop = true;
+            this.rbMotherWithAnotherPartner.Text = "With Another Partner";
+            this.rbMotherWithAnotherPartner.UseVisualStyleBackColor = true;
+            // 
+            // rbMotherWidowed
+            // 
+            this.rbMotherWidowed.AutoSize = true;
+            this.rbMotherWidowed.Location = new System.Drawing.Point(740, 310);
+            this.rbMotherWidowed.Name = "rbMotherWidowed";
+            this.rbMotherWidowed.Size = new System.Drawing.Size(94, 25);
+            this.rbMotherWidowed.TabIndex = 209;
+            this.rbMotherWidowed.TabStop = true;
+            this.rbMotherWidowed.Text = "Widowed";
+            this.rbMotherWidowed.UseVisualStyleBackColor = true;
+            // 
+            // rbMotherAnnulled
+            // 
+            this.rbMotherAnnulled.AutoSize = true;
+            this.rbMotherAnnulled.Location = new System.Drawing.Point(632, 310);
+            this.rbMotherAnnulled.Name = "rbMotherAnnulled";
+            this.rbMotherAnnulled.Size = new System.Drawing.Size(90, 25);
+            this.rbMotherAnnulled.TabIndex = 208;
+            this.rbMotherAnnulled.TabStop = true;
+            this.rbMotherAnnulled.Text = "Annulled";
+            this.rbMotherAnnulled.UseVisualStyleBackColor = true;
             // 
             // rbAbove25000
             // 
@@ -1723,94 +1751,6 @@
             this.rbMotherWorkingAbroadYes.Text = "Yes";
             this.rbMotherWorkingAbroadYes.UseVisualStyleBackColor = true;
             // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.rbFatherSeparated);
-            this.groupBox5.Controls.Add(this.rbFatherLivingTogether);
-            this.groupBox5.Controls.Add(this.rbFatherWithAnotherPartner);
-            this.groupBox5.Location = new System.Drawing.Point(308, 296);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(248, 90);
-            this.groupBox5.TabIndex = 228;
-            this.groupBox5.TabStop = false;
-            // 
-            // rbFatherSeparated
-            // 
-            this.rbFatherSeparated.AutoSize = true;
-            this.rbFatherSeparated.Location = new System.Drawing.Point(144, 14);
-            this.rbFatherSeparated.Name = "rbFatherSeparated";
-            this.rbFatherSeparated.Size = new System.Drawing.Size(98, 25);
-            this.rbFatherSeparated.TabIndex = 207;
-            this.rbFatherSeparated.TabStop = true;
-            this.rbFatherSeparated.Text = "Separated";
-            this.rbFatherSeparated.UseVisualStyleBackColor = true;
-            // 
-            // rbFatherLivingTogether
-            // 
-            this.rbFatherLivingTogether.AutoSize = true;
-            this.rbFatherLivingTogether.Location = new System.Drawing.Point(6, 14);
-            this.rbFatherLivingTogether.Name = "rbFatherLivingTogether";
-            this.rbFatherLivingTogether.Size = new System.Drawing.Size(134, 25);
-            this.rbFatherLivingTogether.TabIndex = 206;
-            this.rbFatherLivingTogether.TabStop = true;
-            this.rbFatherLivingTogether.Text = "Living Together";
-            this.rbFatherLivingTogether.UseVisualStyleBackColor = true;
-            // 
-            // rbFatherWithAnotherPartner
-            // 
-            this.rbFatherWithAnotherPartner.AutoSize = true;
-            this.rbFatherWithAnotherPartner.Location = new System.Drawing.Point(6, 45);
-            this.rbFatherWithAnotherPartner.Name = "rbFatherWithAnotherPartner";
-            this.rbFatherWithAnotherPartner.Size = new System.Drawing.Size(175, 25);
-            this.rbFatherWithAnotherPartner.TabIndex = 210;
-            this.rbFatherWithAnotherPartner.TabStop = true;
-            this.rbFatherWithAnotherPartner.Text = "With Another Partner";
-            this.rbFatherWithAnotherPartner.UseVisualStyleBackColor = true;
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.rbMotherWithAnotherPartner);
-            this.groupBox6.Controls.Add(this.rbMotherAnnulled);
-            this.groupBox6.Controls.Add(this.rbMotherWidowed);
-            this.groupBox6.Location = new System.Drawing.Point(616, 296);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(255, 90);
-            this.groupBox6.TabIndex = 229;
-            this.groupBox6.TabStop = false;
-            // 
-            // rbMotherWithAnotherPartner
-            // 
-            this.rbMotherWithAnotherPartner.AutoSize = true;
-            this.rbMotherWithAnotherPartner.Location = new System.Drawing.Point(14, 45);
-            this.rbMotherWithAnotherPartner.Name = "rbMotherWithAnotherPartner";
-            this.rbMotherWithAnotherPartner.Size = new System.Drawing.Size(175, 25);
-            this.rbMotherWithAnotherPartner.TabIndex = 211;
-            this.rbMotherWithAnotherPartner.TabStop = true;
-            this.rbMotherWithAnotherPartner.Text = "With Another Partner";
-            this.rbMotherWithAnotherPartner.UseVisualStyleBackColor = true;
-            // 
-            // rbMotherAnnulled
-            // 
-            this.rbMotherAnnulled.AutoSize = true;
-            this.rbMotherAnnulled.Location = new System.Drawing.Point(14, 16);
-            this.rbMotherAnnulled.Name = "rbMotherAnnulled";
-            this.rbMotherAnnulled.Size = new System.Drawing.Size(90, 25);
-            this.rbMotherAnnulled.TabIndex = 208;
-            this.rbMotherAnnulled.TabStop = true;
-            this.rbMotherAnnulled.Text = "Annulled";
-            this.rbMotherAnnulled.UseVisualStyleBackColor = true;
-            // 
-            // rbMotherWidowed
-            // 
-            this.rbMotherWidowed.AutoSize = true;
-            this.rbMotherWidowed.Location = new System.Drawing.Point(115, 16);
-            this.rbMotherWidowed.Name = "rbMotherWidowed";
-            this.rbMotherWidowed.Size = new System.Drawing.Size(94, 25);
-            this.rbMotherWidowed.TabIndex = 209;
-            this.rbMotherWidowed.TabStop = true;
-            this.rbMotherWidowed.Text = "Widowed";
-            this.rbMotherWidowed.UseVisualStyleBackColor = true;
-            // 
             // groupBox7
             // 
             this.groupBox7.Controls.Add(this.rb5000To10000);
@@ -2012,9 +1952,52 @@
             this.rbBeneficiaryNo.Text = "No";
             this.rbBeneficiaryNo.UseVisualStyleBackColor = true;
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.rbFatherSeparated);
+            this.groupBox5.Controls.Add(this.rbFatherLivingTogether);
+            this.groupBox5.Controls.Add(this.rbFatherWithAnotherPartner);
+            this.groupBox5.Location = new System.Drawing.Point(308, 293);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(540, 93);
+            this.groupBox5.TabIndex = 228;
+            this.groupBox5.TabStop = false;
+            // 
+            // rbFatherSeparated
+            // 
+            this.rbFatherSeparated.AutoSize = true;
+            this.rbFatherSeparated.Location = new System.Drawing.Point(144, 14);
+            this.rbFatherSeparated.Name = "rbFatherSeparated";
+            this.rbFatherSeparated.Size = new System.Drawing.Size(98, 25);
+            this.rbFatherSeparated.TabIndex = 207;
+            this.rbFatherSeparated.TabStop = true;
+            this.rbFatherSeparated.Text = "Separated";
+            this.rbFatherSeparated.UseVisualStyleBackColor = true;
+            // 
+            // rbFatherLivingTogether
+            // 
+            this.rbFatherLivingTogether.AutoSize = true;
+            this.rbFatherLivingTogether.Location = new System.Drawing.Point(6, 14);
+            this.rbFatherLivingTogether.Name = "rbFatherLivingTogether";
+            this.rbFatherLivingTogether.Size = new System.Drawing.Size(134, 25);
+            this.rbFatherLivingTogether.TabIndex = 206;
+            this.rbFatherLivingTogether.TabStop = true;
+            this.rbFatherLivingTogether.Text = "Living Together";
+            this.rbFatherLivingTogether.UseVisualStyleBackColor = true;
+            // 
+            // rbFatherWithAnotherPartner
+            // 
+            this.rbFatherWithAnotherPartner.AutoSize = true;
+            this.rbFatherWithAnotherPartner.Location = new System.Drawing.Point(6, 45);
+            this.rbFatherWithAnotherPartner.Name = "rbFatherWithAnotherPartner";
+            this.rbFatherWithAnotherPartner.Size = new System.Drawing.Size(175, 25);
+            this.rbFatherWithAnotherPartner.TabIndex = 210;
+            this.rbFatherWithAnotherPartner.TabStop = true;
+            this.rbFatherWithAnotherPartner.Text = "With Another Partner";
+            this.rbFatherWithAnotherPartner.UseVisualStyleBackColor = true;
+            // 
             // tabPage7
             // 
-            this.tabPage7.Controls.Add(this.panel2);
             this.tabPage7.Controls.Add(this.dgvSiblings);
             this.tabPage7.Location = new System.Drawing.Point(4, 30);
             this.tabPage7.Margin = new System.Windows.Forms.Padding(2);
@@ -2024,48 +2007,6 @@
             this.tabPage7.TabIndex = 6;
             this.tabPage7.Text = "D. Siblings Data";
             this.tabPage7.UseVisualStyleBackColor = true;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.cuiButton2);
-            this.panel2.Location = new System.Drawing.Point(4, 475);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(949, 100);
-            this.panel2.TabIndex = 252;
-            // 
-            // cuiButton2
-            // 
-            this.cuiButton2.CheckButton = false;
-            this.cuiButton2.Checked = false;
-            this.cuiButton2.CheckedBackground = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(0)))));
-            this.cuiButton2.CheckedImageTint = System.Drawing.Color.White;
-            this.cuiButton2.CheckedOutline = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(0)))));
-            this.cuiButton2.Content = "Click here if done.";
-            this.cuiButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
-            this.cuiButton2.ForeColor = System.Drawing.Color.Black;
-            this.cuiButton2.HoverBackground = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(0)))));
-            this.cuiButton2.HoveredImageTint = System.Drawing.Color.White;
-            this.cuiButton2.HoverOutline = System.Drawing.Color.Empty;
-            this.cuiButton2.Image = null;
-            this.cuiButton2.ImageAutoCenter = true;
-            this.cuiButton2.ImageExpand = new System.Drawing.Point(0, 0);
-            this.cuiButton2.ImageOffset = new System.Drawing.Point(0, 0);
-            this.cuiButton2.ImageTint = System.Drawing.Color.White;
-            this.cuiButton2.Location = new System.Drawing.Point(825, 2);
-            this.cuiButton2.Margin = new System.Windows.Forms.Padding(2);
-            this.cuiButton2.Name = "cuiButton2";
-            this.cuiButton2.NormalBackground = System.Drawing.Color.White;
-            this.cuiButton2.NormalOutline = System.Drawing.Color.Empty;
-            this.cuiButton2.OutlineThickness = 1.6F;
-            this.cuiButton2.PressedBackground = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(0)))));
-            this.cuiButton2.PressedImageTint = System.Drawing.Color.White;
-            this.cuiButton2.PressedOutline = System.Drawing.Color.Empty;
-            this.cuiButton2.Rounding = new System.Windows.Forms.Padding(8);
-            this.cuiButton2.Size = new System.Drawing.Size(124, 30);
-            this.cuiButton2.TabIndex = 251;
-            this.cuiButton2.TextOffset = new System.Drawing.Point(0, 0);
-            this.cuiButton2.Click += new System.EventHandler(this.cuiButton2_Click_1);
             // 
             // dgvSiblings
             // 
@@ -2081,7 +2022,7 @@
             this.dgvSiblings.Name = "dgvSiblings";
             this.dgvSiblings.RowHeadersWidth = 51;
             this.dgvSiblings.RowTemplate.Height = 24;
-            this.dgvSiblings.Size = new System.Drawing.Size(956, 471);
+            this.dgvSiblings.Size = new System.Drawing.Size(956, 594);
             this.dgvSiblings.TabIndex = 250;
             // 
             // Name
@@ -2549,7 +2490,7 @@
             this.JuniorHighHonorAwards.Location = new System.Drawing.Point(670, 91);
             this.JuniorHighHonorAwards.Margin = new System.Windows.Forms.Padding(2);
             this.JuniorHighHonorAwards.Name = "JuniorHighHonorAwards";
-            this.JuniorHighHonorAwards.Size = new System.Drawing.Size(270, 29);
+            this.JuniorHighHonorAwards.Size = new System.Drawing.Size(192, 29);
             this.JuniorHighHonorAwards.TabIndex = 245;
             this.JuniorHighHonorAwards.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.JuniorHighHonorAwards_KeyPress);
             // 
@@ -3412,32 +3353,19 @@
             this.label44.TabIndex = 13;
             this.label44.Text = "Student Data";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Image = global::GuidanceManagementSystem.Properties.Resources.COUNSELING;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(59, 39);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 14;
-            this.pictureBox1.TabStop = false;
-            // 
             // enrollment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.White;
-            this.BackgroundImage = global::GuidanceManagementSystem.Properties.Resources.asdasdad;
             this.ClientSize = new System.Drawing.Size(994, 772);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label44);
             this.Controls.Add(this.cuiButton1);
             this.Controls.Add(this.panel3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(5);
-           // this.Name = "enrollment";
+            //this.Name = "enrollment";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "enrollment";
             this.TopMost = true;
@@ -3446,7 +3374,7 @@
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
             this.panel5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picturestudent)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tabPage1.ResumeLayout(false);
@@ -3463,10 +3391,6 @@
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             this.groupBox8.ResumeLayout(false);
@@ -3475,8 +3399,9 @@
             this.groupBox9.PerformLayout();
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.tabPage7.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSiblings)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
@@ -3486,7 +3411,6 @@
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3496,7 +3420,6 @@
 
         private System.Windows.Forms.TextBox txtStudentID;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Label label2;
@@ -3698,19 +3621,15 @@
         private System.Windows.Forms.RadioButton RightHanded;
         private System.Windows.Forms.RadioButton LeftHanded;
         private CuoreUI.Controls.cuiButton cuiButton1;
-        private CuoreUI.Controls.cuiButton cuiButton2;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ComboBox txtNationality;
         private System.Windows.Forms.TextBox txtCitizenship;
         private System.Windows.Forms.ComboBox txtCivilStatus;
         private System.Windows.Forms.Label label44;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox textBoxFilePath;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label lblRequired;
         private System.Windows.Forms.RadioButton rbMotherWorkingAbroadNo;
         private System.Windows.Forms.RadioButton rbMotherWorkingAbroadYes;
@@ -3723,11 +3642,8 @@
         private System.Windows.Forms.RadioButton rb10001To15000;
         private System.Windows.Forms.RadioButton rbBelow5000;
         private System.Windows.Forms.RadioButton rbMotherWithAnotherPartner;
-        private System.Windows.Forms.RadioButton rbFatherWithAnotherPartner;
         private System.Windows.Forms.RadioButton rbMotherWidowed;
         private System.Windows.Forms.RadioButton rbMotherAnnulled;
-        private System.Windows.Forms.RadioButton rbFatherSeparated;
-        private System.Windows.Forms.RadioButton rbFatherLivingTogether;
         private System.Windows.Forms.RadioButton rbBeneficiaryYes;
         private System.Windows.Forms.RadioButton rbIndigenousNo;
         private System.Windows.Forms.RadioButton rbIndigenousYes;
@@ -3742,13 +3658,17 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Label lblreq2;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.GroupBox groupBox10;
         public System.Windows.Forms.Button button1;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.RadioButton rbFatherSeparated;
+        private System.Windows.Forms.RadioButton rbFatherLivingTogether;
+        private System.Windows.Forms.RadioButton rbFatherWithAnotherPartner;
+        public System.Windows.Forms.TabControl tabControl1;
+        public System.Windows.Forms.PictureBox picturestudent;
     }
 }

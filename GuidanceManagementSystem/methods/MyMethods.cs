@@ -133,8 +133,6 @@ namespace GuidanceManagementSystem.methods
                             }
                         }
                     }
-
-
                     return "Wi-Fi IP Address not found";
                 }
                 catch (Exception ex)
@@ -264,13 +262,17 @@ namespace GuidanceManagementSystem.methods
             return res;
         }
 
+        internal Task<MySqlDataReader> ExecuteUpdateQuery()
+        {
+            throw new NotImplementedException();
+        }
+
         public static class Delete
         {
             public static void DeleteRecord(string studentID)
             {
                 string connectionString = "server=localhost;database=guidancedb;user=root;password=;";
                 string query = "DELETE FROM tbl_individual_record WHERE Student_ID = @StudentID";
-
                 try
                 {
                     using (var connection = new MySqlConnection(connectionString))

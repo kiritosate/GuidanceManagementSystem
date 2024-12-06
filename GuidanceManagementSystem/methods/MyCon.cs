@@ -16,24 +16,24 @@ namespace GuidanceManagementSystem.methods
         public static int _loggedId { get; set; }
 
         // Get connection method with improved error handling
-        public static MySqlConnection GetConnection()
-        {
-            string connectionString = "server=localhost;database=guidancedb;user=root;password=;"; // Direct connection string
-            try
+            public static MySqlConnection GetConnection()
             {
-                MySqlConnection conn = new MySqlConnection(connectionString);
-                conn.Open(); // Ensure the connection is opened
-                return conn;
+                string connectionString = "server=localhost;database=guidancedb;user=root;password=;"; // Direct connection string
+                try
+                {
+                    MySqlConnection conn = new MySqlConnection(connectionString);
+                    conn.Open(); // Ensure the connection is opened
+                    return conn;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Failed to establish a database connection. Error: {ex.Message}",
+                                    "Connection Error",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
+                    return null; // Return null to indicate failure
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Failed to establish a database connection. Error: {ex.Message}",
-                                "Connection Error",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);
-                return null; // Return null to indicate failure
-            }
-        }
 
         // Login method
         public static (int UserType, int ID, string Name) _Login(string username, string password)
