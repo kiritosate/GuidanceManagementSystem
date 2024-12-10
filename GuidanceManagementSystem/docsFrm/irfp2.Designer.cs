@@ -517,7 +517,7 @@
             this.label36.AutoSize = true;
             this.label36.BackColor = System.Drawing.Color.Transparent;
             this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label36.Location = new System.Drawing.Point(162, 292);
+            this.label36.Location = new System.Drawing.Point(162, 315);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(14, 16);
             this.label36.TabIndex = 34;
@@ -852,7 +852,6 @@
             this.label66.Size = new System.Drawing.Size(14, 16);
             this.label66.TabIndex = 63;
             this.label66.Text = "?";
-            //this.label66.Click += new System.EventHandler(this.label66_Click);
             // 
             // label67
             // 
@@ -1200,8 +1199,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::GuidanceManagementSystem.Properties.Resources._731402e0_fe47_46db_8ebb_295e66760000_1;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(790, 1061);
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ClientSize = new System.Drawing.Size(790, 1100);
             this.Controls.Add(this.label97);
             this.Controls.Add(this.label96);
             this.Controls.Add(this.label95);

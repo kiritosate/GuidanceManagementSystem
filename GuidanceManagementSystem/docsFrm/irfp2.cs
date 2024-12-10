@@ -34,17 +34,23 @@ namespace GuidanceManagementSystem.docsFrm
         {
             for (int i = 1; i <= 97; i++)
             {
-                // Use the Label control's name to find the control and set its text to blank
                 Label label = (Label)this.Controls["label" + i];
                 if (label != null)
                 {
-                    label.Text = string.Empty; // Clear the text
+                    label.Text = string.Empty;
                 }
             }
 
+            // Retrieve sibling data
             DataTable siblingsData = dataSet.Tables[3];
+
             if (siblingsData.Rows.Count > 0)
             {
+                // Remove duplicates if any
+                DataView view = new DataView(siblingsData);
+                DataTable distinctData = view.ToTable(true, "Name", "Age", "School", "Educational_Attainment", "Employment_Business_Agency");
+
+                // Define label rows
                 Label[] lrow1 = new Label[] { label1, label2, label3, label4, label5 };
                 Label[] lrow2 = new Label[] { label10, label9, label8, label7, label6 };
                 Label[] lrow3 = new Label[] { label15, label14, label13, label12, label11 };
@@ -54,15 +60,10 @@ namespace GuidanceManagementSystem.docsFrm
 
                 Object[] tblrow = new Object[] { lrow1, lrow2, lrow3, lrow4, lrow5, lrow6 };
 
-                for (int i = 0; i < siblingsData.Rows.Count; i++)
+                // Populate labels with data
+                for (int i = 0; i < distinctData.Rows.Count && i < tblrow.Length; i++)
                 {
-                    if (i == 5)
-                    {
-                        break;
-                    }
-                    DataRow siblingsRow = siblingsData.Rows[i];
-
-                    // Cast the object back to Label[]
+                    DataRow siblingsRow = distinctData.Rows[i];
                     Label[] currentRow = (Label[])tblrow[i];
 
                     currentRow[0].Text = Cap(siblingsRow["Name"].ToString());

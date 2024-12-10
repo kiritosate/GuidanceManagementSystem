@@ -42,14 +42,17 @@ namespace GuidanceManagementSystem.methods
         // Function to handle email input validation in real-time as user types
         public static void OnKeyPress_EmailValidation(object sender, KeyPressEventArgs e)
         {
-            TextBox textBox = sender as TextBox;
-            if (textBox != null)
+            char keyChar = e.KeyChar;
+
+            // Allow control keys (e.g., backspace) and valid email characters
+            if (!char.IsControl(keyChar) &&
+                !char.IsLetterOrDigit(keyChar) &&
+                keyChar != '@' &&
+                keyChar != '.' &&
+                keyChar != '-' &&
+                keyChar != '_')
             {
-                string input = textBox.Text + e.KeyChar.ToString();
-                if (!ValidateEmail(input))
-                {
-                    e.Handled = true;  // Cancel the input if the email is invalid
-                }
+                e.Handled = true; // Reject invalid characters
             }
         }
 

@@ -34,6 +34,11 @@ namespace GuidanceManagementSystem.View_Frms
                 LoadDataIntoDataGridView(dataGridView1, selectedCourse); // Filter the grid
             };
         }
+
+        public registration_view()
+        {
+        }
+
         public static class GlobalData
         {
             public static string SavedStudentID { get; set; }
@@ -354,7 +359,9 @@ namespace GuidanceManagementSystem.View_Frms
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && dataGridView1.Columns[e.ColumnIndex] is DataGridViewImageColumn)
+            if (e.RowIndex >= 0 &&
+        dataGridView1.Columns[e.ColumnIndex] is DataGridViewImageColumn &&
+        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
             {
                 // Get the Student_ID from the selected row
                 string studentID = dataGridView1.Rows[e.RowIndex].Cells["Student_ID"].Value?.ToString();
@@ -364,19 +371,25 @@ namespace GuidanceManagementSystem.View_Frms
                     MessageBox.Show("Invalid Student ID. Unable to delete.");
                     return;
                 }
+
+                // Show confirmation dialog
                 DialogResult confirmation = MessageBox.Show("Are you sure you want to delete this record?",
                                                              "Confirmation",
                                                              MessageBoxButtons.YesNo,
                                                              MessageBoxIcon.Warning);
-               
+
                 if (confirmation == DialogResult.Yes)
                 {
+                    // Call the delete method
                     Delete.DeleteRecord(studentID);
+
+                    // Reload data to reflect changes
                     dataGridView1.Columns.Clear();
                     LoadData();
                 }
             }
         }
+
         private void LoadCourses()
         {
             string query = "SELECT DISTINCT Course FROM tbl_individual_record WHERE status=0";

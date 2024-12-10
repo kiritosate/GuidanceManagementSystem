@@ -51,7 +51,6 @@
             this.cuiLabel13 = new CuoreUI.Controls.cuiLabel();
             this.cuiLabel6 = new CuoreUI.Controls.cuiLabel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.cuiLabel2 = new CuoreUI.Controls.cuiLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -87,7 +86,6 @@
             this.cuiBorder4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -366,26 +364,12 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.pictureBox7);
             this.panel2.Controls.Add(this.cuiLabel2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(10, 10);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1579, 49);
             this.panel2.TabIndex = 7;
-            // 
-            // pictureBox7
-            // 
-            this.pictureBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox7.BackColor = System.Drawing.SystemColors.Control;
-            this.pictureBox7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox7.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox7.Image")));
-            this.pictureBox7.Location = new System.Drawing.Point(1489, 0);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(82, 49);
-            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox7.TabIndex = 9;
-            this.pictureBox7.TabStop = false;
             // 
             // cuiLabel2
             // 
@@ -497,7 +481,7 @@
             // button3
             // 
             this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(89)))));
-            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatAppearance.BorderSize = 3;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.ForeColor = System.Drawing.Color.AliceBlue;
@@ -505,7 +489,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(146, 35);
             this.button3.TabIndex = 3;
-            this.button3.Text = "Gender Per Course";
+            this.button3.Text = "Course";
             this.button3.UseVisualStyleBackColor = false;
             this.button3.UseWaitCursor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
@@ -513,7 +497,7 @@
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(89)))));
-            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatAppearance.BorderSize = 3;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.AliceBlue;
@@ -521,7 +505,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(146, 35);
             this.button2.TabIndex = 2;
-            this.button2.Text = " Student Per College";
+            this.button2.Text = " College";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.UseWaitCursor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -555,6 +539,7 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(89)))));
+            this.button1.FlatAppearance.BorderSize = 3;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -562,7 +547,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(146, 35);
             this.button1.TabIndex = 1;
-            this.button1.Text = "Student Per Year";
+            this.button1.Text = "Year";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.UseWaitCursor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -723,7 +708,6 @@
             this.cuiBorder4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
@@ -788,6 +772,5 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.PictureBox pictureBox7;
     }
 }

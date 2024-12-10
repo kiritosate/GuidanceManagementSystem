@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GuidanceManagementSystem.methods;
+using static GuidanceManagementSystem.methods.MyMethods;
 
 namespace GuidanceManagementSystem.View_Frms
 {
@@ -58,18 +60,6 @@ namespace GuidanceManagementSystem.View_Frms
                 dataGridView1.Columns.Add(editColumn);
             }
 
-            // Check if the "Delete" column already exists
-            //if (dataGridView1.Columns["imgDelete"] == null)
-            //{
-            //    DataGridViewImageColumn deleteColumn = new DataGridViewImageColumn
-            //    {
-            //        HeaderText = "Delete",
-            //        Name = "imgDelete",
-            //        Image = Properties.Resources.Delete_Trash_50px, // Replace with your resource image
-            //        ImageLayout = DataGridViewImageCellLayout.Zoom // Ensures the image is resized proportionally
-            //    };
-            //    dataGridView1.Columns.Add(deleteColumn);
-            //}
         }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -91,7 +81,12 @@ namespace GuidanceManagementSystem.View_Frms
                 }
                 else if (e.ColumnIndex == deleteColumnIndex)
                 {
-                    DeleteRecord(studentID);
+                    var result = MessageBox.Show("Are you sure you want to delete this record?", "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (result == DialogResult.Yes)
+                    {
+                        // Call your static Delete method
+                        Delete.DeleteRecord(studentID);
+                    }
                 }
             }
         }
@@ -107,24 +102,7 @@ namespace GuidanceManagementSystem.View_Frms
             MessageBox.Show($"Edit record for Student ID: {studentID}");
         }
 
-        private void DeleteRecord(string studentID)
-        {
-            string connectionString = "server=localhost;database=guidancedb;user=root;password=;";
-            string query = "DELETE FROM tbl_individual_record WHERE Student_ID = @StudentID";
-
-            using (var connection = new MySqlConnection(connectionString))
-            {
-                connection.Open();
-                using (var command = new MySqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@StudentID", studentID);
-                    command.ExecuteNonQuery();
-                }
-            }
-            MessageBox.Show("Record Deleted.");
-            LoadDataIntoDataGridView(dataGridView1);
-        }
-
+       
         private void recordfrm_Load(object sender, EventArgs e)
         {
             LoadDataIntoDataGridView(dataGridView1);

@@ -227,9 +227,7 @@
             this.rbSickSeldom = new System.Windows.Forms.RadioButton();
             this.rbSickNo = new System.Windows.Forms.RadioButton();
             this.rbSickOften = new System.Windows.Forms.RadioButton();
-            this.txtPhysicalDisabilitiesOther = new System.Windows.Forms.TextBox();
-            this.label71 = new System.Windows.Forms.Label();
-            this.checkBox40 = new System.Windows.Forms.CheckBox();
+            this.chknone = new System.Windows.Forms.CheckBox();
             this.chkSeizureDisorderss = new System.Windows.Forms.CheckBox();
             this.chkCleftPalate = new System.Windows.Forms.CheckBox();
             this.chkPolio = new System.Windows.Forms.CheckBox();
@@ -237,8 +235,6 @@
             this.chkHearingImpairment = new System.Windows.Forms.CheckBox();
             this.chkVisualImpairment = new System.Windows.Forms.CheckBox();
             this.label72 = new System.Windows.Forms.Label();
-            this.txtHealthProblemsOther = new System.Windows.Forms.TextBox();
-            this.label70 = new System.Windows.Forms.Label();
             this.chkColdsFlu = new System.Windows.Forms.CheckBox();
             this.chkAsthma = new System.Windows.Forms.CheckBox();
             this.chkSeizureDisorders = new System.Windows.Forms.CheckBox();
@@ -405,7 +401,7 @@
             this.button2.TabIndex = 12;
             this.button2.Text = "Browse";
             this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            //this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // label45
             // 
@@ -448,7 +444,7 @@
             this.cmbCourse.Name = "cmbCourse";
             this.cmbCourse.Size = new System.Drawing.Size(187, 29);
             this.cmbCourse.TabIndex = 6;
-            this.cmbCourse.SelectedIndexChanged += new System.EventHandler(this.cmbCourse_SelectedIndexChanged);
+            //this.cmbCourse.SelectedIndexChanged += new System.EventHandler(this.cmbCourse_SelectedIndexChanged);
             // 
             // cmbYear
             // 
@@ -616,7 +612,7 @@
             this.txtCivilStatus.Name = "txtCivilStatus";
             this.txtCivilStatus.Size = new System.Drawing.Size(176, 29);
             this.txtCivilStatus.TabIndex = 168;
-            this.txtCivilStatus.SelectedIndexChanged += new System.EventHandler(this.txtCivilStatus_SelectedIndexChanged_1);
+            //this.txtCivilStatus.SelectedIndexChanged += new System.EventHandler(this.txtCivilStatus_SelectedIndexChanged_1);
             // 
             // txtCitizenship
             // 
@@ -1125,6 +1121,7 @@
             this.txtMiddleName.Name = "txtMiddleName";
             this.txtMiddleName.Size = new System.Drawing.Size(132, 29);
             this.txtMiddleName.TabIndex = 120;
+            this.txtMiddleName.TextChanged += new System.EventHandler(this.txtMiddleName_TextChanged);
             this.txtMiddleName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMiddleName_KeyDown);
             this.txtMiddleName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMiddleName_KeyPress);
             // 
@@ -1307,6 +1304,7 @@
             this.rb10001To15000.TabStop = true;
             this.rb10001To15000.Text = "P10001 to P15000";
             this.rb10001To15000.UseVisualStyleBackColor = true;
+           // this.rb10001To15000.CheckedChanged += new System.EventHandler(this.rb10001To15000_CheckedChanged);
             // 
             // rbMotherWorkingAbroadNo
             // 
@@ -2584,9 +2582,7 @@
             this.tabPage4.Controls.Add(this.rbSickSeldom);
             this.tabPage4.Controls.Add(this.rbSickNo);
             this.tabPage4.Controls.Add(this.rbSickOften);
-            this.tabPage4.Controls.Add(this.txtPhysicalDisabilitiesOther);
-            this.tabPage4.Controls.Add(this.label71);
-            this.tabPage4.Controls.Add(this.checkBox40);
+            this.tabPage4.Controls.Add(this.chknone);
             this.tabPage4.Controls.Add(this.chkSeizureDisorderss);
             this.tabPage4.Controls.Add(this.chkCleftPalate);
             this.tabPage4.Controls.Add(this.chkPolio);
@@ -2594,8 +2590,6 @@
             this.tabPage4.Controls.Add(this.chkHearingImpairment);
             this.tabPage4.Controls.Add(this.chkVisualImpairment);
             this.tabPage4.Controls.Add(this.label72);
-            this.tabPage4.Controls.Add(this.txtHealthProblemsOther);
-            this.tabPage4.Controls.Add(this.label70);
             this.tabPage4.Controls.Add(this.chkColdsFlu);
             this.tabPage4.Controls.Add(this.chkAsthma);
             this.tabPage4.Controls.Add(this.chkSeizureDisorders);
@@ -2675,37 +2669,17 @@
             this.rbSickOften.Text = "Yes";
             this.rbSickOften.UseVisualStyleBackColor = true;
             // 
-            // txtPhysicalDisabilitiesOther
+            // chknone
             // 
-            this.txtPhysicalDisabilitiesOther.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPhysicalDisabilitiesOther.Location = new System.Drawing.Point(669, 247);
-            this.txtPhysicalDisabilitiesOther.Margin = new System.Windows.Forms.Padding(2);
-            this.txtPhysicalDisabilitiesOther.Name = "txtPhysicalDisabilitiesOther";
-            this.txtPhysicalDisabilitiesOther.Size = new System.Drawing.Size(258, 29);
-            this.txtPhysicalDisabilitiesOther.TabIndex = 254;
-            // 
-            // label71
-            // 
-            this.label71.AutoSize = true;
-            this.label71.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label71.Location = new System.Drawing.Point(495, 255);
-            this.label71.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label71.Name = "label71";
-            this.label71.Size = new System.Drawing.Size(170, 21);
-            this.label71.TabIndex = 253;
-            this.label71.Text = "Others (please specify):";
-            // 
-            // checkBox40
-            // 
-            this.checkBox40.AutoSize = true;
-            this.checkBox40.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox40.Location = new System.Drawing.Point(499, 228);
-            this.checkBox40.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox40.Name = "checkBox40";
-            this.checkBox40.Size = new System.Drawing.Size(67, 25);
-            this.checkBox40.TabIndex = 252;
-            this.checkBox40.Text = "None";
-            this.checkBox40.UseVisualStyleBackColor = true;
+            this.chknone.AutoSize = true;
+            this.chknone.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chknone.Location = new System.Drawing.Point(499, 228);
+            this.chknone.Margin = new System.Windows.Forms.Padding(2);
+            this.chknone.Name = "chknone";
+            this.chknone.Size = new System.Drawing.Size(67, 25);
+            this.chknone.TabIndex = 252;
+            this.chknone.Text = "None";
+            this.chknone.UseVisualStyleBackColor = true;
             // 
             // chkSeizureDisorderss
             // 
@@ -2790,27 +2764,6 @@
             this.label72.TabIndex = 244;
             this.label72.Text = "What physical disabilities are hindering you in your academics & extracurricular " +
     "activities?";
-            // 
-            // txtHealthProblemsOther
-            // 
-            this.txtHealthProblemsOther.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtHealthProblemsOther.Location = new System.Drawing.Point(669, 130);
-            this.txtHealthProblemsOther.Margin = new System.Windows.Forms.Padding(2);
-            this.txtHealthProblemsOther.Name = "txtHealthProblemsOther";
-            this.txtHealthProblemsOther.Size = new System.Drawing.Size(258, 29);
-            this.txtHealthProblemsOther.TabIndex = 243;
-            this.txtHealthProblemsOther.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtHealthProblemsOther_KeyPress);
-            // 
-            // label70
-            // 
-            this.label70.AutoSize = true;
-            this.label70.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label70.Location = new System.Drawing.Point(495, 138);
-            this.label70.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label70.Name = "label70";
-            this.label70.Size = new System.Drawing.Size(170, 21);
-            this.label70.TabIndex = 170;
-            this.label70.Text = "Others (please specify):";
             // 
             // chkColdsFlu
             // 
@@ -3560,11 +3513,7 @@
         private System.Windows.Forms.CheckBox chkSeizureDisorders;
         private System.Windows.Forms.CheckBox chkStomachache;
         private System.Windows.Forms.CheckBox chkHeadache;
-        private System.Windows.Forms.TextBox txtHealthProblemsOther;
-        private System.Windows.Forms.Label label70;
-        private System.Windows.Forms.TextBox txtPhysicalDisabilitiesOther;
-        private System.Windows.Forms.Label label71;
-        private System.Windows.Forms.CheckBox checkBox40;
+        private System.Windows.Forms.CheckBox chknone;
         private System.Windows.Forms.CheckBox chkSeizureDisorderss;
         private System.Windows.Forms.CheckBox chkCleftPalate;
         private System.Windows.Forms.CheckBox chkPolio;

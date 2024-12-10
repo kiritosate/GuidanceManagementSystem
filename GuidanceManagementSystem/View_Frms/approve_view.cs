@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
 namespace GuidanceManagementSystem.View_Frms
 {
     public partial class approve_view : Form
