@@ -49,17 +49,16 @@ namespace GuidanceManagementSystem.View_Frms
 
         private void view_irf_Load(object sender, EventArgs e)
         {
-            //asyncrounously get data from database and fill the form.
-
-            MyFetch fetchData = new MyFetch();
-            // Replace with the actual student ID you want to query
-            studentData = fetchData.GetStudentData(student_id);
-
-            LoadForms();
-
-            
-
-            // Example: Display data from the first table (tbl_brothers_sisters)
+            try
+            {
+                MyFetch fetchData = new MyFetch();
+                studentData = fetchData.GetStudentData(student_id);
+                LoadForms();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading student data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void LoadForms()

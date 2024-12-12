@@ -97,7 +97,7 @@ namespace GuidanceManagementSystem.View_Frms
         private void dashboardfrm_Load(object sender, EventArgs e)
         {
             ShowFormInPanel(new dashboard_view());
-            //cuiLabel1.Content = MyCon._loggedName.ToUpper();
+            cuiLabel1.Content = MyCon._loggedName.ToUpper();
           
 
         }
@@ -149,6 +149,11 @@ namespace GuidanceManagementSystem.View_Frms
                 // Handle cases where the role is not set (e.g., not logged in)
                 MessageBox.Show("Please log in to access this feature.", "Login Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+
+        }
+
+        private void cuiLabel1_Load(object sender, EventArgs e)
+        {
 
         }
     }

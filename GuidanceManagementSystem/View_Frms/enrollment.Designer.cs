@@ -401,7 +401,7 @@
             this.button2.TabIndex = 12;
             this.button2.Text = "Browse";
             this.button2.UseVisualStyleBackColor = false;
-            //this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            this.button2.Click += new System.EventHandler(this.button2_Click_2);
             // 
             // label45
             // 
@@ -427,7 +427,7 @@
             this.picturestudent.Location = new System.Drawing.Point(3, 4);
             this.picturestudent.Name = "picturestudent";
             this.picturestudent.Size = new System.Drawing.Size(434, 247);
-            this.picturestudent.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picturestudent.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picturestudent.TabIndex = 0;
             this.picturestudent.TabStop = false;
             // 
@@ -444,7 +444,6 @@
             this.cmbCourse.Name = "cmbCourse";
             this.cmbCourse.Size = new System.Drawing.Size(187, 29);
             this.cmbCourse.TabIndex = 6;
-            //this.cmbCourse.SelectedIndexChanged += new System.EventHandler(this.cmbCourse_SelectedIndexChanged);
             // 
             // cmbYear
             // 
@@ -612,7 +611,6 @@
             this.txtCivilStatus.Name = "txtCivilStatus";
             this.txtCivilStatus.Size = new System.Drawing.Size(176, 29);
             this.txtCivilStatus.TabIndex = 168;
-            //this.txtCivilStatus.SelectedIndexChanged += new System.EventHandler(this.txtCivilStatus_SelectedIndexChanged_1);
             // 
             // txtCitizenship
             // 
@@ -622,6 +620,7 @@
             this.txtCitizenship.Name = "txtCitizenship";
             this.txtCitizenship.Size = new System.Drawing.Size(132, 29);
             this.txtCitizenship.TabIndex = 167;
+            this.txtCitizenship.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCitizenship_KeyPress);
             // 
             // txtNationality
             // 
@@ -1304,7 +1303,6 @@
             this.rb10001To15000.TabStop = true;
             this.rb10001To15000.Text = "P10001 to P15000";
             this.rb10001To15000.UseVisualStyleBackColor = true;
-           // this.rb10001To15000.CheckedChanged += new System.EventHandler(this.rb10001To15000_CheckedChanged);
             // 
             // rbMotherWorkingAbroadNo
             // 
@@ -3322,6 +3320,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "enrollment";
             this.TopMost = true;
+           // this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.enrollment_FormClosing);
             this.Load += new System.EventHandler(this.enrollment_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage6.ResumeLayout(false);

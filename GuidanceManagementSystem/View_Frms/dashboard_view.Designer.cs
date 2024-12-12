@@ -127,6 +127,7 @@
             this.cics.Size = new System.Drawing.Size(46, 53);
             this.cics.TabIndex = 7;
             this.cics.Text = "0";
+            this.cics.Click += new System.EventHandler(this.cics_Click);
             // 
             // cuiLabel10
             // 
@@ -157,7 +158,7 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(132, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(132, 3);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(82, 72);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -204,6 +205,7 @@
             this.cted.Size = new System.Drawing.Size(46, 53);
             this.cted.TabIndex = 7;
             this.cted.Text = "0";
+            this.cted.Click += new System.EventHandler(this.cted_Click);
             // 
             // cuiLabel11
             // 

@@ -74,7 +74,6 @@ namespace GuidanceManagementSystem.View_Frms
 
             LoadDataIntoDataGridView(dataGridView1, cmbCourses.SelectedItem?.ToString());
         }
-
         private void LoadDataIntoDataGridView(DataGridView dataGridView, string course = null)
         {
             MySqlDataAdapter adapter = fetchService.GetIndividualDataPending(course);
@@ -92,7 +91,6 @@ namespace GuidanceManagementSystem.View_Frms
             AddActionColumns();
 
         }
-
         private void AddActionColumns()
         {
             if (dataGridView1.Columns["btnApprove"] == null)
@@ -178,104 +176,120 @@ namespace GuidanceManagementSystem.View_Frms
                 cuiButton2.Image = Properties.Resources.cloud_cross_480px;
             }
         }
-       
+
         private async void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            try
             {
-                int columnIndex = e.ColumnIndex;
-
-                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-
-                // Find the column index for "StudentId" column by name
-                int studentIdColumnIndex = dataGridView1.Columns["Student_Id"].Index;
-
-                // Retrieve the StudentId value based on its column index
-                StudentId = row.Cells[studentIdColumnIndex].Value?.ToString() ?? "N/A";
-
-                // Check if the clicked column is one of the action columns
-                if (e.ColumnIndex == dataGridView1.Columns["imgView"].Index)
+                // Validate that a row is clicked
+                if (e.RowIndex >= 0 && e.RowIndex < dataGridView1.Rows.Count)
                 {
-                    // Get the student ID from the clicked row
-                    string studentId = dataGridView1.Rows[e.RowIndex].Cells["Student_ID"].Value.ToString();
+                    int columnIndex = e.ColumnIndex;
+                    DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
 
-                    // Now you can create your view_irf form and pass the studentId
-                    view_irf fm = new view_irf(studentId);
+                    // Retrieve the Student_ID value from the row
+                    string studentId = row.Cells["Student_ID"]?.Value?.ToString();
 
-                    // Optional: Blur the background if needed
-                    BlurEffectHelper.BlurBackground(fm);
-
-                    // Show the form
-                    //fm.Show();
-                }
-                else if (e.ColumnIndex == dataGridView1.Columns["btnApprove"].Index && e.RowIndex >= 0)
-                {
-                    // Get the Student_ID from the selected row
-                    string studentID = dataGridView1.Rows[e.RowIndex].Cells["Student_ID"].Value.ToString();
-
-                    // Call a method to approve the student record
-                    ApproveStudent(studentID);
-                }
-
-                else if (dataGridView1.Columns[columnIndex].Name == "imgEdit")
-                {
-                    // Retrieve the selected student ID from the DataGridView
-                    string studentId = dataGridView1.Rows[e.RowIndex].Cells["Student_ID"].Value.ToString();
-                   
-                    // Create a new instance of the Enrollment Form
-                    enrollment enrollmentForm = new enrollment();
-
-                    foreach (TabPage tabPage in enrollmentForm.tabControl1.TabPages)
+                    if (string.IsNullOrEmpty(studentId))
                     {
-                        tabPage.Enabled = true; // Enable each tab page
+                        MessageBox.Show("Student ID is missing. Please select a valid record.");
+                        return;
                     }
 
-                    // Optionally, set a specific tab as the selected one
-                    //enrollmentForm.tabControl1.SelectedTab = enrollmentForm.tabControl1.TabPages["tabPage1"]; // Replace "tabPage1" with the tab you want to select
+                    // Check which column is clicked
+                    if (dataGridView1.Columns[columnIndex].Name == "imgView")
+                    {
+                        // Handle the "View" operation
+                        view_irf fm = new view_irf(studentId);
+                        BlurEffectHelper.BlurBackground(fm);
+                        fm.ShowDialog();
+                    }
+                    else if (dataGridView1.Columns[columnIndex].Name == "btnApprove")
+                    {
+                        // Handle the "Approve" operation
+                        ApproveStudent(studentId);
+                    }
+                    else if (dataGridView1.Columns[columnIndex].Name == "imgDelete")
+                    {
+                        Delete.DeleteRecord(studentId);
+                        LoadData();
+                    }
+                    else if (dataGridView1.Columns[columnIndex].Name == "imgEdit")
+                    {
+                        // Handle the "Edit" operation
+                        enrollment enrollmentForm = Application.OpenForms["enrollment"] as enrollment;
+                        if (enrollmentForm == null)
+                        {
+                            // If the form is not open, create a new instance
+                            enrollmentForm = new enrollment();
+                            enrollmentForm.Name = "enrollment"; // Ensure the form has this name for detection
+                        }
 
-                    enrollmentForm.LoadEducationalDataToForm(studentId);
-            
-                    enrollmentForm.SetEditMode(studentId);
-                    BlurEffectHelper.BlurBackground(enrollmentForm);
+                        // Make sure the form is visible and bring it to front
+                        enrollmentForm.BringToFront();
+
+                        // Pass the student ID and other necessary data to the form
+                        enrollmentForm.LoadEducationalDataToForm(studentId);
+                        enrollmentForm.SetEditMode(studentId);
+
+                        // Now, load the student image from the database and display it in the PictureBox
+                        byte[] imageBytes = enrollmentForm.RetrieveImageFromDatabase(studentId);
+                        enrollmentForm.DisplayImageInPictureBox(imageBytes);
+
+                        // Show the form with blur effect
+                        BlurEffectHelper.BlurBackground(enrollmentForm);
+                        enrollmentForm.Show();
+                        LoadData();
+                    }
+                    else
+                    {
+                        // Optional: Handle other columns if necessary
+                        MessageBox.Show("No action assigned for this column.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Invalid row or column clicked.");
                 }
             }
-            //MessageBox.Show($"Student Id: {StudentId}: {row.Cells[1]}");      
-       }
-    
+            catch (Exception ex)
+            {
+                //MessageBox.Show($"An unexpected error occurred: DITO YON {ex.Message}");
+            }
 
-
-
-        private void ApproveStudent(string studentID)
+        }
+            private void ApproveStudent(string studentID)
         {            
             string query = @"UPDATE tbl_individual_record 
                      SET Status = 1 
                      WHERE Student_ID = @StudentID";
+            MySqlConnection con =  MyCon.GetConnection();
             try
             {
-                    using (var command = new MySqlCommand(query, MyCon.GetConnection()))
+                using (var command = new MySqlCommand(query,con))
+                {
+                    command.Parameters.AddWithValue("@StudentID", studentID);
+
+                    // Execute the update query
+                    int rowsAffected = command.ExecuteNonQuery();
+                    if (rowsAffected > 0)
                     {
-                        command.Parameters.AddWithValue("@StudentID", studentID);
+                        MessageBox.Show("Student record approved successfully!");
 
-                        // Execute the update query
-                        int rowsAffected = command.ExecuteNonQuery();
-                        if (rowsAffected > 0)
-                        {
-                            MessageBox.Show("Student record approved successfully!");
-
-                            // Reload data to reflect changes
-                            LoadData(); // You can pass the course parameter if needed
-                        }
-                        else
-                        {
-                            MessageBox.Show("Error: Student record not found or could not be approved.");
-                        }
+                        // Reload data to reflect changes
+                        LoadData(); // You can pass the course parameter if needed
                     }
-                
+                    else
+                    {
+                        MessageBox.Show("Error: Student record not found or could not be approved.");
+                    }
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error approving student: {ex.Message}");
             }
+           
         }
 
         private void MoveOrInsertActionColumns(int sexColumnIndex)
@@ -322,100 +336,75 @@ namespace GuidanceManagementSystem.View_Frms
             {
                 query += " WHERE ir.Course = @Course";
             }
-
+            MySqlConnection con = MyCon.GetConnection();
             try
             {
-                    using (var command = new MySqlCommand(query, MyCon.GetConnection()))
+                using (var command = new MySqlCommand(query, con))
+                {
+                    if (!string.IsNullOrEmpty(course) && course != "All")
                     {
-                        if (!string.IsNullOrEmpty(course) && course != "All")
-                        {
-                            command.Parameters.AddWithValue("@Course", course);
-                        }
-
-                        using (var adapter = new MySqlDataAdapter(command))
-                        {
-                            DataTable dataTable = new DataTable();
-                            adapter.Fill(dataTable);
-
-                            // Clear existing columns and data to prevent duplication
-                            dataGridView1.DataSource = null;
-                            dataGridView1.Columns.Clear();
-
-                            // Bind new data
-                            dataGridView1.DataSource = dataTable;
-
-                            // Add the action columns (View, Edit, Delete)
-                            AddActionColumns();
-                        }
+                        command.Parameters.AddWithValue("@Course", course);
                     }
-                
+
+                    using (var adapter = new MySqlDataAdapter(command))
+                    {
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Clear existing columns and data to prevent duplication
+                        dataGridView1.DataSource = null;
+                        dataGridView1.Columns.Clear();
+
+                        // Bind new data
+                        dataGridView1.DataSource = dataTable;
+
+                        // Add the action columns (View, Edit, Delete)
+                        AddActionColumns();
+                    }
+                }
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error loading data: {ex.Message}");
             }
+           
         }
 
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 &&
-        dataGridView1.Columns[e.ColumnIndex] is DataGridViewImageColumn &&
-        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
-            {
-                // Get the Student_ID from the selected row
-                string studentID = dataGridView1.Rows[e.RowIndex].Cells["Student_ID"].Value?.ToString();
-
-                if (string.IsNullOrEmpty(studentID))
-                {
-                    MessageBox.Show("Invalid Student ID. Unable to delete.");
-                    return;
-                }
-
-                // Show confirmation dialog
-                DialogResult confirmation = MessageBox.Show("Are you sure you want to delete this record?",
-                                                             "Confirmation",
-                                                             MessageBoxButtons.YesNo,
-                                                             MessageBoxIcon.Warning);
-
-                if (confirmation == DialogResult.Yes)
-                {
-                    // Call the delete method
-                    Delete.DeleteRecord(studentID);
-
-                    // Reload data to reflect changes
-                    dataGridView1.Columns.Clear();
-                    LoadData();
-                }
-            }
+            
         }
 
         private void LoadCourses()
         {
             string query = "SELECT DISTINCT Course FROM tbl_individual_record WHERE status=0";
+            MySqlConnection con = MyCon.GetConnection();
             try
             {
-               
 
-                    using (var command = new MySqlCommand(query, MyCon.GetConnection()))
-                    using (var reader = command.ExecuteReader())
+
+                using (var command = new MySqlCommand(query, con))
+                using (var reader = command.ExecuteReader())
+                {
+                    cmbCourses.Items.Clear();
+                    cmbCourses.Items.Add("All"); // Add "All Courses" option first
+
+                    while (reader.Read())
                     {
-                        cmbCourses.Items.Clear();
-                        cmbCourses.Items.Add("All"); // Add "All Courses" option first
-
-                        while (reader.Read())
-                        {
-                            cmbCourses.Items.Add(reader.GetString("Course"));
-                        }
-
-                        cmbCourses.SelectedIndex = 0; // Default to "All Courses"
+                        cmbCourses.Items.Add(reader.GetString("Course"));
                     }
-                
+
+                    cmbCourses.SelectedIndex = 0; // Default to "All Courses"
+                }
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error loading courses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            
         }
 
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -445,6 +434,11 @@ namespace GuidanceManagementSystem.View_Frms
             enrollment enrollment = new enrollment();
             // Call method to load student data, including image
             enrollment.LoadStudentData(studentID);
+        }
+
+        private void cmbCourses_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

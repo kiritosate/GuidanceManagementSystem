@@ -70,9 +70,9 @@ namespace GuidanceManagementSystem.View_Frms
                     }
                 }
             }
-        
 
-        
+
+
 
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -102,21 +102,31 @@ namespace GuidanceManagementSystem.View_Frms
                     // Check if the row is not empty before accessing the cells
                     if (dataGridViewAccounts.Rows[e.RowIndex].Cells["AccountID"].Value != DBNull.Value)
                     {
-                        int rowIndex = e.RowIndex;
-
-                        // Update the UpdatedAt field with the current date and time
-                        dataGridViewAccounts.Rows[rowIndex].Cells["UpdatedAt"].Value = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
-
-                        // You can add additional code to handle the actual account update, like saving changes to the database
-                        UpdateAccountInDatabase(rowIndex);
-                        // Get Account ID and Name from the clicked row
                         int accountID = Convert.ToInt32(dataGridViewAccounts.Rows[e.RowIndex].Cells["AccountID"].Value);
-                        string accountName = dataGridViewAccounts.Rows[e.RowIndex].Cells["AccountName"].Value.ToString();
+                        string Password = dataGridViewAccounts.Rows[e.RowIndex].Cells["Password"].Value.ToString();
                         string accountType = comboBoxAccountType.SelectedItem.ToString();  // Admin or Staff
 
                         // Open SuperAdmin Form to update
-                        OpenSuperAdminForm(accountID, accountName, accountType);
-                        
+                        superadmin superAdminForm = new superadmin();
+
+                        // Subscribe to the OnSaveCompleted event
+                        superAdminForm.OnSaveCompleted += () =>
+                        {
+                            // Reload the DataGridView when save is completed
+                            string selectedType = comboBoxAccountType.SelectedItem?.ToString();
+                            if (!string.IsNullOrEmpty(selectedType))
+                            {
+                                LoadAccountData(selectedType);
+                            }
+                        };
+
+                        // Pass account details to the SuperAdmin form
+                        superAdminForm.AccountID = accountID;
+                        superAdminForm.AccountPassword = Password;
+                        superAdminForm.AccountType = accountType;
+
+                        // Show the SuperAdmin form
+                        superAdminForm.ShowDialog();
                     }
                     else
                     {
@@ -124,12 +134,8 @@ namespace GuidanceManagementSystem.View_Frms
                     }
                 }
             }
-            else
-            {
-                MessageBox.Show("Invalid row index.");
-            }
         }
-        private void UpdateAccountInDatabase(int rowIndex)
+                private void UpdateAccountInDatabase(int rowIndex)
         {
             string accountID = dataGridViewAccounts.Rows[rowIndex].Cells["AccountID"].Value.ToString();
             string accountName = dataGridViewAccounts.Rows[rowIndex].Cells["AccountName"].Value.ToString();
@@ -159,7 +165,7 @@ namespace GuidanceManagementSystem.View_Frms
             LoadAccountData(selectedType);
         }
         // Load Account Data for Admin or Staff
-        private void LoadAccountData(string selectedType)
+        public void LoadAccountData(string selectedType)
         {
             // Clear existing rows
             dataGridViewAccounts.Rows.Clear();
@@ -211,5 +217,12 @@ namespace GuidanceManagementSystem.View_Frms
         {
             this.Close();
         }
+
+        private void cuiButton1_Click(object sender, EventArgs e)
+        {
+
+        }
+      
+       
     }
 }

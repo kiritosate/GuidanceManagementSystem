@@ -227,7 +227,7 @@ namespace GuidanceManagementSystem.methods
         }
         public static int sql(string qry, Hashtable ht)
         {
-            MySqlConnection con = new MySqlConnection("datasource=localhost;database=guidancedb;port=3306;username=root;password=;");
+            MySqlConnection con = MyCon.GetConnection();
 
             int res = 0;
             try
@@ -271,15 +271,11 @@ namespace GuidanceManagementSystem.methods
         {
             public static void DeleteRecord(string studentID)
             {
-                string connectionString = "server=localhost;database=guidancedb;user=root;password=;";
+                MySqlConnection conn = MyCon.GetConnection();   
                 string query = "DELETE FROM tbl_individual_record WHERE Student_ID = @StudentID";
                 try
                 {
-                    using (var connection = new MySqlConnection(connectionString))
-                    {
-                        connection.Open();
-
-                        using (var command = new MySqlCommand(query, connection))
+                        using (var command = new MySqlCommand(query, conn))
                         {
                             command.Parameters.AddWithValue("@StudentID", studentID);
 
@@ -288,18 +284,20 @@ namespace GuidanceManagementSystem.methods
                             if (rowsAffected > 0)
                             {
                                 MessageBox.Show("Record deleted successfully.");
+                                
                             }
                             else
                             {
                                 MessageBox.Show("No record found to delete.");
                             }
                         }
-                    }
+                    
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Error deleting record: {ex.Message}");
                 }
+               
             }
         }
         

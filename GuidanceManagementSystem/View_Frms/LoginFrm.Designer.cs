@@ -53,7 +53,8 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackgroundImage = global::GuidanceManagementSystem.Properties.Resources.asdasdasdasdasd;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
@@ -179,7 +180,7 @@
             this.cuiSpinner1.Name = "cuiSpinner1";
             this.cuiSpinner1.RingColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
             this.cuiSpinner1.RotateSpeed = 1F;
-            this.cuiSpinner1.Rotation = 206.6928F;
+            this.cuiSpinner1.Rotation = 114.5942F;
             this.cuiSpinner1.Size = new System.Drawing.Size(30, 31);
             this.cuiSpinner1.TabIndex = 5;
             this.cuiSpinner1.Thickness = 3F;

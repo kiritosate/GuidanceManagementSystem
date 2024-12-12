@@ -30,21 +30,21 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(reports_view));
             this.panel2 = new System.Windows.Forms.Panel();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cmbCourses = new System.Windows.Forms.ComboBox();
+            this.cuiLabel1 = new CuoreUI.Controls.cuiLabel();
             this.txtStudentID = new CuoreUI.Controls.cuiTextBox2();
             this.cuiLabel2 = new CuoreUI.Controls.cuiLabel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.printDocument = new System.Windows.Forms.Button();
             this.exportexcel = new System.Windows.Forms.Button();
             this.exportpdf = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cmbCourses = new System.Windows.Forms.ComboBox();
-            this.cuiLabel1 = new CuoreUI.Controls.cuiLabel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.printDocument = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -66,6 +66,76 @@
             this.panel2.Size = new System.Drawing.Size(1028, 49);
             this.panel2.TabIndex = 10;
             // 
+            // button4
+            // 
+            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(89)))));
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
+            this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button4.Location = new System.Drawing.Point(651, 18);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(145, 34);
+            this.button4.TabIndex = 5;
+            this.button4.Text = "View Report";
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button1
+            // 
+            this.button1.AutoSize = true;
+            this.button1.BackColor = System.Drawing.Color.Green;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(509, 18);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(136, 34);
+            this.button1.TabIndex = 15;
+            this.button1.Text = "     Generate Report";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(282, 24);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(116, 21);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Filter by course";
+            // 
+            // cmbCourses
+            // 
+            this.cmbCourses.FormattingEnabled = true;
+            this.cmbCourses.Items.AddRange(new object[] {
+            "COA",
+            "CICS",
+            "CHM",
+            "CTED",
+            "All"});
+            this.cmbCourses.Location = new System.Drawing.Point(404, 18);
+            this.cmbCourses.Name = "cmbCourses";
+            this.cmbCourses.Size = new System.Drawing.Size(99, 29);
+            this.cmbCourses.TabIndex = 12;
+            // 
+            // cuiLabel1
+            // 
+            this.cuiLabel1.Content = "User/Registration";
+            this.cuiLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cuiLabel1.Font = new System.Drawing.Font("Segoe UI", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cuiLabel1.ForeColor = System.Drawing.Color.DimGray;
+            this.cuiLabel1.HorizontalAlignment = CuoreUI.Controls.cuiLabel.HorizontalAlignments.Left;
+            this.cuiLabel1.Location = new System.Drawing.Point(0, 49);
+            this.cuiLabel1.Margin = new System.Windows.Forms.Padding(4);
+            this.cuiLabel1.Name = "cuiLabel1";
+            this.cuiLabel1.Size = new System.Drawing.Size(1028, 0);
+            this.cuiLabel1.TabIndex = 13;
+            // 
             // txtStudentID
             // 
             this.txtStudentID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -77,7 +147,7 @@
             this.txtStudentID.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtStudentID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtStudentID.ForeColor = System.Drawing.Color.Gray;
-            this.txtStudentID.Location = new System.Drawing.Point(817, 4);
+            this.txtStudentID.Location = new System.Drawing.Point(818, 6);
             this.txtStudentID.Margin = new System.Windows.Forms.Padding(4);
             this.txtStudentID.Multiline = false;
             this.txtStudentID.Name = "txtStudentID";
@@ -135,34 +205,7 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1028, 57);
             this.panel3.TabIndex = 1;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 55);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(1028, 535);
-            this.dataGridView1.TabIndex = 0;
-            // 
-            // printDocument
-            // 
-            this.printDocument.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.printDocument.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(89)))));
-            this.printDocument.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.printDocument.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.printDocument.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.printDocument.Image = ((System.Drawing.Image)(resources.GetObject("printDocument.Image")));
-            this.printDocument.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.printDocument.Location = new System.Drawing.Point(893, 11);
-            this.printDocument.Name = "printDocument";
-            this.printDocument.Size = new System.Drawing.Size(131, 43);
-            this.printDocument.TabIndex = 4;
-            this.printDocument.Text = "Print";
-            this.printDocument.UseVisualStyleBackColor = false;
-            this.printDocument.Click += new System.EventHandler(this.button3_Click);
+            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
             // exportexcel
             // 
@@ -198,76 +241,33 @@
             this.exportpdf.UseVisualStyleBackColor = false;
             this.exportpdf.Click += new System.EventHandler(this.exportpdf_Click);
             // 
-            // button4
+            // dataGridView1
             // 
-            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(89)))));
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
-            this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button4.Location = new System.Drawing.Point(651, 18);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(137, 34);
-            this.button4.TabIndex = 5;
-            this.button4.Text = "View Report";
-            this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 55);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(1028, 535);
+            this.dataGridView1.TabIndex = 0;
             // 
-            // label1
+            // printDocument
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(282, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(116, 21);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "Filter by course";
-            // 
-            // cmbCourses
-            // 
-            this.cmbCourses.FormattingEnabled = true;
-            this.cmbCourses.Items.AddRange(new object[] {
-            "COA",
-            "CICS",
-            "CHM",
-            "CTED",
-            "All"});
-            this.cmbCourses.Location = new System.Drawing.Point(404, 18);
-            this.cmbCourses.Name = "cmbCourses";
-            this.cmbCourses.Size = new System.Drawing.Size(99, 29);
-            this.cmbCourses.TabIndex = 12;
-            // 
-            // cuiLabel1
-            // 
-            this.cuiLabel1.Content = "User/Registration";
-            this.cuiLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cuiLabel1.Font = new System.Drawing.Font("Segoe UI", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cuiLabel1.ForeColor = System.Drawing.Color.DimGray;
-            this.cuiLabel1.HorizontalAlignment = CuoreUI.Controls.cuiLabel.HorizontalAlignments.Left;
-            this.cuiLabel1.Location = new System.Drawing.Point(0, 49);
-            this.cuiLabel1.Margin = new System.Windows.Forms.Padding(4);
-            this.cuiLabel1.Name = "cuiLabel1";
-            this.cuiLabel1.Size = new System.Drawing.Size(1028, 0);
-            this.cuiLabel1.TabIndex = 13;
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.AutoSize = true;
-            this.button1.BackColor = System.Drawing.Color.Green;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(509, 20);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(136, 32);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "     Generate Report";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.printDocument.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.printDocument.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(89)))));
+            this.printDocument.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.printDocument.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.printDocument.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.printDocument.Image = ((System.Drawing.Image)(resources.GetObject("printDocument.Image")));
+            this.printDocument.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.printDocument.Location = new System.Drawing.Point(893, 11);
+            this.printDocument.Name = "printDocument";
+            this.printDocument.Size = new System.Drawing.Size(131, 43);
+            this.printDocument.TabIndex = 4;
+            this.printDocument.Text = "Print";
+            this.printDocument.UseVisualStyleBackColor = false;
+            this.printDocument.Click += new System.EventHandler(this.button3_Click);
             // 
             // reports_view
             // 
@@ -302,7 +302,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button exportpdf;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Button printDocument;
         private System.Windows.Forms.Button exportexcel;
         private System.Windows.Forms.Button button4;
         private System.Drawing.Printing.PrintDocument printDocument1;
@@ -310,5 +309,6 @@
         private System.Windows.Forms.ComboBox cmbCourses;
         private CuoreUI.Controls.cuiLabel cuiLabel1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button printDocument;
     }
 }

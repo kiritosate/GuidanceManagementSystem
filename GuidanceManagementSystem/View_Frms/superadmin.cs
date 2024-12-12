@@ -49,7 +49,7 @@ namespace GuidanceManagementSystem.View_Frms
         {
             this.Close();
         }
-
+        public event Action OnSaveCompleted;
         private void NextButton_Click_1(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtNewPassword.Text))
@@ -68,9 +68,11 @@ namespace GuidanceManagementSystem.View_Frms
             try
             {
                 UpdateAccountPassword(table, AccountID, newPassword);
-               
+                OnSaveCompleted?.Invoke();
                 MessageBox.Show("Account updated successfully!");
-                this.Close(); // Optionally close the form after update
+               // this.Close(); // Optionally close the form after update
+                
+                
             }
             catch (Exception ex)
             {

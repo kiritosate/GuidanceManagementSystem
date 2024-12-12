@@ -119,6 +119,7 @@
             this.cmbCourses.Name = "cmbCourses";
             this.cmbCourses.Size = new System.Drawing.Size(100, 29);
             this.cmbCourses.TabIndex = 16;
+            this.cmbCourses.Text = "   --select--";
             // 
             // cuiTextBox21
             // 

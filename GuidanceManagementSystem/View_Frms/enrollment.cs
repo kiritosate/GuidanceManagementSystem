@@ -463,12 +463,11 @@ namespace GuidanceManagementSystem
 
         private async Task SaveFamilyData(FamilyData family)
         {
-            string connectionString = "server=localhost;port=3306;database=guidancedb;user=root;password=;";
-            using (var connection = new MySqlConnection(connectionString))
+            using (var connection = MyCon.GetConnection())
             {
-                await connection.OpenAsync();
-
-                string query = @"INSERT INTO tbl_family_data 
+            
+                  
+                    string query = @"INSERT INTO tbl_family_data 
                         (Student_ID, Parent_Type,Living_Status,Parents_Name, Tel_Cell_No, Nationality, Educational_Attainment, Occupation, Employer_Agency, Working_Abroad, Marital_Status, Monthly_Income,
                         No_of_Children, Students_Birth_Order, Language_Dialect, Family_Structure, Indigenous_Group, 4Ps_Beneficiary)
                         VALUES
@@ -499,13 +498,14 @@ namespace GuidanceManagementSystem
                     try
                     {
                         int result = await command.ExecuteNonQueryAsync();
-                        connection.Close();
-                       
+                        
+
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show($"Error: {ex.Message}");
                     }
+                 
                 }
             }
         }
@@ -520,22 +520,21 @@ namespace GuidanceManagementSystem
         FamilyData mother
         )
         {
-            string connectionString = "server=localhost;port=3306;database=guidancedb;user=root;password=;";
+            
 
-            using (var connection = new MySqlConnection(connectionString))
+            using (var connection = MyCon.GetConnection())
             {
-                // Open the connection asynchronously
-                await connection.OpenAsync();
+                
 
                 using (var transaction = await connection.BeginTransactionAsync())
                 {
                     try
                     {
-                    
+
                         // Save individual record
                         string studentID = SavedStudentID;
                         //await SaveIndividualRecordAsync(IndividualInfo);
-                       //  studentID = await SaveIndividualRecordAsync(indi);
+                        //  studentID = await SaveIndividualRecordAsync(indi);
                         await SaveStudentRecord(PersonalInfo);
                         await TestSaveHealthData(Health);
                         await TestSaveAdditionalProfile(AdditionalInfo);
@@ -544,7 +543,7 @@ namespace GuidanceManagementSystem
                         await SaveFamilyData(mother);
 
                         await transaction.CommitAsync();
-                        connection.Close();
+                  
 
                         //MessageBox.Show("Health data saved successfully!");
                     }
@@ -554,6 +553,7 @@ namespace GuidanceManagementSystem
                         await transaction.RollbackAsync();
                         MessageBox.Show("An error occurred while saving: " + ex.Message);
                     }
+                   
                 }
             }
         }
@@ -577,9 +577,9 @@ namespace GuidanceManagementSystem
                 @Contact_No, @E_mail_Address, @CompleteHomeAddress, @BoardingHouseAddress, 
                 @LandlordName, @PersonToContact, @CellNumber, @Hobbies, @DescribeYourself
             );";
-
+                MySqlConnection con =  MyCon.GetConnection();
                 // Use the connection and a command
-                using (var command = new MySqlCommand(query, MyCon.GetConnection()))
+                using (var command = new MySqlCommand(query,con))
                 {
                     // Assign parameter values for the query
                    // command.Parameters.AddWithValue("PersonalDataID", PersonalInfo.PersonalDataID);
@@ -609,18 +609,19 @@ namespace GuidanceManagementSystem
                     command.Parameters.AddWithValue("@Hobbies", PersonalInfo.Hobbies);
                     command.Parameters.AddWithValue("@DescribeYourself", PersonalInfo.DescribeYourself);
 
-                    try
-                    {
-                        int result = await command.ExecuteNonQueryAsync();
+                try
+                {
+                    int result = await command.ExecuteNonQueryAsync();
                     // MessageBox.Show(result > 0 ? "Personal data saved!" : "Personal data not saved.");
-                        
-                    }
-                    catch (Exception ex)
-                    {
-                        
-                        Console.WriteLine("Error Details: " + ex);
-                        MessageBox.Show("Error bobo: " + ex.Message);
-                    }
+
+                }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine("Error Details: " + ex);
+                    MessageBox.Show("Error bobo: " + ex.Message);
+                }
+              
                 }
             
         }
@@ -641,8 +642,8 @@ namespace GuidanceManagementSystem
             @SHSAverageGrade, @College, @FavoriteSubject, @WhyFavoriteSubject, @LeastFavoriteSubject, 
             @WhyLeastFavoriteSubject, @SupportForStudies, @Membership, @LeftRightHanded
         );";
-
-            using (var command = new MySqlCommand(query, MyCon.GetConnection()))
+            MySqlConnection conn = MyCon.GetConnection();
+            using (var command = new MySqlCommand(query,conn))
             {
                 // Adding parameter values
                 command.Parameters.AddWithValue("@StudentID", SavedStudentID);
@@ -678,6 +679,7 @@ namespace GuidanceManagementSystem
                     // Catch and display errors
                     MessageBox.Show($"Error message: {ex.Message}");
                 }
+              
             }
         }
 
@@ -686,23 +688,24 @@ namespace GuidanceManagementSystem
            
                 string query = @"INSERT INTO tbl_health_data (Student_ID, Sick_Frequency, Health_Problems, Physical_Disabilities)
                          VALUES (@StudentID, @SickFrequency, @HealthProblems, @PhysicalDisabilities);";
-
-                using (var command = new MySqlCommand(query, MyCon.GetConnection()))
+                MySqlConnection conn = MyCon.GetConnection();
+                using (var command = new MySqlCommand(query,conn ))
                 {
                     command.Parameters.AddWithValue("@StudentID", SavedStudentID);
                     command.Parameters.AddWithValue("@SickFrequency", Health.SickFrequency);
                     command.Parameters.AddWithValue("@HealthProblems", Health.HealthProblems);
                     command.Parameters.AddWithValue("@PhysicalDisabilities", Health.PhysicalDisabilities);
 
-                    try
-                    {
-                        int result = await command.ExecuteNonQueryAsync();
-                        //MessageBox.Show(result > 0 ? "Health data saved!" : "Health data not saved.");
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Error message: {ex.Message}");
-                    }
+                try
+                {
+                    int result = await command.ExecuteNonQueryAsync();
+                    //MessageBox.Show(result > 0 ? "Health data saved!" : "Health data not saved.");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error message: {ex.Message}");
+                }
+             
                 }
         }
 
@@ -724,8 +727,8 @@ namespace GuidanceManagementSystem
                             @HasScholarship,
                             @ScholarshipName
                          );";
-
-                using (var command = new MySqlCommand(query, MyCon.GetConnection()))
+                MySqlConnection con = MyCon.GetConnection();
+                using (var command = new MySqlCommand(query, con))
                 {
                     command.Parameters.AddWithValue("@StudentID", SavedStudentID);
                     command.Parameters.AddWithValue("@SexualPreference", AdditionalInfo.SexualPreference);
@@ -743,6 +746,7 @@ namespace GuidanceManagementSystem
                     {
                         MessageBox.Show($"Error tanga: {ex.Message}");
                     }
+                   
                 }
             }
         
@@ -786,7 +790,9 @@ namespace GuidanceManagementSystem
         }
         public enrollment()
         {
+            
             InitializeComponent();
+
         
         //    MyMethods.ApplyPlaceholder(txtEmailAddress, "example@gmail.com");
         //    txtEmailAddress.KeyPress += new KeyPressEventHandler(InputValidator.OnKeyPress_EmailValidation);
@@ -1081,10 +1087,7 @@ namespace GuidanceManagementSystem
                     };
 
             int result = await md.ExecuteUpdateQuery(query, parameters);
-            //if (result > 0)
-            //{
-            //    MessageBox.Show("Educational data updated successfully!");
-            //}
+         
         }
 
 
@@ -1106,7 +1109,7 @@ namespace GuidanceManagementSystem
             };
 
             int result = await md.ExecuteUpdateQuery(query, parameters);
-            if (result > 0) MessageBox.Show("Individual record updated successfully!");
+
         }
         public async Task UpdateHealthData(string studentId)
         {
@@ -1351,16 +1354,6 @@ namespace GuidanceManagementSystem
                     {
                         // Execute the update query using MyMethods helper class
                         int result = await md.ExecuteUpdateQuery(query, parameters);
-
-                        // Provide feedback based on the execution result
-                        //if (result > 0)
-                        //{
-                        //    MessageBox.Show("Personal data updated successfully!");
-                        //}
-                        //else
-                        //{
-                        //    MessageBox.Show("No records were updated. Please check if the Student_ID exists.");
-                        //}
                     }
                     catch (Exception ex)
                     {
@@ -1441,13 +1434,13 @@ namespace GuidanceManagementSystem
         {
             // Define the SQL query for updating the image
                     string query = @"
-            UPDATE studentimages 
-            SET 
-                ImageData = @ImageData,
-                ImageType = @ImageType
-            WHERE 
-                Student_ID = @StudentID;
-            ";
+                UPDATE studentimages 
+                SET 
+                    ImageData = @ImageData,
+                    ImageType = @ImageType
+                WHERE 
+                    Student_ID = @StudentID;
+                ";
 
             // Define the parameters for the query
             MySqlParameter[] parameters = new MySqlParameter[]
@@ -1495,6 +1488,7 @@ namespace GuidanceManagementSystem
 
 
         private bool isEditMode;
+        public event Action OnSaveCompleted;
             private async void button1_Click(object sender, EventArgs e)
             {
             if (isEditMode)
@@ -1509,12 +1503,24 @@ namespace GuidanceManagementSystem
                     await UpdateAdditionalProfile(GlobalData.SavedStudentID);
                     await UpdateEducationalData(GlobalData.SavedStudentID);
                     await UpdateFamilyData(GlobalData.SavedStudentID);
-                    byte[] imageBytes = GetImageBytesFromPictureBox(picturestudent.Image);
-                    string imageType = GetImageTypeFromPictureBox(picturestudent.Image);
-                    await UpdateImageInDatabaseAsync(GlobalData.SavedStudentID, imageBytes, imageType);
+                    if (isImageUpdated && picturestudent.Image != null)
+                    {
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            using (Bitmap bitmap = new Bitmap(picturestudent.Image))
+                            {
+                                bitmap.Save(ms, picturestudent.Image.RawFormat);  // Save the cloned image
+                            }
 
+                            byte[] imageBytes = ms.ToArray();
+                            string imageType = picturestudent.Image.RawFormat.ToString().ToLower();
 
+                            // Save the image to the database
+                            await SaveImageToDatabaseAsync(imageBytes, GlobalData.SavedStudentID, imageType);
 
+                            isImageUpdated = false;  // Reset the flag after saving
+                        }
+                    }
                     List<Sibling> siblingsList = GetSiblingsDataFromGrid(); // This method gets the sibling data from the grid
 
                     // Call the UpdateSiblingsDataAsync method to update the database
@@ -1555,59 +1561,38 @@ namespace GuidanceManagementSystem
                     }
 
                     // Step 3: Save each sibling record in the database with a transaction
-                    string connectionString = "server=localhost;port=3306;database=guidancedb;user=root;password=;";
-                    using (var connection = new MySqlConnection(connectionString))
-                    {
-                        await connection.OpenAsync();
-                        using (var transaction = await connection.BeginTransactionAsync())
+    
+                          MySqlConnection conn = MyCon.GetConnection();
+                        using (var transaction = await conn.BeginTransactionAsync())
                         {
-                            try
+                        try
+                        {
+                            // Loop through each sibling in the list and save it
+                            foreach (var sibling in siblingsList)
                             {
-                                // Loop through each sibling in the list and save it
-                                foreach (var sibling in siblingsList)
-                                {
-                                    await SaveSiblingsData(sibling, studentID, connection, transaction);
-                                }
+                                await SaveSiblingsData(sibling, studentID, conn, transaction);
+                            }
 
-                                // Commit the transaction
-                                await transaction.CommitAsync();
-                               // MessageBox.Show("Siblings data saved successfully!");
-                            }
-                            catch (Exception ex)
-                            {
-                                // If an error occurs, roll back the transaction
-                                await transaction.RollbackAsync();
-                                MessageBox.Show($"Error: {ex.Message}");
-                            }
+                            // Commit the transaction
+                            await transaction.CommitAsync();
+                            // MessageBox.Show("Siblings data saved successfully!");
                         }
-                    }
+                        catch (Exception ex)
+                        {
+                            // If an error occurs, roll back the transaction
+                            await transaction.RollbackAsync();
+                            MessageBox.Show($"Error: {ex.Message}");
+                        }
+                      
+                        }                    
                 }
                 catch (Exception ex)
                 {
                     // Handle unexpected errors in saving process
                     MessageBox.Show($"Error: {ex.Message}");
                 }
+               
             }
-            if (isImageUpdated && picturestudent.Image != null)
-            {
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    using (Bitmap bitmap = new Bitmap(picturestudent.Image))
-                    {
-                        bitmap.Save(ms, picturestudent.Image.RawFormat); // Save the cloned image
-                    }
-
-                    byte[] imageBytes = ms.ToArray();
-                    string imageType = picturestudent.Image.RawFormat.ToString().ToLower();
-
-                    // Save the image to the database
-                    await SaveImageToDatabaseAsync(imageBytes, SavedStudentID, imageType);
-
-                    isImageUpdated = false; // Reset the flag after saving
-                }
-            }
-
-
             var PersonalInfo = new PersonalData
             {
                 studentID = SavedStudentID,
@@ -1722,11 +1707,11 @@ namespace GuidanceManagementSystem
 
                 PhysicalDisabilities = GetPhysicalDisabilities()
             };
-            if (string.IsNullOrEmpty(SavedStudentID))
-            {
-                MessageBox.Show("Please save the Individual Record first.");
-                return;
-            }
+            //if (string.IsNullOrEmpty(SavedStudentID))
+            //{
+            //    MessageBox.Show("Please save the Individual Record first.");
+            //    return;
+            //}
            // await TestSaveHealthData(Health);
 
 
@@ -1744,8 +1729,6 @@ namespace GuidanceManagementSystem
             {
 
             };
-
-
             try
             {
                 if (string.IsNullOrEmpty(SavedStudentID))
@@ -1756,7 +1739,8 @@ namespace GuidanceManagementSystem
                 }
                 // Call the async SaveAllRecords method with await
               await SaveAllRecordsAsync(PersonalInfo, Health, AdditionalInfo,Education,father,mother);
-               this.Close();
+                OnSaveCompleted?.Invoke();
+                this.Close();
                 // If all records are saved successfully, show a success message
                 MessageBox.Show("Record saved successfully!");
             }
@@ -1871,11 +1855,10 @@ namespace GuidanceManagementSystem
 
         private async Task<bool> CheckStudentIDExistsAsync(string studentID)
         {
-            string connectionString = "server=localhost;port=3306;database=guidancedb;user=root;password=;";
+           
 
-            using (var connection = new MySqlConnection(connectionString))
+            using (var connection = MyCon.GetConnection())
             {
-                await connection.OpenAsync();
 
                 string query = "SELECT COUNT(*) FROM tbl_individual_record WHERE Student_ID = @StudentID";
 
@@ -1890,16 +1873,11 @@ namespace GuidanceManagementSystem
         }
         public async Task<bool> IsStudentIDExist(string studentID)
         {
-            MySqlConnection conn = null;
+            MySqlConnection conn = MyCon.GetConnection();
 
             try
             {
                 // Get the connection object
-                conn = MyCon.GetConnection();
-
-                // Open the connection asynchronously
-                await conn.OpenAsync();
-
                 string query = "SELECT COUNT(*) FROM tbl_individual_record WHERE Student_ID = @StudentID";
 
                 using (var cmd = new MySqlCommand(query, conn))
@@ -1920,14 +1898,7 @@ namespace GuidanceManagementSystem
                 MessageBox.Show($"Error checking existing Student ID: {ex.Message}");
                 return false;
             }
-            finally
-            {
-                // Ensure the connection is closed after the operation
-                if (conn != null && conn.State == System.Data.ConnectionState.Open)
-                {
-                    await conn.CloseAsync();
-                }
-            }
+          
         }
 
         private async void button2_Click(object sender, EventArgs e)
@@ -2167,8 +2138,6 @@ namespace GuidanceManagementSystem
         private void cuiButton1_Click(object sender, EventArgs e)
         {
             this.Close();
-
-
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -2228,10 +2197,11 @@ namespace GuidanceManagementSystem
 
         private void txtNickname_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void txtNickname_KeyDown(object sender, KeyEventArgs e)
@@ -2301,6 +2271,16 @@ namespace GuidanceManagementSystem
 
         private void txtAge_KeyPress(object sender, KeyPressEventArgs e)
         {
+            if (!char.IsNumber(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
+            {
+                e.Handled = true;  // Block other key presses
+            }
+
+
+        }
+
+        private void txtReligion_KeyPress(object sender, KeyPressEventArgs e)
+        {
             if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
                 e.Handled = true;  // Block other key presses
@@ -2308,28 +2288,22 @@ namespace GuidanceManagementSystem
 
         }
 
-        private void txtReligion_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
-            {
-                e.Handled = true;  // Block the key press
-            }
-        }
-
         private void txtContactNumber_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsNumber(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsNumber(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void txtDescribeYourself_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void txtCompleteHomeAddress_KeyPress(object sender, KeyPressEventArgs e)
@@ -2344,34 +2318,38 @@ namespace GuidanceManagementSystem
 
         private void txtHobbies_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void txtSpouseName_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void txtEmergencyContact_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void txtLandlordName_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void txtGuardianphone_KeyPress(object sender, KeyPressEventArgs e)
@@ -2380,6 +2358,7 @@ namespace GuidanceManagementSystem
             {
                 e.Handled = true;  // Block other key presses
             }
+
 
         }
 
@@ -2393,18 +2372,20 @@ namespace GuidanceManagementSystem
 
         private void txtMotherName_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void txtFatherPhone_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsNumber(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsNumber(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void tabPage2_Click(object sender, EventArgs e)
@@ -2414,26 +2395,29 @@ namespace GuidanceManagementSystem
 
         private void txtFatherEducationalAttainment_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void txtFatherOccupation_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void txtFatherEmployerAgency_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void txtMotherName_KeyUp(object sender, KeyEventArgs e)
@@ -2443,127 +2427,146 @@ namespace GuidanceManagementSystem
 
         private void txtEmailAddress_KeyPress(object sender, KeyPressEventArgs e)
         {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
+            {
+                e.Handled = true;  // Block other key presses
+            }
 
         }
 
         private void txtMotherEmployerAgency_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void txtMotherOccupation_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void txtMotherEducationalAttainment_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void txtMotherNationality_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void txtMotherTelCellNo_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsNumber(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsNumber(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void txtFatherNationality_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void txtFatherLanguageDialect_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void txtFatherBirthOrder_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsNumber(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsNumber(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void Elementary_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void ElementaryHonorAwards_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void HighSchool_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void JuniorHighHonorAwards_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void SeniorHighSchool_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void SeniorHighHonorAwards_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void StrandCompleted_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void SHSAverageGrade_KeyPress(object sender, KeyPressEventArgs e)
@@ -2576,90 +2579,101 @@ namespace GuidanceManagementSystem
 
         private void VocationalTechnical_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void CollegeIfTransferee_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void textBox94_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void FavoriteSubject_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void LeastFavoriteSubject_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void WhyFavoriteSubject_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void WhyLeastFavoriteSubject_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void SupportForStudies_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void Membership_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void txtScholarshipName_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void textBox103_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)  // (char)8 is the Backspace character
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
             {
-                e.Handled = true;  // Block the key press
+                e.Handled = true;  // Block other key presses
             }
+
         }
 
         private void txtHealthProblemsOther_KeyPress(object sender, KeyPressEventArgs e)
@@ -2757,16 +2771,7 @@ namespace GuidanceManagementSystem
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    picturestudent.Image = Image.FromFile(openFileDialog.FileName);
-                    isImageUpdated = true; // Mark that the image has been updated
-                }
-            }
+           
         }
 
         private void numericUpDownNumberOfChildren_ValueChanged(object sender, EventArgs e)
@@ -3058,8 +3063,13 @@ namespace GuidanceManagementSystem
 
             try
             {
-                
-                    using (var cmd = new MySqlCommand(query, MyCon.GetConnection()))
+                using (var connection = MyCon.GetConnection())
+                {
+                    // Open the connection
+                    if (connection.State == System.Data.ConnectionState.Closed)
+                        connection.Open();
+
+                    using (var cmd = new MySqlCommand(query, connection))
                     {
                         cmd.Parameters.AddWithValue("@StudentID", studentID);
 
@@ -3069,7 +3079,7 @@ namespace GuidanceManagementSystem
                             imageBytes = (byte[])result;
                         }
                     }
-                
+                }
             }
             catch (Exception ex)
             {
@@ -3132,7 +3142,6 @@ namespace GuidanceManagementSystem
 
             // Update the save button to indicate Edit Mode
             button1.Text = "Update";
-
             // Set the global edit mode flag
             isEditMode = true;
 
@@ -3163,18 +3172,16 @@ namespace GuidanceManagementSystem
         //}
         private async Task LoadImageFromDatabaseAsync(string studentID, PictureBox pictureBox)
         {
+            MySqlConnection conn = MyCon.GetConnection();
             try
             {
-                // Get the connection
-                var conn = MyCon.GetConnection(); // Assuming MyCon.GetConnection() returns the correct MySqlConnection
-
-                // Open the connection if it's not already open
+                // Ensure the connection is open
                 if (conn.State == System.Data.ConnectionState.Closed)
                 {
                     await conn.OpenAsync();
                 }
 
-                // SQL query to fetch image
+                // SQL query to fetch the image
                 string query = "SELECT ImageData FROM studentimages WHERE Student_ID = @StudentID LIMIT 1";
 
                 using (var cmd = new MySqlCommand(query, conn))
@@ -3213,6 +3220,7 @@ namespace GuidanceManagementSystem
             {
                 MessageBox.Show($"An error occurred while retrieving the image: {ex.Message}");
             }
+
         }
         public async void LLoadStudentData(string studentID,PictureBox pictureBox)
         {
@@ -3231,6 +3239,31 @@ namespace GuidanceManagementSystem
         {
 
         }
+
+        private void txtCitizenship_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)  // Allow letters, Backspace, and space
+            {
+                e.Handled = true;  // Block other key presses
+            }
+
+        }
+
+        private void button2_Click_2(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    picturestudent.Image = Image.FromFile(openFileDialog.FileName);
+                    isImageUpdated = true; // Mark that the image has been updated
+                }
+            }
+        }
+
+       
 
         //private void tabControl1_Selecting_1(object sender, TabControlCancelEventArgs e)
         //{

@@ -15,7 +15,6 @@ namespace GuidanceManagementSystem.methods
     {
         public MySqlDataAdapter GetIndividualDataPending(string course = null)
         {
-
             MySqlDataAdapter dataAdapter;
             string query = @"SELECT ir.Student_ID, 
                      ir.Course, 
@@ -26,7 +25,6 @@ namespace GuidanceManagementSystem.methods
               INNER JOIN tbl_personal_data pd 
               ON ir.Student_ID = pd.Student_ID
               WHERE status=0";
-
             if (!string.IsNullOrEmpty(course) && course != "All")
             {
                 query += " AND ir.Course = @Course";
@@ -41,12 +39,9 @@ namespace GuidanceManagementSystem.methods
 
                 dataAdapter = new MySqlDataAdapter(command);
             }
-
-
             //        MySqlDataAdapter dataAdapter = new MySqlDataAdapter(query, MyCon.GetConnection());
             return dataAdapter;
         }
-
         public DataSet GetStudentData(string studentId)
         {
             DataSet studentData = new DataSet();
@@ -62,7 +57,6 @@ namespace GuidanceManagementSystem.methods
                 "SELECT * FROM tbl_health_data WHERE Student_ID = @StudentID",       // F. Health Data
                 "SELECT * FROM tbl_additional_profile WHERE Student_ID = @StudentID" // G. Additional Profile
             };
-
             foreach (var query in queries)
             {
                 using (MySqlCommand command = new MySqlCommand(query, MyCon.GetConnection()))
@@ -159,7 +153,7 @@ namespace GuidanceManagementSystem.methods
             using (var connection = MyCon.GetConnection())
             {
                 MySqlCommand cmd = new MySqlCommand(query, connection);
-                connection.Open();
+                
 
                 using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -174,8 +168,8 @@ namespace GuidanceManagementSystem.methods
                         studentCountDictionary[key] = count;
                     }
                 }
+              
             }
-
             return studentCountDictionary;
         }
 
@@ -214,7 +208,7 @@ namespace GuidanceManagementSystem.methods
             {
                 try
                 {
-                    conn.Open();
+                    
                     string sql = @"
                 SELECT Course, Year, Gender
                 FROM tbl_individual_record 
@@ -243,10 +237,7 @@ namespace GuidanceManagementSystem.methods
                 {
                     MessageBox.Show("Error: " + ex.Message);
                 }
-                finally
-                {
-                    conn.Close();
-                }
+               
             }
 
             return courseYearGenderCounts;
@@ -267,7 +258,7 @@ namespace GuidanceManagementSystem.methods
             {
                 try
                 {
-                    conn.Open();
+                 
                     string sql = @"
                 SELECT Course
                 FROM tbl_individual_record 
@@ -293,10 +284,7 @@ namespace GuidanceManagementSystem.methods
                 {
                     MessageBox.Show("Error: " + ex.Message);
                 }
-                finally
-                {
-                    conn.Close();
-                }
+               
             }
 
             return courseCounts;
@@ -414,7 +402,7 @@ namespace GuidanceManagementSystem.methods
             using (MySqlConnection connection = MyCon.GetConnection())
             {
                 MySqlCommand cmd = new MySqlCommand(query, connection);
-                connection.Open();
+               
 
                 using (MySqlDataReader reader = cmd.ExecuteReader())
                 {

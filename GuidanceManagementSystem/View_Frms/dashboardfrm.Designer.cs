@@ -43,6 +43,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.dockingPnl = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.cuiLabel2 = new CuoreUI.Controls.cuiLabel();
             this.cuiButton2 = new CuoreUI.Controls.cuiButton();
             this.cuiLabel3 = new CuoreUI.Controls.cuiLabel();
@@ -55,6 +56,7 @@
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -304,7 +306,7 @@
             this.cuiButton8.ImageExpand = new System.Drawing.Point(10, 10);
             this.cuiButton8.ImageOffset = new System.Drawing.Point(0, 0);
             this.cuiButton8.ImageTint = System.Drawing.Color.White;
-            this.cuiButton8.Location = new System.Drawing.Point(12, 148);
+            this.cuiButton8.Location = new System.Drawing.Point(22, 155);
             this.cuiButton8.Name = "cuiButton8";
             this.cuiButton8.NormalBackground = System.Drawing.Color.Transparent;
             this.cuiButton8.NormalOutline = System.Drawing.Color.Empty;
@@ -321,13 +323,14 @@
             // cuiLabel1
             // 
             this.cuiLabel1.Content = "Username";
-            this.cuiLabel1.Font = new System.Drawing.Font("Segoe UI", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cuiLabel1.ForeColor = System.Drawing.Color.Gainsboro;
+            this.cuiLabel1.Font = new System.Drawing.Font("Segoe UI Black", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cuiLabel1.ForeColor = System.Drawing.Color.CadetBlue;
             this.cuiLabel1.HorizontalAlignment = CuoreUI.Controls.cuiLabel.HorizontalAlignments.Center;
-            this.cuiLabel1.Location = new System.Drawing.Point(25, 160);
+            this.cuiLabel1.Location = new System.Drawing.Point(48, 167);
             this.cuiLabel1.Name = "cuiLabel1";
-            this.cuiLabel1.Size = new System.Drawing.Size(162, 33);
+            this.cuiLabel1.Size = new System.Drawing.Size(148, 33);
             this.cuiLabel1.TabIndex = 1;
+            this.cuiLabel1.Load += new System.EventHandler(this.cuiLabel1_Load);
             // 
             // pictureBox1
             // 
@@ -350,6 +353,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(89)))));
+            this.panel2.Controls.Add(this.pictureBox2);
             this.panel2.Controls.Add(this.cuiLabel2);
             this.panel2.Controls.Add(this.cuiButton2);
             this.panel2.Controls.Add(this.cuiLabel3);
@@ -359,13 +363,25 @@
             this.panel2.Size = new System.Drawing.Size(638, 49);
             this.panel2.TabIndex = 6;
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(57, 3);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(56, 43);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 9;
+            this.pictureBox2.TabStop = false;
+            // 
             // cuiLabel2
             // 
+            this.cuiLabel2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.cuiLabel2.Content = "Cagayan\\ State\\ University\\ @Lal-lo\\ Campus";
             this.cuiLabel2.Font = new System.Drawing.Font("Segoe UI", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cuiLabel2.ForeColor = System.Drawing.Color.Gainsboro;
             this.cuiLabel2.HorizontalAlignment = CuoreUI.Controls.cuiLabel.HorizontalAlignments.Center;
-            this.cuiLabel2.Location = new System.Drawing.Point(3, 10);
+            this.cuiLabel2.Location = new System.Drawing.Point(102, 10);
             this.cuiLabel2.Name = "cuiLabel2";
             this.cuiLabel2.Size = new System.Drawing.Size(408, 33);
             this.cuiLabel2.TabIndex = 6;
@@ -409,13 +425,13 @@
             this.cuiLabel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cuiLabel3.AutoSize = true;
             this.cuiLabel3.Content = "Date:Time";
-            this.cuiLabel3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cuiLabel3.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cuiLabel3.ForeColor = System.Drawing.Color.Gainsboro;
             this.cuiLabel3.HorizontalAlignment = CuoreUI.Controls.cuiLabel.HorizontalAlignments.Left;
-            this.cuiLabel3.Location = new System.Drawing.Point(353, 10);
+            this.cuiLabel3.Location = new System.Drawing.Point(309, 10);
             this.cuiLabel3.Name = "cuiLabel3";
             this.cuiLabel3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cuiLabel3.Size = new System.Drawing.Size(229, 28);
+            this.cuiLabel3.Size = new System.Drawing.Size(281, 28);
             this.cuiLabel3.TabIndex = 8;
             // 
             // timer1
@@ -446,6 +462,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -468,5 +485,6 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Panel dockingPnl;
         private CuoreUI.Controls.cuiLabel cuiLabel3;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }

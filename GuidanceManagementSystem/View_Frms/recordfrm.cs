@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using GuidanceManagementSystem.methods;
 using static GuidanceManagementSystem.methods.MyMethods;
+using static GuidanceManagementSystem.View_Frms.LoginFrm;
 
 namespace GuidanceManagementSystem.View_Frms
 {
@@ -48,23 +49,34 @@ namespace GuidanceManagementSystem.View_Frms
             }
 
             // Check if the "Edit" column already exists
-            if (dataGridView1.Columns["imgEdit"] == null)
+            //if (dataGridView1.Columns["imgEdit"] == null)
+            //{
+            //    DataGridViewImageColumn editColumn = new DataGridViewImageColumn
+            //    {
+            //        HeaderText = "Edit",
+            //        Name = "imgEdit",
+            //        Image = Properties.Resources.pen_50px, // Replace with your resource image
+            //        ImageLayout = DataGridViewImageCellLayout.Zoom // Ensures the image is resized proportionally
+            //    };
+            //    dataGridView1.Columns.Add(editColumn);
+            //}
+            if (dataGridView1.Columns["imgDelete"] == null)
             {
-                DataGridViewImageColumn editColumn = new DataGridViewImageColumn
+                DataGridViewImageColumn deleteColumn = new DataGridViewImageColumn
                 {
-                    HeaderText = "Edit",
-                    Name = "imgEdit",
-                    Image = Properties.Resources.pen_50px, // Replace with your resource image
+                    HeaderText = "Delete",
+                    Name = "imgDelete",
+                    Image = Properties.Resources.Delete_Trash_50px, // Replace with your resource image
                     ImageLayout = DataGridViewImageCellLayout.Zoom // Ensures the image is resized proportionally
                 };
-                dataGridView1.Columns.Add(editColumn);
+                dataGridView1.Columns.Add(deleteColumn);
             }
 
         }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             int viewColumnIndex = dataGridView1.Columns["ImgView"].Index;
-            int editColumnIndex = dataGridView1.Columns["ImgEdit"].Index;
+            //int editColumnIndex = dataGridView1.Columns["ImgEdit"].Index;
             int deleteColumnIndex = dataGridView1.Columns["ImgDelete"].Index;
 
             if (e.RowIndex >= 0) // Ensure it's a valid row
@@ -73,12 +85,16 @@ namespace GuidanceManagementSystem.View_Frms
 
                 if (e.ColumnIndex == viewColumnIndex)
                 {
-                    ViewRecord(studentID);
+                    string studentId = dataGridView1.Rows[e.RowIndex].Cells["Student_ID"].Value.ToString();
+
+                    // Now you can create your view_irf form and pass the studentId
+                    view_irf fm = new view_irf(studentId);
+
+                    // Optional: Blur the background if needed
+                    BlurEffectHelper.BlurBackground(fm);
+
                 }
-                else if (e.ColumnIndex == editColumnIndex)
-                {
-                    EditRecord(studentID);
-                }
+
                 else if (e.ColumnIndex == deleteColumnIndex)
                 {
                     var result = MessageBox.Show("Are you sure you want to delete this record?", "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -86,21 +102,12 @@ namespace GuidanceManagementSystem.View_Frms
                     {
                         // Call your static Delete method
                         Delete.DeleteRecord(studentID);
+                        LoadDataIntoDataGridView(dataGridView1);
                     }
                 }
             }
         }
-        private void ViewRecord(string studentID)
-        {
-            // Display the details of the selected record
-            MessageBox.Show($"View details for Student ID: {studentID}");
-        }
-
-        private void EditRecord(string studentID)
-        {
-            // Open a form to edit the selected record
-            MessageBox.Show($"Edit record for Student ID: {studentID}");
-        }
+   
 
        
         private void recordfrm_Load(object sender, EventArgs e)

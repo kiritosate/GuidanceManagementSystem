@@ -63,19 +63,18 @@ namespace GuidanceManagementSystem
         }
        
 
-        private string connectionString = "server=localhost;database=guidancedb;user=root;password=;";
         public class DataAccess
         {
            
-            private string connectionString = "server=localhost;database=guidancedb;user=root;password=;"; // Update with your actual connection string
+            // Update with your actual connection string
             public FamilyData LoadFamilyData(string studentId)
             {
                 FamilyData familyData = null;
 
                 // Query your database and retrieve family data based on the Student ID
-                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                using (MySqlConnection conn = MyCon.GetConnection())
                 {
-                    conn.Open();
+                  
                     string query = "SELECT * FROM tbl_family_data WHERE Student_ID = @studentId";
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@studentId", studentId);
@@ -110,8 +109,11 @@ namespace GuidanceManagementSystem
                                 IndigenousGroup = reader.IsDBNull(reader.GetOrdinal("Indigenous_Group")) ? null : reader.GetString("Indigenous_Group"),
                                 Beneficiary4Ps = reader.IsDBNull(reader.GetOrdinal("4Ps_Beneficiary")) ? null : reader.GetString("4Ps_Beneficiary")
                         };
+                            
                         }
+                        
                     }
+                    conn.Close();
                 }
 
                 return familyData;
@@ -169,12 +171,12 @@ namespace GuidanceManagementSystem
 
                 string query = "SELECT * FROM tbl_health_data WHERE Student_ID = @Student_ID";
 
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                using (MySqlConnection connection = MyCon.GetConnection())
                 {
                     MySqlCommand command = new MySqlCommand(query, connection);
                     command.Parameters.AddWithValue("@Student_ID", studentId);
 
-                    connection.Open();
+                 
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         if (reader.Read())
@@ -189,6 +191,7 @@ namespace GuidanceManagementSystem
                             };
                         }
                     }
+                   
                 }
 
                 return healthData;
@@ -199,13 +202,12 @@ namespace GuidanceManagementSystem
 
                 IndividualRecord individualRecord = null;
                 string query = "SELECT * FROM tbl_individual_record WHERE Student_ID = @StudentID";
-
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                using (MySqlConnection connection = MyCon.GetConnection())
                 {
                     MySqlCommand command = new MySqlCommand(query, connection);
                     command.Parameters.AddWithValue("@StudentID", studentId);
 
-                    connection.Open();
+                 
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         if (reader.Read())
@@ -226,6 +228,7 @@ namespace GuidanceManagementSystem
                             };
                         }
                     }
+                   
                 }
 
                 return individualRecord;
@@ -238,13 +241,10 @@ namespace GuidanceManagementSystem
                 // SQL query to get all personal data fields based on Student_ID
                 string query = "SELECT * FROM tbl_personal_data WHERE Student_ID = @Student_ID";
 
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                using (MySqlConnection connection = MyCon.GetConnection())
                 {
                     MySqlCommand command = new MySqlCommand(query, connection);
                     command.Parameters.AddWithValue("@Student_ID", studentId);
-
-                    connection.Open();
-
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         if (reader.Read())
@@ -281,6 +281,7 @@ namespace GuidanceManagementSystem
 
                         }
                     }
+                    
                 }
 
                 return personalData;
@@ -316,12 +317,10 @@ namespace GuidanceManagementSystem
 
                 string query = "SELECT * FROM tbl_additional_profile WHERE Student_ID = @Student_ID";
 
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                using (MySqlConnection connection = MyCon.GetConnection())
                 {
                     MySqlCommand command = new MySqlCommand(query, connection);
                     command.Parameters.AddWithValue("@Student_ID", studentId);
-
-                    connection.Open();
 
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
@@ -338,6 +337,7 @@ namespace GuidanceManagementSystem
                             };
                         }
                     }
+                    
                 }
 
                 return additionalProfile;

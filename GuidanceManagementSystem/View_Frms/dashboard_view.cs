@@ -126,7 +126,7 @@ namespace GuidanceManagementSystem.View_Frms
         }
         private void LoadStatistics(string type = "courseStatistics")
         {
-           
+
             try
             {
                 string query = "";
@@ -135,41 +135,44 @@ namespace GuidanceManagementSystem.View_Frms
                 {
                     case "courseStatistics":
                         query = @"
-                SELECT 
-                    tbl_individual_record.Course, 
-                    COUNT(tbl_personal_data.Student_ID) AS TotalStudents
-                FROM tbl_personal_data
-                INNER JOIN tbl_individual_record 
-                    ON tbl_personal_data.Student_ID = tbl_individual_record.Student_ID
-                GROUP BY tbl_individual_record.Course;";
-                        break;
+                        SELECT 
+                            tbl_individual_record.Course, 
+                            COUNT(tbl_personal_data.Student_ID) AS TotalStudents
+                        FROM tbl_personal_data
+                        INNER JOIN tbl_individual_record 
+                            ON tbl_personal_data.Student_ID = tbl_individual_record.Student_ID
+                        WHERE tbl_individual_record.Status = 1  -- Only approved records
+                        GROUP BY tbl_individual_record.Course;";
+                                                break;
 
-                    case "yearStatistics":
-                        query = @"
-                SELECT 
-                    tbl_individual_record.Year,
-                    COUNT(tbl_personal_data.Student_ID) AS TotalStudents
-                FROM tbl_personal_data
-                INNER JOIN tbl_individual_record 
-                    ON tbl_personal_data.Student_ID = tbl_individual_record.Student_ID
-                GROUP BY tbl_individual_record.Year;";
-                        break;
+                                            case "yearStatistics":
+                                                query = @"
+                        SELECT 
+                            tbl_individual_record.Year,
+                            COUNT(tbl_personal_data.Student_ID) AS TotalStudents
+                        FROM tbl_personal_data
+                        INNER JOIN tbl_individual_record 
+                            ON tbl_personal_data.Student_ID = tbl_individual_record.Student_ID
+                        WHERE tbl_individual_record.Status = 1  -- Only approved records
+                        GROUP BY tbl_individual_record.Year;";
+                                                break;
 
-                    case "genderPerCourse":
-                        query = @"
-                SELECT 
-                    tbl_individual_record.Course,
-                    SUM(CASE WHEN tbl_personal_data.Sex = 'Male' THEN 1 ELSE 0 END) AS TotalMales,
-                    SUM(CASE WHEN tbl_personal_data.Sex = 'Female' THEN 1 ELSE 0 END) AS TotalFemales
-                FROM tbl_personal_data
-                INNER JOIN tbl_individual_record 
-                    ON tbl_personal_data.Student_ID = tbl_individual_record.Student_ID
-                GROUP BY tbl_individual_record.Course;";
-                        break;
+                                            case "genderPerCourse":
+                                                query = @"
+                        SELECT 
+                            tbl_individual_record.Course,
+                            SUM(CASE WHEN tbl_personal_data.Sex = 'Male' THEN 1 ELSE 0 END) AS TotalMales,
+                            SUM(CASE WHEN tbl_personal_data.Sex = 'Female' THEN 1 ELSE 0 END) AS TotalFemales
+                        FROM tbl_personal_data
+                        INNER JOIN tbl_individual_record 
+                            ON tbl_personal_data.Student_ID = tbl_individual_record.Student_ID
+                        WHERE tbl_individual_record.Status = 1  -- Only approved records
+                        GROUP BY tbl_individual_record.Course;";
+                                                break;
 
-                    default:
-                        throw new Exception("Invalid statistics type.");
-                }
+                                            default:
+                                                throw new Exception("Invalid statistics type.");
+                                        }
 
 
                 {
@@ -309,16 +312,14 @@ namespace GuidanceManagementSystem.View_Frms
         }
         private void LoadPendingCount()
         {
-            string connectionString = "server=localhost;database=guidancedb;user=root;password=;";
+         
             string query = "SELECT COUNT(*) FROM tbl_individual_record WHERE Status = 0"; // 0 represents Pending
-
+            MySqlConnection conn = MyCon.GetConnection();
             try
             {
-                using (var connection = new MySqlConnection(connectionString))
-                {
-                    connection.Open();
+              
 
-                    using (var command = new MySqlCommand(query, connection))
+                    using (var command = new MySqlCommand(query, conn))
                     {
                         object result = command.ExecuteScalar();
                         int pendingCount = result != null ? Convert.ToInt32(result) : 0;
@@ -326,12 +327,13 @@ namespace GuidanceManagementSystem.View_Frms
                         // Display the count in the label
                         lblPendingCount.Text = $"{pendingCount}";
                     }
-                }
+                
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error loading pending count: {ex.Message}");
             }
+           
         }
 
         private void GetTotalStudents()
@@ -535,6 +537,16 @@ namespace GuidanceManagementSystem.View_Frms
             LoadStudentStatusPieChart();
             GetStudentCountByCollege();
             LoadStatistics("courseStatistics");
+        }
+
+        private void cted_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cics_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

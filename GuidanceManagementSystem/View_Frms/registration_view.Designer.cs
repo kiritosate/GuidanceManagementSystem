@@ -69,17 +69,25 @@
             // 
             // cmbCourses
             // 
+            this.cmbCourses.BackColor = System.Drawing.Color.White;
+            this.cmbCourses.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cmbCourses.DropDownWidth = 100;
+            this.cmbCourses.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCourses.FormattingEnabled = true;
             this.cmbCourses.Items.AddRange(new object[] {
-            "COA",
-            "CICS",
+            "All",
             "CHM",
-            "CTED",
-            "All"});
+            "CICS",
+            "COA",
+            "CTED"});
             this.cmbCourses.Location = new System.Drawing.Point(424, 17);
             this.cmbCourses.Name = "cmbCourses";
-            this.cmbCourses.Size = new System.Drawing.Size(100, 29);
+            this.cmbCourses.Size = new System.Drawing.Size(101, 29);
+            this.cmbCourses.Sorted = true;
             this.cmbCourses.TabIndex = 2;
+            this.cmbCourses.Tag = "";
+            this.cmbCourses.Text = "  --select--";
+            this.cmbCourses.SelectedIndexChanged += new System.EventHandler(this.cmbCourses_SelectedIndexChanged);
             // 
             // flowLayoutPanel1
             // 
@@ -185,6 +193,7 @@
             // cuiLabel2
             // 
             this.cuiLabel2.Content = "User/Registration";
+            this.cuiLabel2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cuiLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cuiLabel2.Font = new System.Drawing.Font("Segoe UI", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cuiLabel2.ForeColor = System.Drawing.Color.DimGray;

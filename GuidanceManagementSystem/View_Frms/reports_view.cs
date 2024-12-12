@@ -21,8 +21,6 @@ using GuidanceManagementSystem.Reports;
 using System.Drawing.Printing;
 using ClosedXML.Excel;
 
-
-
 namespace GuidanceManagementSystem.View_Frms
 {
     public partial class reports_view : Form
@@ -30,11 +28,8 @@ namespace GuidanceManagementSystem.View_Frms
         public reports_view()
         {
             InitializeComponent();
-            
         }
-       
-            
-            public void LoadDataToReportView(string course = null)
+        public void LoadDataToReportView(string course = null)
             {
                 try
                 {
@@ -249,20 +244,23 @@ namespace GuidanceManagementSystem.View_Frms
                         }
                     }
                 }
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error loading colleges: {ex.Message}");
             }
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
             string selectedCourse = cmbCourses.SelectedItem?.ToString();  // Get selected course
             
 
             LoadDataToReportView(selectedCourse);
+        }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

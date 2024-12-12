@@ -116,6 +116,7 @@
             this.cuiButton1.Size = new System.Drawing.Size(100, 41);
             this.cuiButton1.TabIndex = 10;
             this.cuiButton1.TextOffset = new System.Drawing.Point(0, 0);
+            this.cuiButton1.Click += new System.EventHandler(this.cuiButton1_Click);
             // 
             // Account_view
             // 
